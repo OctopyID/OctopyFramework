@@ -12,11 +12,11 @@
  * @license : MIT
  */
 
-namespace Octopy\Security\Exception;
+namespace Octopy\Encryption\Exception;
 
 use RuntimeException;
 
-class EncryptionKeyException extends RuntimeException
+class EncryptException extends RuntimeException
 {
     //
 }

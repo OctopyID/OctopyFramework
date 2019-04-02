@@ -197,7 +197,7 @@ class Response
             );
         }
 
-        if (is_callable($body)) {
+        if (is_callable([$body, '__toString'])) {
             $body = call_user_func($body);
         }
 

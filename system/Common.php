@@ -30,6 +30,38 @@ if (!function_exists('app')) {
     }
 }
 
+if (!function_exists('bcrypt')) {
+    /**
+     * @param  string $value
+     * @param  array  $option
+     * @return string
+     */
+    function bcrypt($value, $option = null)
+    {
+        return App::make('hash')->driver('bcrypt')->make($value, $option);
+    }
+}
+
+if (!function_exists('config')) {
+    /**
+     * @param  string $key
+     * @param  mixed  $default
+     * @return mixed
+     */
+    function config($key = null, $default = null)
+    {
+        if (is_null($key)) {
+            return App::make('config');
+        }
+
+        if (is_array($key)) {
+            return App::make('config')->set($key);
+        }
+
+        return App::make('config')->get($key, $default);
+    }
+}
+
 if (!function_exists('csrf')) {
     /**
      * @return string
@@ -51,6 +83,17 @@ if (!function_exists('dd')) {
     }
 }
 
+if (! function_exists('decrypt')) {
+    /**
+     * @param  string $value
+     * @return mixed
+     */
+    function decrypt($value)
+    {
+        return App::make('encrypter')->decrypt($value);
+    }
+}
+
 if (!function_exists('dump')) {
     /**
      * @param  mixed $dump
@@ -59,6 +102,17 @@ if (!function_exists('dump')) {
     function dump(...$dump)
     {
         App::make(Octopy\Support\VarDumper::class)->dump(...$dump);
+    }
+}
+
+if (!function_exists('encrypt')) {
+    /**
+     * @param  string $value
+     * @return mixed
+     */
+    function encrypt($value)
+    {
+        return App::make('encrypter')->encrypt($value);
     }
 }
 
@@ -126,6 +180,17 @@ if (!function_exists('route')) {
     function route(string $name, array $default = []) : string
     {
         return App::make(Octopy\HTTP\Routing\URLGenerator::class)->route($name, $default);
+    }
+}
+
+if (!function_exists('url')) {
+    /**
+     * @param  string $path
+     * @return string
+     */
+    function url(string $path) : string
+    {
+        return config('app.url') . $path;
     }
 }
 

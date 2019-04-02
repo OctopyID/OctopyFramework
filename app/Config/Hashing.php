@@ -16,37 +16,17 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | CSRF Lifetime
+    | Default Hash Driver
     |--------------------------------------------------------------------------
     |
-    | Here you may specify the number of minutes that you wish the session
-    | to be allowed to remain idle before it expires. If you want them
-    | to immediately expire on the browser closing, set that option.
+    | This option controls the default hash driver that will be used to hash
+    | passwords for your application. By default, the bcrypt algorithm is
+    | used; however, you remain free to modify this option if you wish.
+    |
+    | Supported: "bcrypt", "argon", "argon2id"
     |
     */
-    'csrf' => 1800,
-
-    /*
-    |--------------------------------------------------------------------------
-    | Encryption Key
-    |--------------------------------------------------------------------------
-    |
-    | This key is used by the Octopy encrypter service and should be set
-    | to a random, 32 character string, otherwise these encrypted strings
-    | will not be safe. Please do this before deploying an application!
-    |
-    */
-    'key' => env('APP_KEY'),
-
-    /*
-    |--------------------------------------------------------------------------
-    | Encryption Cipher
-    |--------------------------------------------------------------------------
-    |
-    | This cipher used for openssl encryption method
-    |
-    */
-    'cipher' => 'AES-256-CBC',
+    'driver' => 'bcrypt',
 
     /*
     |--------------------------------------------------------------------------
@@ -59,6 +39,22 @@ return [
     |
     */
     'bcrypt' => [
-        'cost' => 10
-   ]
+        'round' => env('BCRYPT_ROUND', 10),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Argon Options
+    |--------------------------------------------------------------------------
+    |
+    | Here you may specify the configuration options that should be used when
+    | passwords are hashed using the Argon algorithm. These will allow you
+    | to control the amount of time it takes to hash the given password.
+    |
+    */
+    'argon' => [
+        'time'   => 2,
+        'thread' => 2,
+        'memory' => 1024,
+    ],
 ];

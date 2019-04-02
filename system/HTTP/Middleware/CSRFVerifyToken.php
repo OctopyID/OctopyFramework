@@ -64,7 +64,7 @@ class CSRFVerifyToken
 
         if ($token === $this->app->session->get('X-CSRF-TOKEN')) {
             $time = time() - $this->app->session->get('X-CSRF-TOKEN-EXPIRE');
-            if ($time < $this->app->config['security.csrf']) {
+            if ($time < $this->app->config['session.lifetime']) {
                 return $next($request);
             }
         }

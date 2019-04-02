@@ -23,8 +23,7 @@ return [
     | requests. By default, we will use the lightweight native handler but
     | you may specify any of the other wonderful handlers provided here.
     |
-    | Supported: "file", "cookie", "database", "apc",
-    |            "memcached", "redis", "array"
+    | Supported: "file"
     |
     */
     'handler' => 'file',
@@ -39,7 +38,7 @@ return [
     | to immediately expire on the browser closing, set that option.
     |
     */
-    'lifetime' => env('SESSION_LIFETIME', 7200),
+    'lifetime' => env('SESSION_LIFETIME', 3600),
 
      /*
     |--------------------------------------------------------------------------
