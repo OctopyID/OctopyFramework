@@ -15,8 +15,8 @@
 /**
  * Check minimum requirement
  */
-if (!version_compare(PHP_VERSION, '7.2', '>=')) {
-    die('Your PHP version must be 7.2 or higher to run Octopy Framework. Current version: ' . PHP_VERSION);
+if (!version_compare(PHP_VERSION, '7.1', '>=')) {
+    die('Your PHP version must be 7.1 or higher to run Octopy Framework. Current version: ' . PHP_VERSION);
 }
 
 /**
