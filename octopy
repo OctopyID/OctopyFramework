@@ -1,0 +1,48 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ *   ___       _
+ *  / _ \  ___| |_ ___  _ __  _   _
+ * | | | |/ __| __/ _ \| '_ \| | | |
+ * | |_| | (__| || (_) | |_) | |_| |
+ *  \___/ \___|\__\___/| .__/ \__, |
+ *                     |_|    |___/
+ * @author  : Supian M <supianidz@gmail.com>
+ * @link    : www.octopy.xyz
+ * @license : MIT
+ */
+
+/**
+ * Check minimum requirement
+ */
+if (!version_compare(PHP_VERSION, '7.2', '>=')) {
+    die('Your PHP version must be 7.2 or higher to run Octopy Framework. Current version: ' . PHP_VERSION);
+}
+
+/**
+ *
+ */
+define('STARTING_TIME', microtime(true));
+
+/**
+ * Octopy\Application
+ */
+$app = require 'system/Octopy.php';
+
+/**
+ * App\Console\Kernel
+ */
+$kernel = $app->make(App\Console\Kernel::class);
+
+$status = $kernel->handle(
+	$input = $app->make(Octopy\Console\Argv::class, [
+		'argv' => $argv
+	]),
+
+	$app->make(Octopy\Console\Output::class)
+);
+
+$kernel->terminate($input);
+
+die($status);

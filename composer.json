@@ -1,0 +1,15 @@
+{
+    "name": "supianidz/octopyframework",
+    "description": "Lightweight PHP Framework with Laravel look like.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Supian M",
+            "email": "supianidz@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^7.2"
+    }
+}
