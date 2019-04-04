@@ -130,6 +130,7 @@ return [
          */
         Octopy\Provider\AutoloadServiceProvider::class,
         Octopy\Provider\ConsoleServiceProvider::class,
+        Octopy\Provider\DebugBarServiceProvider::class,
         Octopy\Provider\ResponseServiceProvider::class,
         Octopy\Provider\SessionServiceProvider::class,
         Octopy\Provider\ValidationServiceProvider::class,

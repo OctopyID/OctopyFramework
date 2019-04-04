@@ -48,6 +48,22 @@ class Finder
     }
 
     /**
+     * @param mixed $resource
+     */
+    public function set($resource)
+    {
+        $this->resource = array_merge($this->resource, (array)$resource);
+    }
+
+    /**
+     * @return array
+     */
+    public function template() : array
+    {
+        return $this->template;
+    }
+
+    /**
      * @param  string $name
      * @return Storage
      */

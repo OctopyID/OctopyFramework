@@ -1,0 +1,200 @@
+/* vietnamese */
+@font-face {
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Nunito Sans Regular'), local('NunitoSans-Regular'), url('../font/pe0qMImSLYBIv1o4X1M8cceyI9tScg.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Nunito Sans Regular'), local('NunitoSans-Regular'), url('../font/pe0qMImSLYBIv1o4X1M8ccezI9tScg.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Nunito Sans Regular'), local('NunitoSans-Regular'), url('../font/pe0qMImSLYBIv1o4X1M8cce9I9s.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'fontello';
+  src: url('../font/fontello.eot?26536419');
+  src: url('../font/fontello.eot?26536419#iefix') format('embedded-opentype'),
+       url('../font/fontello.woff2?26536419') format('woff2'),
+       url('../font/fontello.woff?26536419') format('woff'),
+       url('../font/fontello.ttf?26536419') format('truetype'),
+       url('../font/fontello.svg?26536419#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'fontello';
+    src: url('../font/fontello.svg?26536419#fontello') format('svg');
+  }
+}
+*/
+ 
+ [class^="icon-"]:before, [class*=" icon-"]:before {
+  font-family: "fontello";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+ 
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+ 
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+ 
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+ 
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+ 
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+ 
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+ 
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+ 
+.icon-user:before { content: '\e800'; } /* '' */
+.icon-lock:before { content: '\e801'; } /* '' */
+.icon-home:before { content: '\e802'; } /* '' */
+.icon-info:before { content: '\e803'; } /* '' */
+.icon-attention:before { content: '\e804'; } /* '' */
+.icon-location:before { content: '\e805'; } /* '' */
+.icon-cog:before { content: '\e806'; } /* '' */
+.icon-calendar:before { content: '\e807'; } /* '' */
+.icon-tag:before { content: '\e808'; } /* '' */
+.icon-gauge:before { content: '\e809'; } /* '' */
+.icon-check:before { content: '\e80d'; } /* '' */
+.icon-cancel:before { content: '\e80e'; } /* '' */
+.icon-layout:before { content: '\e80f'; } /* '' */
+.icon-search:before { content: '\e810'; } /* '' */
+.icon-help:before { content: '\e811'; } /* '' */
+.icon-plus:before { content: '\e812'; } /* '' */
+.icon-link:before { content: '\e813'; } /* '' */
+.icon-eye:before { content: '\e814'; } /* '' */
+.icon-clock:before { content: '\e815'; } /* '' */
+.icon-down-open:before { content: '\e816'; } /* '' */
+.icon-left-open:before { content: '\e817'; } /* '' */
+.icon-right-open:before { content: '\e818'; } /* '' */
+.icon-up-open:before { content: '\e819'; } /* '' */
+.icon-arrow-combo:before { content: '\e81a'; } /* '' */
+.icon-resize-small-1:before { content: '\e81b'; } /* '' */
+.icon-resize-full-1:before { content: '\e81c'; } /* '' */
+.icon-block:before { content: '\e81d'; } /* '' */
+.icon-undo:before { content: '\e81e'; } /* '' */
+.icon-redo:before { content: '\e81f'; } /* '' */
+.icon-arrows-ccw:before { content: '\e820'; } /* '' */
+.icon-rocket:before { content: '\e821'; } /* '' */
+.icon-drive:before { content: '\e822'; } /* '' */
+.icon-database:before { content: '\e823'; } /* '' */
+.icon-monitor:before { content: '\e824'; } /* '' */
+.icon-back-in-time:before { content: '\e825'; } /* '' */
+.icon-code:before { content: '\e826'; } /* '' */
+.icon-evernote:before { content: '\f333'; } /* '' */
+
+.debugbar .ui-resizable {
+    position: relative
+}
+
+.debugbar .ui-resizable-handle {
+    position: absolute;
+    font-size: .1px;
+    display: block;
+    -ms-touch-action: none;
+    touch-action: none
+}
+
+.debugbar .ui-resizable-autohide .ui-resizable-handle,
+.debugbar .ui-resizable-disabled .ui-resizable-handle {
+    display: none
+}
+
+.debugbar .ui-resizable-n {
+    cursor: n-resize;
+    height: 7px;
+    width: 100%;
+    top: -5px;
+    left: 0
+}
+
+.debugbar .ui-resizable-s {
+    cursor: s-resize;
+    height: 7px;
+    width: 100%;
+    bottom: -5px;
+    left: 0
+}
+
+.debugbar .ui-resizable-e {
+    cursor: e-resize;
+    width: 7px;
+    right: -5px;
+    top: 0;
+    height: 100%
+}
+
+.debugbar .ui-resizable-w {
+    cursor: w-resize;
+    width: 7px;
+    left: -5px;
+    top: 0;
+    height: 100%
+}
+
+.debugbar .ui-resizable-se {
+    cursor: se-resize;
+    width: 12px;
+    height: 12px;
+    right: 1px;
+    bottom: 1px
+}
+
+.debugbar .ui-resizable-sw {
+    cursor: sw-resize;
+    width: 9px;
+    height: 9px;
+    left: -5px;
+    bottom: -5px
+}
+
+.debugbar .ui-resizable-nw {
+    cursor: nw-resize;
+    width: 9px;
+    height: 9px;
+    left: -5px;
+    top: -5px
+}
+
+.debugbar .ui-resizable-ne {
+    cursor: ne-resize;
+    width: 9px;
+    height: 9px;
+    right: -5px;
+    top: -5px
+}

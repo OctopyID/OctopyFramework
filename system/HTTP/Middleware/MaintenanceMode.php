@@ -23,7 +23,7 @@ use Octopy\HTTP\Middleware\Exception\MaintenanceModeException;
 class MaintenanceMode
 {
     /**
-     * @var app
+     * @var Octopy\Application
      */
     protected $app;
 

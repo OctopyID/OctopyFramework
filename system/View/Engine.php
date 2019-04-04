@@ -17,12 +17,22 @@ namespace Octopy\View;
 use Closure;
 use RuntimeException;
 
+use Octopy\View\Finder;
+use Octopy\View\Parser;
+use Octopy\Support\Collector;
+use Octopy\Support\Benchmark;
+
 class Engine
 {
     /**
      * @var Octopy\View\Finder
      */
-    protected $finder;
+    public $finder;
+
+    /**
+     * @var Octopy\View\Parser
+     */
+    protected $parser;
 
     /**
      * @var array
@@ -39,6 +49,9 @@ class Engine
      */
     protected $section = [];
 
+    /**
+     * @var array
+     */
     protected $parameter = [];
 
     /**
@@ -54,8 +67,9 @@ class Engine
     {
         $this->parser = new Parser($this);
         $this->finder = new Finder($resource, $compiled);
+        $this->benchmark = new Benchmark;
     }
-
+    
     /**
      * @param string $varname
      * @param mixed  $value
@@ -86,10 +100,11 @@ class Engine
      * @return string
      */
     public function render(string $name, array $parameter = [])
-    {
-        $storage = $this->finder->find(
-            $name = $this->trim($name)
-        );
+    {   
+        // benchmark purpose
+        $this->benchmark->mark($name);
+
+        $storage = $this->finder->find($name = $this->trim($name));
 
         $this->parameter = array_merge($this->parameter, array_replace($this->shared, $parameter));
 
@@ -100,6 +115,8 @@ class Engine
         if (false === $content = $this->evaluate($storage)) {
             throw new RuntimeException("The template [$name] cannot be rendered.");
         }
+
+        $storage->benchmark($this->benchmark->elapsed($name), $this->benchmark->memory());
 
         return $content;
     }

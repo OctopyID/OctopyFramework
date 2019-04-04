@@ -12,22 +12,22 @@
  * @license : MIT
  */
 
-namespace Octopy\Debug;
+namespace Octopy\Support;
 
 class Benchmark
 {
     /**
      * @var array
      */
-    protected $marker = [];
+    protected static $marker = [];
 
     /**
      * @param  string $name
      * @param  float  $time
      */
-    public function mark(string $name, float $time = null)
+    public static function mark(string $name, float $time = null)
     {
-        $this->marker[$name] = $time ?? microtime(true);
+        static::$marker[$name] = $time ?? microtime(true);
     }
 
     /**
@@ -36,20 +36,28 @@ class Benchmark
      * @param  int    $decimal
      * @return string
      */
-    public function elapsed(string $start, string $end = null, int $decimal = 4) : string
+    public static function elapsed(string $start, string $end = null, int $decimal = 4) : string
     {
         if ($start === '') {
             return '{elapsed}';
         }
 
-        if (!isset($this->marker[$start])) {
+        if (!isset(static::$marker[$start])) {
             return '';
         }
 
-        if (!isset($this->marker[$end])) {
-            $this->marker[$end] = microtime(true);
+        if (!isset(static::$marker[$end])) {
+            static::$marker[$end] = microtime(true);
         }
 
-        return number_format($this->marker[$end] - $this->marker[$start], $decimal);
+        return number_format(static::$marker[$end] - static::$marker[$start], $decimal);
+    }
+
+    /**
+     * @return string
+     */
+    public static function memory()
+    {
+        return memory_get_usage(true);
     }
 }

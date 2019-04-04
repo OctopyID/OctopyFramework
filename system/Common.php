@@ -171,6 +171,23 @@ if (!function_exists('last')) {
     }
 }
 
+if (!function_exists('memory')) {
+    /**
+     * @param  float $byte
+     * @return string
+     */
+    function memory($byte)
+    {
+        if ($byte < 1024) {
+            return ' ' .$byte . 'B';
+        } elseif ($byte < 1048576) {
+            return ' ' . round($byte / 1024, 2) . 'KB';
+        }
+
+        return ' ' . round($byte / 1048576, 2) . 'MB';
+    }
+}
+
 if (!function_exists('route')) {
     /**
      * @param  string $name
