@@ -27,6 +27,7 @@ class Kernel extends HTTPKernel
         \App\HTTP\Middleware\MaintenanceMode::class,
         \Octopy\HTTP\Middleware\ValidatePostSize::class,
         \App\HTTP\Middleware\CSRFVerifyToken::class,
+        \Octopy\HTTP\Middleware\DebugBar::class,
     ];
 
     /**

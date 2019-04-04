@@ -14,6 +14,7 @@
 
 namespace Octopy\HTTP;
 
+use Octopy\Application;
 use Octopy\HTTP\Middleware\ControllerMiddleware;
 
 class Controller
@@ -22,6 +23,14 @@ class Controller
      * @var array
      */
     protected $middleware = [];
+
+    /**
+     * @param Application $app
+     */
+    public function __construct(Application $app)
+    {
+        $this->app = $app;
+    }
         
     /**
      * @param  array $middleware
