@@ -20,6 +20,7 @@
     font-size: 13px;
     padding: 5px;
     transition: 0.3s;
+    width: 30px;
 }
 
 .debugbar_tab {

@@ -16,11 +16,11 @@ namespace Octopy\HTTP\Middleware;
 
 use Closure;
 
+use Octopy\DebugBar;
 use Octopy\Application;
 use Octopy\HTTP\Request;
-use Octopy\DebugBar as OctopyDebugBar;
 
-class DebugBar
+class InjectDebugBar
 {
     /**
      * @var Octopy\Application
@@ -33,10 +33,10 @@ class DebugBar
     protected $debugbar;
 
     /**
-     * @param Application    $app
-     * @param OctopyDebugBar $debugbar
+     * @param Application $app
+     * @param DebugBar    $debugbar
      */
-    public function __construct(Application $app, OctopyDebugBar $debugbar)
+    public function __construct(Application $app, DebugBar $debugbar)
     {
         $this->app = $app;
         $this->debugbar = $debugbar;
@@ -49,10 +49,19 @@ class DebugBar
      */
     public function handle(Request $request, Closure $next)
     {
-        $debugbar = preg_match('/__debugbar/', $request->path());
-        
-        if (!$this->app->debug() || !$this->app->config['debugbar.enable'] || $debugbar) {
+        if (!$this->app->debug() || !$this->app->config['debugbar.enable']) {
             return $next($request);
+        }
+
+        $excluding = array_merge($this->app['config']['debugbar.except'], [
+            '__debugbar'
+        ]);
+
+        $uri = $request->path();
+        foreach ($excluding as $except) {
+            if (preg_match('/' . $except . '/', $uri)) {
+                return $next($request);
+            }
         }
         
         try {
