@@ -64,8 +64,8 @@ class DebugBar
         $view->finder->set(__DIR__ . DS);
 
         try {
-            return $view->render('debugbar', [
-                'view' => $view->finder->template()
+            return $view->render('template.debugbar', [
+                'collector' => array_map([$this->app, 'make'], $this->app->config['debugbar.collector'])
             ]);
         } catch (Throwable $exception) {
             return '';

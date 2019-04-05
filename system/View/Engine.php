@@ -100,7 +100,7 @@ class Engine
      * @return string
      */
     public function render(string $name, array $parameter = [])
-    {   
+    {
         // benchmark purpose
         $this->benchmark->mark($name);
 

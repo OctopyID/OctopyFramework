@@ -8,15 +8,20 @@
  *  \___/ \___|\__\___/| .__/ \__, |
  *                     |_|    |___/
  * @author  : Supian M <supianidz@gmail.com>
- * @link    : www.octopy.xyz
+ * @version : v1.0
  * @license : MIT
  */
 
-return [
+namespace App\HTTP\Middleware;
 
-    'enable' => true,
-    
-    'collector' => [
-        Octopy\DebugBar\Collector\ViewCollector::class,
-   ]
-];
+use Octopy\HTTP\Middleware\CheckMaintenanceMode as Middleware;
+
+class CheckMaintenanceMode extends Middleware
+{
+    /**
+     * @var array
+     */
+    protected $except = [
+        //
+    ];
+}

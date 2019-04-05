@@ -51,12 +51,10 @@ class CSRFVerifyToken
             return $next($request);
         }
         
-        if (!empty($this->except)) {
-            $uri = $request->uri();
-            foreach ($this->except as $except) {
-                if (preg_match($except, $uri)) {
-                    return $next($request);
-                }
+        $uri = $request->uri();
+        foreach ($this->except as $except) {
+            if (preg_match($except, $uri)) {
+                return $next($request);
             }
         }
         

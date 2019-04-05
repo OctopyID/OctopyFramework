@@ -59,7 +59,7 @@ class DebugBarController extends Controller
     private function get(string $filename) : ?string
     {
         try {
-            return $this->app->fsys->get(sprintf('%s/assets/%s', __DIR__, $filename));
+            return $this->app->fsys->get(sprintf('%s/template/assets/%s', __DIR__, $filename));
         } catch (Throwable $exception) {
             return null;
         }

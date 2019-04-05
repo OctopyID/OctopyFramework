@@ -20,7 +20,7 @@ use Octopy\Application;
 use Octopy\HTTP\Request;
 use Octopy\HTTP\Middleware\Exception\MaintenanceModeException;
 
-class MaintenanceMode
+class CheckMaintenanceMode
 {
     /**
      * @var Octopy\Application
@@ -30,7 +30,7 @@ class MaintenanceMode
     /**
      * @var array
      */
-    protected $pattern = [];
+    protected $except = [];
 
     /**
      * @param Application $app
@@ -47,14 +47,13 @@ class MaintenanceMode
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!empty($this->except)) {
-            $uri = $request->uri();
-            foreach ($this->except as $pattern) {
-                if (preg_match($pattern, $uri)) {
-                    return $next($request);
-                }
+        $uri = $request->uri();
+        foreach ($this->except as $pattern) {
+            if (preg_match($pattern, $uri)) {
+                return $next($request);
             }
         }
+        
 
         if (file_exists($down = $this->app->path->storage('framework') . 'down')) {
             $down = json_decode($this->app->fsys->get($down));

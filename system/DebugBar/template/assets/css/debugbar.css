@@ -9,15 +9,15 @@
 }
 
 .debugbar_hide {
-    max-width: 26px;
-    max-height: 26px;
+    max-width: 30px;
+    max-height: 30px;
     bottom: 0;
 }
 
 .debugbar_logo {
     cursor: pointer;
     float: left;
-    font-size: 70%;
+    font-size: 13px;
     padding: 5px;
     transition: 0.3s;
 }
@@ -34,14 +34,14 @@
     cursor: pointer;
     float: left;
     font-family: 'Nunito Sans', sans-serif;
-    font-size: 12px;
+    font-size: 13px;
     outline: none;
     padding: 5px;
     transition: 0.3s;
 }
 
 /* Change background color of buttons on hover */
-.debugbar_tab button:hover {
+.debugbar_tab button:hover, .debugbar_table tr:hover {
     background-color: #ddd;
 }
 
@@ -95,13 +95,6 @@ button::-moz-focus-inner {
     background-color: #FFF;
 }
 
-.debugbar_table tr:hover {
-    background-color: #ddd;
-}
-
 .debugbar_strong {
     font-weight: bold;  
-}
-
-.debugbar_hr {
 }
