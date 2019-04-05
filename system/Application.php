@@ -125,11 +125,6 @@ class Application extends Container
         return php_sapi_name() === 'cli' || php_sapi_name() === 'phpdbg';
     }
 
-    public function middleware(string $middleware)
-    {
-        return $this->make()->layer($middleware);
-    }
-
     /**
      * @param mixed $provider
      * @param bool  $force

@@ -14,8 +14,39 @@
 
 return [
 
+    /*
+     |--------------------------------------------------------------------------
+     | Debugbar Settings
+     |--------------------------------------------------------------------------
+     |
+     | Debugbar is enabled by default, when debug is set to true in app.php.
+     | You can override the value by setting enable to true or false instead of null.
+     |
+     | You can provide an array of URI's that must be ignored (eg. 'api/*')
+     |
+     */
     'enable' => true,
-    
+
+    /*
+     |--------------------------------------------------------------------------
+     | Excluding URI
+     |--------------------------------------------------------------------------
+     |
+     | You can provide an array of URI's that must be ignored (eg. 'api/*')
+     |
+     */
+    'except' => [
+        //
+    ],
+        
+    /*
+     |--------------------------------------------------------------------------
+     | Debugbar Collector
+     |--------------------------------------------------------------------------
+     |
+     | Comment out Collector for disable from debugbar
+     |
+     */
     'collector' => [
         Octopy\DebugBar\Collector\ViewCollector::class,
    ]
