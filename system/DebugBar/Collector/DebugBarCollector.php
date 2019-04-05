@@ -12,11 +12,15 @@
  * @license : MIT
  */
 
-return [
+namespace Octopy\DebugBar\Collector;
 
-    'enable' => true,
-    
-    'collector' => [
-        Octopy\DebugBar\Collector\ViewCollector::class,
-   ]
-];
+abstract class DebugBarCollector
+{
+    /**
+     * @return string
+     */
+    public function name() : string
+    {
+        return $this->name;
+    }
+}

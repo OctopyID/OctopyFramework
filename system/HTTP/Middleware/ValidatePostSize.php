@@ -16,17 +16,11 @@ namespace Octopy\HTTP\Middleware;
 
 use Closure;
 
-use Octopy\Application;
 use Octopy\HTTP\Request;
 use Octopy\HTTP\Middleware\Exception\PostTooLargeException;
 
 class ValidatePostSize
 {
-    /**
-     * @var Octopy\Application
-     */
-    protected $app;
-
     /**
      * @param  Request $request
      * @param  Closure $next

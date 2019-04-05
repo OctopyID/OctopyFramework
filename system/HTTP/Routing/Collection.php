@@ -19,7 +19,7 @@ use ArrayIterator;
 use IteratorAggregate;
 
 use Octopy\HTTP\Request;
-use Octopy\HTTP\Middleware\Collection as Middleware;
+use Octopy\HTTP\Middleware;
 use Octopy\HTTP\Routing\Exception\RouteNotFoundException;
 use Octopy\HTTP\Routing\Exception\MethodNotAllowedException;
 

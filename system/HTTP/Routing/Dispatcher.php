@@ -80,7 +80,7 @@ class Dispatcher
             return $this->app->response->make($response);
         };
 
-        return $this->app->make(Middleware::class, compact('middleware'))->dispatch($this->app->request, $next);
+        return $this->app->middleware->dispatch($middleware, $this->app->request, $next);
     }
 
     /**

@@ -18,10 +18,10 @@ use Closure;
 
 use Octopy\Application;
 use Octopy\HTTP\Request;
+use Octopy\HTTP\Middleware;
 use Octopy\HTTP\Routing\Route;
 use Octopy\HTTP\Routing\Collection;
 use Octopy\HTTP\Routing\Dispatcher;
-use Octopy\HTTP\Middleware\Collection as Middleware;
 
 class Router
 {
@@ -41,7 +41,7 @@ class Router
     protected $collection;
 
     /**
-     * @var Octopy\HTTP\Middleware\Collection
+     * @var Octopy\HTTP\Middleware
      */
     protected $middleware;
 

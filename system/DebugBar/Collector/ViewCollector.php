@@ -8,20 +8,24 @@
  *  \___/ \___|\__\___/| .__/ \__, |
  *                     |_|    |___/
  * @author  : Supian M <supianidz@gmail.com>
- * @version : v1.0
+ * @link    : www.octopy.xyz
  * @license : MIT
  */
 
-namespace App\HTTP\Middleware;
+namespace Octopy\DebugBar\Collector;
 
-use Octopy\HTTP\Middleware\MaintenanceMode as Middleware;
-
-class MaintenanceMode extends Middleware
+class ViewCollector extends DebugBarCollector
 {
     /**
-     * @var array
+     * @var string
      */
-    protected $except = [
-        //
-    ];
+    protected $name = 'view';
+
+    /**
+     * @return string
+     */
+    public function icon() : string
+    {
+        return 'icon-code';
+    }
 }

@@ -16,64 +16,62 @@ namespace Octopy\HTTP;
 
 use Closure;
 
-use Octopy\Support\App;
+use Octopy\HTTP\Middleware\Dispatcher;
 
 class Middleware
 {
     /**
      * @var array
      */
-    protected $middleware;
+    public $route = [];
 
     /**
-     * @param array $middleware
+     * @var array
      */
-    public function __construct(array $middleware = [])
-    {
-        $this->middleware = $middleware;
-    }
+    public $global = [];
 
     /**
-     * @param  array   $middleware
-     * @param  Request $object
-     * @param  Closure $next
-     * @return mixed
+     * @param string $layer
+     * @param mixed  $middleware
      */
-    public function dispatch(Request $object, Closure $next)
+    public function set(string $layer, $middleware = null)
     {
-        $middleware = array_reverse($this->middleware);
-
-        $complete = array_reduce($middleware, function (Closure $next, $middleware) {
-            return $this->create($next, $middleware);
-        }, $this->next($next));
-
-        return $complete($object);
-    }
-
-    /**
-     * @param  Closure $next
-     * @return Closure
-     */
-    protected function next(Closure $next)
-    {
-        return function ($object) use ($next) {
-            return $next($object);
-        };
-    }
-
-    /**
-     * @param  Closure  $next
-     * @param  callable $middleware
-     * @return mixed
-     */
-    protected function create(Closure $next, $middleware)
-    {
-        return function ($object) use ($next, $middleware) {
-            if ($middleware instanceof Closure) {
-                return $middleware($object, $next);
+        if (is_null($middleware)) {
+            if (!isset($this->global[$layer])) {
+                $this->global[] = $layer;
             }
-            
-            return App::make($middleware)->handle($object, $next);
-        };
+        } elseif (!isset($this->route[$layer])) {
+            $this->route[$layer] = $middleware;
+        }
+    }
+
+    /**
+     * @param  string $layer
+     * @return mixed
+     */
+    public function route($layer = null)
+    {
+        if (is_null($layer)) {
+            return $this->route;
+        }
+
+        if (!is_string($layer)) {
+            return $layer;
+        }
+
+        return $this->route[$layer] ?? $layer;
+    }
+
+    /**
+     * @return array
+     */
+    public function global() : array
+    {
+        return $this->global ?? [];
+    }
+
+    public function dispatch(array $middleware = [], Request $object, Closure $next)
+    {
+        return (new Dispatcher($middleware))->dispatch($object, $next);
     }
 }

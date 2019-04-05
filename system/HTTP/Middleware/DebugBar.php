@@ -49,7 +49,9 @@ class DebugBar
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!$this->app->debug() || preg_match('/__debugbar/', $request->path())) {
+        $debugbar = preg_match('/__debugbar/', $request->path());
+        
+        if (!$this->app->debug() || !$this->app->config['debugbar.enable'] || $debugbar) {
             return $next($request);
         }
         

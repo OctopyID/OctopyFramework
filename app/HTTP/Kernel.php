@@ -24,10 +24,8 @@ class Kernel extends HTTPKernel
      * @var array
      */
     protected $middleware = [
-        \App\HTTP\Middleware\MaintenanceMode::class,
-        \Octopy\HTTP\Middleware\ValidatePostSize::class,
+        \App\HTTP\Middleware\CheckMaintenanceMode::class,
         \App\HTTP\Middleware\CSRFVerifyToken::class,
-        \Octopy\HTTP\Middleware\DebugBar::class,
     ];
 
     /**

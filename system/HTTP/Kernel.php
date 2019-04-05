@@ -15,8 +15,7 @@
 namespace Octopy\HTTP;
 
 use Octopy\Application;
-use Octopy\HTTP\Routing\Router;
-use Octopy\HTTP\Middleware\Collection;
+use Octopy\HTTP\Middleware;
 
 class Kernel
 {
@@ -26,6 +25,7 @@ class Kernel
     protected $bootstrap = [
         \Octopy\Bootstrap\RegisterEnvironmentVariable::class,
         \Octopy\Bootstrap\RegisterSystemConfiguration::class,
+        \Octopy\Bootstrap\RegisterMiddlewareProvider::class,
         \Octopy\Bootstrap\RegisterExceptionHandler::class,
         \Octopy\Bootstrap\RegisterServiceProvider::class,
         \Octopy\Bootstrap\BootUpServiceProvider::class,
@@ -33,23 +33,23 @@ class Kernel
 
     /**
      * @param Application $app
-     * @param Collection  $middleware
+     * @param Middleware  $middleware
      */
-    public function __construct(Application $app, Collection $middleware)
+    public function __construct(Application $app, Middleware $middleware)
     {
         $this->app = $app;
         
         // These middleware are run during every request to your application.
         if (isset($this->middleware)) {
             foreach ($this->middleware as $layer) {
-                $middleware->layer($layer);
+                $middleware->set($layer);
             }
         }
 
         // These middleware may be assigned to groups or used individually.
         if (isset($this->routemiddleware)) {
             foreach ($this->routemiddleware as $name => $layer) {
-                $middleware->layer($name, $layer);
+                $middleware->set($name, $layer);
             }
         }
 
