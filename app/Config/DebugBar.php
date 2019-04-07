@@ -48,6 +48,7 @@ return [
      |
      */
     'collector' => [
+        Octopy\DebugBar\Collector\FileCollector::class,
         Octopy\DebugBar\Collector\ViewCollector::class,
    ]
 ];

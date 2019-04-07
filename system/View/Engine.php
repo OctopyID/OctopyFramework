@@ -19,8 +19,6 @@ use RuntimeException;
 
 use Octopy\View\Finder;
 use Octopy\View\Parser;
-use Octopy\Support\Collector;
-use Octopy\Support\Benchmark;
 
 class Engine
 {
@@ -67,7 +65,6 @@ class Engine
     {
         $this->parser = new Parser($this);
         $this->finder = new Finder($resource, $compiled);
-        $this->benchmark = new Benchmark;
     }
     
     /**
@@ -101,9 +98,6 @@ class Engine
      */
     public function render(string $name, array $parameter = [])
     {
-        // benchmark purpose
-        $this->benchmark->mark($name);
-
         $storage = $this->finder->find($name = $this->trim($name));
 
         $this->parameter = array_merge($this->parameter, array_replace($this->shared, $parameter));
@@ -116,9 +110,7 @@ class Engine
             throw new RuntimeException("The template [$name] cannot be rendered.");
         }
 
-        $storage->benchmark($this->benchmark->elapsed($name), $this->benchmark->memory());
-
-        return $content;
+        return ltrim($content, "\n");
     }
 
     /**

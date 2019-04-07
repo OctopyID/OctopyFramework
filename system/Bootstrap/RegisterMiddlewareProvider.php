@@ -24,9 +24,5 @@ class RegisterMiddlewareProvider
     public function bootstrap(Application $app)
     {
         $app['middleware']->set(\Octopy\HTTP\Middleware\ValidatePostSize::class);
-
-        if ($app['config']['debugbar.enable']) {
-            $app['middleware']->set(\Octopy\HTTP\Middleware\InjectDebugBar::class);
-        }
     }
 }

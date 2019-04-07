@@ -44,7 +44,7 @@ class AutoloadCacheCommand extends Command
         $this->basepath = $this->app->basepath();
 
         $classmap = [];
-        foreach ($this->app->fsys->iterator($this->basepath) as $row) {
+        foreach ($this->app->filesystem->iterator($this->basepath) as $row) {
             if (!$row->isFile()) {
                 continue;
             }
@@ -84,7 +84,7 @@ class AutoloadCacheCommand extends Command
                 $message = 'Re-Generating autoload file.';
             }
 
-            if ($this->app->fsys->put($classmap, $template)) {
+            if ($this->app->filesystem->put($classmap, $template)) {
                 return $output->success($message);
             }
         } catch (Exception $exception) {

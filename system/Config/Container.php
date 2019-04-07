@@ -23,7 +23,7 @@ return [
     'debugbar'   => Octopy\DebugBar::class,
     'encrypter'  => Octopy\Encryption\Encrypter::class,
     'env'        => Octopy\Config\DotEnv::class,
-    'fsys'       => Octopy\FileSystem::class,
+    'filesystem' => Octopy\FileSystem::class,
     'hash'       => Octopy\Hashing\HashManager::class,
     'middleware' => Octopy\HTTP\Middleware::class,
     'path'       => Octopy\FileSystem\PathLocator::class,

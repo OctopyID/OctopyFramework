@@ -51,7 +51,7 @@ class ConsoleServiceProvider extends ServiceProvider
         );
 
         foreach ($autodiscover as $namespace => $directory) {
-            foreach ($this->app->fsys->iterator($directory) as $row) {
+            foreach ($this->app->filesystem->iterator($directory) as $row) {
                 if (substr($row->getFilename(), -4) !== '.php') {
                     continue;
                 }
