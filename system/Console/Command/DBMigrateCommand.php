@@ -63,7 +63,7 @@ class DBMigrateCommand extends Command
                 return $output->warning('Nothing to migrate.');
             }
 
-            $iterator = $this->app->fsys->iterator($directory);
+            $iterator = $this->app->filesystem->iterator($directory);
 
             $migration = [];
             foreach ($iterator as $row) {

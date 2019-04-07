@@ -37,7 +37,7 @@ class ViewClearCommand extends Command
      */
     public function handle(Argv $argv, Output $output)
     {
-        $iterator = $this->app->fsys->iterator(
+        $iterator = $this->app->filesystem->iterator(
             $this->app->config['view.compiled']
         );
 

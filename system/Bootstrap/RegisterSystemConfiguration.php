@@ -30,14 +30,14 @@ class RegisterSystemConfiguration
     /**
      * @var Octopy\FileSystem
      */
-    protected $fsys;
+    protected $filesystem;
 
     /**
-     * @param FileSystem $fsys
+     * @param FileSystem $filesystem
      */
-    public function __construct(FileSystem $fsys)
+    public function __construct(FileSystem $filesystem)
     {
-        $this->fsys = $fsys;
+        $this->filesystem = $filesystem;
     }
 
     /**
@@ -66,7 +66,7 @@ class RegisterSystemConfiguration
     {
         $config = [];
 
-        foreach ($this->fsys->iterator($path) as $row) {
+        foreach ($this->filesystem->iterator($path) as $row) {
             if ($row->isDir()) {
                 continue;
             }

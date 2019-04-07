@@ -14,11 +14,7 @@
 
 namespace Octopy;
 
-use Throwable;
-
 use Octopy\Application;
-use Octopy\View\Engine;
-use Octopy\HTTP\Response;
 
 class DebugBar
 {
@@ -35,40 +31,7 @@ class DebugBar
         $this->app = $app;
     }
 
-    /**
-     * @param  Response $response
-     * @return void
-     */
-    public function modify(Response $response)
+    public function modify()
     {
-        $content = $response->body;
-
-        $debugbar = $this->render($this->app->view);
-
-        $middle = strripos($content, '</body>');
-        if (false !== $middle) {
-            $content = substr($content, 0, $middle) . $debugbar . substr($content, $middle);
-        } else {
-            $content = $content . $debugbar;
-        }
-
-        return $response->body($content);
-    }
-
-    /**
-     * @param  Engine $view
-     * @return string
-     */
-    protected function render(Engine $view) : string
-    {
-        $view->finder->set(__DIR__ . DS);
-
-        try {
-            return $view->render('template.debugbar', [
-                'collector' => array_map([$this->app, 'make'], $this->app->config['debugbar.collector'])
-            ]);
-        } catch (Throwable $exception) {
-            return '';
-        }
     }
 }

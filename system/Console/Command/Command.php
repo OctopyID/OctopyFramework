@@ -74,7 +74,7 @@ abstract class Command
     protected function generate(string $location, string $stub, array $data = [])
     {
         try {
-            $content = $this->app->fsys->get(
+            $content = $this->app->filesystem->get(
                 sprintf('%s/stub/%s.stub', __DIR__, $stub)
             );
         } catch (Exception $exception) {
@@ -92,10 +92,10 @@ abstract class Command
 
         try {
             if (!is_dir($basedir = dirname($location))) {
-                $this->app->fsys->mkdir($basedir, 0755, true);
+                $this->app->filesystem->mkdir($basedir, 0755, true);
             }
 
-            return $this->app->fsys->put($location, $content);
+            return $this->app->filesystem->put($location, $content);
         } catch (Exception $exception) {
             throw $exception;
         }

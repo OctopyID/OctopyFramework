@@ -40,7 +40,7 @@ class ViewCacheCommand extends Command
      */
     public function handle(Argv $argv, Output $output)
     {
-        $iterator = $this->app->fsys->iterator($this->app->config['view.resource']);
+        $iterator = $this->app->filesystem->iterator($this->app->config['view.resource']);
         
         foreach ($iterator as $row) {
             $filename = str_replace(['.octopy.php', '.php'], '', $row->getFilename());
