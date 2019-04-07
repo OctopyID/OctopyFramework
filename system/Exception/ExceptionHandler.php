@@ -107,7 +107,7 @@ class ExceptionHandler
      */
     private function view(string $name, array $vars = []) :string
     {
-        $view = $this->app->resolve('view', ['resource' => sprintf('%s/template/', __DIR__)]);
+        $view = $this->app->resolve('view', ['resource' => sprintf('%s/View/', __DIR__)]);
 
         return $view->render($name, array_merge($vars, [
             'app' => $this->app

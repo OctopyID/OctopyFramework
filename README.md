@@ -1,7 +1,18 @@
-# OctopyFramework
+## What is Octopy Framework?
 
-## Octopy Syntax Highlighter
-https://github.com/SupianIDz/OctopySyntaxHighlighter
+Octopy is a lightweight PHP web framework inspired by Laravel Framework and its use is almost like Laravel.
+
+With several features such as:
+
+* Octopy console
+* Octopy template engine
+* Middleware
+* Exception handler
+* Debugbar
+
+and much more.
+
+In addition to the features above this framework is very light, only measuring less than 1.5 megabytes because there is no dependency on other packages, but you are free to use packages from outside using composer.
 
 ## Installation
   `git clone https://github.com/SupianIDz/OctopyFramework.git`
@@ -41,13 +52,13 @@ use App\HTTP\Controller;
 use Octopy\HTTP\Request;
 
 class ControllerName extends Controller
-{	
-	/**
-	 * @param  Request $request
-	 */
+{ 
+  /**
+   * @param  Request $request
+   */
     public function index(Request $request)
     {
-    	dd($request);
+      dd($request);
     }
 }
 ```
