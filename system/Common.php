@@ -79,7 +79,7 @@ if (!function_exists('dd')) {
      */
     function dd(...$dump)
     {
-        App::make(Octopy\Support\VarDumper::class)->dd(...$dump);
+        App::make('vardumper')->dd(...$dump);
     }
 }
 
@@ -101,7 +101,7 @@ if (!function_exists('dump')) {
      */
     function dump(...$dump)
     {
-        App::make(Octopy\Support\VarDumper::class)->dump(...$dump);
+        App::make('vardumper')->dump(...$dump);
     }
 }
 
