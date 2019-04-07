@@ -1,21 +1,3 @@
-@php
-	if(!function_exists('byteformatter')) {
-		/**
-	 	 * @param  int    $bytes
-	 	 * @return string
-	 	*/
-		function byteformatter(int $bytes) : string
-		{
-   			if ($bytes < 1024) {
-      			return $bytes . 'B';
-   			} elseif ($bytes < 1048576) {
-      			return round($bytes / 1024, 2) . 'KB';
-    		}
-
-		   	return round($bytes / 1048576, 2) . 'MB';
-		}
-	}
-@endphp
 <!DOCTYPE html>
 <html>
 <head>

@@ -171,12 +171,12 @@ if (!function_exists('last')) {
     }
 }
 
-if (!function_exists('memory')) {
+if (!function_exists('byteformatter')) {
     /**
      * @param  float $byte
      * @return string
      */
-    function memory($byte)
+    function byteformatter($byte)
     {
         if ($byte < 1024) {
             return ' ' .$byte . 'B';
