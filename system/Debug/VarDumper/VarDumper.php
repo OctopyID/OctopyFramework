@@ -12,7 +12,7 @@
  * @license : MIT
  */
 
-namespace Octopy\Support;
+namespace Octopy\Debug;
 
 use ReflectionObject;
 

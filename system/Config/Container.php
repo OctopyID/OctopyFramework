@@ -35,5 +35,6 @@ return [
     'session'    => Octopy\Session::class,
     'syntax'     => Octopy\Support\Syntax::class,
     'validator'  => Octopy\Validation\Validator::class,
+    'vardumper'  => Octopy\Debug\VarDumper::class,
     'view'       => Octopy\View\Engine::class,
 ];
