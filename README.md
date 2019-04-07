@@ -1,3 +1,5 @@
+![Screenshot](public/img/logo.png)
+
 ## What is Octopy Framework?
 
 Octopy is a lightweight PHP web framework inspired by Laravel Framework and its use is almost like Laravel.
