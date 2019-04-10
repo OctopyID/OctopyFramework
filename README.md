@@ -17,6 +17,14 @@ and much more.
 In addition to the features above this framework is very light, only measuring less than 1.5 megabytes because there is no dependency on other packages, but you are free to use packages from outside using composer.
 
 ## Installation
+### Composer
+  `composer create-project supianidz/octopyframework OctopyFramework dev-master`
+
+  `cd OctopyFramework`
+
+  `php octopy serve`
+  
+### GIT
   `git clone https://github.com/SupianIDz/OctopyFramework.git`
 
   `cd OctopyFramework`
