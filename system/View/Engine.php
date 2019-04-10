@@ -15,6 +15,7 @@
 namespace Octopy\View;
 
 use Closure;
+use Exception;
 use RuntimeException;
 
 use Octopy\View\Finder;
@@ -25,7 +26,7 @@ class Engine
     /**
      * @var Octopy\View\Finder
      */
-    public $finder;
+    protected $finder;
 
     /**
      * @var Octopy\View\Parser
@@ -106,8 +107,10 @@ class Engine
             $this->parser->compile($storage);
         }
         
-        if (false === $content = $this->evaluate($storage)) {
-            throw new RuntimeException("The template [$name] cannot be rendered.");
+        try {
+            $content = $this->evaluate($storage);
+        } catch (Exception $exception) {
+            throw new RuntimeException($exception->getMessage());
         }
 
         return ltrim($content, "\n");
@@ -172,14 +175,18 @@ class Engine
     {
         extract($this->parameter);
 
-        if ($octopy__[0]->octopy() && $octopy__[0]->compiled()) {
-            ob_start();
-            require $octopy__[0];
-            return ob_get_clean();
-        } else {
-            ob_start();
-            eval('; ?>' . $octopy__[0] . '<?php ;');
-            return ob_get_clean();
+        try {
+            if ($octopy__[0]->octopy() && $octopy__[0]->compiled()) {
+                ob_start();
+                require $octopy__[0];
+                return ob_get_clean();
+            } else {
+                ob_start();
+                eval('; ?>' . $octopy__[0] . '<?php ;');
+                return ob_get_clean();
+            }
+        } catch (Exception $exception) {
+            throw $exception;
         }
 
         return false;

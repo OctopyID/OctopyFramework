@@ -194,8 +194,12 @@ if (!function_exists('route')) {
      * @param  array  $default
      * @return string
      */
-    function route(string $name, array $default = []) : string
+    function route(string $name, $default = []) : string
     {
+        if (!is_array($default)) {
+            $default = (array)$default;
+        }
+        
         return App::make(Octopy\HTTP\Routing\URLGenerator::class)->route($name, $default);
     }
 }

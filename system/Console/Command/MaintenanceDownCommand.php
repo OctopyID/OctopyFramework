@@ -25,7 +25,7 @@ class MaintenanceDownCommand extends Command
     /**
      * @var string
      */
-    protected $signature = 'maintenance:down';
+    protected $signature = 'down';
 
     /**
      * @var string

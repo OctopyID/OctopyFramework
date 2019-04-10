@@ -82,8 +82,8 @@ class ExceptionHandler
 
         if ($request->ajax()) {
             return array(
-                'message' => $vars['message'],
-                'exception' => $vars['exception']
+                'message'   => $vars['message'],
+                'exception' => $vars['exception'],
             );
         }
 

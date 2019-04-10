@@ -15,14 +15,32 @@
 namespace Octopy\Bootstrap;
 
 use Octopy\Application;
+use Octopy\HTTP\Middleware;
 
 class RegisterMiddlewareProvider
 {
+    /**
+     * @var Octopy\HTTP\Middleware
+     */
+    protected $middleware;
+
+    /**
+     * @param Middleware $middleware
+     */
+    public function __construct(Middleware $middleware)
+    {
+        $this->middleware = $middleware;
+    }
+
     /**
      * @param Application $app
      */
     public function bootstrap(Application $app)
     {
-        $app['middleware']->set(\Octopy\HTTP\Middleware\ValidatePostSize::class);
+        $this->middleware->set(\Octopy\HTTP\Middleware\ValidatePostSize::class);
+
+        if ($app['config']['app.debug'] && $app['config']['debugbar.enable']) {
+            $this->middleware->set(\Octopy\HTTP\Middleware\InjectDebugBar::class);
+        }
     }
 }

@@ -123,7 +123,7 @@ class Header
      */
     public function has(string $key) : bool
     {
-        return array_key_exists(str_replace('_', '-', strtolower($key)), $this->all());
+        return array_key_exists($key, $this->all());
     }
 
     /**
@@ -132,5 +132,16 @@ class Header
     public function all() : array
     {
         return $this->header;
+    }
+
+    /**
+     * @param  string $key
+     * @return void
+     */
+    public function remove(string $key)
+    {
+        if ($this->has($key)) {
+            unset($this->header[$key]);
+        }
     }
 }

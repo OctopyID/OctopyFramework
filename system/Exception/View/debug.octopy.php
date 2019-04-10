@@ -10,7 +10,7 @@
 <body onload="init()">
 	<div class="header">
 		<div class="container">
-			<h1>{{ htmlspecialchars($exception, ENT_SUBSTITUTE, 'UTF-8'), ($code ? ' #' . $code : '') }}</h1>
+			<h1>{{ $exception, $code ? ' #' . $code : '' }}</h1>
 			<p>{{{ $message }}}</p>
 		</div>
 	</div>
