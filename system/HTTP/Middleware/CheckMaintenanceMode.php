@@ -47,13 +47,9 @@ class CheckMaintenanceMode
      */
     public function handle(Request $request, Closure $next)
     {
-        $uri = $request->uri();
-        foreach ($this->except as $pattern) {
-            if (preg_match($pattern, $uri)) {
-                return $next($request);
-            }
+        if ($request->except($this->except)) {
+            return $next($request);
         }
-        
 
         if (file_exists($down = $this->app->path->storage('framework') . 'down')) {
             $down = json_decode($this->app->filesystem->get($down));

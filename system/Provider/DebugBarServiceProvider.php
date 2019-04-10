@@ -14,12 +14,14 @@
 
 namespace Octopy\Provider;
 
+use Octopy\HTTP\Response;
+
 class DebugBarServiceProvider extends ServiceProvider
 {
     /**
      * @var string
      */
-    protected $namespace = \Octopy\DebugBar::class;
+    protected $namespace = \Octopy\Debug\DebugBar::class;
     
     /**
      * @return void
@@ -33,7 +35,8 @@ class DebugBarServiceProvider extends ServiceProvider
             );
 
             $this->app->route->group($option, function ($route) {
-                $route->get('assets/:dir/:file', 'DebugBarController@assets')->name('debugbar.assets');
+                $route->get('/', 'DebugBarController@index')->name('debugbar');
+                $route->get(':filename', 'DebugBarController@assets')->name('debugbar.assets');
             });
         }
     }

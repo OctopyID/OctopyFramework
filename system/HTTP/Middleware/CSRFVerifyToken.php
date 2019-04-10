@@ -47,17 +47,10 @@ class CSRFVerifyToken
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->method() !== 'POST') {
+        if ($request->method() !== 'POST' || $request->except(array_merge($this->except, ['__debugbar']))) {
             return $next($request);
         }
-        
-        $uri = $request->uri();
-        foreach ($this->except as $except) {
-            if (preg_match($except, $uri)) {
-                return $next($request);
-            }
-        }
-        
+
         $token = $request->header('X-CSRF-TOKEN') ?? $request->__TOKEN__;
 
         if ($token === $this->app->session->get('X-CSRF-TOKEN')) {

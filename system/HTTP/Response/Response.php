@@ -187,7 +187,8 @@ class Response
     }
 
     /**
-     * @param string $body
+     * @param  string $body
+     * @return $this
      */
     public function body($body)
     {
@@ -213,7 +214,7 @@ class Response
      * @param  int   $option
      * @return JsonResponse
      */
-    public function json($data = [], int $status = 200, array $header = [], int $option = 0)
+    public function json(array $data = [], int $status = 200, array $header = [], int $option = 0)
     {
         return new JsonResponse($data, $status, $header, $option);
     }
@@ -261,6 +262,14 @@ class Response
      */
     public function header(...$header)
     {
+        if (isset($header[0]) && is_array($header[0])) {
+            foreach ($header[0] as $key => $value) {
+                $this->header($key, $value);
+            }
+
+            return $this;
+        }
+
         $this->header->set(...$header);
         
         return $this;

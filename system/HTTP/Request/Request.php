@@ -284,4 +284,13 @@ class Request
     {
         return $this->server('SERVER_PORT');
     }
+
+    /**
+     * @param  array $except
+     * @return bool
+     */
+    public function except(array $except) : bool
+    {
+        return preg_match('/' . implode('|', $except) . '/', $this->path());
+    }
 }
