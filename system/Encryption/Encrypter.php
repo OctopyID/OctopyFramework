@@ -34,12 +34,12 @@ class Encrypter
     protected $cipher;
 
     /**
-     * @param Application $app
+     * @param string $key
+     * @param string $cipher
      */
-    public function __construct(Application $app)
+    public function __construct(string $key, string $cipher)
     {
-        $config = $app->config['app'];
-        if ($this->supported($key = $config['key'], $cipher = $config['cipher'])) {
+        if ($this->supported($key, $cipher)) {
             $this->key = $key;
             $this->cipher = $cipher;
         } else {
@@ -63,7 +63,7 @@ class Encrypter
      * @param  string $cipher
      * @return string
      */
-    public function generate($cipher)
+    public static function generate($cipher)
     {
         return random_bytes($cipher === 'AES-128-CBC' ? 16 : 32);
     }

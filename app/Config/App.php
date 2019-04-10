@@ -128,12 +128,13 @@ return [
         /**
          * System Service Providers...
          */
-        Octopy\Provider\AutoloadServiceProvider::class,
+        Octopy\Provider\SessionServiceProvider::class,
         Octopy\Provider\ConsoleServiceProvider::class,
         Octopy\Provider\DebugBarServiceProvider::class,
         Octopy\Provider\ResponseServiceProvider::class,
-        Octopy\Provider\SessionServiceProvider::class,
+        Octopy\Provider\AutoloadServiceProvider::class,
         Octopy\Provider\ValidationServiceProvider::class,
         Octopy\Provider\ViewEngineServiceProvider::class,
+        Octopy\Provider\EncryptionServiceProvider::class,
    ]
 ];
