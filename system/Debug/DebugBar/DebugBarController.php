@@ -26,7 +26,8 @@ class DebugBarController extends Controller
      */
     public function index()
     {
-        return 'MEMEK';
+        // idk
+        return '';
     }
 
     /**
