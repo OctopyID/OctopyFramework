@@ -15,7 +15,7 @@
 			<img src="img/octopy.png" title="Octopy Framework">
 		</div>
 		<h2>{{ $app->name() }} - {{ $app->version() }}</h2>
-		<p>Lightweight PHP Framework with Laravel look like.</p>
+		<p>lightweight php framework with laravel look like</p>
 	</div>
 </div>
 
