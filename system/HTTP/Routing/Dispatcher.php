@@ -77,10 +77,10 @@ class Dispatcher
                 $response = $controller(...array_values($this->method($parameter, new ReflectionFunction($controller))));
             }
 
-            return $this->app->response->make($response);
+            return $this->app['response']->make($response);
         };
 
-        return $this->app->middleware->dispatch($middleware, $this->app->request, $next);
+        return $this->app['middleware']->dispatch($middleware, $this->app['request'], $next);
     }
 
     /**

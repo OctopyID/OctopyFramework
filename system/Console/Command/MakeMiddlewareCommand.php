@@ -38,7 +38,7 @@ class MakeMiddlewareCommand extends Command
     public function handle(Argv $argv, Output $output)
     {
         $parsed = $this->parse($argv);
-        if (file_exists($location = $this->app->path->app->HTTP->middleware($parsed['location']))) {
+        if (file_exists($location = $this->app['path']->app->HTTP->middleware($parsed['location']))) {
             return $output->warning('Middleware already exists.');
         }
         

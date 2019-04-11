@@ -129,7 +129,7 @@ trait ValidationRules
      */
     public function exists(string $attribute, string $table, string $column)
     {
-        $db = $this->app->database->table($table);
+        $db = $this->app['database']->table($table);
         $db->where($column, $this->value($attribute));
         if ($db->count() == 0) {
             return $this->format('The selected `:attribute` is not exists.', [
@@ -318,7 +318,7 @@ trait ValidationRules
      */
     public function unique(string $attribute, string $table, string $column)
     {
-        $db = $this->app->database->table($table);
+        $db = $this->app['database']->table($table);
         $db->where($column, $this->value($attribute));
         if ($db->count() > 0) {
             return $this->format('The selected `:attribute` has already been taken.', [

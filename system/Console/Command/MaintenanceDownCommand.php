@@ -50,8 +50,8 @@ class MaintenanceDownCommand extends Command
         }
 
         try {
-            $location = $this->app->path->storage('framework') . 'down';
-            $this->app->filesystem->put($location, json_encode(array(
+            $location = $this->app['path']->storage('framework') . 'down';
+            $this->app['filesystem']->put($location, json_encode(array(
                 'time'    => time(),
                 'message' => $message,
                 'allowed' => $allowed,

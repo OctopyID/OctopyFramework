@@ -29,7 +29,7 @@ class RouteServiceProvider extends ServiceProvider
     public function register()
     {
         // http
-        $route = $this->app->route;
+        $route = $this->app['route'];
         $route->namespace($this->namespace, function () use ($route) {
             $route->load('Web.php');
 
@@ -40,7 +40,7 @@ class RouteServiceProvider extends ServiceProvider
 
         // cli
         if ($this->app->console()) {
-            $this->app->console->load('Console.php');
+            $this->app['console']->load('Console.php');
         }
     }
 }

@@ -87,7 +87,7 @@ class RegisterExceptionHandler
                 $response = $exception->getMessage();
             }
 
-            $this->app->response->make($response, $exception->getCode())->send();
+            $this->app['response']->make($response, $exception->getCode())->send();
         }
     }
 

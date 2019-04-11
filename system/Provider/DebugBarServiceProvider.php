@@ -34,7 +34,7 @@ class DebugBarServiceProvider extends ServiceProvider
                 'namespace' => $this->namespace
             );
 
-            $this->app->route->group($option, function ($route) {
+            $this->app['route']->group($option, function ($route) {
                 $route->get('/', 'DebugBarController@index')->name('debugbar');
                 $route->get(':filename', 'DebugBarController@assets')->name('debugbar.assets');
             });

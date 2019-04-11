@@ -78,6 +78,6 @@ class Console
      */
     public function load(string $route)
     {
-        require $this->app->path->app->route($route);
+        require $this->app['path']->app->route($route);
     }
 }

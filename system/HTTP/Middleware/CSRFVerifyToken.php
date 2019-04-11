@@ -53,9 +53,9 @@ class CSRFVerifyToken
 
         $token = $request->header('X-CSRF-TOKEN') ?? $request->__TOKEN__;
 
-        if ($token === $this->app->session->get('X-CSRF-TOKEN')) {
-            $time = time() - $this->app->session->get('X-CSRF-TOKEN-EXPIRE');
-            if ($time < $this->app->config['session.lifetime']) {
+        if ($token === $this->app['session']->get('X-CSRF-TOKEN')) {
+            $time = time() - $this->app['session']->get('X-CSRF-TOKEN-EXPIRE');
+            if ($time < $this->app['config']['session.lifetime']) {
                 return $next($request);
             }
         }
@@ -68,13 +68,13 @@ class CSRFVerifyToken
      */
     public function generate() : string
     {
-        if (!$this->app->session->has('X-CSRF-TOKEN')) {
+        if (!$this->app['session']->has('X-CSRF-TOKEN')) {
             $token = sha1(random_bytes(32));
         } else {
-            $token = $this->app->session->get('X-CSRF-TOKEN');
+            $token = $this->app['session']->get('X-CSRF-TOKEN');
         }
 
-        $this->app->session->set(array(
+        $this->app['session']->set(array(
             'X-CSRF-TOKEN'        => $token,
             'X-CSRF-TOKEN-EXPIRE' => microtime(true)
         ));

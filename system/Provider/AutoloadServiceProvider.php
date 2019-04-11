@@ -21,8 +21,8 @@ class AutoloadServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if (file_exists($autoload = $this->app->path->storage('framework/autoload.php'))) {
-            $this->app->autoload->classmap(require $autoload);
+        if (file_exists($autoload = $this->app['path']->storage('framework/autoload.php'))) {
+            $this->app['autoload']->classmap(require $autoload);
         }
     }
 }

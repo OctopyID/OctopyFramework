@@ -60,7 +60,7 @@ class DebugBarController extends Controller
     public function get(string $path) : string
     {
         try {
-            return $this->app->filesystem->get(__DIR__ . '/View/assets/' . $path);
+            return $this->app['filesystem']->get(__DIR__ . '/View/assets/' . $path);
         } catch (Throwable $exception) {
             return $exception->getMessage();
         }

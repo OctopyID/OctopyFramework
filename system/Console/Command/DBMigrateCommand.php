@@ -57,13 +57,13 @@ class DBMigrateCommand extends Command
             /**
              * Multiple
              */
-            $directory = $this->app->path->app->DB('Migration');
+            $directory = $this->app['path']->app->DB('Migration');
 
             if (!is_dir($directory)) {
                 return $output->warning('Nothing to migrate.');
             }
 
-            $iterator = $this->app->filesystem->iterator($directory);
+            $iterator = $this->app['filesystem']->iterator($directory);
 
             $migration = [];
             foreach ($iterator as $row) {

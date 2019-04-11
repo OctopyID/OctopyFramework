@@ -70,7 +70,7 @@ class Kernel
     public function handle(Request $request)
     {
         try {
-            return $this->app->router->dispatch($request);
+            return $this->app['router']->dispatch($request);
         } catch (Throwable $exception) {
             throw $exception;
         }

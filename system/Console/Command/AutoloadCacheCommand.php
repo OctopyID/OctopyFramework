@@ -44,7 +44,7 @@ class AutoloadCacheCommand extends Command
         $this->basepath = $this->app->basepath();
 
         $classmap = [];
-        foreach ($this->app->filesystem->iterator($this->basepath) as $row) {
+        foreach ($this->app['filesystem']->iterator($this->basepath) as $row) {
             if (!$row->isFile()) {
                 continue;
             }
@@ -75,7 +75,7 @@ class AutoloadCacheCommand extends Command
             
             $template = sprintf("<?php \n\n%s\n\nreturn %s;", implode("\n", $banner), var_export($classmap, true));
 
-            if (!is_dir($location = dirname($classmap = $this->app->path->storage('framework/autoload.php')))) {
+            if (!is_dir($location = dirname($classmap = $this->app['path']->storage('framework/autoload.php')))) {
                 $this->app->mkdir($location, 0755, true);
             }
 
@@ -84,7 +84,7 @@ class AutoloadCacheCommand extends Command
                 $message = 'Re-Generating autoload file.';
             }
 
-            if ($this->app->filesystem->put($classmap, $template)) {
+            if ($this->app['filesystem']->put($classmap, $template)) {
                 return $output->success($message);
             }
         } catch (Exception $exception) {

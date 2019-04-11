@@ -38,7 +38,7 @@ class MakeSeederCommand extends Command
     public function handle(Argv $argv, Output $output)
     {
         $parsed = $this->parse($argv);
-        if (file_exists($location = $this->app->path->app->DB->seeder($parsed['location']))) {
+        if (file_exists($location = $this->app['path']->app->DB->seeder($parsed['location']))) {
             return $output->warning('Seeder already exists.');
         }
         

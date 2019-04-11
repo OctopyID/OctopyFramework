@@ -72,7 +72,7 @@ class Router
      */
     public function load(string $route)
     {
-        require $this->app->path->app->route($route);
+        require $this->app['path']->app->route($route);
     }
 
     /**
@@ -239,7 +239,7 @@ class Router
         } catch (Exception $exception) {
         }
 
-        return $this->app->response->make($response);
+        return $this->app['response']->make($response);
     }
 
     /**

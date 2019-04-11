@@ -45,7 +45,7 @@ class OctopyServeCommand extends Command
 
         foreach (['exec', 'system', 'shell', 'shell_exec'] as $shell) {
             if (function_exists($shell)) {
-                $shell('cd ' . $this->app->path->public() . ' && php -S localhost:' . $port);
+                $shell('cd ' . $this->app['path']->public() . ' && php -S localhost:' . $port);
                 break;
             }
         }

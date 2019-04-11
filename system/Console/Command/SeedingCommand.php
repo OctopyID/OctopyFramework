@@ -40,7 +40,7 @@ class SeedingCommand extends Command
      */
     public function handle(Argv $argv, Output $output)
     {
-        $directory = $this->app->path->app->DB('Seeder');
+        $directory = $this->app['path']->app->DB('Seeder');
 
         if (!is_dir($directory)) {
             return $output->warning('Nothing to seeds.');
