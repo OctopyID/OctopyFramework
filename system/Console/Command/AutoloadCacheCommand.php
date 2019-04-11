@@ -32,7 +32,7 @@ class AutoloadCacheCommand extends Command
     /**
      * @var string
      */
-    protected $description = 'Create a cache file for faster class loading';
+    protected $description = 'Create a cache for faster class loading';
 
     /**
      * @param  Argv   $argv
