@@ -39,7 +39,7 @@ class MaintenanceUpCommand extends Command
      */
     public function handle(Argv $argv, Output $output)
     {
-        $down = $this->app->path->storage('framework') . 'down';
+        $down = $this->app['path']->storage('framework') . 'down';
         if (file_exists($down)) {
             unlink($down);
         }

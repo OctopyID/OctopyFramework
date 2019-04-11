@@ -25,9 +25,9 @@ class SessionServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $handler = Session::handler($this->app->config['session.handler']);
+        $handler = Session::handler($this->app['config']['session.handler']);
         $this->app->instance(SessionHandlerInterface::class, new $handler(
-            $this->app->config['session']
+            $this->app['config']['session']
         ));
     }
 }

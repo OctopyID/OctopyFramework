@@ -22,7 +22,7 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->app->boot(function () {
-            $this->app->router->collection->refresh();
+            $this->app['router']->collection->refresh();
         });
     }
 }

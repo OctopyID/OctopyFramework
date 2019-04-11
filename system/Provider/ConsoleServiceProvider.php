@@ -25,7 +25,7 @@ class ConsoleServiceProvider extends ServiceProvider
     public function register()
     {
         if ($this->app->console()) {
-            $console = $this->app->console;
+            $console = $this->app['console'];
 
             $console->command('--help', function (Output $output) {
                 return $output->help();
@@ -46,12 +46,12 @@ class ConsoleServiceProvider extends ServiceProvider
     private function autodiscover()
     {
         $autodiscover = array(
-            'App\\Console\\Command\\' => $this->app->path->app->console->command(),
-            'Octopy\\Console\\Command\\' => $this->app->path->system->console->command()
+            'App\\Console\\Command\\' => $this->app['path']->app->console->command(),
+            'Octopy\\Console\\Command\\' => $this->app['path']->system->console->command()
         );
 
         foreach ($autodiscover as $namespace => $directory) {
-            foreach ($this->app->filesystem->iterator($directory) as $row) {
+            foreach ($this->app['filesystem']->iterator($directory) as $row) {
                 if (substr($row->getFilename(), -4) !== '.php') {
                     continue;
                 }
@@ -62,7 +62,7 @@ class ConsoleServiceProvider extends ServiceProvider
 
                 $console = $this->app->make($class = $namespace . $class);
 
-                $this->app->console->command($console->signature, $class)->describe($console->description);
+                $this->app['console']->command($console->signature, $class)->describe($console->description);
             }
         }
     }

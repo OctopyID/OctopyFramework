@@ -109,7 +109,7 @@ class Output extends Color
         $rows = [];
 
         $this->table->margin(3);
-        foreach ($this->app->console->all() as $command => $row) {
+        foreach ($this->app['console']->all() as $command => $row) {
             if (substr($command, 0, 1) === '-' || substr($command, 0, 2) === '--') {
                 $this->table->add(['command', 'description'], [
                     'command'     => $this->green($command),

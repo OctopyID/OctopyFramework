@@ -57,6 +57,6 @@ abstract class BluePrint
      */
     protected function query(string $query)
     {
-        return $this->app->database->query($query);
+        return $this->app['database']->query($query);
     }
 }

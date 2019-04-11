@@ -6,15 +6,17 @@ Octopy is a lightweight PHP web framework inspired by Laravel Framework and its 
 
 With several features such as:
 
-* Octopy console
-* Octopy template engine
-* Middleware
-* Exception handler
+* Database Migration
+* Database Seeder
 * Debugbar
+* Exception Handler
+* Middleware
+* Octopy Console
+* Octopy Template
 
 and much more.
 
-In addition to the features above this framework is very light, only measuring less than 1.5 megabytes because there is no dependency on other packages, but you are free to use packages from outside using composer.
+In addition to the features above this framework is very lightweight, only measuring less than 1.5 megabytes because there is no dependency on other packages, but you are free to use packages from outside using composer.
 
 ## Installation
 ### Composer

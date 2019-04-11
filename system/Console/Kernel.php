@@ -59,7 +59,7 @@ class Kernel
     public function handle(Argv $argv, Output $output)
     {
         try {
-            return $this->app->console->dispatch($argv, $output);
+            return $this->app['console']->dispatch($argv, $output);
         } catch (Exception $exception) {
         }
     }

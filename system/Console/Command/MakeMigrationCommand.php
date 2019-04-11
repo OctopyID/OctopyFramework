@@ -38,7 +38,7 @@ class MakeMigrationCommand extends Command
     public function handle(Argv $argv, Output $output)
     {
         $parsed = $this->parse($argv);
-        if (file_exists($location = $this->app->path->app->DB->migration($parsed['location']))) {
+        if (file_exists($location = $this->app['path']->app->DB->migration($parsed['location']))) {
             return $output->warning('Migration already exists.');
         }
 

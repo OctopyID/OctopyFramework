@@ -38,7 +38,7 @@ class MakeConsoleCommand extends Command
     public function handle(Argv $argv, Output $output)
     {
         $parsed = $this->parse($argv);
-        if (file_exists($location = $this->app->path->app->console->command($parsed['location']))) {
+        if (file_exists($location = $this->app['path']->app->console->command($parsed['location']))) {
             return $output->warning('Command already exists.');
         }
 

@@ -51,7 +51,7 @@ class HashManager
      */
     public function driver(string $driver = null)
     {
-        $driver = strtolower($driver ?? $this->app->config['hashing.driver']);
+        $driver = strtolower($driver ?? $this->app['config']['hashing.driver']);
 
         if ($this->hasher && $this->driver === $driver) {
             return $this->hasher;
@@ -60,15 +60,15 @@ class HashManager
         switch ($this->driver = $driver) {
             case 'argon':
                 return $this->hasher = new ArgonHasher(
-                    $this->app->config['hashing.argon']
+                    $this->app['config']['hashing.argon']
                 );
             case 'argon2id':
                 return $this->hasher = new Argon2IdHasher(
-                    $this->app->config['hashing.argon']
+                    $this->app['config']['hashing.argon']
                 );
             case 'bcrypt':
                 return $this->hasher = new BcryptHasher(
-                    $this->app->config['hashing.bcrypt']
+                    $this->app['config']['hashing.bcrypt']
                 );
         }
 
