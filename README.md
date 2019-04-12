@@ -2,7 +2,7 @@
 
 ## What is Octopy Framework?
 
-Octopy is a lightweight PHP web framework inspired by Octopy Framework and its use is almost like Octopy.
+Octopy is a lightweight PHP web framework inspired by Laravel framework and its use is almost like Laravel.
 
 With several features such as:
 
@@ -29,7 +29,7 @@ In addition to the features above this framework is very lightweight, only measu
 ### GIT
   `git clone https://github.com/SupianIDz/OctopyFramework.git`
 
-If you find bugs, error or you want contribute to this project. Fell free to post an issue and pull request to make Octopy Framework better.
+If you find bugs, error or you want contribute to this project. Fell free to post an issue and pull request to make Octopy framework better.
 
 ## Security Vulnerabilities
 
@@ -37,7 +37,7 @@ If you discover a security vulnerability within Octopy, please send an e-mail to
 
 ## License
 
-The Octopy Framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The Octopy framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 ## About
 
