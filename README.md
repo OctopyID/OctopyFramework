@@ -20,7 +20,7 @@ In addition to the features above this framework is very lightweight, only measu
 ## TODO
 
 * Adding Octopy documentation
-* Adding support to another Database Connectio
+* Adding support to another Database Connection
 * Adding support for commit and rollback database transaction.
 * Adding feature import export Excel, Word and PDF.
 
