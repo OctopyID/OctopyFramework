@@ -2,82 +2,45 @@
 
 ## What is Octopy Framework?
 
-Octopy is a lightweight PHP web framework inspired by Laravel Framework and its use is almost like Laravel.
+Octopy is a lightweight PHP web framework inspired by Octopy Framework and its use is almost like Octopy.
 
 With several features such as:
 
 * Database Migration
-* Database Seeder
-* Debugbar
+* DebugBar
+* Dependency Injection
 * Exception Handler
-* Middleware
 * Octopy Console
-* Octopy Template
+* Octopy Template Engine
 
 and much more.
 
 In addition to the features above this framework is very lightweight, only measuring less than 1.5 megabytes because there is no dependency on other packages, but you are free to use packages from outside using composer.
 
+## Requirement
+
+* PHP version >= **PHP 7.1** or greater
+* Composer
+
 ## Installation
 ### Composer
   `composer create-project supianidz/octopyframework OctopyFramework dev-master`
-
-  `cd OctopyFramework`
-
-  `php octopy serve`
   
 ### GIT
   `git clone https://github.com/SupianIDz/OctopyFramework.git`
 
-  `cd OctopyFramework`
+If you find bugs, error or you want contribute to this project. Fell free to post an issue and pull request to make Octopy Framework better.
 
-  `php octopy serve`
+## Security Vulnerabilities
 
-Open http://127.0.0.1:1337 in your browser.
+If you discover a security vulnerability within Octopy, please send an e-mail to Supian M via [supianidz@gmail.com](mailto:supianidz@gmail.com). All security vulnerabilities will be promptly addressed.
 
-## Routing Example
+## License
 
-### HTTP
+The Octopy Framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
-```php
-// GET http://127.0.0.1:1337/example
-$this->get('/example', function(){
-  return 'Hi People!';
-});
+## About
 
-// GET http://127.0.0.1:1337/example/supianidz
-$this->get('/example/:name', function($name){
-  return 'Hi ' . $name;
-});
+Crafted with :heart: from Banjarmasin, Indonesia
 
-// POST http://127.0.0.1:1337/example
-$this->post('/example', 'ControllerName@index')->name('mycontroller');
-```
-
-ControllerName.php
-```php
-<?php
-
-namespace App\HTTP\Controller;
-
-use App\HTTP\Controller;
-use Octopy\HTTP\Request;
-
-class ControllerName extends Controller
-{ 
-  /**
-   * @param  Request $request
-   */
-    public function index(Request $request)
-    {
-      dd($request);
-    }
-}
-```
-### Console
-
-```php
-$this->command('mycommand', function(Octopy\Console\Argv $argv, Octopy\Console\Output $output){
-  return $output->success('Hallo friend !!!');
-})->describe('Some Text');
-```
+Copyright 2018 - 2019 by Supian M
