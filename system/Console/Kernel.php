@@ -61,6 +61,7 @@ class Kernel
         try {
             return $this->app['console']->dispatch($argv, $output);
         } catch (Exception $exception) {
+            throw $exception;
         }
     }
 
@@ -69,5 +70,6 @@ class Kernel
      */
     public function terminate(Argv $argv)
     {
+        //
     }
 }

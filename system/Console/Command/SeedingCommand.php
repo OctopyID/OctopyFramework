@@ -48,22 +48,22 @@ class SeedingCommand extends Command
 
         $seed = !$argv->get('value') || !$argv->get('--seed') ? 'DatabaseSeeder' : $argv->get('value');
        
-        return $this->call($output, $seed);
+        return $this->seed($output, $seed);
     }
 
     /**
      * @param Output $output
      * @param string $seed
      */
-    private function call(Output $output, string $seed)
+    private function seed(Output $output, string $seed)
     {
         echo $output->success('Seeding : {white}' . $seed);
 
         call_user_func([$seeder = $this->app->make('App\\DB\\Seeder\\' . $seed), 'seed']);
        
-        if (!empty($seeds = $seeder->call())) {
+        if (!empty($seeds = $seeder->seed())) {
             foreach ($seeds as $i => $seed) {
-                $this->call($output, str_replace('App\\DB\\Seeder\\', '', $seed));
+                $this->seed($output, str_replace('App\\DB\\Seeder\\', '', $seed));
             }
         }
     }

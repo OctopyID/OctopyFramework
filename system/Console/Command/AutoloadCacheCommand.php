@@ -79,16 +79,16 @@ class AutoloadCacheCommand extends Command
                 $this->app->mkdir($location, 0755, true);
             }
 
-            $message = 'Generating autoload file.';
+            $message = 'Generating autoload cache.';
             if (file_exists($classmap)) {
-                $message = 'Re-Generating autoload file.';
+                $message = 'Re-Generating autoload cache.';
             }
 
             if ($this->app['filesystem']->put($classmap, $template)) {
                 return $output->success($message);
             }
         } catch (Exception $exception) {
-            return $output->error('Failed generating autoload file.');
+            return $output->error('Failed generating autoload cache.');
         }
     }
 }

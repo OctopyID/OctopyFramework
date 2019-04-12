@@ -60,17 +60,35 @@ class Console
     /**
      * @param  Argv   $input
      * @param  Output $output
-     * @return
+     * @return string
      */
     public function dispatch(Argv $input, Output $output)
     {
         $command = $input->command();
-
-        if (isset($this->collection[$command])) {
-            return (new Dispatcher($this->app, $this->collection[$command]))->run();
+        
+        if ($this->has($command)) {
+            return $this->call($command);
         }
 
         return $output->help($this->collection);
+    }
+
+    /**
+     * @param  string $command
+     * @return bool
+     */
+    public function has(string $command) : bool
+    {
+        return isset($this->collection[$command]);
+    }
+
+    /**
+     * @param  string $command
+     * @return string
+     */
+    public function call(?string $command)
+    {
+        return (new Dispatcher($this->app, $this->collection[$command]))->run();
     }
 
     /**
