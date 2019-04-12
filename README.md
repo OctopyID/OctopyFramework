@@ -1,4 +1,4 @@
-<img align="left" src="http://www.octopy.xyz/wp-content/uploads/2019/01/logo.png">
+![Screenshot](public/img/logo.png)
 
 ## What is Octopy Framework?
 
