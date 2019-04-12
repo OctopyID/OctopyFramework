@@ -1,4 +1,4 @@
-![Screenshot](public/img/logo.png)
+<img align="left" src="http://www.octopy.xyz/wp-content/uploads/2019/01/logo.png">
 
 ## What is Octopy Framework?
 
@@ -16,6 +16,13 @@ With several features such as:
 and much more.
 
 In addition to the features above this framework is very lightweight, only measuring less than 1.5 megabytes because there is no dependency on other packages, but you are free to use packages from outside using composer.
+
+## TODO
+
+* Adding Octopy documentation
+* Adding support to another Database Connectio
+* Adding support for commit and rollback database transaction.
+* Adding feature import export Excel, Word and PDF.
 
 ## Requirement
 
