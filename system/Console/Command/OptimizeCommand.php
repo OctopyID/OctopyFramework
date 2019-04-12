@@ -37,14 +37,8 @@ class OptimizeCommand extends Command
      */
     public function handle(Argv $argv, Output $output)
     {
-        $class = array(
-            ViewClearCommand::class,
-            ViewCacheCommand::class,
-            AutoloadCacheCommand::class,
-        );
-
-        foreach ($class as $i => $handler) {
-            echo $this->app->make($handler)->handle($argv, $output);
-        }
+        $this->call('view:clear');
+        $this->call('view:cache');
+        $this->call('autoload:cache');
     }
 }

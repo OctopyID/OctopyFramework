@@ -46,12 +46,11 @@ class DebugBar
      */
     public function modify(Response $response) : Response
     {
-        $debugbar  = '<div class="debugbar"></div>';
-        $debugbar .= $this->javascript('jquery.js');
+        $debugbar  = '<div class="debugbar"></div>' . $this->javascript();
 
-        $pos = strripos($body = $response->body, '</body>');
-        if (false !== $pos) {
-            $body = substr($body, 0, $pos) . $debugbar . substr($body, $pos);
+        $position = strripos($body = $response->body, '</body>');
+        if ($position !== false) {
+            $body = substr($body, 0, $position) . $debugbar . substr($body, $position);
         } else {
             $body = $body . $debugbar;
         }

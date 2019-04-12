@@ -100,4 +100,15 @@ abstract class Command
             throw $exception;
         }
     }
+
+    /**
+     * @param  string $command
+     * @return string
+     */
+    protected function call(string $command)
+    {
+        if ($this->app['console']->has($command)) {
+            echo $this->app['console']->call($command);
+        }
+    }
 }
