@@ -40,6 +40,7 @@ class ExceptionHandler
      */
     public function report(Throwable $exception)
     {
+        //
     }
 
     /**
@@ -82,12 +83,13 @@ class ExceptionHandler
 
         if ($request->ajax()) {
             return array(
+                'code'      => $vars['code'],
                 'message'   => $vars['message'],
                 'exception' => $vars['exception'],
             );
         }
 
-        return $this->view($this->app->debug() ? 'debug':'error', $vars);
+        return $this->view($this->app->debug() ? 'debug' : 'error', $vars);
     }
 
     /**
@@ -96,7 +98,19 @@ class ExceptionHandler
      */
     private function vars(Throwable $exception):array
     {
-        return array('code' => $exception->getCode(), 'file' => $exception->getFile(), 'line' => $exception->getLine(), 'message' => $exception->getMessage(), 'exception' => last(explode(BS, get_class($exception))), 'trace' => $exception->getTrace(),
+        $code = $exception->getCode();
+
+        if ($code < 100 || $code > 500) {
+            $code = 500;
+        }
+
+        return array(
+            'code'      => $code,
+            'file'      => $exception->getFile(),
+            'line'      => $exception->getLine(),
+            'trace'     => $exception->getTrace(),
+            'message'   => $exception->getMessage(),
+            'exception' => last(explode(BS, get_class($exception))),
         );
     }
 
