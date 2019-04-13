@@ -1,7 +1,7 @@
 {
     "name": "supianidz/octopyframework",
     "type": "project",
-    "description": "Lightweight PHP Framework with Laravel look like.",
+    "description": "Lightweight PHP framework with Laravel look like.",
     "license": "MIT",
     "keywords": [
         "framework",

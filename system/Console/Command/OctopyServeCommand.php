@@ -43,7 +43,7 @@ class OctopyServeCommand extends Command
 
         echo $output->format('{yellow}Octopy development server started : {white}http://localhost:' . $port, true);
 
-        foreach (['exec', 'system', 'shell', 'shell_exec'] as $shell) {
+        foreach (['system', 'shell', 'shell_exec', 'exec'] as $shell) {
             if (function_exists($shell)) {
                 $shell('cd ' . $this->app['path']->public() . ' && php -S localhost:' . $port);
                 break;
