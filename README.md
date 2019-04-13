@@ -17,6 +17,11 @@ and much more.
 
 In addition to the features above this framework is very lightweight, only measuring less than 1.5 megabytes because there is no dependency on other packages, but you are free to use packages from outside using composer.
 
+## Learning Octopy
+
+Octopy has the most extensive and thorough [documentation](https://github.com/SupianIDz/OctopyDocumentation/), making it a breeze to get started with the framework.
+
+
 ## TODO
 
 * Adding Octopy documentation
