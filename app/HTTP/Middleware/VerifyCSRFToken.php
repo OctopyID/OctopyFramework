@@ -14,9 +14,9 @@
 
 namespace App\HTTP\Middleware;
 
-use Octopy\HTTP\Middleware\CSRFVerifyToken as Middleware;
+use Octopy\HTTP\Middleware\VerifyCSRFToken as Middleware;
 
-class CSRFVerifyToken extends Middleware
+class VerifyCSRFToken extends Middleware
 {
     /**
      * @var array

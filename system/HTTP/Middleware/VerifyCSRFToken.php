@@ -20,7 +20,7 @@ use Octopy\Application;
 use Octopy\HTTP\Request;
 use Octopy\HTTP\Middleware\Exception\TokenMismatchException;
 
-class CSRFVerifyToken
+class VerifyCSRFToken
 {
     /**
      * @var Octopy\Application
@@ -30,7 +30,9 @@ class CSRFVerifyToken
     /**
      * @var array
      */
-    protected $except = [];
+    protected $except = [
+        //
+    ];
 
     /**
      * @param Application $app

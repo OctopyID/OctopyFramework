@@ -25,7 +25,7 @@ class Kernel extends HTTPKernel
      */
     protected $middleware = [
         \App\HTTP\Middleware\CheckMaintenanceMode::class,
-        \App\HTTP\Middleware\CSRFVerifyToken::class,
+        \App\HTTP\Middleware\VerifyCSRFToken::class,
     ];
 
     /**
