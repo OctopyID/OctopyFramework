@@ -12,11 +12,11 @@
  * @license : MIT
  */
 
-namespace App\HTTP\Controller\DummyNameSpace;
+namespace App\HTTP\Controller;
 
-use App\HTTP\Controller;
+use Octopy\HTTP\Controller as BaseController;
 
-class DummyClassName extends Controller
+class Controller extends BaseController
 {
     //
 }
