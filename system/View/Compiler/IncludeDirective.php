@@ -25,7 +25,7 @@ class IncludeDirective extends Directive
     public function parse(Stream $stream)
     {
         if ($stream->next(T_INCLUDE)) {
-            return $this->php('echo $this->render(%s);', $stream->value());
+            return $this->php('echo $this->render(%s);', $stream->expression());
         }
     }
 }

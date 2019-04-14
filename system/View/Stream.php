@@ -19,7 +19,7 @@ class Stream
     /**
      * @var string
      */
-    protected $type;
+    protected $code;
 
     /**
      * @var int
@@ -29,15 +29,15 @@ class Stream
     /**
      * @var string
      */
-    protected $value;
+    protected $expression;
 
     /**
      * @param array $token
      */
-    public function __construct(array $token, string $value = null)
+    public function __construct(array $token, string $expression = null)
     {
-        $this->value = $value;
-        [$this->token, $this->type] = $token[1];
+        $this->expression = $expression;
+        [$this->token, $this->code] = $token[1];
     }
 
     /**
@@ -45,15 +45,15 @@ class Stream
      */
     public function __toString() : string
     {
-        return printf('%s(%s)', $this->type(), $this->value());
+        return printf('%s(%s)', $this->code(), $this->expression());
     }
 
     /**
      * @return string
      */
-    public function type() : string
+    public function code() : string
     {
-        return $this->type;
+        return $this->code;
     }
 
     /**
@@ -67,26 +67,21 @@ class Stream
     /**
      * @return string
      */
-    public function value() : string
+    public function expression() : string
     {
-        if (strstr($this->value, '(')) {
-            return substr($this->value, 1, -1);
+        if (strstr($this->expression, '(')) {
+            return substr($this->expression, 1, -1);
         }
 
-        return $this->value;
-    }
-
-    public function z()
-    {
-        return $this;
+        return $this->expression;
     }
 
     /**
-     * @param  mixed $value
+     * @param  mixed $expression
      * @return bool
      */
-    public function next($value) : bool
+    public function next($expression) : bool
     {
-        return $value === $this->type || $value === $this->token;
+        return $expression === $this->code || $expression === $this->token;
     }
 }

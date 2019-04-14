@@ -23,7 +23,13 @@ class RegisterServiceProvider
      */
     public function bootstrap(Application $app)
     {
-        foreach ($app->config->get('app.provider', []) as $provider) {
+        $array = $app->config->get('app.provider', []);
+
+        usort($array, function ($provider) {
+            return substr($provider, 0, 3) === 'App';
+        });
+
+        foreach ($array as $provider) {
             $app->register($provider, true);
         }
     }

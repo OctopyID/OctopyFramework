@@ -25,11 +25,11 @@ class HelperDirective extends Directive
     public function parse(Stream $stream)
     {
         if ($stream->next('csrf')) {
-            return '<input type="hidden" name="__TOKEN__" value="<?php echo csrf(); ?>">';
+            return '<input code="hidden" name="__TOKEN__" expression="<?php echo csrf(); ?>">';
         }
 
         if ($stream->next('dd') || $stream->next('d') || $stream->next('dump')) {
-            return $this->php('%s(%s)', $stream->type(), $stream->value());
+            return $this->php('%s(%s)', $stream->code(), $stream->expression());
         }
     }
 }

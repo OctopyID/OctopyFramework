@@ -130,13 +130,13 @@ class Parser
      */
     protected function stream(string $type, string $parameter)
     {
-        $token = new Stream(token_get_all('<?php ' . $type), $parameter);
+        $stream = new Stream(token_get_all('<?php ' . $type), $parameter);
                     
         if ($directive = $this->engine->directive($type)) {
-            return $directive($token);
+            return $directive($stream->expression());
         } else {
             foreach ($this->directive as $directive) {
-                if ($compiled = $directive->parse($token, $this)) {
+                if ($compiled = $directive->parse($stream, $this)) {
                     return $compiled;
                 }
             }
