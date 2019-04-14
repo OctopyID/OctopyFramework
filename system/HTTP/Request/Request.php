@@ -171,7 +171,7 @@ class Request
         array_pop($root);
         $root = implode('/', $root);
         
-        return rtrim(preg_replace('/\?.*/', '', preg_replace('/\+/', '/', str_replace($root, '', $this->server('REQUEST_URI')))), '/') ? : '/';
+        return rtrim(preg_replace('/\?.*/', '', preg_replace('/\/+/', '/', str_replace($root, '', $this->server('REQUEST_URI')))), '/') ? : '/';
     }
 
     /**
