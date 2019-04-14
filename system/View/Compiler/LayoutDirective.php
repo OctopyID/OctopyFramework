@@ -27,11 +27,11 @@ class LayoutDirective extends Directive
     public function parse(Stream $stream, Parser $parser)
     {
         if ($stream->next('parent') || $stream->next('extend')) {
-            return $parser->footer($this->php('echo $this->render(%s);', $stream->value()));
+            return $parser->footer($this->php('echo $this->render(%s);', $stream->expression()));
         }
 
         if ($stream->next('section') || $stream->next('block')) {
-            return $this->php('$this->section(%s);', $stream->value());
+            return $this->php('$this->section(%s);', $stream->expression());
         }
 
         if ($stream->next('endsection') || $stream->next('endblock')) {
@@ -39,7 +39,7 @@ class LayoutDirective extends Directive
         }
 
         if ($stream->next('yield') || $stream->next('child')) {
-            return $this->php('echo $this->yield(%s);', $stream->value());
+            return $this->php('echo $this->yield(%s);', $stream->expression());
         }
     }
 }

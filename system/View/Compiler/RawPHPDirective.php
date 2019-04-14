@@ -25,12 +25,12 @@ class RawPHPDirective extends Directive
     public function parse(Stream $stream)
     {
         // @php($foo = 'bar')
-        if ($stream->next('php') && $stream->value() != '') {
-            return $this->php('%s;', $stream->value());
+        if ($stream->next('php') && $stream->expression() != '') {
+            return $this->php('%s;', $stream->expression());
         }
 
         // @php
-        if ($stream->next('php') && $stream->value() == '') {
+        if ($stream->next('php') && $stream->expression() == '') {
             return '<?php ';
         }
 
@@ -40,15 +40,15 @@ class RawPHPDirective extends Directive
         }
 
         if ($stream->next(T_UNSET)) {
-            return $this->php('%s(%s);', $stream->type(), $stream->value());
+            return $this->php('%s(%s);', $stream->code(), $stream->expression());
         }
 
         if ($stream->next(T_EXIT)) {
-            if ($stream->value() == '') {
-                return $this->php('%s;', $stream->type());
+            if ($stream->expression() == '') {
+                return $this->php('%s;', $stream->code());
             }
 
-            return $this->php('if(%s) : %s; endif;', $stream->value(), $stream->type());
+            return $this->php('if(%s) : %s; endif;', $stream->expression(), $stream->code());
         }
     }
 }

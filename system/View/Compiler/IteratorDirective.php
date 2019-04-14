@@ -25,27 +25,27 @@ class IteratorDirective extends Directive
     public function parse(Stream $stream)
     {
         if (in_array($stream->token(), [T_FOR, T_FOREACH, T_WHILE])) {
-            return $this->php('%s(%s) :', $stream->type(), $stream->value());
+            return $this->php('%s(%s) :', $stream->code(), $stream->expression());
         }
 
         if (in_array($stream->token(), [T_ENDFOR, T_ENDFOREACH, T_ENDWHILE])) {
-            return $this->php('%s;', $stream->type());
+            return $this->php('%s;', $stream->code());
         }
 
         if ($stream->next(T_CONTINUE)) {
-            if ($stream->value() == '') {
-                return $this->php('%s;', $stream->type());
+            if ($stream->expression() == '') {
+                return $this->php('%s;', $stream->code());
             }
 
-            return $this->php('if(%s) : continue; endif;', $stream->value());
+            return $this->php('if(%s) : continue; endif;', $stream->expression());
         }
 
         if ($stream->next(T_BREAK)) {
-            if ($stream->value() == '') {
-                return $this->php('%s;', $stream->type());
+            if ($stream->expression() == '') {
+                return $this->php('%s;', $stream->code());
             }
 
-            return $this->php('if(%s) : break; endif;', $stream->value());
+            return $this->php('if(%s) : break; endif;', $stream->expression());
         }
     }
 }

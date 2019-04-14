@@ -26,14 +26,14 @@ class ControlDirective extends Directive
     {
         if (in_array($stream->token(), [T_IF, T_ELSEIF, T_ELSE])) {
             if ($stream->next(T_ELSE)) {
-                return $this->php('%s :', $stream->type());
+                return $this->php('%s :', $stream->code());
             }
 
-            return $this->php('%s(%s) :', $stream->type(), $stream->value());
+            return $this->php('%s(%s) :', $stream->code(), $stream->expression());
         }
 
         if ($stream->next(T_ENDIF)) {
-            return $this->php('%s;', $stream->type());
+            return $this->php('%s;', $stream->code());
         }
     }
 }
