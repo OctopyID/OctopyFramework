@@ -34,12 +34,20 @@ class RedirectResponse extends Response
     }
 
     /**
-     * @param  int   $status
-     * @param  array $header
-     * @return Response
+     * @return $this
      */
-    public function back(int $status = 302, array $header = [])
+    public function back()
     {
         return $this->header('Location', $_SERVER['HTTP_REFERER'] ?? '/');
+    }
+
+    /**
+     * @param  string $name
+     * @param  array  $parameter
+     * @return $this
+     */
+    public function route(string $name, array $parameter = [])
+    {
+        return $this->header('Location', route($name, $parameter));
     }
 }
