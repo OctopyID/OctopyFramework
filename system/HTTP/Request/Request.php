@@ -75,7 +75,7 @@ class Request
      */
     public function __get(string $key)
     {
-        if ($value = $this->post($key)) {
+        if ($value = $this->input($key)) {
             return $value;
         }
 
@@ -98,6 +98,14 @@ class Request
     }
 
     /**
+     * @return array
+     */
+    public function all() : array
+    {
+        return $this->input() + $this->file();
+    }
+
+    /**
      * @param  string $key
      * @param  mixed  $default
      * @return mixed
@@ -112,7 +120,7 @@ class Request
      * @param  mixed  $default
      * @return mixed
      */
-    public function post(string $key, $default = null)
+    public function input(string $key, $default = null)
     {
         return $this->retrieve('request', $key, $default);
     }
@@ -159,7 +167,15 @@ class Request
      */
     public function uri() : string
     {
-        return $this->scheme(true) . $this->domain() . preg_replace('/\+/', '/', $this->server('REQUEST_URI'));
+        return preg_replace('/\+/', '/', $this->server('REQUEST_URI'));
+    }
+
+    /**
+     * @return string
+     */
+    public function url() : string
+    {
+        return $this->scheme(true) . $this->domain() . $this->uri();
     }
 
     /**
