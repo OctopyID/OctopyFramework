@@ -21,27 +21,9 @@ In addition to the features above this framework is very lightweight, only measu
 
 Octopy has the most extensive and thorough [documentation](https://github.com/SupianIDz/OctopyDocumentation/), making it a breeze to get started with the framework.
 
+### Contributing
 
-## TODO
-
-* Adding Octopy documentation
-* Adding support to another Database Connection
-* Adding support for commit and rollback database transaction.
-* Adding feature import export Excel, Word and PDF.
-
-## Requirement
-
-* PHP version >= **PHP 7.1** or greater
-* Composer
-
-## Installation
-### Composer
-  `composer create-project supianidz/octopyframework OctopyFramework dev-master`
-  
-### GIT
-  `git clone https://github.com/SupianIDz/OctopyFramework.git`
-
-If you find bugs, error or you want contribute to this project. Fell free to post an issue and pull request to make Octopy framework better.
+Thank you for considering contributing to the Octopy framework! The contribution guide can be found in the [Octopy documentation](https://framework.octopy.xyz/docs/contribution/).
 
 ## Security Vulnerabilities
 
