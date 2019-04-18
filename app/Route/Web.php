@@ -15,8 +15,3 @@
 $this->get('/', function (Octopy\HTTP\Response $response) {
     return $response->view('welcome', [], 200);
 });
-
-
-$this->get('/test', function (Octopy\HTTP\Request $r) {
-    dd($r->uri());
-});
