@@ -19,23 +19,33 @@ body {
 }
 
 #octopy {
-    position:absolute;
+    position: absolute;
     width: 100%;
-    height: 100%; 
+    height: 100%;
     background-color: transparent;
     background-repeat: no-repeat;
     background-position: 50% 50%;
 }
 
-.container > .content {
+.container>.content {
     text-align: center;
     color: #fff;
     font-size: 2rem
 }
 
-.container > .content > .logo {
+.container>.content>.logo {
     padding-top: 100px;
     font-size: 60px
+}
+
+.links > a {
+    color: #F2F2F1;
+    padding: 0 25px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
 }
 
 img {
@@ -61,20 +71,20 @@ a {
     color: #fff;
 }
 
-.container > .head {
+.container>.head {
     position: relative;
     border-bottom: 0;
     height: 28px
 }
 
-.container > .head > .buttons {
+.container>.head>.buttons {
     float: left;
     padding: 6px;
     position: relative;
     z-index: 1
 }
 
-.container > .head > .buttons a {
+.container>.head>.buttons a {
     cursor: pointer;
     display: inline-block;
     text-align: center;
@@ -89,7 +99,7 @@ a {
     line-height: .83333em
 }
 
-.container > .head > .buttons a i {
+.container>.head>.buttons a i {
     text-align: center;
     width: 100%;
     height: 15px;
@@ -98,29 +108,29 @@ a {
     line-height: 1.5em
 }
 
-.container > .head > .buttons a.close {
+.container>.head>.buttons a.close {
     background: #f25056;
     color: #f25056
 }
 
-.container > .head > .buttons a.close:hover {
+.container>.head>.buttons a.close:hover {
     color: #a21f2c
 }
 
-.container > .head > .buttons a.minimize {
+.container>.head>.buttons a.minimize {
     background: #fac536;
     color: #fac536
 }
 
-.container > .head > .buttons a.minimize:hover {
+.container>.head>.buttons a.minimize:hover {
     color: #c28723
 }
 
-.container > .head > .buttons a.enlarge {
+.container>.head>.buttons a.enlarge {
     background: #39ea49;
     color: #39ea49
 }
 
-.container > .head > .buttons a.enlarge:hover {
+.container>.head>.buttons a.enlarge:hover {
     color: #0b7407
 }

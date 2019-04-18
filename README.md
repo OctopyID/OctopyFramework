@@ -6,7 +6,7 @@ Octopy is a lightweight PHP web framework inspired by Laravel framework and its 
 
 ## Learning Octopy
 
-Octopy has the most extensive and thorough [documentation](https://framework.octopy.xyz/docs/), making it a breeze to get started with the framework.
+Octopy has the most extensive and thorough [documentation](https://framework.octopy.xyz/docs/welcome/), making it a breeze to get started with the framework.
 
 ### Contributing
 
