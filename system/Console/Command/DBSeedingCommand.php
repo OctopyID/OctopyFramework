@@ -14,14 +14,11 @@
 
 namespace Octopy\Console\Command;
 
-use RecursiveIteratorIterator;
-use RecursiveDirectoryIterator;
-
 use Octopy\Console\Argv;
 use Octopy\Console\Output;
 use Octopy\Console\Command;
 
-class SeedingCommand extends Command
+class DBSeedingCommand extends Command
 {
     /**
      * @var string
@@ -47,7 +44,11 @@ class SeedingCommand extends Command
         }
 
         $seed = !$argv->get('value') || !$argv->get('--seed') ? 'DatabaseSeeder' : $argv->get('value');
-       
+            
+        if (!class_exists('App\DB\Seeder\DatabaseSeeder')) {
+            $this->call('make:seeder', ['value' => 'DatabaseSeeder']);
+        }
+
         return $this->seed($output, $seed);
     }
 
@@ -61,7 +62,7 @@ class SeedingCommand extends Command
 
         call_user_func([$seeder = $this->app->make('App\\DB\\Seeder\\' . $seed), 'seed']);
        
-        if (!empty($seeds = $seeder->seed())) {
+        if (!empty($seeds = $seeder->call())) {
             foreach ($seeds as $i => $seed) {
                 $this->seed($output, str_replace('App\\DB\\Seeder\\', '', $seed));
             }

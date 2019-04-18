@@ -51,6 +51,15 @@ class Argv
     }
 
     /**
+     * @param  array $option
+     * @return void
+     */
+    public function option(array $option)
+    {
+        $this->option = array_merge($this->option, $option);
+    }
+
+    /**
      * @return string
      */
     public function __toString()

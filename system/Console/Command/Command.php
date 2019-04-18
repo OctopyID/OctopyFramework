@@ -14,6 +14,8 @@
 
 namespace Octopy\Console;
 
+use Exception;
+
 use Octopy\Application;
 
 abstract class Command
@@ -105,10 +107,16 @@ abstract class Command
      * @param  string $command
      * @return string
      */
-    protected function call(string $command)
+    protected function call(string $command, array $option = [])
     {
         if ($this->app['console']->has($command)) {
-            echo $this->app['console']->call($command);
+            $this->app['argv']->option($option);
+
+            try {
+                return $this->app['console']->call($command);
+            } catch (Exception $exception) {
+                return $exception->getMessage();
+            }
         }
     }
 }

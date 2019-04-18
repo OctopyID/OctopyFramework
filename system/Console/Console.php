@@ -77,7 +77,7 @@ class Console
      * @param  string $command
      * @return bool
      */
-    public function has(string $command) : bool
+    public function has(?string $command) : bool
     {
         return isset($this->collection[$command]);
     }

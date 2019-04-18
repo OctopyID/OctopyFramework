@@ -14,6 +14,7 @@
 
 return [
     'app'        => Octopy\Application::class,
+    'argv'       => Octopy\Console\Argv::class,
     'autoload'   => Octopy\Autoload::class,
     'config'     => Octopy\Config::class,
     'console'    => Octopy\Console::class,
