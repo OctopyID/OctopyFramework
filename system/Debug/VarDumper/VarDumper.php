@@ -285,7 +285,7 @@ class VarDumper
      */
     protected function break() : string
     {
-        return $this->console ? PHP_EOL : '<br>';
+        return $this->console ? "\n" : '<br>';
     }
 
     /**

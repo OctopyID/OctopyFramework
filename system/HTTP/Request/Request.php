@@ -21,11 +21,8 @@ use Octopy\HTTP\Request\FileHandler;
 
 class Request
 {
-    /**
-     * @Macroable
-     */
     use Macroable;
-
+    
     /**
      * @var ctopy\HTTP\Request\Collection
      */

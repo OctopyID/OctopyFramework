@@ -25,9 +25,6 @@ use Octopy\HTTP\Response\RedirectResponse;
 
 class Response
 {
-    /**
-     * @Macroable
-     */
     use Macroable;
 
     /**

@@ -80,10 +80,9 @@ class Output extends Color
      */
     public function help()
     {
-        foreach (['exec', 'system', 'shell_exec',] as $function) {
+        foreach (['system', 'shell_exec', 'exec'] as $function) {
             if (function_exists($function)) {
                 $function('clear');
-
                 break;
             }
         }
@@ -97,8 +96,8 @@ class Output extends Color
         $octopy[] = "  \___/ \___|\__\___/| .__/ \__, | ";
         $octopy[] = "   www.octopy.xyz    |_|    |___/  ";
 
-        $output  = $this->yellow(implode(PHP_EOL, $octopy)) . PHP_EOL;
-        $output .= $this->white(' USAGE : command [options] [args]') . PHP_EOL;
+        $output  = $this->yellow(implode("\n", $octopy)) . "\n";
+        $output .= $this->white(' USAGE : command [options] [args]') . "\n";
 
         // Header
         $this->table->add(['header'], array(
