@@ -73,7 +73,7 @@ class HTMLParser
                     $output .= $value;
                 } elseif ($token === T_OPEN_TAG) {
                     $output .= $this->span($tname, trim($value));
-                    $output .= PHP_EOL;
+                    $output .= "\n";
                 } elseif ($token === T_DOC_COMMENT) {
                     $value = preg_replace('/(\@(author|license|link|param|return|throw|var|version))(\s)/i', '<span class="C_DOCTAG">\1</span>\3', $value);
                    
@@ -82,11 +82,11 @@ class HTMLParser
                     $value = preg_replace('/\&lt\;([A-Za-z0-9].*?@.*?)\&gt\;/i', '&lt;<a href="mailto:\1" class="C_DOCLINK">\1</a>&gt;', $value);
                    
                     $docs = [];
-                    foreach (explode(PHP_EOL, $value) as $doc) {
+                    foreach (explode("\n", $value) as $doc) {
                         $docs[] = $this->span($tname, $doc);
                     }
 
-                    $output .= implode(PHP_EOL, $docs);
+                    $output .= implode("\n", $docs);
                 } elseif ($token === T_COMMENT) {
                     $value = preg_replace('/(http\:\/\/[A-Za-z0-9\.\/\-\_\~\#\?\=\&\!\%]*)/i', '<a href="\1" class="C_COMMENT_LINK">\1</a>', $value);
                     $value = preg_replace('/\&lt\;([A-Za-z0-9].*?@.*?)\&gt\;/i', '&lt;<a href="mailto:\1" class="C_COMMENT_LINK">\1</a>&gt;', $value);
@@ -156,7 +156,7 @@ class HTMLParser
             }
         }
 
-        return explode(PHP_EOL, $output);
+        return explode("\n", $output);
     }
 
     /**
@@ -244,7 +244,7 @@ class HTMLParser
                 $class .= ' highlighted';
             }
 
-            $snippet .= sprintf('<span class="%s">%s| %s</span>', $class, str_pad($i + 1, $length, ' ', STR_PAD_LEFT), $line) . PHP_EOL;
+            $snippet .= sprintf('<span class="%s">%s| %s</span>', $class, str_pad($i + 1, $length, ' ', STR_PAD_LEFT), $line) . "\n";
         }
 
         return $snippet;
