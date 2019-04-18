@@ -47,7 +47,7 @@ class CheckMaintenanceMode
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->except($this->except)) {
+        if ($request->is($this->except)) {
             return $next($request);
         }
 

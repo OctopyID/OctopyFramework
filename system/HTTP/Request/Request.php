@@ -14,6 +14,7 @@
 
 namespace Octopy\HTTP;
 
+use Octopy\Support\Str;
 use Octopy\Support\Macroable;
 use Octopy\HTTP\Request\Collection;
 use Octopy\HTTP\Request\FileHandler;
@@ -110,7 +111,7 @@ class Request
      * @param  mixed  $default
      * @return mixed
      */
-    public function query(string $key, $default = null)
+    public function query(string $key = null, $default = null)
     {
         return $this->retrieve('query', $key, $default);
     }
@@ -120,7 +121,7 @@ class Request
      * @param  mixed  $default
      * @return mixed
      */
-    public function input(string $key, $default = null)
+    public function input(string $key = null, $default = null)
     {
         return $this->retrieve('request', $key, $default);
     }
@@ -130,7 +131,7 @@ class Request
      * @param  mixed  $default
      * @return mixed
      */
-    public function file(string $key, $default = null)
+    public function file(string $key = null, $default = null)
     {
         return $this->retrieve('file', $key, $default);
     }
@@ -140,7 +141,7 @@ class Request
      * @param  mixed  $default
      * @return mixed
      */
-    public function cookie(string $key, $default = null)
+    public function cookie(string $key = null, $default = null)
     {
         return $this->retrieve('cookie', $key, $default);
     }
@@ -294,11 +295,19 @@ class Request
     }
 
     /**
-     * @param  array $except
+     * @param  mixed ...$patterns
      * @return bool
      */
-    public function except(array $except) : bool
+    public function is(...$patterns)
     {
-        return preg_match('/' . implode('|', $except) . '/', $this->path());
+        $path = rawurldecode($this->path());
+
+        foreach ($patterns as $pattern) {
+            if (Str::is($pattern, $path)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

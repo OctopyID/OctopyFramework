@@ -52,7 +52,7 @@ class InjectDebugBar
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!$this->debugbar->enabled() || $request->except($this->except)) {
+        if (!$this->debugbar->enabled() || $request->is($this->except)) {
             return $next($request);
         }
        

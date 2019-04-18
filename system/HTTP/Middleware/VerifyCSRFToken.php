@@ -49,7 +49,7 @@ class VerifyCSRFToken
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->method() !== 'POST' || $request->except(array_merge($this->except, ['__debugbar']))) {
+        if ($request->method() !== 'POST' || $request->is(array_merge($this->except, ['__debugbar']))) {
             return $next($request);
         }
 
