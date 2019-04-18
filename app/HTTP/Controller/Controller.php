@@ -12,7 +12,7 @@
  * @license : MIT
  */
 
-namespace App\HTTP\Controller;
+namespace App\HTTP;
 
 use Octopy\HTTP\Controller as BaseController;
 

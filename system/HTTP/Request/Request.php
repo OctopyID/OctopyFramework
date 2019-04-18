@@ -193,14 +193,6 @@ class Request
     /**
      * @return string
      */
-    public function url() : string
-    {
-        return $this->scheme(true) . $this->domain() . $this->path();
-    }
-
-    /**
-     * @return string
-     */
     public function domain() : string
     {
         return $this->server('SERVER_NAME');

@@ -68,7 +68,7 @@ if (!function_exists('csrf')) {
      */
     function csrf() : string
     {
-        return App::make(Octopy\HTTP\Middleware\CSRFVerifyToken::class)->generate();
+        return App::make(Octopy\HTTP\Middleware\VerifyCSRFToken::class)->generate();
     }
 }
 
