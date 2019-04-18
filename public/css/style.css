@@ -18,15 +18,6 @@ body {
     background-color: #0c1021
 }
 
-#octopy {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-}
-
 .container>.content {
     text-align: center;
     color: #fff;
@@ -38,7 +29,7 @@ body {
     font-size: 60px
 }
 
-.links > a {
+.links>a {
     color: #F2F2F1;
     padding: 0 25px;
     font-size: 15px;
@@ -69,6 +60,8 @@ p {
 a {
     text-decoration: none;
     color: #fff;
+    border: 0;
+    outline: 0;
 }
 
 .container>.head {

@@ -11,11 +11,5 @@
 	</head>
 	<body>
 		@yield('content')
-		<script type="text/javascript" src="js/particle.js"></script>
-		<script type="text/javascript">
-			particlesJS.load('octopy', 'js/particle.json', function() {
-				console.log('Octopy Loaded');
-			});
-		</script>
 	</body>
 </html>
