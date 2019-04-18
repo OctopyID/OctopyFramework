@@ -14,6 +14,8 @@
 
 namespace Octopy\HTTP\Request;
 
+use Octopy\Support\Arr;
+
 class Collection
 {
     /**
@@ -36,12 +38,10 @@ class Collection
      */
     public function get(string $key, $default = null)
     {
-        if (isset($this->parameter[$key])) {
-            $value = $this->parameter[$key];
+        $value = Arr::get($this->parameter, $key, $default);
 
-            if (is_numeric($value)) {
-                $value += 0;
-            }
+        if (is_numeric($value)) {
+            $value += 0;
         }
 
         return $value ?? $default;
