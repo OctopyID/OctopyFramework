@@ -52,21 +52,21 @@ class ExceptionHandler
 
         $color = new Color;
 
-        $output  = PHP_EOL;
+        $output  = "\n";
         $output .= $color->apply('bg_red', $vars['exception']);
         $output .= $color->apply('white', ' : ');
         $output .= $color->apply('yellow', $vars['message']);
-        $output .= PHP_EOL;
-        $output .= PHP_EOL;
+        $output .= "\n";
+        $output .= "\n";
         $output .= $color->apply('light_gray', 'at ');
         $output .= $color->apply('green', $vars['file']);
         $output .= $color->apply('light_gray', ' on line ');
         $output .= $color->apply('green', $vars['line']);
-        $output .= PHP_EOL;
+        $output .= "\n";
 
         if (is_file($vars['file']) && is_readable($vars['file'])) {
             $output .= $this->app['syntax']->highlight($vars['file'], $vars['line'], 3, 3);
-            $output .= PHP_EOL;
+            $output .= "\n";
         }
 
         die($output);

@@ -136,7 +136,7 @@ class Engine
       */
     protected function yield(string $name, string $default = null)
     {
-        return ltrim($this->section[$this->trim($name)] ?? $default, PHP_EOL);
+        return ltrim($this->section[$this->trim($name)] ?? $default, "\n");
     }
 
     /**

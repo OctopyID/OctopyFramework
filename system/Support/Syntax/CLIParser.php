@@ -272,7 +272,7 @@ class CLIParser
 
             $snippet .= $this->color->apply(CLIParser::LINE_NUMBER, str_pad($i + 1, $length, ' ', STR_PAD_LEFT) . '| ');
 
-            $snippet .= $line . PHP_EOL;
+            $snippet .= $line . "\n";
         }
 
         return $snippet;

@@ -81,10 +81,10 @@ class TableFormatter
         foreach ($this->data as $rkey => $row) {
             $table .= str_pad(' ', $this->margin[$rkey]);
             foreach ($row as $ckey => $cell) {
-                $table .= str_replace(PHP_EOL, '', str_pad($cell, $column[$ckey]));
+                $table .= str_replace("\n", '', str_pad($cell, $column[$ckey]));
             }
 
-            $table .= PHP_EOL;
+            $table .= "\n";
         }
 
         $this->data   = array();

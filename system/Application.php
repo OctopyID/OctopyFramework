@@ -18,9 +18,6 @@ use Octopy\Support\Macroable;
 
 class Application extends Container
 {
-    /**
-     * @Macroable
-     */
     use Macroable;
 
     /**

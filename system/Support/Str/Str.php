@@ -19,9 +19,6 @@ use Octopy\Support\Macroable;
 
 class Str
 {
-    /**
-     * @Macroable
-     */
     use Macroable;
 
     /**
