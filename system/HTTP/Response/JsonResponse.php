@@ -38,9 +38,7 @@ class JsonResponse extends Response
 
         $data = $this->encode($data, $option);
         if ($this->body($data)) {
-            if (!$this->header->has('Content-Type') || 'text/javascript' === $this->header->get('Content-Type')) {
-                $this->header->set('Content-Type', 'application/json');
-            }
+            $this->header->set('Content-Type', 'application/json; charset=UTF-8', true);
         }
     }
 

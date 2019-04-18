@@ -40,7 +40,7 @@ class RegisterMiddlewareProvider
         $this->middleware->set(\Octopy\HTTP\Middleware\ValidatePostSize::class);
 
         if ($app['config']['app.debug'] && $app['config']['debugbar.enable']) {
-            $this->middleware->set(\Octopy\HTTP\Middleware\InjectDebugBar::class);
+            // $this->middleware->set(\Octopy\HTTP\Middleware\InjectDebugBar::class);
         }
     }
 }
