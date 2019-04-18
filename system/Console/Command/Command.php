@@ -21,7 +21,7 @@ use Octopy\Application;
 abstract class Command
 {
     /**
-     * @var Application
+     * @var Octopy\Application
      */
     protected $app;
 
