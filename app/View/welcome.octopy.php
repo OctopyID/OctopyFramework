@@ -1,6 +1,5 @@
 @parent('parent')
 @section('content')
-<div id="octopy"></div>
 <div class="container">
 	<div class="head">
 		<div class="buttons">
@@ -21,5 +20,4 @@
 		<div>
 	</div>
 </div>
-
 @endsection
