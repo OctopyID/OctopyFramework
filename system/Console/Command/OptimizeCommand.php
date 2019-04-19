@@ -6,17 +6,20 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy\Console\Command;
 
 use Octopy\Console\Argv;
-use Octopy\Console\Output;
 use Octopy\Console\Command;
+use Octopy\Console\Output;
 
 class OptimizeCommand extends Command
 {
@@ -31,8 +34,9 @@ class OptimizeCommand extends Command
     protected $description = 'Cache the framework for better performance';
 
     /**
-     * @param  Argv   $argv
-     * @param  Output $output
+     * @param Argv   $argv
+     * @param Output $output
+     *
      * @return string
      */
     public function handle(Argv $argv, Output $output)

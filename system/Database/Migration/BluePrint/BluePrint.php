@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @version : v1.0
+ *
  * @license : MIT
  */
 
@@ -37,7 +40,7 @@ abstract class BluePrint
      * @var array
      */
     protected $primary = [];
-        
+
     /**
      * @var array
      */
@@ -52,7 +55,8 @@ abstract class BluePrint
     }
 
     /**
-     * @param  string $query
+     * @param string $query
+     *
      * @return bool
      */
     protected function query(string $query)

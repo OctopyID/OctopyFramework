@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
@@ -30,7 +33,7 @@ final class Autoload
      * @var array
      */
     private $classmap = [];
-        
+
     /**
      * @param string $basepath
      * @param array  $autoload
@@ -50,7 +53,7 @@ final class Autoload
     public function set(string $namespace, string $directory)
     {
         $this->autoload = array_merge($this->autoload, [
-            $namespace => $directory
+            $namespace => $directory,
         ]);
     }
 
@@ -71,7 +74,8 @@ final class Autoload
     }
 
     /**
-     * @param  string $class
+     * @param string $class
+     *
      * @return string
      */
     protected function load(string $class)
@@ -82,7 +86,7 @@ final class Autoload
 
         $class = str_replace(BS, DS, $class);
         foreach ($this->autoload as $namespace => $directory) {
-            if (preg_match($pattern = '/^' . $namespace . '/', $class)) {
+            if (preg_match($pattern = '/^'.$namespace.'/', $class)) {
                 $classpath = str_replace(BS, DS, preg_replace($pattern, $directory, $class));
                 if ($this->require($classpath)) {
                     return true;
@@ -100,12 +104,13 @@ final class Autoload
     }
 
     /**
-     * @param  string $filepath
+     * @param string $filepath
+     *
      * @return string
      */
     protected function require(string $filepath)
     {
-        if (file_exists($filepath = $this->basepath . $filepath . '.php')) {
+        if (file_exists($filepath = $this->basepath.$filepath.'.php')) {
             return require $filepath;
         }
     }

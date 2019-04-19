@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
@@ -29,14 +32,14 @@ defined('BS') || define('BS', '\\');
  * JUST ROOT PATH DIRECTORY PROJECT
  * ---------------------------------------------------------------
  */
-$basepath = dirname(__DIR__) . DS;
+$basepath = dirname(__DIR__).DS;
 
 /*
  * ---------------------------------------------------------------
  * GRAB OUR CONSTANTS
  * ---------------------------------------------------------------
  */
-if (file_exists($constant = $basepath . '../app/Config/Constant.php')) {
+if (file_exists($constant = $basepath.'../app/Config/Constant.php')) {
     require $constant;
 }
 
@@ -52,16 +55,13 @@ if (file_exists($constant = $basepath . '../app/Config/Constant.php')) {
 require 'Autoload.php';
 
 $autoload = new Octopy\Autoload($basepath, [
-    'App' => 'app',
-    'Octopy' => 'system'
+    'App'    => 'app',
+    'Octopy' => 'system',
 ]);
 
 // Now load Composer's if it's available
 $autoload->composer();
 
-/**
- *
- */
 require 'Common.php';
 
 /**
@@ -69,12 +69,12 @@ require 'Common.php';
  */
 $app = new Octopy\Application($basepath);
 
-/**
+/*
  *
  */
 $app->instance(Octopy\Autoload::class, $autoload);
 
-/**
+/*
  * @return Octopy\Application
  */
 return $app;

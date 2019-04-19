@@ -6,23 +6,26 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy\HTTP;
 
-use Octopy\Support\Str;
-use Octopy\Support\Macroable;
 use Octopy\HTTP\Request\Collection;
 use Octopy\HTTP\Request\FileHandler;
+use Octopy\Support\Macroable;
+use Octopy\Support\Str;
 
 class Request
 {
     use Macroable;
-    
+
     /**
      * @var ctopy\HTTP\Request\Collection
      */
@@ -48,13 +51,10 @@ class Request
      */
     protected $server;
 
-    /**
-     *
-     */
     public function __construct()
     {
         foreach (['query' => $_GET, 'request' => $_POST, 'file' => $_FILES, 'cookie' => $_COOKIE,
-             'server' => $_SERVER] as $property => $request) {
+             'server' => $_SERVER, ] as $property => $request) {
 
             //
             if ($property === 'file') {
@@ -68,7 +68,8 @@ class Request
     }
 
     /**
-     * @param  string $key
+     * @param string $key
+     *
      * @return mixed
      */
     public function __get(string $key)
@@ -79,11 +80,12 @@ class Request
 
         return $this->file($key);
     }
-    
+
     /**
-     * @param  string $source
-     * @param  string $key
-     * @param  mixed  $default
+     * @param string $source
+     * @param string $key
+     * @param mixed  $default
+     *
      * @return mixed
      */
     public function retrieve(string $source, string $key = null, $default = null)
@@ -104,8 +106,9 @@ class Request
     }
 
     /**
-     * @param  string $key
-     * @param  mixed  $default
+     * @param string $key
+     * @param mixed  $default
+     *
      * @return mixed
      */
     public function query(string $key = null, $default = null)
@@ -114,8 +117,9 @@ class Request
     }
 
     /**
-     * @param  string $key
-     * @param  mixed  $default
+     * @param string $key
+     * @param mixed  $default
+     *
      * @return mixed
      */
     public function input(string $key = null, $default = null)
@@ -124,8 +128,9 @@ class Request
     }
 
     /**
-     * @param  string $key
-     * @param  mixed  $default
+     * @param string $key
+     * @param mixed  $default
+     *
      * @return mixed
      */
     public function file(string $key = null, $default = null)
@@ -134,8 +139,9 @@ class Request
     }
 
     /**
-     * @param  string $key
-     * @param  mixed  $default
+     * @param string $key
+     * @param mixed  $default
+     *
      * @return mixed
      */
     public function cookie(string $key = null, $default = null)
@@ -144,7 +150,8 @@ class Request
     }
 
     /**
-     * @param  string $key
+     * @param string $key
+     *
      * @return string
      */
     public function server(string $key)
@@ -173,7 +180,7 @@ class Request
      */
     public function url() : string
     {
-        return $this->scheme(true) . $this->domain() . $this->uri();
+        return $this->scheme(true).$this->domain().$this->uri();
     }
 
     /**
@@ -184,8 +191,8 @@ class Request
         $root = explode('/', $this->server('PHP_SELF'));
         array_pop($root);
         $root = implode('/', $root);
-        
-        return rtrim(preg_replace('/\?.*/', '', preg_replace('/\/+/', '/', str_replace($root, '', $this->server('REQUEST_URI')))), '/') ? : '/';
+
+        return rtrim(preg_replace('/\?.*/', '', preg_replace('/\/+/', '/', str_replace($root, '', $this->server('REQUEST_URI')))), '/') ?: '/';
     }
 
     /**
@@ -202,7 +209,7 @@ class Request
     public function scheme(bool $suffix = false) : string
     {
         if ($suffix) {
-            return $this->server('REQUEST_SCHEME') . '://';
+            return $this->server('REQUEST_SCHEME').'://';
         }
 
         return $this->server('REQUEST_SCHEME');
@@ -241,7 +248,8 @@ class Request
     }
 
     /**
-     * @param  string $name
+     * @param string $name
+     *
      * @return mixed
      */
     public function header(string $name = null)
@@ -249,7 +257,7 @@ class Request
         $header = [];
         foreach ($_SERVER as $key => $val) {
             if (preg_match('/\AHTTP_/', $key)) {
-                $name  = preg_replace('/\AHTTP_/', '', $key);
+                $name = preg_replace('/\AHTTP_/', '', $key);
                 $match = explode('_', $name);
                 if (count($match) > 0 and strlen($name) > 2) {
                     foreach ($match as $subkey => $subvalue) {
@@ -262,16 +270,17 @@ class Request
                 $header[ucwords(strtolower($name), '-')] = $val;
             }
         }
-        
+
         if (!is_null($name)) {
             return $header[$name] ?? null;
         }
-        
+
         return $header;
     }
 
     /**
-     * @param  bool $server
+     * @param bool $server
+     *
      * @return string
      */
     public function ip(bool $server = false) : string
@@ -292,7 +301,8 @@ class Request
     }
 
     /**
-     * @param  mixed ...$patterns
+     * @param mixed ...$patterns
+     *
      * @return bool
      */
     public function is(...$patterns)

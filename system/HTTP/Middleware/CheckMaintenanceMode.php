@@ -6,19 +6,21 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @version : v1.0
+ *
  * @license : MIT
  */
 
 namespace Octopy\HTTP\Middleware;
 
 use Closure;
-
 use Octopy\Application;
-use Octopy\HTTP\Request;
 use Octopy\HTTP\Middleware\Exception\MaintenanceModeException;
+use Octopy\HTTP\Request;
 
 class CheckMaintenanceMode
 {
@@ -41,8 +43,9 @@ class CheckMaintenanceMode
     }
 
     /**
-     * @param  Request $request
-     * @param  Closure $next
+     * @param Request $request
+     * @param Closure $next
+     *
      * @return Request
      */
     public function handle(Request $request, Closure $next)
@@ -51,9 +54,9 @@ class CheckMaintenanceMode
             return $next($request);
         }
 
-        if (file_exists($down = $this->app['path']->storage('framework') . 'down')) {
+        if (file_exists($down = $this->app['path']->storage('framework').'down')) {
             $down = json_decode($this->app['filesystem']->get($down));
-            
+
             if (in_array($request->ip(), $down->allowed)) {
                 return $next($request);
             }

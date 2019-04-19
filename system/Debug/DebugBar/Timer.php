@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
@@ -24,11 +27,12 @@ class Timer
     protected $timers = [];
 
     /**
-     * @param  string $name
-     * @param  float  $start
+     * @param string $name
+     * @param float  $start
+     *
      * @return $this
      */
-    public function start(string $name, float $start = null) : Timer
+    public function start(string $name, float $start = null) : self
     {
         $this->timers[$name] = [
             'start' => $start ?? microtime(true),
@@ -39,7 +43,8 @@ class Timer
     }
 
     /**
-     * @param  string $name
+     * @param string $name
+     *
      * @return $this
      */
     public function stop(string $name)
@@ -54,14 +59,15 @@ class Timer
     }
 
     /**
-     * @param  string $name
-     * @param  int    $decimal
+     * @param string $name
+     * @param int    $decimal
+     *
      * @return float
      */
     public function elapsed(string $name, int $decimal = 4)
     {
         if (empty($this->timers[$name])) {
-            return null;
+            return;
         }
 
         $timer = $this->timers[$name];
@@ -70,11 +76,12 @@ class Timer
             $timer['end'] = microtime(true);
         }
 
-        return (float)number_format($timer['end'] - $timer['start'], $decimal);
+        return (float) number_format($timer['end'] - $timer['start'], $decimal);
     }
 
     /**
-     * @param  int $decimal
+     * @param int $decimal
+     *
      * @return array
      */
     public function timers(int $decimal = 4) : array
@@ -86,14 +93,15 @@ class Timer
                 $timer['end'] = microtime(true);
             }
 
-            $timer['duration'] = (float)number_format($timer['end'] - $timer['start'], $decimal);
+            $timer['duration'] = (float) number_format($timer['end'] - $timer['start'], $decimal);
         }
 
         return $timers;
     }
 
     /**
-     * @param  string $name
+     * @param string $name
+     *
      * @return bool
      */
     public function has(string $name) : bool

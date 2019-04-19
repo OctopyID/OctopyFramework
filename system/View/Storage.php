@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
@@ -89,7 +92,7 @@ class Storage extends FileSystem
     public function write(string $content)
     {
         $this->content = $content;
-        
+
         if (!is_null($this->compiled)) {
             if ($this->mkdir(dirname($this->compiled))) {
                 $this->put($this->compiled, $content);
@@ -117,10 +120,10 @@ class Storage extends FileSystem
         return filemtime($this->template) > filemtime($this->compiled);
     }
 
-
     /**
-     * @param  [type] $time
-     * @param  [type] $memory
+     * @param [type] $time
+     * @param [type] $memory
+     *
      * @return [type]
      */
     public function benchmark($time, $memory)
@@ -129,7 +132,8 @@ class Storage extends FileSystem
     }
 
     /**
-     * @param  string $name
+     * @param string $name
+     *
      * @return mixed
      */
     public function info(string $name = null)

@@ -6,16 +6,18 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy\HTTP;
 
 use Closure;
-
 use Octopy\HTTP\Middleware\Dispatcher;
 
 class Middleware
@@ -46,7 +48,8 @@ class Middleware
     }
 
     /**
-     * @param  string $layer
+     * @param string $layer
+     *
      * @return mixed
      */
     public function route($layer = null)
@@ -70,7 +73,7 @@ class Middleware
         return $this->global ?? [];
     }
 
-    public function dispatch(array $middleware = [], Request $object, Closure $next)
+    public function dispatch(array $middleware, Request $object, Closure $next)
     {
         return (new Dispatcher($middleware))->dispatch($object, $next);
     }

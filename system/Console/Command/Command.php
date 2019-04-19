@@ -6,16 +6,18 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy\Console;
 
 use Exception;
-
 use Octopy\Application;
 
 abstract class Command
@@ -42,9 +44,10 @@ abstract class Command
     {
         $this->app = $app;
     }
-        
+
     /**
-     * @param  string $property
+     * @param string $property
+     *
      * @return mixed
      */
     public function __get(string $property)
@@ -53,24 +56,26 @@ abstract class Command
     }
 
     /**
-     * @param  string $string
+     * @param string $string
+     *
      * @return array
      */
     protected function parse(string $string) : array
     {
         preg_match('/(.*)\/(.*)/', trim($string, '/'), $match);
-        
-        return array(
-            'location'  => $string . '.php',
+
+        return [
+            'location'  => $string.'.php',
             'classname' => $match[2] ?? $string,
-            'namespace' => str_replace('/', '\\', $match[1] ?? null)
-        );
+            'namespace' => str_replace('/', '\\', $match[1] ?? null),
+        ];
     }
 
     /**
-     * @param  string $location
-     * @param  string $stub
-     * @param  array  $data
+     * @param string $location
+     * @param string $stub
+     * @param array  $data
+     *
      * @return bool
      */
     protected function generate(string $location, string $stub, array $data = [])
@@ -82,7 +87,7 @@ abstract class Command
         } catch (Exception $exception) {
             throw $exception;
         }
-        
+
         if (!empty($data)) {
             if (isset($data['DummyNameSpace']) && $data['DummyNameSpace'] == null) {
                 unset($data['DummyNameSpace']);
@@ -104,7 +109,8 @@ abstract class Command
     }
 
     /**
-     * @param  string $command
+     * @param string $command
+     *
      * @return string
      */
     protected function call(string $command, array $option = [])

@@ -6,16 +6,18 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy\Support;
 
 use Exception;
-
 use Octopy\Application;
 use Octopy\Support\Syntax\CLIParser;
 use Octopy\Support\Syntax\HTMLParser;
@@ -37,7 +39,7 @@ class Syntax
             case 'cli':
                 $this->parser = $app->make(CLIParser::class);
                 break;
-   
+
             default:
                 $this->parser = $app->make(HTMLParser::class);
                 break;
@@ -45,10 +47,11 @@ class Syntax
     }
 
     /**
-     * @param  string $source
-     * @param  int    $marker
-     * @param  int    $before
-     * @param  int    $after
+     * @param string $source
+     * @param int    $marker
+     * @param int    $before
+     * @param int    $after
+     *
      * @return string
      */
     public function highlight(string $source, int $marker = null, int $before = 0, int $after = 0) : string

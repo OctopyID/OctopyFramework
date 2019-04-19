@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
@@ -52,7 +55,7 @@ class Finder
      */
     public function set($resource)
     {
-        $this->resource = array_merge($this->resource, (array)$resource);
+        $this->resource = array_merge($this->resource, (array) $resource);
     }
 
     /**
@@ -64,7 +67,8 @@ class Finder
     }
 
     /**
-     * @param  string $name
+     * @param string $name
+     *
      * @return Storage
      */
     public function find(string $name) : Storage
@@ -73,12 +77,12 @@ class Finder
             return $this->template[$name];
         }
 
-        $compiled = $this->compiled ? $this->compiled . md5($name) . '.php' : null;
-        
+        $compiled = $this->compiled ? $this->compiled.md5($name).'.php' : null;
+
         $template = str_replace('.', '/', $name);
         foreach ($this->resource as $resource) {
             $resource = array_map(function ($extension) use ($resource, $template) {
-                return $resource . $template . $extension;
+                return $resource.$template.$extension;
             }, ['.octopy.php', '.octopy', '.php']);
 
             foreach ($resource as $pathname) {

@@ -6,23 +6,24 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy\HTTP\Routing;
 
 use Closure;
-use ReflectionMethod;
-use ReflectionFunction;
-
 use Octopy\Application;
-use Octopy\Support\Arr;
-use Octopy\HTTP\Request;
 use Octopy\HTTP\Middleware;
-use Octopy\HTTP\Routing\Route;
+use Octopy\HTTP\Request;
+use Octopy\Support\Arr;
+use ReflectionFunction;
+use ReflectionMethod;
 
 class Dispatcher
 {
@@ -30,12 +31,12 @@ class Dispatcher
      * @var Octopy\Application
      */
     protected $app;
-    
+
     /**
      * @var Octopy\Routing\Route
      */
     protected $route;
-    
+
     /**
      * @param Application $app
      * @param Request     $request
@@ -84,9 +85,10 @@ class Dispatcher
     }
 
     /**
-     * @param  array  &$middleware
-     * @param  object $controller
-     * @param  string $method
+     * @param array  &$middleware
+     * @param object $controller
+     * @param string $method
+     *
      * @return void
      */
     protected function middleware(array &$middleware, $controller, string $method)
@@ -109,9 +111,10 @@ class Dispatcher
     }
 
     /**
-     * @param  array  $parameter
-     * @param  object $instance
-     * @param  string $method
+     * @param array  $parameter
+     * @param object $instance
+     * @param string $method
+     *
      * @return array
      */
     protected function class(array $parameter, $instance, string $method)
@@ -124,8 +127,9 @@ class Dispatcher
     }
 
     /**
-     * @param  array   $parameter
-     * @param  unknown $reflector
+     * @param array   $parameter
+     * @param unknown $reflector
+     *
      * @return array
      */
     public function method(array $parameter, $reflector) : array
@@ -149,8 +153,9 @@ class Dispatcher
     }
 
     /**
-     * @param  unknown $dependency
-     * @param  array   $parameter
+     * @param unknown $dependency
+     * @param array   $parameter
+     *
      * @return mixed
      */
     protected function transform($dependency, array $parameter)
@@ -163,8 +168,9 @@ class Dispatcher
     }
 
     /**
-     * @param  string $class
-     * @param  array  $parameter
+     * @param string $class
+     * @param array  $parameter
+     *
      * @return bool
      */
     protected function already($class, array $parameter)
@@ -175,9 +181,10 @@ class Dispatcher
     }
 
     /**
-     * @param  array  $parameter
-     * @param  string $offset
-     * @param  mixed  $array
+     * @param array  $parameter
+     * @param string $offset
+     * @param mixed  $array
+     *
      * @return void
      */
     protected function splice(array &$parameter, $offset, $array)

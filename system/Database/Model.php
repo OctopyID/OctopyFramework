@@ -6,19 +6,22 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy\Database;
 
 use ArrayIterator;
-use Octopy\Database;
-use Octopy\Container;
-use JsonSerializable;
 use IteratorAggregate;
+use JsonSerializable;
+use Octopy\Container;
+use Octopy\Database;
 
 class Model implements IteratorAggregate, JsonSerializable
 {
@@ -36,7 +39,8 @@ class Model implements IteratorAggregate, JsonSerializable
     }
 
     /**
-     * @param  string $property
+     * @param string $property
+     *
      * @return mixed
      */
     public function __get(string $property)
@@ -51,8 +55,9 @@ class Model implements IteratorAggregate, JsonSerializable
     }
 
     /**
-     * @param  string $method
-     * @param  array  $args
+     * @param string $method
+     * @param array  $args
+     *
      * @return mixed
      */
     public function __call(string $method, array $args = [])
@@ -71,19 +76,21 @@ class Model implements IteratorAggregate, JsonSerializable
     }
 
     /**
-     * @param  string $method
-     * @param  array  $args
+     * @param string $method
+     * @param array  $args
+     *
      * @return mixed
      */
     public static function __callStatic(string $method, array $args = [])
     {
-        return (new static)->$method(...$args);
+        return (new static())->$method(...$args);
     }
 
     /**
-     * @param  string $model
-     * @param  string $foreign
-     * @param  string $primary
+     * @param string $model
+     * @param string $foreign
+     * @param string $primary
+     *
      * @return Database
      */
     public function link(string $model, string $foreign, string $primary = 'id')

@@ -6,24 +6,25 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy\Support;
-
-use Octopy\Support\Arr;
-use Octopy\Support\Macroable;
 
 class Str
 {
     use Macroable;
 
     /**
-     * @param  string $pattern
-     * @param  string $value
+     * @param string $pattern
+     * @param string $value
+     *
      * @return bool
      */
     public static function is($pattern, $value)
@@ -58,8 +59,9 @@ class Str
     }
 
     /**
-     * @param  string $value
-     * @param  string $encoding
+     * @param string $value
+     * @param string $encoding
+     *
      * @return int
      */
     public static function length($value, $encoding = null)
@@ -72,9 +74,10 @@ class Str
     }
 
     /**
-     * @param  string $value
-     * @param  int    $limit
-     * @param  string $end
+     * @param string $value
+     * @param int    $limit
+     * @param string $end
+     *
      * @return string
      */
     public static function limit($value, $limit = 100, $end = '...')
@@ -87,7 +90,8 @@ class Str
     }
 
     /**
-     * @param  string  $value
+     * @param string $value
+     *
      * @return string
      */
     public static function lower($value)
@@ -96,16 +100,17 @@ class Str
     }
 
     /**
-     * @param  string $value
-     * @param  int    $words
-     * @param  string $end
+     * @param string $value
+     * @param int    $words
+     * @param string $end
+     *
      * @return string
      */
     public static function words($value, $words = 100, $end = '...')
     {
         preg_match('/^\s*+(?:\S++\s*+){1,'.$words.'}/u', $value, $matches);
 
-        if (! isset($matches[0]) || static::length($value) === static::length($matches[0])) {
+        if (!isset($matches[0]) || static::length($value) === static::length($matches[0])) {
             return $value;
         }
 
@@ -113,7 +118,8 @@ class Str
     }
 
     /**
-     * @param  int $length
+     * @param int $length
+     *
      * @return string
      */
     public static function random($length = 16)
@@ -132,7 +138,8 @@ class Str
     }
 
     /**
-     * @param  string  $value
+     * @param string $value
+     *
      * @return string
      */
     public static function upper($value)
@@ -141,7 +148,8 @@ class Str
     }
 
     /**
-     * @param  string $value
+     * @param string $value
+     *
      * @return string
      */
     public static function title($value)

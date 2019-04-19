@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @version : v1.0
+ *
  * @license : MIT
  */
 
@@ -22,7 +25,8 @@ abstract class Seeder
     protected $seeder = [];
 
     /**
-     * @param  array $seeder
+     * @param array $seeder
+     *
      * @return void
      */
     public function call(...$seeder)

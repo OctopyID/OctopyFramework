@@ -6,22 +6,24 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy\HTTP\Routing;
 
-use Countable;
 use ArrayIterator;
+use Countable;
 use IteratorAggregate;
-
-use Octopy\HTTP\Request;
 use Octopy\HTTP\Middleware;
-use Octopy\HTTP\Routing\Exception\RouteNotFoundException;
+use Octopy\HTTP\Request;
 use Octopy\HTTP\Routing\Exception\MethodNotAllowedException;
+use Octopy\HTTP\Routing\Exception\RouteNotFoundException;
 
 class Collection implements Countable, IteratorAggregate
 {
@@ -56,7 +58,8 @@ class Collection implements Countable, IteratorAggregate
     }
 
     /**
-     * @param  string $method
+     * @param string $method
+     *
      * @return array
      */
     public function get(string $method) : array
@@ -81,9 +84,10 @@ class Collection implements Countable, IteratorAggregate
             }
         }
     }
-    
+
     /**
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return Response
      */
     public function match(Request $request)
@@ -103,18 +107,19 @@ class Collection implements Countable, IteratorAggregate
 
         if ($match instanceof Route) {
             if (!in_array($request->method(), $match->method())) {
-                throw new MethodNotAllowedException;
+                throw new MethodNotAllowedException();
             }
 
             return $match;
         }
-        
-        throw new RouteNotFoundException;
+
+        throw new RouteNotFoundException();
     }
 
     /**
-     * @param  array  $route
-     * @param  string $path
+     * @param array  $route
+     * @param string $path
+     *
      * @return mixed
      */
     protected function search(array $route, string $request)
@@ -122,7 +127,7 @@ class Collection implements Countable, IteratorAggregate
         if (isset($route[$request])) {
             return $route[$request];
         }
-        
+
         foreach ($route as $uri => $route) {
             if (preg_match($route->pattern, $request, $parameter)) {
                 return $route->parameter(array_filter($parameter, function ($value, $key) {

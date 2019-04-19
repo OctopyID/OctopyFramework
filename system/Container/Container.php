@@ -6,21 +6,23 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy;
 
-use Closure;
-use Throwable;
 use ArrayAccess;
+use Closure;
+use Octopy\Container\Exception\BindingResolutionException;
 use ReflectionClass;
 use ReflectionException;
-
-use Octopy\Container\Exception\BindingResolutionException;
+use Throwable;
 
 class Container implements ArrayAccess
 {
@@ -45,7 +47,8 @@ class Container implements ArrayAccess
     protected static $parameters = [];
 
     /**
-     * @param  string $abstract
+     * @param string $abstract
+     *
      * @return object
      */
     public function __get(string $abstract)
@@ -63,7 +66,8 @@ class Container implements ArrayAccess
     }
 
     /**
-     * @param  string $abstract
+     * @param string $abstract
+     *
      * @return bool
      */
     public static function has(string $abstract) : bool
@@ -72,8 +76,9 @@ class Container implements ArrayAccess
     }
 
     /**
-     * @param  string $abstract
-     * @param  mixed  $instance
+     * @param string $abstract
+     * @param mixed  $instance
+     *
      * @return mixed
      */
     public static function instance(string $abstract, $instance)
@@ -96,12 +101,13 @@ class Container implements ArrayAccess
             unset(static::$instances[$abstract]);
         }
 
-        return new Container;
+        return new self();
     }
 
     /**
-     * @param  string $abstract
-     * @param  mixed  $concrete
+     * @param string $abstract
+     * @param mixed  $concrete
+     *
      * @return string
      */
     public static function alias(string $abstract, $concrete = null)
@@ -112,10 +118,11 @@ class Container implements ArrayAccess
 
         static::$aliases[$abstract] = $concrete;
     }
-    
+
     /**
-     * @param  string $abstract
-     * @param  array  $parameter
+     * @param string $abstract
+     * @param array  $parameter
+     *
      * @return object
      */
     public static function make(string $abstract, array $parameter = [])
@@ -124,14 +131,15 @@ class Container implements ArrayAccess
     }
 
     /**
-     * @param  mixed $abstract
-     * @param  array $parameter
+     * @param mixed $abstract
+     * @param array $parameter
+     *
      * @return object
      */
     public static function resolve($abstract, array $parameter = [])
     {
         $abstract = static::alias($abstract);
-        
+
         if (!empty($parameter)) {
             static::unset($abstract);
         }
@@ -154,7 +162,8 @@ class Container implements ArrayAccess
     }
 
     /**
-     * @param  mixed $concrete
+     * @param mixed $concrete
+     *
      * @return object
      */
     protected static function build($concrete)
@@ -183,6 +192,7 @@ class Container implements ArrayAccess
 
         if (is_null($constructor = $reflector->getConstructor())) {
             array_pop(static::$concretes);
+
             return $reflector->newInstance();
         }
 
@@ -208,7 +218,7 @@ class Container implements ArrayAccess
                                 sprintf('Unresolvable dependency resolving [%s] in class [%s]', $dependency, $dependency->getDeclaringClass()->getName())
                             );
                         }
-               
+
                         $depedencies[] = $dependency->getDefaultValue();
                     }
                 } catch (ReflectionException $exception) {
@@ -225,7 +235,8 @@ class Container implements ArrayAccess
     }
 
     /**
-     * @param  string $key
+     * @param string $key
+     *
      * @return bool
      */
     public function offsetExists($key)
@@ -234,7 +245,8 @@ class Container implements ArrayAccess
     }
 
     /**
-     * @param  string $key
+     * @param string $key
+     *
      * @return object
      */
     public function offsetGet($key)
@@ -243,8 +255,9 @@ class Container implements ArrayAccess
     }
 
     /**
-     * @param  string $key
-     * @param  mixed  $value
+     * @param string $key
+     * @param mixed  $value
+     *
      * @return mixed
      */
     public function offsetSet($key, $value)

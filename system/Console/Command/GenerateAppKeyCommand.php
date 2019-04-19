@@ -6,19 +6,20 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy\Console\Command;
 
-use Exception;
-
 use Octopy\Console\Argv;
-use Octopy\Console\Output;
 use Octopy\Console\Command;
+use Octopy\Console\Output;
 use Octopy\Encryption\Encrypter;
 
 class GenerateAppKeyCommand extends Command
@@ -32,10 +33,11 @@ class GenerateAppKeyCommand extends Command
      * @var string
      */
     protected $description = 'Set the application key';
-    
+
     /**
-     * @param  Argv   $argv
-     * @param  Output $output
+     * @param Argv   $argv
+     * @param Output $output
+     *
      * @return string
      */
     public function handle(Argv $argv, Output $output)
@@ -50,7 +52,7 @@ class GenerateAppKeyCommand extends Command
         // automatically setup for this developer. This key gets generated using a
         // secure random byte generator and is later base64 encoded for storage.
         $this->write($key);
-      
+
         $this->app['config']['app.key'] = $key;
 
         return $output->success('Application key set successfully.');
@@ -67,17 +69,18 @@ class GenerateAppKeyCommand extends Command
     }
 
     /**
-     * @param  string  $key
+     * @param string $key
+     *
      * @return void
      */
     protected function write($key)
     {
-        $lines = file($environment = $this->app->basepath() . '.env');
+        $lines = file($environment = $this->app->basepath().'.env');
         foreach ($lines as $i => $line) {
             if (preg_match('/^APP_KEY/', $line = trim($line))) {
-                $array    = explode('=', $line, 2);
+                $array = explode('=', $line, 2);
                 $array[1] = $key;
-                $line     = implode('= ', $array);
+                $line = implode('= ', $array);
             }
 
             $lines[$i] = $line;

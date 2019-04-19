@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
@@ -16,12 +19,11 @@ namespace Octopy\HTTP;
 
 use ArrayObject;
 use JsonSerializable;
-use UnexpectedValueException;
-
-use Octopy\Support\Macroable;
 use Octopy\HTTP\Response\Header;
 use Octopy\HTTP\Response\JsonResponse;
 use Octopy\HTTP\Response\RedirectResponse;
+use Octopy\Support\Macroable;
+use UnexpectedValueException;
 
 class Response
 {
@@ -123,7 +125,7 @@ class Response
         510 => 'Not Extended',
         511 => 'Network Authentication Required',
         598 => 'Network Read Timeout Error',
-        599 => 'Network Connect Timeout Error'
+        599 => 'Network Connect Timeout Error',
    ];
 
     /**
@@ -152,7 +154,8 @@ class Response
     }
 
     /**
-     * @param  string $property
+     * @param string $property
+     *
      * @return mixed
      */
     public function __get(string $property)
@@ -161,14 +164,15 @@ class Response
     }
 
     /**
-     * @param  mixed $data
-     * @param  int   $status
-     * @param  array $header
+     * @param mixed $data
+     * @param int   $status
+     * @param array $header
+     *
      * @return Response
      */
     public function make($data, int $status = 200, array $header = [])
     {
-        if ($data instanceof Response) {
+        if ($data instanceof self) {
             return $data;
         }
 
@@ -184,14 +188,15 @@ class Response
     }
 
     /**
-     * @param  string $body
+     * @param string $body
+     *
      * @return $this
      */
     public function body($body)
     {
         if (!is_null($body) && !is_string($body) && !is_numeric($body) && !is_callable([$body, '__toString'])) {
             throw new UnexpectedValueException(
-                'The response body must be a string or object implementing __toString() given ' . gettype($body)
+                'The response body must be a string or object implementing __toString() given '.gettype($body)
             );
         }
 
@@ -205,10 +210,11 @@ class Response
     }
 
     /**
-     * @param  array $data
-     * @param  int   $status
-     * @param  array $header
-     * @param  int   $option
+     * @param array $data
+     * @param int   $status
+     * @param array $header
+     * @param int   $option
+     *
      * @return JsonResponse
      */
     public function json(array $data = [], int $status = 200, array $header = [], int $option = 0)
@@ -217,9 +223,10 @@ class Response
     }
 
     /**
-     * @param  string $data
-     * @param  int    $status
-     * @param  array  $header
+     * @param string $data
+     * @param int    $status
+     * @param array  $header
+     *
      * @return RedirectResponse
      */
     public function redirect(string $data = '/', int $status = 302, array $header = [])
@@ -228,8 +235,9 @@ class Response
     }
 
     /**
-     * @param  int    $status
-     * @param  string $reason
+     * @param int    $status
+     * @param string $reason
+     *
      * @return $this
      */
     public function status(int $status, string $reason = null)
@@ -241,7 +249,8 @@ class Response
     }
 
     /**
-     * @param  int $status
+     * @param int $status
+     *
      * @return string
      */
     public function reason(int $status) : string
@@ -254,7 +263,8 @@ class Response
     }
 
     /**
-     * @param  array $header
+     * @param array $header
+     *
      * @return $this
      */
     public function header(...$header)
@@ -268,7 +278,7 @@ class Response
         }
 
         $this->header->set(...$header);
-        
+
         return $this;
     }
 
@@ -291,7 +301,7 @@ class Response
 
             foreach ($this->header->all() as $name => $values) {
                 foreach ($values as $value) {
-                    header($name . ':' . $value, strcasecmp($name, 'Content-Type') === 0, $status);
+                    header($name.':'.$value, strcasecmp($name, 'Content-Type') === 0, $status);
                 }
             }
 

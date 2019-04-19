@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
@@ -22,7 +25,8 @@ class ControllerMiddleware
     protected $option;
 
     /**
-     * @param  array $option
+     * @param array $option
+     *
      * @return void
      */
     public function __construct(array &$option)
@@ -31,7 +35,8 @@ class ControllerMiddleware
     }
 
     /**
-     * @param  mixed $method
+     * @param mixed $method
+     *
      * @return $this
      */
     public function only($method)
@@ -42,7 +47,8 @@ class ControllerMiddleware
     }
 
     /**
-     * @param  mixed $method
+     * @param mixed $method
+     *
      * @return $this
      */
     public function except($method)

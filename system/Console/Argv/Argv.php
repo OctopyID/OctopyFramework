@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
@@ -51,7 +54,8 @@ class Argv
     }
 
     /**
-     * @param  array $option
+     * @param array $option
+     *
      * @return void
      */
     public function option(array $option)
@@ -70,7 +74,8 @@ class Argv
     }
 
     /**
-     * @param  string $command
+     * @param string $command
+     *
      * @return mixed
      */
     public function command(string $command = null)
@@ -83,7 +88,8 @@ class Argv
     }
 
     /**
-     * @param  string $key
+     * @param string $key
+     *
      * @return string
      */
     public function get(string $key)

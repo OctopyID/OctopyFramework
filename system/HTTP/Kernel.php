@@ -6,16 +6,18 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy\HTTP;
 
 use Octopy\Application;
-use Octopy\HTTP\Middleware;
 
 class Kernel
 {
@@ -38,7 +40,7 @@ class Kernel
     public function __construct(Application $app, Middleware $middleware)
     {
         $this->app = $app;
-        
+
         // These middleware are run during every request to your application.
         if (isset($this->middleware)) {
             foreach ($this->middleware as $layer) {
@@ -64,7 +66,8 @@ class Kernel
     }
 
     /**
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return Response
      */
     public function handle(Request $request)

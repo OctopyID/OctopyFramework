@@ -6,17 +6,20 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy\Console;
 
-use Countable;
 use ArrayAccess;
 use ArrayIterator;
+use Countable;
 use IteratorAggregate;
 
 class Collection implements ArrayAccess, Countable, IteratorAggregate
@@ -32,7 +35,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate
     public function set(Route $command)
     {
         $this->command = array_merge($this->command, [
-            $command->command() => $command
+            $command->command() => $command,
         ]);
 
         return $command;
@@ -44,6 +47,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate
     public function all() : array
     {
         asort($this->command);
+
         return $this->command;
     }
 
@@ -64,7 +68,8 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
-     * @param  string $key
+     * @param string $key
+     *
      * @return bool
      */
     public function offsetExists($key)
@@ -73,7 +78,8 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
-     * @param  string $key
+     * @param string $key
+     *
      * @return object
      */
     public function offsetGet($key)
@@ -82,8 +88,9 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
-     * @param  string $key
-     * @param  mixed  $value
+     * @param string $key
+     * @param mixed  $value
+     *
      * @return mixed
      */
     public function offsetSet($key, $value)

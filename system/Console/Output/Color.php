@@ -6,16 +6,19 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy\Console\Output;
 
-use InvalidArgumentException;
 use Exception as InvalidStyleException;
+use InvalidArgumentException;
 
 class Color
 {
@@ -61,7 +64,7 @@ class Color
         'blink'            => 5,
         'reverse'          => 7,
         'concealed'        => 8,
-        
+
         'default'          => 39,
         'black'            => 30,
         'red'              => 31,
@@ -71,7 +74,7 @@ class Color
         'magenta'          => 35,
         'cyan'             => 36,
         'light_gray'       => 37,
-        
+
         'dark_gray'        => 90,
         'light_red'        => 91,
         'light_green'      => 92,
@@ -80,7 +83,7 @@ class Color
         'light_magenta'    => 95,
         'light_cyan'       => 96,
         'white'            => 97,
-        
+
         'bg_default'       => 49,
         'bg_black'         => 40,
         'bg_red'           => 41,
@@ -90,7 +93,7 @@ class Color
         'bg_magenta'       => 45,
         'bg_cyan'          => 46,
         'bg_light_gray'    => 47,
-        
+
         'bg_dark_gray'     => 100,
         'bg_light_red'     => 101,
         'bg_light_green'   => 102,
@@ -101,43 +104,43 @@ class Color
         'bg_white'         => 107,
    ];
 
-    /**
-     *
-     */
     public function __construct()
     {
         $this->supported = $this->supported();
     }
 
     /**
-     * @param  string $color
-     * @param  array  $args
+     * @param string $color
+     * @param array  $args
+     *
      * @return string
      */
     public function __call(string $color, array $args = []) : string
     {
-        return $this->format('{' . $color . '}' . ($args[0] ?? ''));
+        return $this->format('{'.$color.'}'.($args[0] ?? ''));
     }
 
     /**
-     * @param  string $text
+     * @param string $text
+     *
      * @return string
      */
     public function format(string $text)
     {
-        preg_match_all('^\{' . implode('|', array_keys($this->style)) . '\}^', $text, $match);
+        preg_match_all('^\{'.implode('|', array_keys($this->style)).'\}^', $text, $match);
         $match[1] = [];
         foreach ($match[0] as $i  => $key) {
-            $match[0][$i] = '{' . $key . '}';
+            $match[0][$i] = '{'.$key.'}';
             $match[1][$i] = sprintf("\033[%um", $this->style[$key]);
         }
-  
-        return str_replace($match[0], $match[1], $text) . "\033[0m\n";
+
+        return str_replace($match[0], $match[1], $text)."\033[0m\n";
     }
 
     /**
-     * @param  string $style
-     * @param  string $text
+     * @param string $style
+     * @param string $text
+     *
      * @return string
      */
     public function apply($style, $text)
@@ -149,7 +152,7 @@ class Color
         if (is_string($style)) {
             $style = [$style];
         }
-        
+
         if (!is_array($style)) {
             throw new InvalidArgumentException('Style must be string or array');
         }
@@ -174,7 +177,7 @@ class Color
             return $text;
         }
 
-        return $this->concat(implode(';', $sequence)) . $text . $this->concat(Color::RESET_STYLE);
+        return $this->concat(implode(';', $sequence)).$text.$this->concat(self::RESET_STYLE);
     }
 
     /**
@@ -182,7 +185,7 @@ class Color
      */
     public function force($force)
     {
-        $this->force = (bool)$force;
+        $this->force = (bool) $force;
     }
 
     /**
@@ -194,8 +197,8 @@ class Color
     }
 
     /**
-    * @param array $theme
-    */
+     * @param array $theme
+     */
     public function set(array $theme)
     {
         $this->theme = [];
@@ -227,7 +230,8 @@ class Color
     }
 
     /**
-     * @param  string $name
+     * @param string $name
+     *
      * @return bool
      */
     public function has($name) : bool
@@ -254,6 +258,7 @@ class Color
             } elseif (getenv('ANSICON') !== false || getenv('ConEmuANSI') === 'ON') {
                 return true;
             }
+
             return false;
         } else {
             return function_exists('posix_isatty') && @posix_isatty(STDOUT);
@@ -273,7 +278,8 @@ class Color
     }
 
     /**
-     * @param  string $name
+     * @param string $name
+     *
      * @return array
      */
     protected function sequence($name) : array
@@ -287,7 +293,8 @@ class Color
     }
 
     /**
-     * @param  string $style
+     * @param string $style
+     *
      * @return string
      */
     protected function style($style) : string
@@ -300,25 +307,27 @@ class Color
             return null;
         }
 
-        preg_match(Color::COLOR256_REGEXP, $style, $matches);
+        preg_match(self::COLOR256_REGEXP, $style, $matches);
 
-        $type  = $matches[1] === 'bg_' ? Color::BACKGROUND : Color::FOREGROUND;
+        $type = $matches[1] === 'bg_' ? self::BACKGROUND : self::FOREGROUND;
         $value = $matches[2];
 
         return "$type;5;$value";
     }
 
     /**
-     * @param  string $style
+     * @param string $style
+     *
      * @return bool
      */
     protected function validate(string $style) : bool
     {
-        return array_key_exists($style, $this->style) || preg_match(Color::COLOR256_REGEXP, $style);
+        return array_key_exists($style, $this->style) || preg_match(self::COLOR256_REGEXP, $style);
     }
 
     /**
-     * @param  string $value
+     * @param string $value
+     *
      * @return string
      */
     protected function concat(string $value) : string

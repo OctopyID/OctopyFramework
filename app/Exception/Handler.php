@@ -6,17 +6,20 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace App\Exception;
 
-use Throwable;
-use Octopy\HTTP\Request;
 use Octopy\Exception\ExceptionHandler;
+use Octopy\HTTP\Request;
+use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -29,8 +32,9 @@ class Handler extends ExceptionHandler
     }
 
     /**
-     * @param  Request   $request
-     * @param  Throwable $exception
+     * @param Request   $request
+     * @param Throwable $exception
+     *
      * @return mixed
      */
     public function render(Request $request, Throwable $exception)

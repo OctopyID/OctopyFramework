@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @version : v1.0
+ *
  * @license : MIT
  */
 
@@ -19,7 +22,7 @@ use Exception;
 class InvalidRecepientException extends Exception
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $code = 406;
 }

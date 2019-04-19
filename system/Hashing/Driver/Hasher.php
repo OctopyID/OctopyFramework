@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
@@ -17,7 +20,8 @@ namespace Octopy\Hashing\Driver;
 abstract class Hasher
 {
     /**
-     * @param  string $hashed
+     * @param string $hashed
+     *
      * @return array
      */
     public function info($hashed) : array
@@ -26,9 +30,10 @@ abstract class Hasher
     }
 
     /**
-     * @param  string $value
-     * @param  string $hashed
-     * @param  array  $option
+     * @param string $value
+     * @param string $hashed
+     * @param array  $option
+     *
      * @return bool
      */
     public function verify($value, $hashed, array $option = []) : bool

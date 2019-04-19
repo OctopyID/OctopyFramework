@@ -6,19 +6,21 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy\HTTP\Middleware;
 
 use Closure;
-
 use Octopy\Application;
-use Octopy\HTTP\Request;
 use Octopy\HTTP\Middleware\Exception\TokenMismatchException;
+use Octopy\HTTP\Request;
 
 class VerifyCSRFToken
 {
@@ -43,8 +45,9 @@ class VerifyCSRFToken
     }
 
     /**
-     * @param  Request $request
-     * @param  Closure $next
+     * @param Request $request
+     * @param Closure $next
+     *
      * @return Request
      */
     public function handle(Request $request, Closure $next)
@@ -62,7 +65,7 @@ class VerifyCSRFToken
             }
         }
 
-        throw new TokenMismatchException;
+        throw new TokenMismatchException();
     }
 
     /**
@@ -76,10 +79,10 @@ class VerifyCSRFToken
             $token = $this->app['session']->get('X-CSRF-TOKEN');
         }
 
-        $this->app['session']->set(array(
+        $this->app['session']->set([
             'X-CSRF-TOKEN'        => $token,
-            'X-CSRF-TOKEN-EXPIRE' => microtime(true)
-        ));
+            'X-CSRF-TOKEN-EXPIRE' => microtime(true),
+        ]);
 
         return $token;
     }

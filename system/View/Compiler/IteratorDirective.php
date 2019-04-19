@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
@@ -19,7 +22,8 @@ use Octopy\View\Stream;
 class IteratorDirective extends Directive
 {
     /**
-     * @param  Stream $stream
+     * @param Stream $stream
+     *
      * @return string
      */
     public function parse(Stream $stream)

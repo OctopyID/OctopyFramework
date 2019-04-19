@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
@@ -19,9 +22,10 @@ use RuntimeException;
 class Argon2IdHasher extends ArgonHasher
 {
     /**
-     * @param  string  $value
-     * @param  string  $hashed
-     * @param  array  $option
+     * @param string $value
+     * @param string $hashed
+     * @param array  $option
+     *
      * @return bool
      */
     public function verify($value, $hashed, array $option = []) : bool

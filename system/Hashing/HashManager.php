@@ -6,18 +6,21 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy\Hashing;
 
 use Octopy\Application;
+use Octopy\Hashing\Driver\Argon2IdHasher;
 use Octopy\Hashing\Driver\ArgonHasher;
 use Octopy\Hashing\Driver\BcryptHasher;
-use Octopy\Hashing\Driver\Argon2IdHasher;
 use Octopy\Hashing\Exception\HashDriverException;
 
 class HashManager
@@ -46,7 +49,8 @@ class HashManager
     }
 
     /**
-     * @param  string $driver
+     * @param string $driver
+     *
      * @return void
      */
     public function driver(string $driver = null)
@@ -76,7 +80,8 @@ class HashManager
     }
 
     /**
-     * @param  string  $hashed
+     * @param string $hashed
+     *
      * @return array
      */
     public function info($hashed)
@@ -85,8 +90,9 @@ class HashManager
     }
 
     /**
-     * @param  string $value
-     * @param  array  $option
+     * @param string $value
+     * @param array  $option
+     *
      * @return string
      */
     public function make($value, array $option = [])
@@ -95,9 +101,10 @@ class HashManager
     }
 
     /**
-     * @param  string $value
-     * @param  string $hashed
-     * @param  array  $option
+     * @param string $value
+     * @param string $hashed
+     * @param array  $option
+     *
      * @return bool
      */
     public function verify($value, string $hashed, array $option = []) : bool
@@ -106,8 +113,9 @@ class HashManager
     }
 
     /**
-     * @param  string $hashed
-     * @param  array  $option
+     * @param string $hashed
+     * @param array  $option
+     *
      * @return bool
      */
     public function rehash(string $hashed, array $option = [])

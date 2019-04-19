@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
@@ -27,7 +30,8 @@ class BcryptHasher extends Hasher
     protected $verify = false;
 
     /**
-     * @param  array $option
+     * @param array $option
+     *
      * @return void
      */
     public function __construct(array $option = [])
@@ -36,8 +40,9 @@ class BcryptHasher extends Hasher
     }
 
     /**
-     * @param  string $value
-     * @param  array  $option
+     * @param string $value
+     * @param array  $option
+     *
      * @return string
      */
     public function make($value, array $option = [])
@@ -54,9 +59,10 @@ class BcryptHasher extends Hasher
     }
 
     /**
-     * @param  string $value
-     * @param  string $hashed
-     * @param  array  $option
+     * @param string $value
+     * @param string $hashed
+     * @param array  $option
+     *
      * @return bool
      */
     public function verify($value, $hashed, array $option = []) : bool
@@ -69,8 +75,9 @@ class BcryptHasher extends Hasher
     }
 
     /**
-     * @param  string $hashed
-     * @param  array   $option
+     * @param string $hashed
+     * @param array  $option
+     *
      * @return bool
      */
     public function rehash($hashed, array $option = [])
@@ -81,7 +88,8 @@ class BcryptHasher extends Hasher
     }
 
     /**
-     * @param  array $option
+     * @param array $option
+     *
      * @return int
      */
     protected function cost(array $option = [])

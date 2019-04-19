@@ -6,17 +6,20 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy\Console\Command;
 
 use Octopy\Console\Argv;
-use Octopy\Console\Output;
 use Octopy\Console\Command;
+use Octopy\Console\Output;
 
 class DBSeedingCommand extends Command
 {
@@ -31,8 +34,9 @@ class DBSeedingCommand extends Command
     protected $description = 'Seed the database with records';
 
     /**
-     * @param  Argv   $argv
-     * @param  Output $output
+     * @param Argv   $argv
+     * @param Output $output
+     *
      * @return string
      */
     public function handle(Argv $argv, Output $output)
@@ -44,7 +48,7 @@ class DBSeedingCommand extends Command
         }
 
         $seed = !$argv->get('value') || !$argv->get('--seed') ? 'DatabaseSeeder' : $argv->get('value');
-            
+
         if (!class_exists('App\DB\Seeder\DatabaseSeeder')) {
             $this->call('make:seeder', ['value' => 'DatabaseSeeder']);
         }
@@ -58,10 +62,10 @@ class DBSeedingCommand extends Command
      */
     private function seed(Output $output, string $seed)
     {
-        echo $output->success('Seeding : {white}' . $seed);
+        echo $output->success('Seeding : {white}'.$seed);
 
-        call_user_func([$seeder = $this->app->make('App\\DB\\Seeder\\' . $seed), 'seed']);
-       
+        call_user_func([$seeder = $this->app->make('App\\DB\\Seeder\\'.$seed), 'seed']);
+
         if (!empty($seeds = $seeder->call())) {
             foreach ($seeds as $i => $seed) {
                 $this->seed($output, str_replace('App\\DB\\Seeder\\', '', $seed));

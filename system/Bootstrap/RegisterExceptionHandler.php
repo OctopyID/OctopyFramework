@@ -6,20 +6,21 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @link    : www.octopy.xyz
+ *
  * @author  : Supian M <supianidz@gmail.com>
  * @license : MIT
  */
 
 namespace Octopy\Bootstrap;
 
-use Exception;
-use Throwable;
-use ErrorException;
-
-use Octopy\Application;
 use App\Exception\Handler;
+use ErrorException;
+use Exception;
+use Octopy\Application;
+use Throwable;
 
 class RegisterExceptionHandler
 {
@@ -42,7 +43,8 @@ class RegisterExceptionHandler
     }
 
     /**
-     * @param  Application $app
+     * @param Application $app
+     *
      * @return void
      */
     public function bootstrap(Application $app)
@@ -52,7 +54,7 @@ class RegisterExceptionHandler
         error_reporting(-1);
 
         set_error_handler([$this, 'error']);
-        
+
         set_exception_handler([$this, 'exception']);
 
         register_shutdown_function([$this, 'shutdown']);
@@ -63,7 +65,8 @@ class RegisterExceptionHandler
     }
 
     /**
-     * @param  Throwable  $exception
+     * @param Throwable $exception
+     *
      * @return void
      */
     public function exception(Throwable $exception)
@@ -104,9 +107,6 @@ class RegisterExceptionHandler
         }
     }
 
-    /**
-     *
-     */
     public function shutdown()
     {
         $type = [E_COMPILE_ERROR, E_CORE_ERROR, E_ERROR, E_PARSE];

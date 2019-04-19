@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
@@ -35,16 +38,17 @@ class Parser
     {
         $this->engine = $engine;
 
-        $this->directive[] = new Compiler\RawPHPDirective;
-        $this->directive[] = new Compiler\HelperDirective;
-        $this->directive[] = new Compiler\LayoutDirective;
-        $this->directive[] = new Compiler\IncludeDirective;
-        $this->directive[] = new Compiler\ControlDirective;
-        $this->directive[] = new Compiler\IteratorDirective;
+        $this->directive[] = new Compiler\RawPHPDirective();
+        $this->directive[] = new Compiler\HelperDirective();
+        $this->directive[] = new Compiler\LayoutDirective();
+        $this->directive[] = new Compiler\IncludeDirective();
+        $this->directive[] = new Compiler\ControlDirective();
+        $this->directive[] = new Compiler\IteratorDirective();
     }
 
     /**
-     * @param  string $compiled
+     * @param string $compiled
+     *
      * @return string
      */
     public function footer(?string $compiled) : string
@@ -55,13 +59,14 @@ class Parser
     }
 
     /**
-     * @param  Storage $storage
+     * @param Storage $storage
+     *
      * @return string
      */
     public function compile(Storage $storage) : ?string
     {
         $source = $storage->source();
-        
+
         // Removing PHP Comment parser adapted from Laravel Blade
         $source = preg_replace('/{{--(.*?)--}}/s', '', $source);
 
@@ -82,9 +87,9 @@ class Parser
         }
 
         unset($source);
-            
+
         if (count($this->footer) > 0) {
-            $compiled = ltrim($compiled) . "\n" . implode("\n", array_reverse($this->footer));
+            $compiled = ltrim($compiled)."\n".implode("\n", array_reverse($this->footer));
             $this->footer = [];
         }
 
@@ -98,8 +103,9 @@ class Parser
     }
 
     /**
-     * @param  int    $token
-     * @param  string $content
+     * @param int    $token
+     * @param string $content
+     *
      * @return string
      */
     protected function parse(int $token, ?string $content)
@@ -124,14 +130,15 @@ class Parser
     }
 
     /**
-     * @param  string $type
-     * @param  string $parameter
+     * @param string $type
+     * @param string $parameter
+     *
      * @return string
      */
     protected function stream(string $type, string $parameter)
     {
-        $stream = new Stream(token_get_all('<?php ' . $type), $parameter);
-                    
+        $stream = new Stream(token_get_all('<?php '.$type), $parameter);
+
         if ($directive = $this->engine->directive($type)) {
             return $directive($stream->expression());
         } else {

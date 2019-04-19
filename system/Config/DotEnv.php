@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
@@ -79,14 +82,15 @@ class DotEnv
         if (empty($_ENV[$key])) {
             $_ENV[$key] = $value;
         }
-        
+
         if (empty($_SERVER[$key])) {
             $_SERVER[$key] = $value;
         }
     }
 
     /**
-     * @param  string $key
+     * @param string $key
+     *
      * @return mixed
      */
     protected function get(string $key)
@@ -100,6 +104,7 @@ class DotEnv
                 break;
             default:
                 $value = getenv($key);
+
                 return $value === false ? null : $value;
         }
     }
@@ -113,8 +118,9 @@ class DotEnv
     }
 
     /**
-     * @param  string $key
-     * @param  string $value
+     * @param string $key
+     * @param string $value
+     *
      * @return array
      */
     protected function normalise(string $key, string $value = ''): array
@@ -123,7 +129,7 @@ class DotEnv
             list($key, $value) = explode('=', $key, 2);
         }
 
-        $key  = trim($key);
+        $key = trim($key);
         $value = trim($value);
 
         // Sanitize the key
@@ -138,7 +144,8 @@ class DotEnv
     }
 
     /**
-     * @param  string $value
+     * @param string $value
+     *
      * @return string
      */
     protected function sanitize(string $value): string
@@ -161,7 +168,7 @@ class DotEnv
                     %1$s          # and the closing quote
                     .*$           # and discard any string after the closing quote
                     /mx',
-                $quote  = $value[0]
+                $quote = $value[0]
             );
 
             $value = preg_replace($regexp, '$1', $value);
@@ -182,7 +189,8 @@ class DotEnv
     }
 
     /**
-     * @param  string $value
+     * @param string $value
+     *
      * @return string
      */
     protected function nested(string $value) : string

@@ -7,17 +7,19 @@
  * @| |_| | (__| || (_) | |_) | |_| |
  * @ \___/ \___|\__\___/| .__/ \__, |
  * @                    |_|    |___/
+ *
  * @author  : Supian M <supianidzgmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy\Session\Handler;
 
-use SessionHandlerInterface;
-
 use Octopy\Application;
 use Octopy\Session\Exception\SessionException;
+use SessionHandlerInterface;
 
 class FileSessionHandler implements SessionHandlerInterface
 {
@@ -38,10 +40,11 @@ class FileSessionHandler implements SessionHandlerInterface
     {
         $this->storage = $config['storage'];
     }
-    
+
     /**
      * @@param  string $storage
      * @@param  string $name
+     *
      * @@return bool
      */
     public function open($storage, $name)
@@ -68,12 +71,13 @@ class FileSessionHandler implements SessionHandlerInterface
     }
 
     /**
-     * @param  string $id
+     * @param string $id
+     *
      * @return mixed
      */
     public function read($id)
     {
-        $filename = $this->storage . md5($id);
+        $filename = $this->storage.md5($id);
 
         if (file_exists($filename)) {
             $this->data = file_get_contents($filename);
@@ -82,16 +86,16 @@ class FileSessionHandler implements SessionHandlerInterface
         return $this->data ?? '';
     }
 
-
     /**
-     * @param  string $id
-     * @param  mixed  $data
+     * @param string $id
+     * @param mixed  $data
+     *
      * @return bool
      */
     public function write($id, $data)
     {
-        $filename = $this->storage . md5($id);
-       
+        $filename = $this->storage.md5($id);
+
         // check if data has changed since first read
         if ($data !== $this->data) {
             return file_put_contents($filename, $data, LOCK_EX) === false ? false : true;
@@ -101,12 +105,13 @@ class FileSessionHandler implements SessionHandlerInterface
     }
 
     /**
-     * @param  string $id
+     * @param string $id
+     *
      * @return bool
      */
     public function destroy($id)
     {
-        $filename = $this->storage . md5($id);
+        $filename = $this->storage.md5($id);
         if (file_exists($filename)) {
             unlink($filename);
         }
@@ -115,7 +120,8 @@ class FileSessionHandler implements SessionHandlerInterface
     }
 
     /**
-     * @param  int $maxlifetime
+     * @param int $maxlifetime
+     *
      * @return bool
      */
     public function gc($maxlifetime)

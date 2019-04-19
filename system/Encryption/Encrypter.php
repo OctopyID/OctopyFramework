@@ -6,20 +6,20 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy\Encryption;
 
-use RuntimeException;
-
-use Octopy\Application;
-use Octopy\Encryption\Exception\EncryptException;
-use Octopy\Encryption\Exception\DecryptException;
 use Octopy\Encryption\Exception\CipherKeyException;
+use Octopy\Encryption\Exception\DecryptException;
+use Octopy\Encryption\Exception\EncryptException;
 
 class Encrypter
 {
@@ -48,8 +48,9 @@ class Encrypter
     }
 
     /**
-     * @param  string $key
-     * @param  string $cipher
+     * @param string $key
+     * @param string $cipher
+     *
      * @return bool
      */
     public function supported($key, $cipher)
@@ -60,7 +61,8 @@ class Encrypter
     }
 
     /**
-     * @param  string $cipher
+     * @param string $cipher
+     *
      * @return string
      */
     public static function generate($cipher)
@@ -69,8 +71,9 @@ class Encrypter
     }
 
     /**
-     * @param  mixed $value
-     * @param  bool $serialize
+     * @param mixed $value
+     * @param bool  $serialize
+     *
      * @return string
      */
     public function encrypt($value, $serialize = true)
@@ -101,8 +104,9 @@ class Encrypter
     }
 
     /**
-     * @param  mixed $payload
-     * @param  bool  $unserialize
+     * @param mixed $payload
+     * @param bool  $unserialize
+     *
      * @return mixed
      */
     public function decrypt($payload, $unserialize = true)
@@ -124,8 +128,9 @@ class Encrypter
     }
 
     /**
-     * @param  string $iv
-     * @param  mixed $value
+     * @param string $iv
+     * @param mixed  $value
+     *
      * @return string
      */
     protected function hash($iv, $value)
@@ -134,7 +139,8 @@ class Encrypter
     }
 
     /**
-     * @param  string $payload
+     * @param string $payload
+     *
      * @return array
      */
     protected function payload($payload)
@@ -156,7 +162,8 @@ class Encrypter
     }
 
     /**
-     * @param  mixed $payload
+     * @param mixed $payload
+     *
      * @return bool
      */
     protected function jsonvalidate($payload)
@@ -166,7 +173,8 @@ class Encrypter
     }
 
     /**
-     * @param  array $payload
+     * @param array $payload
+     *
      * @return bool
      */
     protected function hmacvalidate(array $payload)
@@ -177,8 +185,9 @@ class Encrypter
     }
 
     /**
-     * @param  array  $payload
-     * @param  string $bytes
+     * @param array  $payload
+     * @param string $bytes
+     *
      * @return string
      */
     protected function calculate($payload, $bytes)

@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
@@ -25,7 +28,7 @@ class Repository implements ArrayAccess
     protected $items = [];
 
     /**
-     * @param  array $items
+     * @param array $items
      */
     public function __construct(array $items = [])
     {
@@ -33,7 +36,8 @@ class Repository implements ArrayAccess
     }
 
     /**
-     * @param  string $key
+     * @param string $key
+     *
      * @return bool
      */
     public function has($key)
@@ -42,8 +46,9 @@ class Repository implements ArrayAccess
     }
 
     /**
-     * @param  array $key
-     * @param  mixed $default
+     * @param array $key
+     * @param mixed $default
+     *
      * @return mixed
      */
     public function get($key, $default = null)
@@ -56,7 +61,8 @@ class Repository implements ArrayAccess
     }
 
     /**
-     * @param  array $keys
+     * @param array $keys
+     *
      * @return array
      */
     public function many($keys)
@@ -106,7 +112,7 @@ class Repository implements ArrayAccess
      */
     public function push(string $key, $value)
     {
-        $this->set($key, array_merge($this->get($key), (array)$value));
+        $this->set($key, array_merge($this->get($key), (array) $value));
     }
 
     /**
@@ -118,7 +124,8 @@ class Repository implements ArrayAccess
     }
 
     /**
-     * @param  string $key
+     * @param string $key
+     *
      * @return bool
      */
     public function offsetExists($key)
@@ -127,7 +134,8 @@ class Repository implements ArrayAccess
     }
 
     /**
-     * @param  string $key
+     * @param string $key
+     *
      * @return mixed
      */
     public function offsetGet($key)

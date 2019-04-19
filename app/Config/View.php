@@ -6,14 +6,17 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 return [
-    
+
     /*
     |--------------------------------------------------------------------------
     | View Storage Paths
@@ -36,5 +39,5 @@ return [
     | directory. However, as usual, you are free to change this value.
     |
     */
-   'compiled' => $this->path->storage('framework/views')
+   'compiled' => $this->path->storage('framework/views'),
 ];

@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @version : v1.0
+ *
  * @license : MIT
  */
 
@@ -29,11 +32,11 @@ class MySQL extends PDO
     {
         try {
             parent::__construct("mysql:host=$hostname;dbname=$database;charset=utf8", $username, $password, [
-                MySQL::ATTR_PERSISTENT         => true,
-                MySQL::ATTR_CASE               => MySQL::CASE_LOWER,
-                MySQL::ATTR_ERRMODE            => MySQL::ERRMODE_WARNING,
-                MySQL::ATTR_ERRMODE            => MySQL::ERRMODE_EXCEPTION,
-                MySQL::ATTR_DEFAULT_FETCH_MODE => MySQL::FETCH_OBJ,
+                self::ATTR_PERSISTENT         => true,
+                self::ATTR_CASE               => self::CASE_LOWER,
+                self::ATTR_ERRMODE            => self::ERRMODE_WARNING,
+                self::ATTR_ERRMODE            => self::ERRMODE_EXCEPTION,
+                self::ATTR_DEFAULT_FETCH_MODE => self::FETCH_OBJ,
             ]);
         } catch (PDOException $exception) {
             throw $exception;

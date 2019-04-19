@@ -6,17 +6,20 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy\Console\Command;
 
 use Octopy\Console\Argv;
-use Octopy\Console\Output;
 use Octopy\Console\Command;
+use Octopy\Console\Output;
 
 class DBMigrateCommand extends Command
 {
@@ -31,20 +34,21 @@ class DBMigrateCommand extends Command
     protected $description = 'Run the database migrations';
 
     /**
-     * @param  Argv   $argv
-     * @param  Output $output
+     * @param Argv   $argv
+     * @param Output $output
+     *
      * @return string
      */
     public function handle(Argv $argv, Output $output)
     {
         if ($name = $argv->get('name')) {
             /**
-             * Single
+             * Single.
              */
-            $data = array(
+            $data = [
                 'name'  => $name,
-                'class' => '\\App\\DB\\Migration\\' . $name
-            );
+                'class' => '\\App\\DB\\Migration\\'.$name,
+            ];
 
             if ($argv->get('-r') || $argv->get('--refresh')) {
                 $this->drop($output, $data);
@@ -55,7 +59,7 @@ class DBMigrateCommand extends Command
             $this->create($output, $data);
         } else {
             /**
-             * Multiple
+             * Multiple.
              */
             $directory = $this->app['path']->app->DB('Migration');
 
@@ -71,18 +75,18 @@ class DBMigrateCommand extends Command
                     continue;
                 }
 
-                $class = '\\App\\DB\\Migration\\' . ($file = substr($row->getFilename(), 0, -4));
-                $migration[ $class::$timestamp ] = array(
+                $class = '\\App\\DB\\Migration\\'.($file = substr($row->getFilename(), 0, -4));
+                $migration[$class::$timestamp] = [
                     'name'  => $file,
                     'class' => $class,
-                );
+                ];
             }
 
             if (empty($migration)) {
                 return $output->warning('Nothing to migrate.');
             }
 
-            /**
+            /*
              * Rolling Back Tables
              */
             if ($argv->get('-r') || $argv->get('--refresh')) {
@@ -93,7 +97,7 @@ class DBMigrateCommand extends Command
                 echo $output->white(str_repeat('-', 40));
             }
 
-            /**
+            /*
              * Migrating Tables
              */
             foreach ($migration as $data) {
@@ -101,12 +105,13 @@ class DBMigrateCommand extends Command
             }
         }
 
-        /**
+        /*
          * Database Seeding
          */
         if ($argv->get('-s') || $argv->get('--seed')) {
             $argv->remove('name');
             echo $output->white(str_repeat('-', 40));
+
             return $this->app->make(SeedingCommand::class)->handle($argv, $output);
         }
     }
@@ -117,9 +122,9 @@ class DBMigrateCommand extends Command
      */
     protected function create(Output $output, array $data)
     {
-        echo $output->warning('Migrating : {white}' . $data['name']);
+        echo $output->warning('Migrating : {white}'.$data['name']);
         $this->app->make($data['class'])->create();
-        echo $output->success('Migrated  : {white}' . $data['name']);
+        echo $output->success('Migrated  : {white}'.$data['name']);
     }
 
     /**
@@ -128,8 +133,8 @@ class DBMigrateCommand extends Command
      */
     protected function drop(Output $output, array $data)
     {
-        echo $output->warning('Rolling Back : {white}' . $data['name']);
+        echo $output->warning('Rolling Back : {white}'.$data['name']);
         $this->app->make($data['class'])->drop();
-        echo $output->success('Rolled Back  : {white}' . $data['name']);
+        echo $output->success('Rolled Back  : {white}'.$data['name']);
     }
 }

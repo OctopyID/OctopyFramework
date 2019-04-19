@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
@@ -41,7 +44,7 @@ class Header
         }
 
         if (!isset($this->header['Date'])) {
-            $this->set('Date', (new DateTime)->now()->format('D, d M Y H:i:s') . ' GMT');
+            $this->set('Date', (new DateTime())->now()->format('D, d M Y H:i:s').' GMT');
         }
     }
 
@@ -60,7 +63,7 @@ class Header
         foreach ($header as $name => $value) {
             $name = ucwords($name, '-');
             foreach ($value as $value) {
-                $content .= sprintf("%-{$max}s %s\r\n", $name . ':', $value);
+                $content .= sprintf("%-{$max}s %s\r\n", $name.':', $value);
             }
         }
 
@@ -88,14 +91,15 @@ class Header
                 $this->header[$key][] = $value;
             }
         }
-        
+
         return $this;
     }
 
     /**
-     * @param  string $key
-     * @param  mixed  $default
-     * @param  bool   $first
+     * @param string $key
+     * @param mixed  $default
+     * @param bool   $first
+     *
      * @return mixed
      */
     public function get(string $key, $default = null, bool $first = true)
@@ -118,7 +122,8 @@ class Header
     }
 
     /**
-     * @param  string $key
+     * @param string $key
+     *
      * @return bool
      */
     public function has(string $key) : bool
@@ -135,7 +140,8 @@ class Header
     }
 
     /**
-     * @param  string $key
+     * @param string $key
+     *
      * @return void
      */
     public function remove(string $key)

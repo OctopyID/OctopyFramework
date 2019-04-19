@@ -6,20 +6,22 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy\HTTP\Middleware;
 
 use Closure;
-use Throwable;
-
 use Octopy\Application;
-use Octopy\HTTP\Request;
 use Octopy\Debug\DebugBar;
+use Octopy\HTTP\Request;
+use Throwable;
 
 class InjectDebugBar
 {
@@ -27,7 +29,7 @@ class InjectDebugBar
      * @var array
      */
     protected $except = [
-        '__debugbar'
+        '__debugbar',
     ];
 
     /**
@@ -46,8 +48,9 @@ class InjectDebugBar
     }
 
     /**
-     * @param  Request $request
-     * @param  Closure $next
+     * @param Request $request
+     * @param Closure $next
+     *
      * @return Response
      */
     public function handle(Request $request, Closure $next)
@@ -55,7 +58,7 @@ class InjectDebugBar
         if (!$this->debugbar->enabled() || $request->is($this->except)) {
             return $next($request);
         }
-       
+
         try {
             $response = $next($request);
         } catch (Throwable $exception) {

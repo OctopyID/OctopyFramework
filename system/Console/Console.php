@@ -6,20 +6,22 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy;
 
-use Octopy\Application;
 use Octopy\Console\Argv;
-use Octopy\Console\Route;
-use Octopy\Console\Output;
 use Octopy\Console\Collection;
 use Octopy\Console\Dispatcher;
+use Octopy\Console\Output;
+use Octopy\Console\Route;
 
 class Console
 {
@@ -58,14 +60,15 @@ class Console
     }
 
     /**
-     * @param  Argv   $input
-     * @param  Output $output
+     * @param Argv   $input
+     * @param Output $output
+     *
      * @return string
      */
     public function dispatch(Argv $input, Output $output)
     {
         $command = $input->command();
-        
+
         if ($this->has($command)) {
             return $this->call($command);
         }
@@ -74,7 +77,8 @@ class Console
     }
 
     /**
-     * @param  string $command
+     * @param string $command
+     *
      * @return bool
      */
     public function has(?string $command) : bool
@@ -83,7 +87,8 @@ class Console
     }
 
     /**
-     * @param  string $command
+     * @param string $command
+     *
      * @return string
      */
     public function call(?string $command)

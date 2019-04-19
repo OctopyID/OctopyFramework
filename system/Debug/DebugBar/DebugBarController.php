@@ -6,18 +6,20 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy\Debug\DebugBar;
 
-use Throwable;
-
-use Octopy\HTTP\Response;
 use Octopy\HTTP\Controller;
+use Octopy\HTTP\Response;
+use Throwable;
 
 class DebugBarController extends Controller
 {
@@ -31,8 +33,9 @@ class DebugBarController extends Controller
     }
 
     /**
-     * @param  string   $filename
-     * @param  Response $response
+     * @param string   $filename
+     * @param Response $response
+     *
      * @return Response
      */
     public function assets(string $filename, Response $response)
@@ -54,13 +57,14 @@ class DebugBarController extends Controller
     }
 
     /**
-     * @param  string $path
+     * @param string $path
+     *
      * @return string
      */
     public function get(string $path) : string
     {
         try {
-            return $this->app['filesystem']->get(__DIR__ . '/View/assets/' . $path);
+            return $this->app['filesystem']->get(__DIR__.'/View/assets/'.$path);
         } catch (Throwable $exception) {
             return $exception->getMessage();
         }

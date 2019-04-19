@@ -6,8 +6,10 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @link    : www.octopy.xyz
+ *
  * @author  : Supian M <supianidz@gmail.com>
  * @license : MIT
  */
@@ -16,7 +18,6 @@ namespace Octopy\HTTP\Response;
 
 use Exception;
 use InvalidArgumentException;
-
 use Octopy\HTTP\Response;
 
 class JsonResponse extends Response
@@ -27,10 +28,10 @@ class JsonResponse extends Response
     const DEFAULT_ENCODING = 15;
 
     /**
-     * @param  mixed $data
-     * @param  int   $status
-     * @param  array $header
-     * @param  int   $option
+     * @param mixed $data
+     * @param int   $status
+     * @param array $header
+     * @param int   $option
      */
     public function __construct($data = [], $status = 200, array $header = [], $option = 0)
     {
@@ -43,8 +44,9 @@ class JsonResponse extends Response
     }
 
     /**
-     * @param  array $data
-     * @param  int   $option
+     * @param array $data
+     * @param int   $option
+     *
      * @return string
      */
     protected function encode($data, $option) : string
@@ -56,9 +58,9 @@ class JsonResponse extends Response
             }
         } catch (Exception $exception) {
             if (get_class($exception) == 'Exception' && strpos($exception->getMessage(), 'Failed calling ') == 0) {
-                throw $exception->getPrevious() ? : $exception;
+                throw $exception->getPrevious() ?: $exception;
             }
-         
+
             throw $exception;
         }
 
@@ -70,8 +72,9 @@ class JsonResponse extends Response
     }
 
     /**
-     * @param  int $error
-     * @param  int $option
+     * @param int $error
+     * @param int $option
+     *
      * @return bool
      */
     protected function validate($error, $option) : bool

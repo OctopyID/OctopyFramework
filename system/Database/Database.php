@@ -6,19 +6,20 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy;
 
 use ArrayIterator;
-use JsonSerializable;
 use IteratorAggregate;
-
-use Octopy\Application;
+use JsonSerializable;
 use Octopy\Database\Connection;
 use Octopy\Database\Exception\DBException;
 
@@ -28,7 +29,7 @@ class Database implements IteratorAggregate, JsonSerializable
      * @var Octopy\Application
      */
     protected $app;
-    
+
     /**
      * @var string
      */
@@ -40,8 +41,8 @@ class Database implements IteratorAggregate, JsonSerializable
     protected $model;
 
     /**
-    * @var string
-    */
+     * @var string
+     */
     protected $table;
 
     /**
@@ -67,7 +68,8 @@ class Database implements IteratorAggregate, JsonSerializable
     }
 
     /**
-     * @param  string $property
+     * @param string $property
+     *
      * @return mixed
      */
     public function __get(string $property)
@@ -78,12 +80,13 @@ class Database implements IteratorAggregate, JsonSerializable
     }
 
     /**
-     * @param  string $driver
+     * @param string $driver
+     *
      * @return
      */
     public function driver(string $driver)
     {
-        $connector = new Connection($driver, $this->app['config']['database.connection.' . $driver]);
+        $connector = new Connection($driver, $this->app['config']['database.connection.'.$driver]);
 
         try {
             $this->driver = $connector->connect();
@@ -95,7 +98,8 @@ class Database implements IteratorAggregate, JsonSerializable
     }
 
     /**
-     * @param  string $model
+     * @param string $model
+     *
      * @return $this
      */
     public function model(string $model)
@@ -106,7 +110,8 @@ class Database implements IteratorAggregate, JsonSerializable
     }
 
     /**
-     * @param  string $table
+     * @param string $table
+     *
      * @return $this
      */
     public function table(string $table)
@@ -117,7 +122,8 @@ class Database implements IteratorAggregate, JsonSerializable
     }
 
     /**
-     * @param  string $query
+     * @param string $query
+     *
      * @return
      */
     public function query(string $query)
@@ -128,7 +134,8 @@ class Database implements IteratorAggregate, JsonSerializable
     }
 
     /**
-     * @param  array $column
+     * @param array $column
+     *
      * @return $this
      */
     public function select(...$column)
@@ -150,9 +157,10 @@ class Database implements IteratorAggregate, JsonSerializable
     }
 
     /**
-     * @param  string $column
-     * @param  mixed  $value
-     * @param  string $operator
+     * @param string $column
+     * @param mixed  $value
+     * @param string $operator
+     *
      * @return $this
      */
     public function where($column, $value = null, string $operator = '=')
@@ -177,9 +185,10 @@ class Database implements IteratorAggregate, JsonSerializable
     }
 
     /**
-     * @param  string $column
-     * @param  mixed  $value
-     * @param  string $operator
+     * @param string $column
+     * @param mixed  $value
+     * @param string $operator
+     *
      * @return $this
      */
     public function or($column, $value = null, string $operator = '=')
@@ -200,7 +209,8 @@ class Database implements IteratorAggregate, JsonSerializable
     }
 
     /**
-     * @param  int $limit
+     * @param int $limit
+     *
      * @return $this
      */
     public function limit(int $limit)
@@ -213,8 +223,9 @@ class Database implements IteratorAggregate, JsonSerializable
     }
 
     /**
-     * @param  int $start
-     * @param  int $end
+     * @param int $start
+     * @param int $end
+     *
      * @return $this
      */
     public function offset(int $start, int $end)
@@ -227,8 +238,9 @@ class Database implements IteratorAggregate, JsonSerializable
     }
 
     /**
-     * @param  string $column
-     * @param  string $order
+     * @param string $column
+     * @param string $order
+     *
      * @return $this
      */
     public function order(string $column, string $order = 'ASC')
@@ -269,7 +281,8 @@ class Database implements IteratorAggregate, JsonSerializable
     }
 
     /**
-     * @param  array $data
+     * @param array $data
+     *
      * @return bool
      */
     public function insert(array $data) : bool
@@ -290,7 +303,8 @@ class Database implements IteratorAggregate, JsonSerializable
     }
 
     /**
-     * @param  mixed $data
+     * @param mixed $data
+     *
      * @return $this
      */
     protected function data($data)
@@ -323,16 +337,18 @@ class Database implements IteratorAggregate, JsonSerializable
     }
 
     /**
-     * @param  string $search
+     * @param string $search
+     *
      * @return bool
      */
     protected function match(string $search) : bool
     {
-        return preg_match('/' . $search . '/', $this->query);
+        return preg_match('/'.$search.'/', $this->query);
     }
 
     /**
-     * @param  mixed $value
+     * @param mixed $value
+     *
      * @return mixed
      */
     protected function quote($value)
@@ -345,7 +361,8 @@ class Database implements IteratorAggregate, JsonSerializable
     }
 
     /**
-     * @param  string $value
+     * @param string $value
+     *
      * @return string
      */
     protected function escape(string $value) : string
@@ -370,7 +387,7 @@ class Database implements IteratorAggregate, JsonSerializable
     protected function reset() : string
     {
         $query = $this->query;
-        
+
         $this->query = null;
 
         return trim($query);

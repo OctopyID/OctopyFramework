@@ -6,24 +6,27 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy;
 
 use FilesystemIterator;
-use RecursiveIteratorIterator;
-use RecursiveDirectoryIterator;
-
 use Octopy\FileSystem\Exception\FileNotFoundException;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 
 class FileSystem
 {
     /**
-     * @param  string $path
+     * @param string $path
+     *
      * @return string
      */
     public function hash($path)
@@ -32,8 +35,9 @@ class FileSystem
     }
 
     /**
-     * @param  string $path
-     * @param  bool   $lock
+     * @param string $path
+     * @param bool   $lock
+     *
      * @return string
      */
     public function get($path, $lock = false)
@@ -67,9 +71,10 @@ class FileSystem
     }
 
     /**
-     * @param  string $path
-     * @param  string $content
-     * @param  bool   $lock
+     * @param string $path
+     * @param string $content
+     * @param bool   $lock
+     *
      * @return int
      */
     public function put(string $path, string $content, bool $lock = false)
@@ -97,8 +102,9 @@ class FileSystem
     }
 
     /**
-     * @param  string $path
-     * @param  string $data
+     * @param string $path
+     * @param string $data
+     *
      * @return int
      */
     public function prepend($path, $data)
@@ -111,8 +117,9 @@ class FileSystem
     }
 
     /**
-     * @param  string $path
-     * @param  string $data
+     * @param string $path
+     * @param string $data
+     *
      * @return int
      */
     public function append($path, $data)
@@ -121,8 +128,9 @@ class FileSystem
     }
 
     /**
-     * @param  string $path
-     * @param  octal  $permission
+     * @param string $path
+     * @param octal  $permission
+     *
      * @return mixed
      */
     public function chmod(string $path, int $permission = null)
@@ -135,8 +143,9 @@ class FileSystem
     }
 
     /**
-     * @param  string $path
-     * @param  bool   $preserve
+     * @param string $path
+     * @param bool   $preserve
+     *
      * @return bool
      */
     public function delete(string $path, bool $preserve = false)
@@ -145,7 +154,7 @@ class FileSystem
             return @unlink($path);
         } elseif (is_dir($path)) {
             $items = new FilesystemIterator($path);
-          
+
             foreach ($items as $item) {
                 if ($item->isFile()) {
                     $status = $this->delete($item);
@@ -165,8 +174,9 @@ class FileSystem
     }
 
     /**
-     * @param  string $path
-     * @param  string $target
+     * @param string $path
+     * @param string $target
+     *
      * @return bool
      */
     public function move($path, $target)
@@ -175,9 +185,10 @@ class FileSystem
     }
 
     /**
-     * @param  string $directory
-     * @param  string $destination
-     * @param  int    $flag
+     * @param string $directory
+     * @param string $destination
+     * @param int    $flag
+     *
      * @return bool
      */
     public function copy(string $directory, string $destination, int $flag = null)
@@ -187,7 +198,7 @@ class FileSystem
         }
 
         if (is_dir($directory)) {
-            $flag = $flag ? : FilesystemIterator::SKIP_DOTS;
+            $flag = $flag ?: FilesystemIterator::SKIP_DOTS;
 
             if (!is_dir($destination)) {
                 $this->mkdir($destination, 0755, true);
@@ -196,7 +207,7 @@ class FileSystem
             $items = new FilesystemIterator($directory, $flag);
 
             foreach ($items as $item) {
-                $target = $destination . '/' . $item->getBasename();
+                $target = $destination.'/'.$item->getBasename();
 
                 if ($item->isDir()) {
                     if (!$this->copy($item->getPathname(), $target, $flag)) {
@@ -216,9 +227,10 @@ class FileSystem
     }
 
     /**
-     * @param  string $path
-     * @param  int    $permission
-     * @param  bool   $recursive
+     * @param string $path
+     * @param int    $permission
+     * @param bool   $recursive
+     *
      * @return bool
      */
     public function mkdir(string $path, int $permission = 0755, bool $recursive = true)
@@ -231,8 +243,9 @@ class FileSystem
     }
 
     /**
-     * @param  string $path
-     * @param  int    $flag
+     * @param string $path
+     * @param int    $flag
+     *
      * @return RecursiveIteratorIterator
      */
     public function iterator(string $path, int $flag = null)
@@ -240,7 +253,7 @@ class FileSystem
         if (!is_dir($path)) {
             return [];
         }
-        
+
         return new RecursiveIteratorIterator(
             new RecursiveDirectoryIterator($path, $flag ?? RecursiveDirectoryIterator::SKIP_DOTS)
         );

@@ -6,22 +6,21 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy\HTTP\Routing;
 
 use Closure;
-
 use Octopy\Application;
-use Octopy\HTTP\Request;
 use Octopy\HTTP\Middleware;
-use Octopy\HTTP\Routing\Route;
-use Octopy\HTTP\Routing\Collection;
-use Octopy\HTTP\Routing\Dispatcher;
+use Octopy\HTTP\Request;
 
 class Router
 {
@@ -59,7 +58,8 @@ class Router
     }
 
     /**
-     * @param  string $property
+     * @param string $property
+     *
      * @return mixed
      */
     public function __get(string $property)
@@ -84,7 +84,7 @@ class Router
         foreach (['prefix', 'namespace', 'middleware'] as $attrname) {
             if (isset($attribute[$attrname])) {
                 if ($attrname === 'middleware') {
-                    $attribute[$attrname] = (array)$attribute[$attrname];
+                    $attribute[$attrname] = (array) $attribute[$attrname];
                 }
 
                 $this->group[$attrname][] = $attribute[$attrname];
@@ -128,8 +128,9 @@ class Router
     }
 
     /**
-     * @param  string   $uri
-     * @param  callable $controller
+     * @param string   $uri
+     * @param callable $controller
+     *
      * @return Route
      */
     public function get(string $uri, $controller)
@@ -138,8 +139,9 @@ class Router
     }
 
     /**
-     * @param  string   $uri
-     * @param  callable $controller
+     * @param string   $uri
+     * @param callable $controller
+     *
      * @return Route
      */
     public function post(string $uri, $controller)
@@ -148,8 +150,9 @@ class Router
     }
 
     /**
-     * @param  string   $uri
-     * @param  callable $controller
+     * @param string   $uri
+     * @param callable $controller
+     *
      * @return Route
      */
     public function any(string $uri, $controller)
@@ -177,7 +180,7 @@ class Router
 
         // URI
         if (isset($this->group['prefix'])) {
-            $uri = implode(DS, $this->group['prefix']) . DS . $uri;
+            $uri = implode(DS, $this->group['prefix']).DS.$uri;
         }
 
         $uri = $this->normalize($uri);
@@ -187,13 +190,13 @@ class Router
         }
 
         if (substr($uri, 0, 1) !== DS) {
-            $uri = DS . $uri;
+            $uri = DS.$uri;
         }
 
         // Controller
         if (is_string($controller)) {
             if (isset($this->group['namespace'])) {
-                $controller = BS . implode(BS, $this->group['namespace']) . BS . $controller;
+                $controller = BS.implode(BS, $this->group['namespace']).BS.$controller;
             }
 
             $controller = explode('@', $controller);
@@ -224,7 +227,8 @@ class Router
     }
 
     /**
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return Response
      */
     public function dispatch(Request $request)
@@ -243,7 +247,8 @@ class Router
     }
 
     /**
-     * @param  mixed $value
+     * @param mixed $value
+     *
      * @return mixed
      */
     protected function normalize($value)

@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
@@ -27,13 +30,14 @@ class Route
      * @param mixed  $handler
      * @param string $describe
      */
-    public function __construct(string $command, array $option = [], $handler, string $describe = '')
+    public function __construct(string $command, array $option, $handler, string $describe = '')
     {
         $this->data = compact('command', 'describe', 'option', 'handler');
     }
 
     /**
-     * @param  string $key
+     * @param string $key
+     *
      * @return mixed
      */
     public function __get(string $key)
@@ -50,7 +54,8 @@ class Route
     }
 
     /**
-     * @param  mixed $handler
+     * @param mixed $handler
+     *
      * @return $this
      */
     public function handler($handler)
@@ -59,7 +64,8 @@ class Route
     }
 
     /**
-     * @param  array $option
+     * @param array $option
+     *
      * @return $this
      */
     public function option(array $option)
@@ -68,7 +74,8 @@ class Route
     }
 
     /**
-     * @param  string $describe
+     * @param string $describe
+     *
      * @return $this
      */
     public function describe(?string $describe)
@@ -77,8 +84,9 @@ class Route
     }
 
     /**
-     * @param  string $key
-     * @param  mixed  $value
+     * @param string $key
+     * @param mixed  $value
+     *
      * @return $this
      */
     protected function update(string $key, $value)

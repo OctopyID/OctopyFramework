@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @version : v1.0
+ *
  * @license : MIT
  */
 
@@ -49,7 +52,8 @@ class MySQL extends BluePrint
     }
 
     /**
-     * @param  string $name
+     * @param string $name
+     *
      * @return BluePrint
      */
     public function increment(string $name)
@@ -58,7 +62,8 @@ class MySQL extends BluePrint
     }
 
     /**
-     * @param  string $name
+     * @param string $name
+     *
      * @return BluePrint
      */
     public function integer(string $name)
@@ -67,8 +72,9 @@ class MySQL extends BluePrint
     }
 
     /**
-     * @param  string $name
-     * @param  int    $length
+     * @param string $name
+     * @param int    $length
+     *
      * @return BluePrint
      */
     public function string(string $name, int $length = 255)
@@ -77,7 +83,8 @@ class MySQL extends BluePrint
     }
 
     /**
-     * @param  string $name
+     * @param string $name
+     *
      * @return BluePrint
      */
     public function text(string $name)
@@ -86,8 +93,9 @@ class MySQL extends BluePrint
     }
 
     /**
-     * @param  string $name
-     * @param  array  $data
+     * @param string $name
+     * @param array  $data
+     *
      * @return BluePrint
      */
     public function enum(string $name, array $data)
@@ -100,7 +108,8 @@ class MySQL extends BluePrint
     }
 
     /**
-     * @param  string $name
+     * @param string $name
+     *
      * @return BluePrint
      */
     public function time(string $name)
@@ -109,7 +118,8 @@ class MySQL extends BluePrint
     }
 
     /**
-     * @param  string $name
+     * @param string $name
+     *
      * @return BluePrint
      */
     public function date(string $name)
@@ -118,7 +128,8 @@ class MySQL extends BluePrint
     }
 
     /**
-     * @param  string $name
+     * @param string $name
+     *
      * @return BluePrint
      */
     public function year(string $name)
@@ -127,7 +138,8 @@ class MySQL extends BluePrint
     }
 
     /**
-     * @param  string $name
+     * @param string $name
+     *
      * @return BluePrint
      */
     public function datetime(string $name)
@@ -136,7 +148,8 @@ class MySQL extends BluePrint
     }
 
     /**
-     * @param  string $name
+     * @param string $name
+     *
      * @return BluePrint
      */
     public function timestamp(string $name)
@@ -145,39 +158,42 @@ class MySQL extends BluePrint
     }
 
     /**
-     * @param  string $default
+     * @param string $default
+     *
      * @return BluePrint
      */
     public function default($default = 'NULL')
     {
         $index = count($this->query) - 1;
-        
+
         if (!in_array($default, ['NULL', 'CURRENT_TIMESTAMP'])) {
             $default = sprintf("'%s'", $default);
         }
 
-        $this->query[$index] = $this->query[$index] . " DEFAULT $default";
+        $this->query[$index] = $this->query[$index]." DEFAULT $default";
 
         return $this;
     }
 
     /**
-     * @param  string $parent
-     * @param  string $primary
+     * @param string $parent
+     * @param string $primary
+     *
      * @return BluePrint
      */
     public function foreign(string $parent, string $primary)
     {
         $index = count($this->query) - 1;
 
-        $this->query[$index] = $this->query[$index] . sprintf(', FOREIGN KEY (`%s`) REFERENCES `%s` (`%s`)', $this->name, $parent, $primary);
+        $this->query[$index] = $this->query[$index].sprintf(', FOREIGN KEY (`%s`) REFERENCES `%s` (`%s`)', $this->name, $parent, $primary);
 
         return $this;
     }
 
     /**
-     * @param  string $condition
-     * @param  string $option
+     * @param string $condition
+     * @param string $option
+     *
      * @return BluePrint
      */
     public function on(string $condition, string $option)
@@ -186,27 +202,29 @@ class MySQL extends BluePrint
     }
 
     /**
-     * @param  string $option
+     * @param string $option
+     *
      * @return BluePrint
      */
     public function update(string $option)
     {
         $index = count($this->query) - 1;
 
-        $this->query[$index] = $this->query[$index] . " ON UPDATE $option";
+        $this->query[$index] = $this->query[$index]." ON UPDATE $option";
 
         return $this;
     }
 
     /**
-     * @param  string $option
+     * @param string $option
+     *
      * @return BluePrint
      */
     public function delete(string $option)
     {
         $index = count($this->query) - 1;
 
-        $this->query[$index] = $this->query[$index] . " ON DELETE $option";
+        $this->query[$index] = $this->query[$index]." ON DELETE $option";
 
         return $this;
     }
@@ -224,8 +242,9 @@ class MySQL extends BluePrint
     }
 
     /**
-     * @param  string $name
-     * @param  string $query
+     * @param string $name
+     * @param string $query
+     *
      * @return BluePrint
      */
     public function set(string $name, string $query)
@@ -237,7 +256,8 @@ class MySQL extends BluePrint
     }
 
     /**
-     * @param  string $table
+     * @param string $table
+     *
      * @return string
      */
     public function create(string $table)
@@ -268,7 +288,8 @@ class MySQL extends BluePrint
     }
 
     /**
-     * @param  string $table
+     * @param string $table
+     *
      * @return string
      */
     public function drop(string $table)

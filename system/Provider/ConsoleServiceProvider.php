@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
@@ -32,7 +35,7 @@ class ConsoleServiceProvider extends ServiceProvider
             })->describe('Display this help message');
 
             $console->command('--version', function (Application $app, Output $output) {
-                return 'Octopy Framework ' . $output->success($app->version());
+                return 'Octopy Framework '.$output->success($app->version());
             })->describe('Display this application version');
 
             // auto
@@ -45,10 +48,10 @@ class ConsoleServiceProvider extends ServiceProvider
      */
     private function autodiscover()
     {
-        $autodiscover = array(
-            'App\\Console\\Command\\' => $this->app['path']->app->console->command(),
-            'Octopy\\Console\\Command\\' => $this->app['path']->system->console->command()
-        );
+        $autodiscover = [
+            'App\\Console\\Command\\'    => $this->app['path']->app->console->command(),
+            'Octopy\\Console\\Command\\' => $this->app['path']->system->console->command(),
+        ];
 
         foreach ($autodiscover as $namespace => $directory) {
             foreach ($this->app['filesystem']->iterator($directory) as $row) {
@@ -60,7 +63,7 @@ class ConsoleServiceProvider extends ServiceProvider
                     continue;
                 }
 
-                $console = $this->app->make($class = $namespace . $class);
+                $console = $this->app->make($class = $namespace.$class);
 
                 $this->app['console']->command($console->signature, $class)->describe($console->description);
             }

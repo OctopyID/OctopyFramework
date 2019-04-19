@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @version : v1.0
+ *
  * @license : MIT
  */
 
@@ -22,12 +25,12 @@ class TableFormatter
     protected $data = [];
 
     /**
-     * @var integer
+     * @var int
      */
     protected $state = 0;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $prev = 0;
 
@@ -54,7 +57,7 @@ class TableFormatter
         foreach ($keys as $key) {
             if (isset($data[$key])) {
                 $this->margin[$this->state] = $this->prev;
-                
+
                 $this->data[$this->state][] = $data[$key];
             }
         }
@@ -76,7 +79,7 @@ class TableFormatter
                 }
             }
         }
-        
+
         $table = '';
         foreach ($this->data as $rkey => $row) {
             $table .= str_pad(' ', $this->margin[$rkey]);
@@ -87,8 +90,8 @@ class TableFormatter
             $table .= "\n";
         }
 
-        $this->data   = array();
-        $this->margin = array();
+        $this->data = [];
+        $this->margin = [];
         $this->margin(
             $this->state = 0
         );

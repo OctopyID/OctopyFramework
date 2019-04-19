@@ -6,18 +6,21 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy\Support;
 
+use BadMethodCallException;
 use Closure;
 use ReflectionClass;
 use ReflectionMethod;
-use BadMethodCallException;
 
 trait Macroable
 {
@@ -27,8 +30,9 @@ trait Macroable
     protected static $macro = [];
 
     /**
-     * @param  string    $name
-     * @param  callable  $macro
+     * @param string   $name
+     * @param callable $macro
+     *
      * @return void
      */
     public static function macro(string $name, $macro)
@@ -37,7 +41,8 @@ trait Macroable
     }
 
     /**
-     * @param  object  $mixin
+     * @param object $mixin
+     *
      * @return void
      */
     public static function mixin($mixin)
@@ -54,8 +59,9 @@ trait Macroable
     }
 
     /**
-     * @param  string  $method
-     * @param  array   $parameter
+     * @param string $method
+     * @param array  $parameter
+     *
      * @return mixed
      */
     public static function __callStatic($method, $parameter)
@@ -74,8 +80,9 @@ trait Macroable
     }
 
     /**
-     * @param  string  $method
-     * @param  array   $parameter
+     * @param string $method
+     * @param array  $parameter
+     *
      * @return mixed
      */
     public function __call($method, $parameter)

@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
@@ -32,7 +35,8 @@ class DateTime extends \DateTime
     }
 
     /**
-     * @param  string $timezone
+     * @param string $timezone
+     *
      * @return $this
      */
     public function now(string $timezone = null)
@@ -41,7 +45,8 @@ class DateTime extends \DateTime
     }
 
     /**
-     * @param  string $timezone
+     * @param string $timezone
+     *
      * @return $this
      */
     public function today(string $timezone = null)
@@ -50,7 +55,8 @@ class DateTime extends \DateTime
     }
 
     /**
-     * @param  string $timezone
+     * @param string $timezone
+     *
      * @return $this
      */
     public function yesterday(string $timezone = null)
@@ -59,7 +65,8 @@ class DateTime extends \DateTime
     }
 
     /**
-     * @param  string $timezone
+     * @param string $timezone
+     *
      * @return $this
      */
     public function tomorrow(string $timezone = null)
@@ -68,71 +75,79 @@ class DateTime extends \DateTime
     }
 
     /**
-     * @param  integer $second
+     * @param int $second
+     *
      * @return $this
      */
     public function second(int $second)
     {
-        return $this->parse((int)$second . ' second');
+        return $this->parse((int) $second.' second');
     }
 
     /**
-     * @param  integer $minute
+     * @param int $minute
+     *
      * @return $this
      */
     public function minute(int $minute)
     {
-        return $this->parse((int)$minute . ' minute');
+        return $this->parse((int) $minute.' minute');
     }
 
     /**
-     * @param  integer $hour
+     * @param int $hour
+     *
      * @return $this
      */
     public function hour(int $hour)
     {
-        return $this->parse((int)$hour . ' hour');
+        return $this->parse((int) $hour.' hour');
     }
 
     /**
-     * @param  integer $day
+     * @param int $day
+     *
      * @return $this
      */
     public function day(int $day)
     {
-        return $this->parse((int)$day . ' day');
+        return $this->parse((int) $day.' day');
     }
 
     /**
-     * @param  integer $week
+     * @param int $week
+     *
      * @return $this
      */
     public function week(int $week)
     {
-        return $this->parse((int)$week . ' week');
+        return $this->parse((int) $week.' week');
     }
 
     /**
-     * @param  integer $month
+     * @param int $month
+     *
      * @return $this
      */
     public function month(int $month)
     {
-        return $this->parse((int)$month . ' month');
+        return $this->parse((int) $month.' month');
     }
 
     /**
-     * @param  integer $year
+     * @param int $year
+     *
      * @return $this
      */
     public function year(int $year)
     {
-        return $this->parse((int)$year . ' year');
+        return $this->parse((int) $year.' year');
     }
 
     /**
-     * @param  string $time
-     * @param  string $timezone
+     * @param string $time
+     * @param string $timezone
+     *
      * @return $this
      */
     public function parse(string $time, string $timezone = null)
@@ -141,7 +156,8 @@ class DateTime extends \DateTime
     }
 
     /**
-     * @param  string $timezone
+     * @param string $timezone
+     *
      * @return mixed
      */
     public function timezone(string $timezone = null)
@@ -166,6 +182,6 @@ class DateTime extends \DateTime
      */
     public function cookie() : string
     {
-        return $this->format(DateTime::COOKIE);
+        return $this->format(self::COOKIE);
     }
 }

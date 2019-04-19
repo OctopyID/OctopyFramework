@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author   : Supian M <supianidz@gmail.com>
+ *
  * @link     : www.octopy.xyz
+ *
  * @license  : MIT
  */
 
@@ -27,17 +30,17 @@ class CLIParser
      * @var string
      */
     const TOKEN_STRING = 'token_string';
-        
+
     /**
      * @var string
      */
     const TOKEN_DEFAULT = 'token_default';
-    
+
     /**
      * @var string
      */
     const TOKEN_COMMENT = 'token_comment';
-    
+
     /**
      * @var string
      */
@@ -62,14 +65,14 @@ class CLIParser
      * @var array
      */
     protected $default = [
-        CLIParser::TOKEN_HTML       => 'cyan',
-        CLIParser::TOKEN_STRING     => 'white',
-        CLIParser::TOKEN_COMMENT    => 'yellow',
-        CLIParser::TOKEN_DEFAULT    => 'default',
-        CLIParser::TOKEN_KEYWORD    => 'red',
-        
-        CLIParser::LINE_NUMBER      => 'light_gray',
-        CLIParser::ACTUAL_LINE_MARK => 'red',
+        self::TOKEN_HTML       => 'cyan',
+        self::TOKEN_STRING     => 'white',
+        self::TOKEN_COMMENT    => 'yellow',
+        self::TOKEN_DEFAULT    => 'default',
+        self::TOKEN_KEYWORD    => 'red',
+
+        self::LINE_NUMBER      => 'light_gray',
+        self::ACTUAL_LINE_MARK => 'red',
    ];
 
     /**
@@ -87,10 +90,11 @@ class CLIParser
     }
 
     /**
-     * @param  string $source
-     * @param  int    $marker
-     * @param  int    $before
-     * @param  int    $after
+     * @param string $source
+     * @param int    $marker
+     * @param int    $before
+     * @param int    $after
+     *
      * @return string
      */
     public function highlight(string $source, ?int $marker = null, int $before = 0, int $after = 0)
@@ -109,6 +113,7 @@ class CLIParser
 
     /**
      * @param string $source
+     *
      * @return array
      */
     protected function parse($source)
@@ -121,15 +126,16 @@ class CLIParser
     }
 
     /**
-     * @param  string $source
+     * @param string $source
+     *
      * @return array
      */
     protected function tokenize($source)  : array
     {
         $tokens = token_get_all($source);
 
-        $buffer  = '';
-        $output  = [];
+        $buffer = '';
+        $output = [];
         $current = null;
 
         foreach ($tokens as $token) {
@@ -142,7 +148,7 @@ class CLIParser
                     case T_OPEN_TAG_WITH_ECHO:
                     case T_CLOSE_TAG:
                     case T_VARIABLE:
-                    
+
                     // Constants
                     case T_DIR:
                     case T_FILE:
@@ -154,30 +160,30 @@ class CLIParser
                     case T_CLASS_C:
                     case T_FUNC_C:
                     case T_TRAIT_C:
-                        $newtype = CLIParser::TOKEN_DEFAULT;
+                        $newtype = self::TOKEN_DEFAULT;
                         break;
 
                     case T_COMMENT:
                     case T_DOC_COMMENT:
                     case T_CLASS:
-                        $newtype = CLIParser::TOKEN_COMMENT;
+                        $newtype = self::TOKEN_COMMENT;
                         break;
 
                     case T_STRING:
                     case T_ENCAPSED_AND_WHITESPACE:
                     case T_CONSTANT_ENCAPSED_STRING:
-                        $newtype = CLIParser::TOKEN_STRING;
+                        $newtype = self::TOKEN_STRING;
                         break;
 
                     case T_INLINE_HTML:
-                        $newtype = CLIParser::TOKEN_HTML;
+                        $newtype = self::TOKEN_HTML;
                         break;
 
                     default:
-                        $newtype = CLIParser::TOKEN_KEYWORD;
+                        $newtype = self::TOKEN_KEYWORD;
                 }
             } else {
-                $newtype = $token === '"' ? CLIParser::TOKEN_STRING  : CLIParser::TOKEN_KEYWORD;
+                $newtype = $token === '"' ? self::TOKEN_STRING : self::TOKEN_KEYWORD;
             }
 
             if ($current === null) {
@@ -186,11 +192,11 @@ class CLIParser
 
             if ($current !== $newtype) {
                 $output[] = [$current, $buffer];
-                $buffer   = '';
-                $current  = $newtype;
+                $buffer = '';
+                $current = $newtype;
             }
 
-            $buffer .= is_array($token) ? $token[1]  : $token;
+            $buffer .= is_array($token) ? $token[1] : $token;
         }
 
         if (isset($newtype)) {
@@ -201,7 +207,8 @@ class CLIParser
     }
 
     /**
-     * @param  array $tokens
+     * @param array $tokens
+     *
      * @return array
      */
     protected function split(array $tokens)  : array
@@ -230,7 +237,8 @@ class CLIParser
     }
 
     /**
-     * @param  array $token
+     * @param array $token
+     *
      * @return array
      */
     protected function color(array $token)  : array
@@ -255,8 +263,9 @@ class CLIParser
     }
 
     /**
-     * @param  array $lines
-     * @param  int   $marker
+     * @param array $lines
+     * @param int   $marker
+     *
      * @return string
      */
     protected function number(array $lines, int $marker = null)
@@ -267,12 +276,12 @@ class CLIParser
         $snippet = '';
         foreach ($lines as $i => $line) {
             if ($marker !== null) {
-                $snippet .= ($marker === $i + 1 ? $this->color->apply(CLIParser::ACTUAL_LINE_MARK, '  > ')  : '    ');
+                $snippet .= ($marker === $i + 1 ? $this->color->apply(self::ACTUAL_LINE_MARK, '  > ') : '    ');
             }
 
-            $snippet .= $this->color->apply(CLIParser::LINE_NUMBER, str_pad($i + 1, $length, ' ', STR_PAD_LEFT) . '| ');
+            $snippet .= $this->color->apply(self::LINE_NUMBER, str_pad($i + 1, $length, ' ', STR_PAD_LEFT).'| ');
 
-            $snippet .= $line . "\n";
+            $snippet .= $line."\n";
         }
 
         return $snippet;

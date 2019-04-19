@@ -6,21 +6,21 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy\Console\Command;
 
 use Exception;
-use RecursiveIteratorIterator;
-use RecursiveDirectoryIterator;
-
 use Octopy\Console\Argv;
-use Octopy\Console\Output;
 use Octopy\Console\Command;
+use Octopy\Console\Output;
 
 class AutoloadCacheCommand extends Command
 {
@@ -35,8 +35,9 @@ class AutoloadCacheCommand extends Command
     protected $description = 'Create a cache for faster class loading';
 
     /**
-     * @param  Argv   $argv
-     * @param  Output $output
+     * @param Argv   $argv
+     * @param Output $output
+     *
      * @return string
      */
     public function handle(Argv $argv, Output $output)
@@ -48,7 +49,7 @@ class AutoloadCacheCommand extends Command
             if (!$row->isFile()) {
                 continue;
             }
-            
+
             if (substr($row->getFilename(), -4) === '.php') {
                 $classname = preg_replace(['/^system/', '/^app/'], ['Octopy', 'App'], implode('\\', array_unique(explode('/', str_replace($this->basepath, '', substr($row = $row->getRealpath(), 0, -4))))));
 
@@ -61,18 +62,18 @@ class AutoloadCacheCommand extends Command
         }
 
         try {
-            $banner[] = "/**                                          ";
-            $banner[] = " *   ___       _                             ";
+            $banner[] = '/**                                          ';
+            $banner[] = ' *   ___       _                             ';
             $banner[] = " *  / _ \  ___| |_ ___  _ __  _   _          ";
             $banner[] = " * | | | |/ __| __/ _ \| '_ \| | | |         ";
-            $banner[] = " * | |_| | (__| || (_) | |_) | |_| |         ";
+            $banner[] = ' * | |_| | (__| || (_) | |_) | |_| |         ';
             $banner[] = " *  \___/ \___|\__\___/| .__/ \__, |         ";
-            $banner[] = " *                     |_|    |___/          ";
-            $banner[] = " * @author  : Supian M <supianidz@gmail.com> ";
-            $banner[] = " * @link    : www.octopy.xyz                 ";
-            $banner[] = " * @license : MIT                            ";
-            $banner[] = " */                                          ";
-            
+            $banner[] = ' *                     |_|    |___/          ';
+            $banner[] = ' * @author  : Supian M <supianidz@gmail.com> ';
+            $banner[] = ' * @link    : www.octopy.xyz                 ';
+            $banner[] = ' * @license : MIT                            ';
+            $banner[] = ' */                                          ';
+
             $template = sprintf("<?php \n\n%s\n\nreturn %s;", implode("\n", $banner), var_export($classmap, true));
 
             if (!is_dir($location = dirname($classmap = $this->app['path']->storage('framework/autoload.php')))) {

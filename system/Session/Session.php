@@ -6,22 +6,25 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy;
 
-use Exception;
 use ArrayAccess;
+use Exception;
 use SessionHandlerInterface;
 
 class Session implements ArrayAccess
 {
     /**
-     * @var  Octopy\Session\Handler\SessionHandler
+     * @var Octopy\Session\Handler\SessionHandler
      */
     protected $handler;
 
@@ -40,11 +43,11 @@ class Session implements ArrayAccess
         extract($config = $app->config['session']);
 
         if (empty($lifetime)) {
-            $lifetime = $config['lifetime'] = (int)ini_get('session.gc_maxlifetime');
+            $lifetime = $config['lifetime'] = (int) ini_get('session.gc_maxlifetime');
         } else {
-            ini_set('session.gc_maxlifetime', (int)$lifetime);
+            ini_set('session.gc_maxlifetime', (int) $lifetime);
         }
-        
+
         if (empty($storage)) {
             $storage = $config['storage'] = ini_get('session.save_path');
         } else {
@@ -85,8 +88,9 @@ class Session implements ArrayAccess
     }
 
     /**
-     * @param  string $name
-     * @param  mixed  $default
+     * @param string $name
+     * @param mixed  $default
+     *
      * @return mixed
      */
     public function get(string $name, $default = null)
@@ -107,8 +111,9 @@ class Session implements ArrayAccess
     }
 
     /**
-     * @param  string $name
-     * @param  mixed  $default
+     * @param string $name
+     * @param mixed  $default
+     *
      * @return mixed
      */
     public function pull(string $name, $default = null)
@@ -121,7 +126,8 @@ class Session implements ArrayAccess
     }
 
     /**
-     * @param  string $name
+     * @param string $name
+     *
      * @return string
      */
     public function forget(string $name) : bool
@@ -134,7 +140,8 @@ class Session implements ArrayAccess
     }
 
     /**
-     * @param  string $name
+     * @param string $name
+     *
      * @return bool
      */
     public function has(string $name) : bool
@@ -143,7 +150,8 @@ class Session implements ArrayAccess
     }
 
     /**
-     * @param  bool $destroy
+     * @param bool $destroy
+     *
      * @return string
      */
     public function regenerate(bool $destroy = false) : string
@@ -160,20 +168,22 @@ class Session implements ArrayAccess
     }
 
     /**
-     * @param  string $name
+     * @param string $name
+     *
      * @return string
      */
     public static function handler(string $name) : string
     {
-        $handler = array(
-            'file' => \Octopy\Session\Handler\FileSessionHandler::class
-        );
+        $handler = [
+            'file' => \Octopy\Session\Handler\FileSessionHandler::class,
+        ];
 
         return $handler[$name] ?? $handler['file'];
     }
 
     /**
-     * @param  string $key
+     * @param string $key
+     *
      * @return bool
      */
     public function offsetExists($key)
@@ -182,7 +192,8 @@ class Session implements ArrayAccess
     }
 
     /**
-     * @param  string $key
+     * @param string $key
+     *
      * @return object
      */
     public function offsetGet($key)
@@ -191,8 +202,9 @@ class Session implements ArrayAccess
     }
 
     /**
-     * @param  string $key
-     * @param  mixed  $value
+     * @param string $key
+     * @param mixed  $value
+     *
      * @return mixed
      */
     public function offsetSet($key, $value)

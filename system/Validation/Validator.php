@@ -6,22 +6,24 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @version : v1.0
+ *
  * @license : MIT
  */
 
 namespace Octopy\Validation;
 
 use BadMethodCallException;
-
 use Octopy\Application;
 use Octopy\HTTP\Request;
 
 class Validator
 {
-    /**
+    /*
      * @ValidationRules
      */
     use ValidationRules;
@@ -48,10 +50,11 @@ class Validator
     {
         $this->app = $app;
     }
-    
+
     /**
-     * @param  Request $request
-     * @param  array   $rules
+     * @param Request $request
+     * @param array   $rules
+     *
      * @return bool
      */
     public function validate(Request $request, array $rules)
@@ -69,7 +72,7 @@ class Validator
                 $this->$method($attribute, ...$parameter);
             }
         }
-        
+
         return $this->passed();
     }
 
@@ -90,7 +93,8 @@ class Validator
     }
 
     /**
-     * @param  string $attribute
+     * @param string $attribute
+     *
      * @return mixed
      */
     protected function value(string $attribute)
@@ -99,8 +103,9 @@ class Validator
     }
 
     /**
-     * @param  string $format
-     * @param  array  $replace
+     * @param string $format
+     * @param array  $replace
+     *
      * @return void
      */
     protected function format(string $format, array $replace = []) : void
@@ -109,7 +114,8 @@ class Validator
     }
 
     /**
-     * @param  string $rule
+     * @param string $rule
+     *
      * @return array
      */
     private function parse(string $rule)
@@ -120,13 +126,13 @@ class Validator
                 $args = [];
             } else {
                 list($rule, $args) = explode(':', $rule);
-                $args = (array)$args;
+                $args = (array) $args;
                 if (strstr($args[0], ',')) {
                     $args = explode(',', $args[0]);
                 }
             }
 
-            $parsed[] = array($rule, $args);
+            $parsed[] = [$rule, $args];
         }
 
         return $parsed;

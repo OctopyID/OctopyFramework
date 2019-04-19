@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
@@ -20,8 +23,9 @@ use Octopy\View\Stream;
 class LayoutDirective extends Directive
 {
     /**
-     * @param  Stream $stream
-     * @param  Parser $parser
+     * @param Stream $stream
+     * @param Parser $parser
+     *
      * @return string
      */
     public function parse(Stream $stream, Parser $parser)

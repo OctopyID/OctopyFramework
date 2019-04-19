@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
@@ -34,8 +37,9 @@ class URLGenerator
     }
 
     /**
-     * @param  string $name
-     * @param  array  $default
+     * @param string $name
+     * @param array  $default
+     *
      * @return string
      */
     public function route(string $name, array $default = [])
@@ -43,9 +47,9 @@ class URLGenerator
         if (array_key_exists($name, $this->route)) {
             preg_match($this->route[$name]->pattern, $this->route[$name]->uri, $matches);
 
-            $passed  = [];
+            $passed = [];
             $default = array_merge($this->route[$name]->parameter, $default);
-            
+
             foreach ($required = array_slice($matches, 1) as $key => $value) {
                 if (isset($default[$key])) {
                     $passed[$value] = $default[$key];
@@ -53,12 +57,12 @@ class URLGenerator
             }
 
             if (count($passed) !== (count($required) / 2)) {
-                throw new MissingParameterException;
+                throw new MissingParameterException();
             }
 
             return str_replace(array_keys($passed), $passed, $this->route[$name]->uri);
         }
 
-        throw new RouteNameNotExistException;
+        throw new RouteNameNotExistException();
     }
 }

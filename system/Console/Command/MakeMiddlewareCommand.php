@@ -6,17 +6,20 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy\Console\Command;
 
 use Octopy\Console\Argv;
-use Octopy\Console\Output;
 use Octopy\Console\Command;
+use Octopy\Console\Output;
 
 class MakeMiddlewareCommand extends Command
 {
@@ -31,8 +34,9 @@ class MakeMiddlewareCommand extends Command
     protected $description = 'Create a new middleware class';
 
     /**
-     * @param  Argv   $argv
-     * @param  Output $output
+     * @param Argv   $argv
+     * @param Output $output
+     *
      * @return string
      */
     public function handle(Argv $argv, Output $output)
@@ -41,12 +45,12 @@ class MakeMiddlewareCommand extends Command
         if (file_exists($location = $this->app['path']->app->HTTP->middleware($parsed['location']))) {
             return $output->warning('Middleware already exists.');
         }
-        
-        $data = array(
+
+        $data = [
             'DummyNameSpace' => $parsed['namespace'],
             'DummyClassName' => $parsed['classname'],
-        );
-        
+        ];
+
         if ($this->generate($location, 'Middleware', $data)) {
             return $output->success('Middleware created successfully.');
         }

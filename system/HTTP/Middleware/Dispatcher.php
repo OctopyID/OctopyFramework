@@ -6,18 +6,20 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy\HTTP\Middleware;
 
 use Closure;
-
-use Octopy\Support\App;
 use Octopy\HTTP\Request;
+use Octopy\Support\App;
 
 class Dispatcher
 {
@@ -35,9 +37,10 @@ class Dispatcher
     }
 
     /**
-     * @param  array   $middleware
-     * @param  Request $object
-     * @param  Closure $next
+     * @param array   $middleware
+     * @param Request $object
+     * @param Closure $next
+     *
      * @return mixed
      */
     public function dispatch(Request $object, Closure $next)
@@ -52,7 +55,8 @@ class Dispatcher
     }
 
     /**
-     * @param  Closure $next
+     * @param Closure $next
+     *
      * @return Closure
      */
     protected function next(Closure $next)
@@ -63,8 +67,9 @@ class Dispatcher
     }
 
     /**
-     * @param  Closure  $next
-     * @param  callable $middleware
+     * @param Closure  $next
+     * @param callable $middleware
+     *
      * @return mixed
      */
     protected function create(Closure $next, $middleware)
@@ -73,7 +78,7 @@ class Dispatcher
             if ($middleware instanceof Closure) {
                 return $middleware($object, $next);
             }
-            
+
             return App::make($middleware)->handle($object, $next);
         };
     }

@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
@@ -22,7 +25,8 @@ class Compiler
     protected $count = 0;
 
     /**
-     * @param  string $uri
+     * @param string $uri
+     *
      * @return array
      */
     public function parse(string $uri) : array
@@ -31,7 +35,8 @@ class Compiler
     }
 
     /**
-     * @param  string $uri
+     * @param string $uri
+     *
      * @return array
      */
     protected function option(string $uri) : array
@@ -46,7 +51,8 @@ class Compiler
     }
 
     /**
-     * @param  string $uri
+     * @param string $uri
+     *
      * @return string
      */
     protected function regexp(string $uri) : ?string
@@ -54,24 +60,25 @@ class Compiler
         if (preg_match_all('/(?<=\/):([^\/]+)(?=\/|$)/', $uri, $matches)) {
             $search = '';
             $regexp = '/';
-                
+
             foreach ($matches[1] as $key => $value) {
-                $search .= '\/' . preg_quote($matches[0][$key]);
+                $search .= '\/'.preg_quote($matches[0][$key]);
                 $regexp .= sprintf($this->compute($matches[1], $key), trim($value, '?'));
             }
 
-            $regexp = preg_replace('/' . $search . '/', rtrim($regexp, '/'), $uri);
+            $regexp = preg_replace('/'.$search.'/', rtrim($regexp, '/'), $uri);
             $regexp = preg_replace('/\/+/', '/', $regexp .= str_repeat(')?', $this->count));
         }
-        
+
         $this->count = 0;
 
-        return '#^' . ($regexp ?? str_replace('/', '\/', $uri)) . '$#sDu';
+        return '#^'.($regexp ?? str_replace('/', '\/', $uri)).'$#sDu';
     }
 
     /**
-     * @param  array $array
-     * @param  int   $offset
+     * @param array $array
+     * @param int   $offset
+     *
      * @return bool
      */
     protected function compute(array $array, int $offset = 0)
@@ -79,7 +86,7 @@ class Compiler
         $regexp = '(?P<%s>[^/]++)';
 
         if ($offset > 0 && substr($array[$offset], -1) === '?') {
-            $regexp = '(?:/' . $regexp;
+            $regexp = '(?:/'.$regexp;
 
             $this->count++;
         }
@@ -96,8 +103,9 @@ class Compiler
     }
 
     /**
-     * @param  array $array
-     * @param  int   $offset
+     * @param array $array
+     * @param int   $offset
+     *
      * @return bool
      */
     protected function next(array $array, int $offset) : bool

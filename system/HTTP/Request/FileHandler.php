@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
@@ -32,8 +35,8 @@ class FileHandler
     }
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function name() : string
     {
         return $this->file['name'];
@@ -64,7 +67,8 @@ class FileHandler
     }
 
     /**
-     * @param  string $destination
+     * @param string $destination
+     *
      * @return bool
      */
     public function move(string $destination = null, bool $replace = false) : bool
@@ -72,7 +76,7 @@ class FileHandler
         if ($this->error() > 0) {
             return false;
         }
-        
+
         if (is_null($destination)) {
             $destination = $this->name();
         }

@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
@@ -33,7 +36,7 @@ class PathLocator
      * @var array
      */
     protected $extension = ['octopy', 'php', 'html', 'js', 'css', 'cache', 'png', 'jpg', 'ico', 'svg', 'mp4', 'flv', 'mp3', 'log'];
-    
+
     /**
      * @param Application $app
      */
@@ -43,19 +46,21 @@ class PathLocator
     }
 
     /**
-     * @param  string $path
+     * @param string $path
+     *
      * @return string
      */
     public function __invoke(string $path)
     {
-        return $this->basepath . $path;
+        return $this->basepath.$path;
     }
 
     /**
-     * @param  string $path
+     * @param string $path
+     *
      * @return $this
      */
-    public function __get(string $path) : PathLocator
+    public function __get(string $path) : self
     {
         if (!empty($this->subpath)) {
             if ($path !== 'app' && !in_array($path, ['app', 'system', 'public', 'storage'])) {
@@ -64,13 +69,14 @@ class PathLocator
         }
 
         $this->subpath[] = $path;
-        
+
         return $this;
     }
 
     /**
-     * @param  string $method
-     * @param  array  $parameter
+     * @param string $method
+     * @param array  $parameter
+     *
      * @return string
      */
     public function __call(string $path, array $additional = [])
@@ -83,7 +89,7 @@ class PathLocator
 
         if (isset($additional[0])) {
             $this->subpath[] = $additional[0];
-            if (!preg_match('/\.(' . implode('|', $this->extension) . ')/', strtolower($additional[0]))) {
+            if (!preg_match('/\.('.implode('|', $this->extension).')/', strtolower($additional[0]))) {
                 $this->subpath[] = '/';
             }
         } else {
@@ -91,7 +97,7 @@ class PathLocator
         }
 
         $location = function (Closure $callback) {
-            $location = $this->basepath . implode('/', $this->subpath);
+            $location = $this->basepath.implode('/', $this->subpath);
             if ($callback instanceof Closure) {
                 $callback();
             }

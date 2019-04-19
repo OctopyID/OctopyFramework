@@ -6,15 +6,17 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy;
 
-use Octopy\Container;
 use Octopy\Support\Macroable;
 
 class Application extends Container
@@ -49,7 +51,7 @@ class Application extends Container
         $this->basepath = $basepath;
 
         if ($this->instance(static::class, $this)) {
-            
+
             // Set instance aliases
             $aliases = include 'Config/Container.php';
             foreach ($aliases as $abstract => $concrete) {
@@ -83,12 +85,13 @@ class Application extends Container
     }
 
     /**
-     * @param  string $subpath
+     * @param string $subpath
+     *
      * @return string
      */
     public function basepath(string $subpath = null) : string
     {
-        return preg_replace('/\/+/', '/', $this->basepath . $subpath . DIRECTORY_SEPARATOR);
+        return preg_replace('/\/+/', '/', $this->basepath.$subpath.DIRECTORY_SEPARATOR);
     }
 
     /**
@@ -130,7 +133,7 @@ class Application extends Container
     public function register($provider, bool $force = false)
     {
         $name = is_string($provider) ? $provider : get_class($provider);
-    
+
         if (isset($this->provider[$name]) && !$force) {
             return $this->provider[$name];
         }

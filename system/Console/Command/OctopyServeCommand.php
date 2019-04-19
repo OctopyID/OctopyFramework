@@ -6,17 +6,20 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy\Console\Command;
 
 use Octopy\Console\Argv;
-use Octopy\Console\Output;
 use Octopy\Console\Command;
+use Octopy\Console\Output;
 
 class OctopyServeCommand extends Command
 {
@@ -31,8 +34,9 @@ class OctopyServeCommand extends Command
     protected $description = 'Serve the application on the PHP development server';
 
     /**
-     * @param  Argv   $argv
-     * @param  Output $output
+     * @param Argv   $argv
+     * @param Output $output
+     *
      * @return string
      */
     public function handle(Argv $argv, Output $output)
@@ -41,11 +45,11 @@ class OctopyServeCommand extends Command
             $port = 1337;
         }
 
-        echo $output->format('{yellow}Octopy development server started : {white}http://localhost:' . $port, true);
+        echo $output->format('{yellow}Octopy development server started : {white}http://localhost:'.$port, true);
 
         foreach (['system', 'shell', 'shell_exec', 'exec'] as $shell) {
             if (function_exists($shell)) {
-                $shell('cd ' . $this->app['path']->public() . ' && php -S localhost:' . $port);
+                $shell('cd '.$this->app['path']->public().' && php -S localhost:'.$port);
                 break;
             }
         }

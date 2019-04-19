@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @version : v1.0
+ *
  * @license : MIT
  */
 
@@ -19,9 +22,10 @@ use Octopy\HTTP\Request\FileHandler;
 trait ValidationRules
 {
     /**
-    * @param  string $attribute
-    * @return string
-    */
+     * @param string $attribute
+     *
+     * @return string
+     */
     public function accepted(string $attribute)
     {
         $value = $this->value($attribute);
@@ -33,15 +37,16 @@ trait ValidationRules
     }
 
     /**
-     * @param  string  $attribute
-     * @param  int     $min
-     * @param  int     $max
+     * @param string $attribute
+     * @param int    $min
+     * @param int    $max
+     *
      * @return string
      */
     public function between(string $attribute, int $min, int $max)
     {
         $value = $this->value($attribute);
-        
+
         if ($value instanceof FileHandler) {
             $length = $value->size() / 1024;
             if (($length >= $min && $length <= $max) === false) {
@@ -51,7 +56,7 @@ trait ValidationRules
                     ':attribute' => $attribute,
                 ]);
             }
-        } elseif (ctype_digit($value) || is_integer($value) || is_int($value) || is_float($value) || is_double($value)) {
+        } elseif (ctype_digit($value) || is_int($value) || is_int($value) || is_float($value) || is_float($value)) {
             $length = $value;
             if (($length >= $min && $length <= $max) === false) {
                 return $this->format('The `:attribute` must be between :min and :max.', [
@@ -82,7 +87,8 @@ trait ValidationRules
     }
 
     /**
-     * @param  string $attribute
+     * @param string $attribute
+     *
      * @return string
      */
     public function boolean(string $attribute)
@@ -95,8 +101,9 @@ trait ValidationRules
     }
 
     /**
-     * @param  string $attribute
-     * @param  string $attribute2nd
+     * @param string $attribute
+     * @param string $attribute2nd
+     *
      * @return string
      */
     public function confirmed(string $attribute, string $attribute2nd)
@@ -109,7 +116,8 @@ trait ValidationRules
     }
 
     /**
-     * @param  string $attribute
+     * @param string $attribute
+     *
      * @return string
      */
     public function email(string $attribute)
@@ -122,9 +130,10 @@ trait ValidationRules
     }
 
     /**
-     * @param  string $attribute
-     * @param  string $table
-     * @param  string $column
+     * @param string $attribute
+     * @param string $table
+     * @param string $column
+     *
      * @return string
      */
     public function exists(string $attribute, string $table, string $column)
@@ -139,7 +148,8 @@ trait ValidationRules
     }
 
     /**
-     * @param  string $attribute
+     * @param string $attribute
+     *
      * @return string
      */
     public function file(string $attribute)
@@ -153,13 +163,14 @@ trait ValidationRules
     }
 
     /**
-     * @param  string $attribute
+     * @param string $attribute
+     *
      * @return string
      */
     public function integer(string $attribute)
     {
         $value = $this->value($attribute);
-        if (!is_integer($value)) {
+        if (!is_int($value)) {
             return $this->format('The `:attribute` must be an integer.', [
                 ':attribute' => $attribute,
             ]);
@@ -167,7 +178,8 @@ trait ValidationRules
     }
 
     /**
-     * @param  string $attribute
+     * @param string $attribute
+     *
      * @return string
      */
     public function ip(string $attribute)
@@ -180,8 +192,9 @@ trait ValidationRules
     }
 
     /**
-     * @param  string $attribute
-     * @param  int    $max
+     * @param string $attribute
+     * @param int    $max
+     *
      * @return string
      */
     public function max(string $attribute, int $max)
@@ -195,7 +208,7 @@ trait ValidationRules
                     ':attribute' => $attribute,
                 ]);
             }
-        } elseif (ctype_digit($value) || is_integer($value) || is_float($value) || is_double($value)) {
+        } elseif (ctype_digit($value) || is_int($value) || is_float($value) || is_float($value)) {
             if (($value < $max) === false) {
                 return $this->format('The `:attribute` may not be greater than :max.', [
                     ':max'       => $max,
@@ -220,8 +233,9 @@ trait ValidationRules
     }
 
     /**
-     * @param  string $attribute
-     * @param  int    $max
+     * @param string $attribute
+     * @param int    $max
+     *
      * @return string
      */
     public function min(string $attribute, int $min)
@@ -235,7 +249,7 @@ trait ValidationRules
                     ':attribute' => $attribute,
                 ]);
             }
-        } elseif (ctype_digit($value) || is_integer($value) || is_float($value) || is_double($value)) {
+        } elseif (ctype_digit($value) || is_int($value) || is_float($value) || is_float($value)) {
             if (($value > $min) === false) {
                 return $this->format('The `:attribute` must be at least :min.', [
                     ':min'       => $min,
@@ -260,10 +274,11 @@ trait ValidationRules
     }
 
     /**
-    * @param  string $attribute
-    * @param  string $type
-    * @return string
-    */
+     * @param string $attribute
+     * @param string $type
+     *
+     * @return string
+     */
     public function mime(string $attribute, string $type)
     {
         $value = $this->value($attribute);
@@ -284,7 +299,8 @@ trait ValidationRules
     }
 
     /**
-     * @param  string $attribute
+     * @param string $attribute
+     *
      * @return string
      */
     public function required(string $attribute)
@@ -298,7 +314,8 @@ trait ValidationRules
     }
 
     /**
-     * @param  string $attribute
+     * @param string $attribute
+     *
      * @return string
      */
     public function string(string $attribute)
@@ -311,9 +328,10 @@ trait ValidationRules
     }
 
     /**
-     * @param  string $attribute
-     * @param  string $table
-     * @param  string $column
+     * @param string $attribute
+     * @param string $table
+     * @param string $column
+     *
      * @return string
      */
     public function unique(string $attribute, string $table, string $column)
@@ -328,7 +346,8 @@ trait ValidationRules
     }
 
     /**
-     * @param  string $attribute
+     * @param string $attribute
+     *
      * @return string
      */
     public function uploaded(string $attribute)
@@ -342,7 +361,8 @@ trait ValidationRules
     }
 
     /**
-     * @param  string $attribute
+     * @param string $attribute
+     *
      * @return string
      */
     public function url(string $attribute)

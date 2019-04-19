@@ -6,17 +6,20 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
 namespace Octopy\Mailer;
 
 use Octopy\Application;
-use Octopy\Mailer\Exception\InvalidRecepientException;
 use Octopy\Mailer\Exception\AttachmentNotExistException;
+use Octopy\Mailer\Exception\InvalidRecepientException;
 
 class SMTP
 {
@@ -46,39 +49,38 @@ class SMTP
     protected $boundary;
 
     /**
-    * @var string
-    */
+     * @var string
+     */
     protected $multipart;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $attachment = false;
 
-    /**
-     *
-     */
     public function __construct(Application $app)
     {
         $this->socket = $app->make(Socket::class, $app->config['mail']);
 
-        $this->boundary = '--' . md5(uniqid(time()));
+        $this->boundary = '--'.md5(uniqid(time()));
     }
 
     /**
-     * @param  string $name
-     * @param  string $email
+     * @param string $name
+     * @param string $email
+     *
      * @return Mailer
      */
     public function from(string $name, string $email)
     {
-        $this->from = array($name, $this->email($email));
+        $this->from = [$name, $this->email($email)];
 
         return $this;
     }
 
     /**
-     * @param  array $email
+     * @param array $email
+     *
      * @return Mailer
      */
     public function recepient($email)
@@ -97,49 +99,53 @@ class SMTP
     }
 
     /**
-     * @param  string $subject
+     * @param string $subject
+     *
      * @return Mailer
      */
     public function subject(string $subject)
     {
         $this->subject = $subject;
+
         return $this;
     }
 
     /**
-     * @param  string $message
+     * @param string $message
+     *
      * @return Mailer
      */
     public function message(string $message)
     {
         $this->message = $message;
-        
+
         return $this;
     }
 
     /**
-     * @param  string $path
+     * @param string $path
+     *
      * @return Mailer
      */
     public function attachment(string $path)
     {
         if (!is_file($path)) {
-            throw new AttachmentNotExistException;
+            throw new AttachmentNotExistException();
         }
-            
+
         $fopen = fopen($path, 'rb');
-        $data  = fread($fopen, filesize($path));
+        $data = fread($fopen, filesize($path));
         fclose($fopen);
-        
+
         $filename = basename($path);
 
-        $multipart  = "\r\n--{$this->boundary}\r\n";
+        $multipart = "\r\n--{$this->boundary}\r\n";
         $multipart .= "Content-Type: application/octet-stream; name=\"{$filename}\"\r\n";
         $multipart .= "Content-Transfer-Encoding: base64\r\n";
         $multipart .= "Content-Disposition: attachment; filename=\"{$filename}\"\r\n";
         $multipart .= "\r\n";
         $multipart .= chunk_split(base64_encode($data));
-        
+
         $this->multipart .= $multipart;
         $this->attachment = true;
 
@@ -155,13 +161,14 @@ class SMTP
     }
 
     /**
-     * @param  string $email
+     * @param string $email
+     *
      * @return string
      */
     private function email(string $email)
     {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            throw new InvalidRecepientException;
+            throw new InvalidRecepientException();
         }
 
         return $email;
@@ -172,10 +179,10 @@ class SMTP
      */
     private function build()
     {
-        $headers  = "MIME-Version: 1.0\r\n";
-        $content  = "Date: " . date("D, d M Y H:i:s") . " UT\r\n";
-        $content .= 'Subject: =?utf-8?B?'  . base64_encode($this->subject) . "=?=\r\n";
-        
+        $headers = "MIME-Version: 1.0\r\n";
+        $content = 'Date: '.date('D, d M Y H:i:s')." UT\r\n";
+        $content .= 'Subject: =?utf-8?B?'.base64_encode($this->subject)."=?=\r\n";
+
         if ($this->attachment === true) {
             $headers .= "Content-Type: multipart/mixed; boundary=\"{$this->boundary}\"\r\n";
         } else {
@@ -183,9 +190,9 @@ class SMTP
         }
 
         $headers .= "From: {$this->from[0]} <{$this->from[1]}>\r\n";
-        $headers .= "To: " . implode(',', $this->recepient) . "\r\n";
-        $content .= $headers . "\r\n";
-        
+        $headers .= 'To: '.implode(',', $this->recepient)."\r\n";
+        $content .= $headers."\r\n";
+
         if ($this->attachment === true) {
             $content .= "--{$this->boundary}\r\n";
             $content .= "Content-Type: text/html; charset=utf-8\r\n";
@@ -195,9 +202,9 @@ class SMTP
             $content .= $this->multipart;
             $content .= "\r\n--{$this->boundary}--\r\n";
         } else {
-            $content .= $this->message . "\r\n";
+            $content .= $this->message."\r\n";
         }
-        
+
         return trim($content);
     }
 }

@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
@@ -27,12 +30,13 @@ class Route
     public function __construct(array $data)
     {
         $this->data = array_merge($data, [
-            'name' => ''
+            'name' => '',
        ]);
     }
 
     /**
-     * @param  string $key
+     * @param string $key
+     *
      * @return mixed
      */
     public function __get(string $key)
@@ -66,7 +70,8 @@ class Route
     }
 
     /**
-     * @param  string $name
+     * @param string $name
+     *
      * @return Route
      */
     public function name(string $name = null)
@@ -74,12 +79,13 @@ class Route
         if (is_null($name)) {
             return $this->data['name'];
         }
-        
+
         return $this->update('name', trim($name));
     }
 
     /**
-     * @param  mixed $middleware
+     * @param mixed $middleware
+     *
      * @return Route
      */
     public function middleware(...$middleware)
@@ -88,7 +94,8 @@ class Route
     }
 
     /**
-     * @param  array $parameter
+     * @param array $parameter
+     *
      * @return Route
      */
     public function parameter(array $parameter)
@@ -97,13 +104,15 @@ class Route
     }
 
     /**
-     * @param  string $key
-     * @param  mixed  $value
+     * @param string $key
+     * @param mixed  $value
+     *
      * @return Route
      */
-    protected function update(string $key, $value) : Route
+    protected function update(string $key, $value) : self
     {
         $this->data[$key] = $value;
+
         return $this;
     }
 }

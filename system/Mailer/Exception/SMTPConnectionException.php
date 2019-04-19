@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @version : v1.0
+ *
  * @license : MIT
  */
 
@@ -16,7 +19,7 @@ namespace Octopy\Mailer\Exception;
 
 use Exception;
 
-class SMTPConnectionErrorException extends Exception
+class SMTPConnectionException extends Exception
 {
     //
 }

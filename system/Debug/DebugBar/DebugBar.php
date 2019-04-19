@@ -6,9 +6,12 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
+ *
  * @author  : Supian M <supianidz@gmail.com>
+ *
  * @link    : www.octopy.xyz
+ *
  * @license : MIT
  */
 
@@ -41,18 +44,19 @@ class DebugBar
     }
 
     /**
-     * @param  Response $response
+     * @param Response $response
+     *
      * @return Response
      */
     public function modify(Response $response) : Response
     {
-        $debugbar  = '<div class="debugbar"></div>' . $this->javascript();
+        $debugbar = '<div class="debugbar"></div>'.$this->javascript();
 
         $position = strripos($body = $response->body, '</body>');
         if ($position !== false) {
-            $body = substr($body, 0, $position) . $debugbar . substr($body, $position);
+            $body = substr($body, 0, $position).$debugbar.substr($body, $position);
         } else {
-            $body = $body . $debugbar;
+            $body = $body.$debugbar;
         }
 
         // Update the new body and reset the body length
@@ -67,8 +71,8 @@ class DebugBar
      */
     private function javascript() : string
     {
-        $js  = '<script type="text/javascript" src="' . route('debugbar.assets', 'jquery.js') . '"></script>';
-        $js .= '<script type="text/javascript">$(document).ready(function(){$("div.debugbar").load("' . route('debugbar') . '");});</script>';
+        $js = '<script type="text/javascript" src="'.route('debugbar.assets', 'jquery.js').'"></script>';
+        $js .= '<script type="text/javascript">$(document).ready(function(){$("div.debugbar").load("'.route('debugbar').'");});</script>';
 
         return $js;
     }
