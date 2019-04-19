@@ -1,0 +1,30 @@
+preset: laravel
+
+risky: false
+
+disabled:
+  - concat_without_spaces
+  - no_empty_phpdoc
+  - no_blank_lines_after_phpdoc
+
+enabled:
+  - array_indentation
+  - compact_nullable_typehint
+  - concat_with_spaces
+  - phpdoc_annotation_without_dot
+  
+finder:
+  exclude:
+    - modules
+    - node_modules
+    - storage
+    - vendor
+  exclude:
+    - "tests"
+  name:
+    - "*.php"
+  not-name:
+    - "*.stub"
+    - "*.octopy.php"
+  depth:
+    - "< 3"

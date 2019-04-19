@@ -1,4 +1,21 @@
-![Screenshot](public/img/logo.png)
+<p align="center">
+	<img src="http://www.octopy.xyz/wp-content/uploads/2019/01/logo.png">
+</p>
+
+<p align="center">
+	<a href="https://packagist.org/packages/supianidz/octopyframework">
+		<img src="https://poser.pugx.org/supianidz/octopyframework/d/total.svg?format=flat-square " alt="Total Downloads">
+	</a>
+	<a href="https://packagist.org/packages/supianidz/octopyframework">
+		<img src="https://poser.pugx.org/supianidz/octopyframework/v/stable.svg?format=flat-square " alt="Latest Stable Version">
+	</a>
+	<a href="https://packagist.org/packages/supianidz/octopyframework">
+		<img src="https://poser.pugx.org/supianidz/octopyframework/v/unstable.svg?format=flat-square " alt="Latest Unstable Version">
+	</a>
+	<a href="https://packagist.org/packages/supianidz/octopyframework">
+		<img src="https://poser.pugx.org/supianidz/octopyframework/license.svg?format=flat-square " alt="License">
+	</a>
+</p>
 
 ## What is Octopy Framework?
 
