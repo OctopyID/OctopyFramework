@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -40,11 +40,11 @@ class Session implements ArrayAccess
         extract($config = $app->config['session']);
 
         if (empty($lifetime)) {
-            $lifetime = $config['lifetime'] = (int)ini_get('session.gc_maxlifetime');
+            $lifetime = $config['lifetime'] = (int) ini_get('session.gc_maxlifetime');
         } else {
-            ini_set('session.gc_maxlifetime', (int)$lifetime);
+            ini_set('session.gc_maxlifetime', (int) $lifetime);
         }
-        
+
         if (empty($storage)) {
             $storage = $config['storage'] = ini_get('session.save_path');
         } else {
@@ -165,9 +165,9 @@ class Session implements ArrayAccess
      */
     public static function handler(string $name) : string
     {
-        $handler = array(
-            'file' => \Octopy\Session\Handler\FileSessionHandler::class
-        );
+        $handler = [
+            'file' => \Octopy\Session\Handler\FileSessionHandler::class,
+        ];
 
         return $handler[$name] ?? $handler['file'];
     }

@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -125,7 +125,7 @@ return [
         App\Provider\AppServiceProvider::class,
         App\Provider\RouteServiceProvider::class,
 
-        /**
+        /*
          * System Service Providers...
          */
         Octopy\Provider\SessionServiceProvider::class,
@@ -136,5 +136,5 @@ return [
         Octopy\Provider\ValidationServiceProvider::class,
         Octopy\Provider\ViewEngineServiceProvider::class,
         Octopy\Provider\EncryptionServiceProvider::class,
-   ]
+    ],
 ];

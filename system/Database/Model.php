@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -16,8 +16,8 @@ namespace Octopy\Database;
 
 use ArrayIterator;
 use Octopy\Database;
-use Octopy\Container;
 use JsonSerializable;
+use Octopy\Container;
 use IteratorAggregate;
 
 class Model implements IteratorAggregate, JsonSerializable

@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -17,7 +17,6 @@ namespace Octopy;
 use FilesystemIterator;
 use RecursiveIteratorIterator;
 use RecursiveDirectoryIterator;
-
 use Octopy\FileSystem\Exception\FileNotFoundException;
 
 class FileSystem
@@ -127,7 +126,7 @@ class FileSystem
      */
     public function chmod(string $path, int $permission = null)
     {
-        if (!is_null($permission)) {
+        if (! is_null($permission)) {
             return chmod($path, $permission);
         }
 
@@ -145,11 +144,11 @@ class FileSystem
             return @unlink($path);
         } elseif (is_dir($path)) {
             $items = new FilesystemIterator($path);
-          
+
             foreach ($items as $item) {
                 if ($item->isFile()) {
                     $status = $this->delete($item);
-                } elseif ($item->isDir() && !$item->isLink()) {
+                } elseif ($item->isDir() && ! $item->isLink()) {
                     if ($this->delete($item)) {
                         $status = @rmdir($item);
                     }
@@ -182,14 +181,14 @@ class FileSystem
      */
     public function copy(string $directory, string $destination, int $flag = null)
     {
-        if (!is_dir($directory) && !is_file($directory)) {
+        if (! is_dir($directory) && ! is_file($directory)) {
             return false;
         }
 
         if (is_dir($directory)) {
-            $flag = $flag ? : FilesystemIterator::SKIP_DOTS;
+            $flag = $flag ?: FilesystemIterator::SKIP_DOTS;
 
-            if (!is_dir($destination)) {
+            if (! is_dir($destination)) {
                 $this->mkdir($destination, 0755, true);
             }
 
@@ -199,11 +198,11 @@ class FileSystem
                 $target = $destination . '/' . $item->getBasename();
 
                 if ($item->isDir()) {
-                    if (!$this->copy($item->getPathname(), $target, $flag)) {
+                    if (! $this->copy($item->getPathname(), $target, $flag)) {
                         return false;
                     }
                 } else {
-                    if (!$this->copy($item->getPathname(), $target, $flag)) {
+                    if (! $this->copy($item->getPathname(), $target, $flag)) {
                         return false;
                     }
                 }
@@ -237,10 +236,10 @@ class FileSystem
      */
     public function iterator(string $path, int $flag = null)
     {
-        if (!is_dir($path)) {
+        if (! is_dir($path)) {
             return [];
         }
-        
+
         return new RecursiveIteratorIterator(
             new RecursiveDirectoryIterator($path, $flag ?? RecursiveDirectoryIterator::SKIP_DOTS)
         );

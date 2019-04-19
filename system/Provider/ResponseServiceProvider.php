@@ -6,15 +6,13 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
  */
 
 namespace Octopy\Provider;
-
-use Octopy\Validation\Validator;
 
 class ResponseServiceProvider extends ServiceProvider
 {
@@ -26,6 +24,7 @@ class ResponseServiceProvider extends ServiceProvider
         $app = $this->app;
         $app->response->macro('flash', function (array $flash) use ($app) {
             $app->session->set('error', $flash);
+
             return $this;
         });
 

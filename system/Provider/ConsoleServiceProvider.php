@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -45,10 +45,10 @@ class ConsoleServiceProvider extends ServiceProvider
      */
     private function autodiscover()
     {
-        $autodiscover = array(
+        $autodiscover = [
             'App\\Console\\Command\\' => $this->app['path']->app->console->command(),
-            'Octopy\\Console\\Command\\' => $this->app['path']->system->console->command()
-        );
+            'Octopy\\Console\\Command\\' => $this->app['path']->system->console->command(),
+        ];
 
         foreach ($autodiscover as $namespace => $directory) {
             foreach ($this->app['filesystem']->iterator($directory) as $row) {

@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @version : v1.0
  * @license : MIT
@@ -14,14 +14,13 @@
 
 namespace Octopy\Validation;
 
-use BadMethodCallException;
-
 use Octopy\Application;
 use Octopy\HTTP\Request;
+use BadMethodCallException;
 
 class Validator
 {
-    /**
+    /*
      * @ValidationRules
      */
     use ValidationRules;
@@ -48,7 +47,7 @@ class Validator
     {
         $this->app = $app;
     }
-    
+
     /**
      * @param  Request $request
      * @param  array   $rules
@@ -60,7 +59,7 @@ class Validator
         foreach ($rules as $attribute => $rule) {
             foreach ($this->parse($rule) as $rule) {
                 list($method, $parameter) = $rule;
-                if (!method_exists($this, $method)) {
+                if (! method_exists($this, $method)) {
                     throw new BadMethodCallException(
                         sprintf('Call to undefined method %s::%s(arguments)', __CLASS__, $method)
                     );
@@ -69,7 +68,7 @@ class Validator
                 $this->$method($attribute, ...$parameter);
             }
         }
-        
+
         return $this->passed();
     }
 
@@ -116,17 +115,17 @@ class Validator
     {
         $parsed = [];
         foreach (explode('|', $rule) as $rule) {
-            if (!strstr($rule, ':')) {
+            if (! strstr($rule, ':')) {
                 $args = [];
             } else {
                 list($rule, $args) = explode(':', $rule);
-                $args = (array)$args;
+                $args = (array) $args;
                 if (strstr($args[0], ',')) {
                     $args = explode(',', $args[0]);
                 }
             }
 
-            $parsed[] = array($rule, $args);
+            $parsed[] = [$rule, $args];
         }
 
         return $parsed;

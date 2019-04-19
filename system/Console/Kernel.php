@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -15,7 +15,6 @@
 namespace Octopy\Console;
 
 use Octopy\Application;
-use Octopy\Console\Output;
 
 class Kernel
 {
@@ -33,7 +32,7 @@ class Kernel
         \Octopy\Bootstrap\RegisterExceptionHandler::class,
         \Octopy\Bootstrap\RegisterServiceProvider::class,
         \Octopy\Bootstrap\BootUpServiceProvider::class,
-   ];
+    ];
 
     /**
      * @param Application $app
@@ -41,7 +40,7 @@ class Kernel
     public function __construct(Application $app)
     {
         $this->app = $app;
-        
+
         try {
             foreach ($this->bootstrap as $bootstrap) {
                 $app->make($bootstrap)->bootstrap($app);

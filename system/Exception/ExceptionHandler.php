@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author :Supian M <supianidz@gmail.com>
  * @link   :www.octopy.xyz
  * @license:MIT
@@ -15,7 +15,6 @@
 namespace Octopy\Exception;
 
 use Throwable;
-use Octopy\Log\Logger;
 use Octopy\Application;
 use Octopy\HTTP\Request;
 use Octopy\Console\Output\Color;
@@ -52,7 +51,7 @@ class ExceptionHandler
 
         $color = new Color;
 
-        $output  = "\n";
+        $output = "\n";
         $output .= $color->apply('bg_red', $vars['exception']);
         $output .= $color->apply('white', ' : ');
         $output .= $color->apply('yellow', $vars['message']);
@@ -82,11 +81,11 @@ class ExceptionHandler
         $vars = $this->vars($exception);
 
         if ($request->ajax()) {
-            return array(
+            return [
                 'code'      => $vars['code'],
                 'message'   => $vars['message'],
                 'exception' => $vars['exception'],
-            );
+            ];
         }
 
         return $this->view($this->app->debug() ? 'debug' : 'error', $vars);
@@ -104,14 +103,14 @@ class ExceptionHandler
             $code = 500;
         }
 
-        return array(
+        return [
             'code'      => $code,
             'file'      => $exception->getFile(),
             'line'      => $exception->getLine(),
             'trace'     => $exception->getTrace(),
             'message'   => $exception->getMessage(),
             'exception' => last(explode(BS, get_class($exception))),
-        );
+        ];
     }
 
     /**
@@ -124,7 +123,7 @@ class ExceptionHandler
         $view = $this->app->resolve('view', ['resource' => sprintf('%s/View/', __DIR__)]);
 
         return $view->render($name, array_merge($vars, [
-            'app' => $this->app
+            'app' => $this->app,
         ]));
     }
 }

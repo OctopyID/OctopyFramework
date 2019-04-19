@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -14,7 +14,6 @@
 
 namespace Octopy;
 
-use Octopy\Application;
 use Octopy\Console\Argv;
 use Octopy\Console\Route;
 use Octopy\Console\Output;
@@ -65,7 +64,7 @@ class Console
     public function dispatch(Argv $input, Output $output)
     {
         $command = $input->command();
-        
+
         if ($this->has($command)) {
             return $this->call($command);
         }
