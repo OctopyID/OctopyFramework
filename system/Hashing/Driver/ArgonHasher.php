@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -54,7 +54,7 @@ class ArgonHasher extends Hasher
      * @param  array  $option
      * @return string
      */
-    public function make($value, array $option = []) : string
+    public function make($value, array $option = []): string
     {
         $hash = password_hash($value, $this->algorithm(), [
             'threads'     => $this->thread($option),
@@ -83,7 +83,7 @@ class ArgonHasher extends Hasher
      * @param  array  $option
      * @return bool
      */
-    public function verify($value, $hashed, array $option = []) : bool
+    public function verify($value, $hashed, array $option = []): bool
     {
         if ($this->verify && $this->info($hashed)['algoName'] !== 'argon2i') {
             throw new RuntimeException('This password does not use the Argon2i algorithm.');
@@ -105,12 +105,12 @@ class ArgonHasher extends Hasher
             'memory_cost' => $this->memory($option),
         ]);
     }
-    
+
     /**
      * @param  array $option
      * @return int
      */
-    protected function memory(array $option) : int
+    protected function memory(array $option): int
     {
         return $option['memory'] ?? $this->memory;
     }
@@ -119,7 +119,7 @@ class ArgonHasher extends Hasher
      * @param  array $option
      * @return int
      */
-    protected function time(array $option) : int
+    protected function time(array $option): int
     {
         return $option['time'] ?? $this->time;
     }
@@ -128,7 +128,7 @@ class ArgonHasher extends Hasher
      * @param  array $option
      * @return int
      */
-    protected function thread(array $option) : int
+    protected function thread(array $option): int
     {
         return $option['thread'] ?? $this->thread;
     }

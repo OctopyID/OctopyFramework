@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @link    : www.octopy.xyz
  * @author  : Supian M <supianidz@gmail.com>
  * @license : MIT
@@ -15,9 +15,8 @@
 namespace Octopy\HTTP\Response;
 
 use Exception;
-use InvalidArgumentException;
-
 use Octopy\HTTP\Response;
+use InvalidArgumentException;
 
 class JsonResponse extends Response
 {
@@ -47,18 +46,18 @@ class JsonResponse extends Response
      * @param  int   $option
      * @return string
      */
-    protected function encode($data, $option) : string
+    protected function encode($data, $option): string
     {
         try {
             $data = json_encode($data, $option);
-            if (!$this->validate(json_last_error(), $option)) {
+            if (! $this->validate(json_last_error(), $option)) {
                 throw new InvalidArgumentException(json_last_error_msg());
             }
         } catch (Exception $exception) {
-            if (get_class($exception) == 'Exception' && strpos($exception->getMessage(), 'Failed calling ') == 0) {
-                throw $exception->getPrevious() ? : $exception;
+            if (get_class($exception) === 'Exception' && mb_strpos($exception->getMessage(), 'Failed calling ') === 0) {
+                throw $exception->getPrevious() ?: $exception;
             }
-         
+
             throw $exception;
         }
 
@@ -74,7 +73,7 @@ class JsonResponse extends Response
      * @param  int $option
      * @return bool
      */
-    protected function validate($error, $option) : bool
+    protected function validate($error, $option): bool
     {
         if ($error === JSON_ERROR_NONE) {
             return true;

@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -15,7 +15,6 @@
 namespace Octopy\Console;
 
 use Exception;
-
 use Octopy\Application;
 
 abstract class Command
@@ -42,7 +41,7 @@ abstract class Command
     {
         $this->app = $app;
     }
-        
+
     /**
      * @param  string $property
      * @return mixed
@@ -56,15 +55,15 @@ abstract class Command
      * @param  string $string
      * @return array
      */
-    protected function parse(string $string) : array
+    protected function parse(string $string): array
     {
         preg_match('/(.*)\/(.*)/', trim($string, '/'), $match);
-        
-        return array(
+
+        return [
             'location'  => $string . '.php',
             'classname' => $match[2] ?? $string,
-            'namespace' => str_replace('/', '\\', $match[1] ?? null)
-        );
+            'namespace' => str_replace('/', '\\', $match[1] ?? null),
+        ];
     }
 
     /**
@@ -82,9 +81,9 @@ abstract class Command
         } catch (Exception $exception) {
             throw $exception;
         }
-        
-        if (!empty($data)) {
-            if (isset($data['DummyNameSpace']) && $data['DummyNameSpace'] == null) {
+
+        if (! empty($data)) {
+            if (isset($data['DummyNameSpace']) && $data['DummyNameSpace'] === null) {
                 unset($data['DummyNameSpace']);
                 $data['\DummyNameSpace'] = '';
             }
@@ -93,7 +92,7 @@ abstract class Command
         }
 
         try {
-            if (!is_dir($basedir = dirname($location))) {
+            if (! is_dir($basedir = dirname($location))) {
                 $this->app['filesystem']->mkdir($basedir, 0755, true);
             }
 

@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -27,7 +27,7 @@ class Route
      * @param mixed  $handler
      * @param string $describe
      */
-    public function __construct(string $command, array $option = [], $handler, string $describe = '')
+    public function __construct(string $command, array $option, $handler, string $describe = '')
     {
         $this->data = compact('command', 'describe', 'option', 'handler');
     }
@@ -44,7 +44,7 @@ class Route
     /**
      * @return string
      */
-    public function command() : string
+    public function command(): string
     {
         return $this->data['command'];
     }

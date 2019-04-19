@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -21,7 +21,7 @@ class ViewEngineServiceProvider extends ServiceProvider
     /**
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $app = $this->app;
 
@@ -33,6 +33,7 @@ class ViewEngineServiceProvider extends ServiceProvider
         // We adding a view macro method in Response class.
         $macro = function (string $name, array $data = [], int $status = 200, array $header = []) use ($app) {
             $value = $app->view->render($name, $data);
+
             return $app->response->make($value, $status, $header);
         };
 
@@ -42,7 +43,7 @@ class ViewEngineServiceProvider extends ServiceProvider
     /**
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->app['view']->share('app', $this->app);
     }

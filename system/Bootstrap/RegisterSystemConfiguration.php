@@ -6,15 +6,13 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
  */
 
 namespace Octopy\Bootstrap;
-
-use Exception;
 
 use Octopy\FileSystem;
 use Octopy\Application;
@@ -43,7 +41,7 @@ class RegisterSystemConfiguration
     /**
      * @param Application $app
      */
-    public function bootstrap(Application $app)
+    public function bootstrap(Application $app): void
     {
         // Set path locator
         $this->path = $app->path;
@@ -62,7 +60,7 @@ class RegisterSystemConfiguration
      * @param  string $path
      * @return array
      */
-    protected function search(string $path) : array
+    protected function search(string $path): array
     {
         $config = [];
 
@@ -71,7 +69,7 @@ class RegisterSystemConfiguration
                 continue;
             }
 
-            $key = strtolower(substr($row->getFilename(), 0, -4));
+            $key = mb_strtolower(mb_substr($row->getFilename(), 0, -4));
 
             $config[$key] = require $row->getRealpath();
         }

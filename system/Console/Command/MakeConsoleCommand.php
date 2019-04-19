@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -42,10 +42,10 @@ class MakeConsoleCommand extends Command
             return $output->warning('Command already exists.');
         }
 
-        $data = array(
+        $data = [
             'DummyClassName' => $parsed['classname'],
-        );
-        
+        ];
+
         if ($this->generate($location, 'Command', $data)) {
             return $output->success('Command created successfully.');
         }

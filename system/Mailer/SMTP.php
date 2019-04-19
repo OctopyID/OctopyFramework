@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -46,18 +46,15 @@ class SMTP
     protected $boundary;
 
     /**
-    * @var string
-    */
+     * @var string
+     */
     protected $multipart;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $attachment = false;
 
-    /**
-     *
-     */
     public function __construct(Application $app)
     {
         $this->socket = $app->make(Socket::class, $app->config['mail']);
@@ -72,7 +69,7 @@ class SMTP
      */
     public function from(string $name, string $email)
     {
-        $this->from = array($name, $this->email($email));
+        $this->from = [$name, $this->email($email)];
 
         return $this;
     }
@@ -103,6 +100,7 @@ class SMTP
     public function subject(string $subject)
     {
         $this->subject = $subject;
+
         return $this;
     }
 
@@ -113,7 +111,7 @@ class SMTP
     public function message(string $message)
     {
         $this->message = $message;
-        
+
         return $this;
     }
 
@@ -123,23 +121,23 @@ class SMTP
      */
     public function attachment(string $path)
     {
-        if (!is_file($path)) {
+        if (! is_file($path)) {
             throw new AttachmentNotExistException;
         }
-            
+
         $fopen = fopen($path, 'rb');
-        $data  = fread($fopen, filesize($path));
+        $data = fread($fopen, filesize($path));
         fclose($fopen);
-        
+
         $filename = basename($path);
 
-        $multipart  = "\r\n--{$this->boundary}\r\n";
+        $multipart = "\r\n--{$this->boundary}\r\n";
         $multipart .= "Content-Type: application/octet-stream; name=\"{$filename}\"\r\n";
         $multipart .= "Content-Transfer-Encoding: base64\r\n";
         $multipart .= "Content-Disposition: attachment; filename=\"{$filename}\"\r\n";
         $multipart .= "\r\n";
         $multipart .= chunk_split(base64_encode($data));
-        
+
         $this->multipart .= $multipart;
         $this->attachment = true;
 
@@ -160,7 +158,7 @@ class SMTP
      */
     private function email(string $email)
     {
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new InvalidRecepientException;
         }
 
@@ -172,10 +170,10 @@ class SMTP
      */
     private function build()
     {
-        $headers  = "MIME-Version: 1.0\r\n";
-        $content  = "Date: " . date("D, d M Y H:i:s") . " UT\r\n";
-        $content .= 'Subject: =?utf-8?B?'  . base64_encode($this->subject) . "=?=\r\n";
-        
+        $headers = "MIME-Version: 1.0\r\n";
+        $content = 'Date: ' . date('D, d M Y H:i:s') . " UT\r\n";
+        $content .= 'Subject: =?utf-8?B?' . base64_encode($this->subject) . "=?=\r\n";
+
         if ($this->attachment === true) {
             $headers .= "Content-Type: multipart/mixed; boundary=\"{$this->boundary}\"\r\n";
         } else {
@@ -183,9 +181,9 @@ class SMTP
         }
 
         $headers .= "From: {$this->from[0]} <{$this->from[1]}>\r\n";
-        $headers .= "To: " . implode(',', $this->recepient) . "\r\n";
+        $headers .= 'To: ' . implode(',', $this->recepient) . "\r\n";
         $content .= $headers . "\r\n";
-        
+
         if ($this->attachment === true) {
             $content .= "--{$this->boundary}\r\n";
             $content .= "Content-Type: text/html; charset=utf-8\r\n";
@@ -197,7 +195,7 @@ class SMTP
         } else {
             $content .= $this->message . "\r\n";
         }
-        
+
         return trim($content);
     }
 }

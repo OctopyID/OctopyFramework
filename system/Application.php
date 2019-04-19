@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -14,7 +14,6 @@
 
 namespace Octopy;
 
-use Octopy\Container;
 use Octopy\Support\Macroable;
 
 class Application extends Container
@@ -49,7 +48,7 @@ class Application extends Container
         $this->basepath = $basepath;
 
         if ($this->instance(static::class, $this)) {
-            
+
             // Set instance aliases
             $aliases = include 'Config/Container.php';
             foreach ($aliases as $abstract => $concrete) {
@@ -61,7 +60,7 @@ class Application extends Container
     /**
      * @return string
      */
-    public function name() : string
+    public function name(): string
     {
         return $this['config']['app.name'];
     }
@@ -69,7 +68,7 @@ class Application extends Container
     /**
      * @return string
      */
-    public function version() : string
+    public function version(): string
     {
         return 'v0.2-dev';
     }
@@ -77,7 +76,7 @@ class Application extends Container
     /**
      * @return string
      */
-    public function locale() : string
+    public function locale(): string
     {
         return $this['config']['app.locale'];
     }
@@ -86,7 +85,7 @@ class Application extends Container
      * @param  string $subpath
      * @return string
      */
-    public function basepath(string $subpath = null) : string
+    public function basepath(string $subpath = null): string
     {
         return preg_replace('/\/+/', '/', $this->basepath . $subpath . DIRECTORY_SEPARATOR);
     }
@@ -94,7 +93,7 @@ class Application extends Container
     /**
      * @return bool
      */
-    public function debug() : bool
+    public function debug(): bool
     {
         return $this['config']['app.debug'];
     }
@@ -104,7 +103,7 @@ class Application extends Container
      */
     public function env(string $env = null)
     {
-        if (!is_null($env)) {
+        if (! is_null($env)) {
             return $this['config']['app.env'] === $env;
         }
 
@@ -114,7 +113,7 @@ class Application extends Container
     /**
      * @return bool
      */
-    public function console() : bool
+    public function console(): bool
     {
         if (isset($_ENV['APP_RUNNING_IN_CONSOLE'])) {
             return $_ENV['APP_RUNNING_IN_CONSOLE'] === 'true';
@@ -130,8 +129,8 @@ class Application extends Container
     public function register($provider, bool $force = false)
     {
         $name = is_string($provider) ? $provider : get_class($provider);
-    
-        if (isset($this->provider[$name]) && !$force) {
+
+        if (isset($this->provider[$name]) && ! $force) {
             return $this->provider[$name];
         }
 
@@ -153,7 +152,7 @@ class Application extends Container
     /**
      * @param callable $boot
      */
-    public function boot(callable $boot)
+    public function boot(callable $boot): void
     {
         $this->boot[] = $boot;
     }

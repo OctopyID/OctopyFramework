@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -39,24 +39,24 @@ class DotEnv
     {
         // We don't want to enforce the presence of a .env file,
         // they should be optional.
-        if (!is_file($this->path)) {
+        if (! is_file($this->path)) {
             return false;
         }
 
-        if (!is_readable($this->path)) {
+        if (! is_readable($this->path)) {
             throw new DotEnvException("The .env file is not readable: {$this->path}");
         }
 
         $lines = file($this->path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
         foreach ($lines as $line) {
-            if (strpos(trim($line), '#') === 0) {
+            if (mb_strpos(trim($line), '#') === 0) {
                 continue;
             }
 
             // If there is an equal sign, then we know we
             // are assigning a variable.
-            if (strpos($line, '=') !== false) {
+            if (mb_strpos($line, '=') !== false) {
                 $this->set($line);
             }
         }
@@ -68,18 +68,18 @@ class DotEnv
      * @param string $key
      * @param string $value
      */
-    protected function set(string $key, string $value = '')
+    protected function set(string $key, string $value = ''): void
     {
         extract($this->normalise($key, $value));
 
-        if (!getenv($key, true)) {
+        if (! getenv($key, true)) {
             putenv("$key=$value");
         }
 
         if (empty($_ENV[$key])) {
             $_ENV[$key] = $value;
         }
-        
+
         if (empty($_SERVER[$key])) {
             $_SERVER[$key] = $value;
         }
@@ -100,6 +100,7 @@ class DotEnv
                 break;
             default:
                 $value = getenv($key);
+
                 return $value === false ? null : $value;
         }
     }
@@ -107,7 +108,7 @@ class DotEnv
     /**
      * @return array
      */
-    public function all() : array
+    public function all(): array
     {
         return $_ENV;
     }
@@ -119,11 +120,11 @@ class DotEnv
      */
     protected function normalise(string $key, string $value = ''): array
     {
-        if (strpos($key, '=') !== false) {
+        if (mb_strpos($key, '=') !== false) {
             list($key, $value) = explode('=', $key, 2);
         }
 
-        $key  = trim($key);
+        $key = trim($key);
         $value = trim($value);
 
         // Sanitize the key
@@ -143,7 +144,7 @@ class DotEnv
      */
     protected function sanitize(string $value): string
     {
-        if (!$value) {
+        if (! $value) {
             return $value;
         }
 
@@ -161,7 +162,7 @@ class DotEnv
                     %1$s          # and the closing quote
                     .*$           # and discard any string after the closing quote
                     /mx',
-                $quote  = $value[0]
+                $quote = $value[0]
             );
 
             $value = preg_replace($regexp, '$1', $value);
@@ -185,9 +186,9 @@ class DotEnv
      * @param  string $value
      * @return string
      */
-    protected function nested(string $value) : string
+    protected function nested(string $value): string
     {
-        if (strpos($value, '$') !== false) {
+        if (mb_strpos($value, '$') !== false) {
             $loader = $this;
 
             $value = preg_replace_callback('/\${([a-zA-Z0-9_]+)}/', function ($matched) use ($loader) {

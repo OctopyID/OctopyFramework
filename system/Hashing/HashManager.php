@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -51,7 +51,7 @@ class HashManager
      */
     public function driver(string $driver = null)
     {
-        $driver = strtolower($driver ?? $this->app['config']['hashing.driver']);
+        $driver = mb_strtolower($driver ?? $this->app['config']['hashing.driver']);
 
         if ($this->hasher && $this->driver === $driver) {
             return $this->hasher;
@@ -100,7 +100,7 @@ class HashManager
      * @param  array  $option
      * @return bool
      */
-    public function verify($value, string $hashed, array $option = []) : bool
+    public function verify($value, string $hashed, array $option = []): bool
     {
         return $this->driver()->verify($value, $hashed, $option);
     }

@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -15,13 +15,9 @@
 namespace Octopy\HTTP\Routing;
 
 use Closure;
-
 use Octopy\Application;
 use Octopy\HTTP\Request;
 use Octopy\HTTP\Middleware;
-use Octopy\HTTP\Routing\Route;
-use Octopy\HTTP\Routing\Collection;
-use Octopy\HTTP\Routing\Dispatcher;
 
 class Router
 {
@@ -70,7 +66,7 @@ class Router
     /**
      * @param string $route
      */
-    public function load(string $route)
+    public function load(string $route): void
     {
         require $this->app['path']->app->route($route);
     }
@@ -79,12 +75,12 @@ class Router
      * @param array   $attribute
      * @param Closure $callback
      */
-    public function group(array $attribute, Closure $callback)
+    public function group(array $attribute, Closure $callback): void
     {
         foreach (['prefix', 'namespace', 'middleware'] as $attrname) {
             if (isset($attribute[$attrname])) {
                 if ($attrname === 'middleware') {
-                    $attribute[$attrname] = (array)$attribute[$attrname];
+                    $attribute[$attrname] = (array) $attribute[$attrname];
                 }
 
                 $this->group[$attrname][] = $attribute[$attrname];
@@ -104,7 +100,7 @@ class Router
      * @param string  $namespace
      * @param Closure $callback
      */
-    public function namespace(string $namespace, Closure $callback)
+    public function namespace(string $namespace, Closure $callback): void
     {
         $this->group(['namespace' => $namespace], $callback);
     }
@@ -113,7 +109,7 @@ class Router
      * @param string  $prefix
      * @param Closure $callback
      */
-    public function prefix(string $prefix, Closure $callback)
+    public function prefix(string $prefix, Closure $callback): void
     {
         $this->group(['prefix' => $prefix], $callback);
     }
@@ -122,7 +118,7 @@ class Router
      * @param string  $middleware
      * @param Closure $callback
      */
-    public function middleware(string $middleware, Closure $callback)
+    public function middleware(string $middleware, Closure $callback): void
     {
         $this->group(['middleware' => $middleware], $callback);
     }
@@ -160,7 +156,7 @@ class Router
     /**
      * @return array
      */
-    public function all() : array
+    public function all(): array
     {
         return $this->collection->all();
     }
@@ -186,7 +182,7 @@ class Router
             $uri = rtrim($uri, DS);
         }
 
-        if (substr($uri, 0, 1) !== DS) {
+        if (mb_substr($uri, 0, 1) !== DS) {
             $uri = DS . $uri;
         }
 
@@ -197,7 +193,7 @@ class Router
             }
 
             $controller = explode('@', $controller);
-            if (!isset($controller[1])) {
+            if (! isset($controller[1])) {
                 $controller[1] = '__invoke';
             }
 
@@ -248,7 +244,7 @@ class Router
      */
     protected function normalize($value)
     {
-        if (!is_string($value)) {
+        if (! is_string($value)) {
             return $value;
         }
 

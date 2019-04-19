@@ -14,9 +14,8 @@
 
 namespace Octopy\Session\Handler;
 
-use SessionHandlerInterface;
-
 use Octopy\Application;
+use SessionHandlerInterface;
 use Octopy\Session\Exception\SessionException;
 
 class FileSessionHandler implements SessionHandlerInterface
@@ -38,7 +37,7 @@ class FileSessionHandler implements SessionHandlerInterface
     {
         $this->storage = $config['storage'];
     }
-    
+
     /**
      * @@param  string $storage
      * @@param  string $name
@@ -48,11 +47,11 @@ class FileSessionHandler implements SessionHandlerInterface
     {
         $this->storage = $this->storage ?? $storage;
 
-        if (!is_dir($this->storage)) {
-            if (!mkdir($this->storage, 0755, true)) {
+        if (! is_dir($this->storage)) {
+            if (! mkdir($this->storage, 0755, true)) {
                 throw new SessionException("Configured save path [{$this->storage}] is not a directory, doesn't exist or cannot be created.");
             }
-        } elseif (!is_writable($this->storage)) {
+        } elseif (! is_writable($this->storage)) {
             throw new SessionException("Configured save path [{$this->storage}] is not writable by the PHP process.");
         }
 
@@ -82,7 +81,6 @@ class FileSessionHandler implements SessionHandlerInterface
         return $this->data ?? '';
     }
 
-
     /**
      * @param  string $id
      * @param  mixed  $data
@@ -91,13 +89,13 @@ class FileSessionHandler implements SessionHandlerInterface
     public function write($id, $data)
     {
         $filename = $this->storage . md5($id);
-       
+
         // check if data has changed since first read
         if ($data !== $this->data) {
             return file_put_contents($filename, $data, LOCK_EX) === false ? false : true;
-        } else {
-            return touch($filename);
         }
+
+        return touch($filename);
     }
 
     /**

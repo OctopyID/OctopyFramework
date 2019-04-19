@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -43,9 +43,9 @@ class URLGenerator
         if (array_key_exists($name, $this->route)) {
             preg_match($this->route[$name]->pattern, $this->route[$name]->uri, $matches);
 
-            $passed  = [];
+            $passed = [];
             $default = array_merge($this->route[$name]->parameter, $default);
-            
+
             foreach ($required = array_slice($matches, 1) as $key => $value) {
                 if (isset($default[$key])) {
                     $passed[$value] = $default[$key];

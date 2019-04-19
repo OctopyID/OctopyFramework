@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -22,7 +22,7 @@ use Octopy\HTTP\Request\FileHandler;
 class Request
 {
     use Macroable;
-    
+
     /**
      * @var ctopy\HTTP\Request\Collection
      */
@@ -48,13 +48,10 @@ class Request
      */
     protected $server;
 
-    /**
-     *
-     */
     public function __construct()
     {
         foreach (['query' => $_GET, 'request' => $_POST, 'file' => $_FILES, 'cookie' => $_COOKIE,
-             'server' => $_SERVER] as $property => $request) {
+             'server' => $_SERVER, ] as $property => $request) {
 
             //
             if ($property === 'file') {
@@ -79,7 +76,7 @@ class Request
 
         return $this->file($key);
     }
-    
+
     /**
      * @param  string $source
      * @param  string $key
@@ -88,7 +85,7 @@ class Request
      */
     public function retrieve(string $source, string $key = null, $default = null)
     {
-        if (!is_null($key)) {
+        if (! is_null($key)) {
             return $this->$source->get($key, $default);
         }
 
@@ -98,7 +95,7 @@ class Request
     /**
      * @return array
      */
-    public function all() : array
+    public function all(): array
     {
         return $this->input() + $this->file();
     }
@@ -155,7 +152,7 @@ class Request
     /**
      * @return string
      */
-    public function method() : string
+    public function method(): string
     {
         return $this->server('REQUEST_METHOD');
     }
@@ -163,7 +160,7 @@ class Request
     /**
      * @return string
      */
-    public function uri() : string
+    public function uri(): string
     {
         return preg_replace('/\+/', '/', $this->server('REQUEST_URI'));
     }
@@ -171,7 +168,7 @@ class Request
     /**
      * @return string
      */
-    public function url() : string
+    public function url(): string
     {
         return $this->scheme(true) . $this->domain() . $this->uri();
     }
@@ -179,19 +176,19 @@ class Request
     /**
      * @return string
      */
-    public function path() : string
+    public function path(): string
     {
         $root = explode('/', $this->server('PHP_SELF'));
         array_pop($root);
         $root = implode('/', $root);
-        
-        return rtrim(preg_replace('/\?.*/', '', preg_replace('/\/+/', '/', str_replace($root, '', $this->server('REQUEST_URI')))), '/') ? : '/';
+
+        return rtrim(preg_replace('/\?.*/', '', preg_replace('/\/+/', '/', str_replace($root, '', $this->server('REQUEST_URI')))), '/') ?: '/';
     }
 
     /**
      * @return string
      */
-    public function domain() : string
+    public function domain(): string
     {
         return $this->server('SERVER_NAME');
     }
@@ -199,7 +196,7 @@ class Request
     /**
      * @return string
      */
-    public function scheme(bool $suffix = false) : string
+    public function scheme(bool $suffix = false): string
     {
         if ($suffix) {
             return $this->server('REQUEST_SCHEME') . '://';
@@ -211,7 +208,7 @@ class Request
     /**
      * @return string
      */
-    public function uagent() : string
+    public function uagent(): string
     {
         return $this->server('HTTP_USER_AGENT');
     }
@@ -219,7 +216,7 @@ class Request
     /**
      * @return string
      */
-    public function referer() : string
+    public function referer(): string
     {
         return $this->server('HTTP_REFERER');
     }
@@ -227,7 +224,7 @@ class Request
     /**
      * @return bool
      */
-    public function secure() : bool
+    public function secure(): bool
     {
         return $this->server('HTTPS') === 'on';
     }
@@ -235,9 +232,9 @@ class Request
     /**
      * @return bool
      */
-    public function ajax() : bool
+    public function ajax(): bool
     {
-        return strtoupper($this->server('HTTP_X_REQUESTED_WITH')) === 'XMLHTTPREQUEST';
+        return mb_strtoupper($this->server('HTTP_X_REQUESTED_WITH')) === 'XMLHTTPREQUEST';
     }
 
     /**
@@ -249,9 +246,9 @@ class Request
         $header = [];
         foreach ($_SERVER as $key => $val) {
             if (preg_match('/\AHTTP_/', $key)) {
-                $name  = preg_replace('/\AHTTP_/', '', $key);
+                $name = preg_replace('/\AHTTP_/', '', $key);
                 $match = explode('_', $name);
-                if (count($match) > 0 and strlen($name) > 2) {
+                if (count($match) > 0 and mb_strlen($name) > 2) {
                     foreach ($match as $subkey => $subvalue) {
                         $match[$subkey] = ucfirst($subvalue);
                     }
@@ -259,14 +256,14 @@ class Request
                     $name = implode('-', $match);
                 }
 
-                $header[ucwords(strtolower($name), '-')] = $val;
+                $header[ucwords(mb_strtolower($name), '-')] = $val;
             }
         }
-        
-        if (!is_null($name)) {
+
+        if (! is_null($name)) {
             return $header[$name] ?? null;
         }
-        
+
         return $header;
     }
 
@@ -274,7 +271,7 @@ class Request
      * @param  bool $server
      * @return string
      */
-    public function ip(bool $server = false) : string
+    public function ip(bool $server = false): string
     {
         if ($server) {
             return $this->server('SERVER_ADDR');
@@ -286,7 +283,7 @@ class Request
     /**
      * @return int
      */
-    public function port() : int
+    public function port(): int
     {
         return $this->server('SERVER_PORT');
     }

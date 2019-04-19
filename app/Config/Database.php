@@ -6,14 +6,13 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
  */
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Default Database Connection Name
@@ -47,19 +46,19 @@ return [
             'hostname' => env('DB_HOSTNAME', 'localhost'),
             'database' => env('DB_DATABASE'),
             'username' => env('DB_USERNAME'),
-            'password' => env('DB_PASSWORD')
+            'password' => env('DB_PASSWORD'),
        ],
 
         'pgsql' => [
             'hostname' => env('DB_HOSTNAME', 'localhost'),
             'database' => env('DB_DATABASE'),
             'username' => env('DB_USERNAME'),
-            'password' => env('DB_PASSWORD')
+            'password' => env('DB_PASSWORD'),
        ],
 
         'sqlite' => [
-            'database' => ''
-       ]
+            'database' => '',
+       ],
    ],
 
     /*
@@ -84,5 +83,5 @@ return [
     | the migrations on disk haven't actually been run in the database.
     |
     */
-    'seeder' => $this->path->app->seeder('/')
+    'seeder' => $this->path->app->seeder('/'),
 ];

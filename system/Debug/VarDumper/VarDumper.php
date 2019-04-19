@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -57,20 +57,20 @@ class VarDumper
      * @var array
      */
     protected $colors = [
-        'boolean'    => ['#FFC447', 'purple'     ],
-        'double'     => ['#abb2bf', 'cyan'       ],
+        'boolean'    => ['#FFC447', 'purple'],
+        'double'     => ['#abb2bf', 'cyan'],
         'integer'    => ['#FFC447', 'light_green'],
-        'null'       => ['#FFC447', 'white'      ],
-        'recursion'  => ['#e06c75', 'red'        ],
-        'size'       => ['#21B089', 'green'      ],
-        'string'     => ['#589DF6', 'blue'       ],
-        'type'       => ['#BBBBBB', 'light_gray' ],
+        'null'       => ['#FFC447', 'white'],
+        'recursion'  => ['#e06c75', 'red'],
+        'size'       => ['#21B089', 'green'],
+        'string'     => ['#589DF6', 'blue'],
+        'type'       => ['#BBBBBB', 'light_gray'],
 
-        'array'      => ['#abb2bf', 'white'      ],
-        'arrow'      => ['#e06c75', 'red'        ],
-        'name'       => ['#e6c07b', 'yellow'     ],
-        'object'     => ['#abb2bf', 'white'      ],
-        'visibility' => ['#FA8C8F', 'light_red'  ],
+        'array'      => ['#abb2bf', 'white'],
+        'arrow'      => ['#e06c75', 'red'],
+        'name'       => ['#e6c07b', 'yellow'],
+        'object'     => ['#abb2bf', 'white'],
+        'visibility' => ['#FA8C8F', 'light_red'],
    ];
 
     /**
@@ -132,12 +132,9 @@ class VarDumper
         'negative'  => 7,
    ];
 
-    /**
-     *
-     */
     public function __construct()
     {
-        if (substr(PHP_SAPI, 0, 3) == 'cli') {
+        if (mb_substr(PHP_SAPI, 0, 3) === 'cli') {
             $this->console = true;
             $this->posix = $this->posix();
         }
@@ -146,7 +143,7 @@ class VarDumper
     /**
      * @return void
      */
-    public function dump() : void
+    public function dump(): void
     {
         foreach (func_get_args() as $arg) {
             $this->output($this->evaluate([$arg]));
@@ -156,7 +153,7 @@ class VarDumper
     /**
      * @return void
      */
-    public function dd() : void
+    public function dd(): void
     {
         $this->dump(...func_get_args());
         die();
@@ -165,7 +162,7 @@ class VarDumper
     /**
      * @return bool
      */
-    protected function above() : bool
+    protected function above(): bool
     {
         return count(debug_backtrace()) > $this->nesting;
     }
@@ -173,31 +170,31 @@ class VarDumper
     /**
      * @return bool
      */
-    protected function windows() : bool
+    protected function windows(): bool
     {
-        return (defined('PHP_OS') && (substr_compare(PHP_OS, 'win', 0, 3, true) === 0)) || (getenv('OS') != false && substr_compare(getenv('OS'), 'windows', 0, 7, true));
+        return (defined('PHP_OS') && (substr_compare(PHP_OS, 'win', 0, 3, true) === 0)) || (getenv('OS') !== false && substr_compare(getenv('OS'), 'windows', 0, 7, true));
     }
 
     /**
      * @return bool
      */
-    protected function posix() : bool
+    protected function posix(): bool
     {
         if ($this->force) {
             return true;
         }
-        
+
         if ($this->windows()) {
             return false;
         }
 
         if (function_exists('posix_isatty')) {
-            set_error_handler(function () {
+            set_error_handler(function (): void {
             });
-       
+
             $posix = posix_isatty(STDIN);
             restore_error_handler();
-       
+
             return $posix;
         }
 
@@ -209,27 +206,27 @@ class VarDumper
      * @param  string  $format
      * @return string
      */
-    protected function console(string $string, string $format = null) : string
+    protected function console(string $string, string $format = null): string
     {
-        if (!$format || !$this->posix) {
+        if (! $format || ! $this->posix) {
             return $string;
         }
 
         $format = $format ? explode('|', $format) : [];
 
-        return sprintf("\033[%sm%s\033[0m", implode(';', array_filter([$this->background[$format[1] ?? null] ?? null, $this->styles[$format[2] ?? null] ?? null, $this->foreground[$format[0] ?? null] ?? null,])), $string);
+        return sprintf("\033[%sm%s\033[0m", implode(';', array_filter([$this->background[$format[1] ?? null] ?? null, $this->styles[$format[2] ?? null] ?? null, $this->foreground[$format[0] ?? null] ?? null])), $string);
     }
 
     /**
      * @param string  $data
      */
-    protected function output(string $data) : void
+    protected function output(string $data): void
     {
-        if (!$this->console) {
+        if (! $this->console) {
             $data = preg_replace('/&lt;address\>|&lt;\/address><br \/>\n/', '', $data);
             echo '<pre style="background:#0c1021;font:85% Monaco, Consolas, monospace;padding:10px;line-height:1.3;">' . $data . '</pre>';
-           
-            if (!$this->initialized) {
+
+            if (! $this->initialized) {
                 $this->initialized = true;
                 echo '<script>function __vardump(c,b){var a=document.getElementById(c);a.classList.toggle("active")?(b.innerHTML=" \u25b6 ",a.style.display="none") :(b.innerHTML=" \u25bc ",a.style.display="inline")};</script>';
             }
@@ -243,10 +240,10 @@ class VarDumper
      * @param  string  $name
      * @return string
      */
-    protected function color($value, string $name) : ?string
+    protected function color($value, string $name): ?string
     {
-        if (!$this->console) {
-            if ($name == 'type') {
+        if (! $this->console) {
+            if ($name === 'type') {
                 return '<small style="color:' . $this->colors[$name][0] . '">' . $value . '</small>';
             }
 
@@ -261,13 +258,13 @@ class VarDumper
      * @param  int  $type
      * @return string
      */
-    protected function counter(int $size, int $type = 0) : string
+    protected function counter(int $size, int $type = 0): string
     {
-        if (!$this->console) {
-            return $this->color('<small>(' . ($type ? 'length' : 'size')  . ":{$size})</small>", 'size');
+        if (! $this->console) {
+            return $this->color('<small>(' . ($type ? 'length' : 'size') . ":{$size})</small>", 'size');
         }
 
-        return $this->color('(' . ($type ? 'length' : 'size')  . ":{$size})", 'size');
+        return $this->color('(' . ($type ? 'length' : 'size') . ":{$size})", 'size');
     }
 
     /**
@@ -275,7 +272,7 @@ class VarDumper
      * @param  string  $before
      * @return string
      */
-    protected function type(string $type, string $before = ' ') : string
+    protected function type(string $type, string $before = ' '): string
     {
         return "{$before}{$this->color($type, 'type')}";
     }
@@ -283,7 +280,7 @@ class VarDumper
     /**
      * @return string
      */
-    protected function break() : string
+    protected function break(): string
     {
         return $this->console ? "\n" : '<br>';
     }
@@ -292,18 +289,18 @@ class VarDumper
      * @param  iteger  $size
      * @return string
      */
-    protected function indent(int $size) : string
+    protected function indent(int $size): string
     {
-        return str_repeat(!$this->console ? '&nbsp;' : ' ', $size);
+        return str_repeat(! $this->console ? '&nbsp;' : ' ', $size);
     }
 
     /**
-     * @param  integer  $size
+     * @param  int  $size
      * @return string
      */
-    protected function pad(int $size) : string
+    protected function pad(int $size): string
     {
-        return str_repeat(!$this->console ? '&nbsp;' : ' ', $size < 0 ? 0 : $size);
+        return str_repeat(! $this->console ? '&nbsp;' : ' ', $size < 0 ? 0 : $size);
     }
 
     /**
@@ -311,7 +308,7 @@ class VarDumper
      * @param  bool    $parent
      * @return string
      */
-    protected function parent(string $key, bool $parent = false) : string
+    protected function parent(string $key, bool $parent = false): string
     {
         return $this->color("'$key'", 'name') . " {$this->color('=>', 'arrow')} ";
     }
@@ -321,24 +318,24 @@ class VarDumper
      * @param  bool   $object
      * @return string
      */
-    protected function array(array $array, bool $object) : string
+    protected function array(array $array, bool $object): string
     {
         $temporary = '';
         $this->indent += $this->padding;
         foreach ($array as $key => $arr) {
             if (is_array($arr)) {
-                $temporary .= $this->break() . $this->indent($this->indent) . $this->parent((string) $key)  . 'Array ' . $this->counter(count($arr));
-                
+                $temporary .= $this->break() . $this->indent($this->indent) . $this->parent((string) $key) . 'Array ' . $this->counter(count($arr));
+
                 $result = $this->array($arr, $object);
 
-                if ($object == false && $result != '') {
+                if ($object === false && $result !== '') {
                     $result .= $this->indent($this->indent);
                 }
 
-                if (!$this->console) {
-                    $id = time() . rand(0, 9999);
-                    
-                    $temporary .= " [<span onclick=\"__vardump('debug_" . $id . "', this)\"> ▼ </span><span id=\"debug_" . $id ."\">{$result}</span>]";
+                if (! $this->console) {
+                    $id = time() . mt_rand(0, 9999);
+
+                    $temporary .= " [<span onclick=\"__vardump('debug_" . $id . "', this)\"> ▼ </span><span id=\"debug_" . $id . "\">{$result}</span>]";
                 } else {
                     $temporary .= " [{$result}]";
                 }
@@ -350,7 +347,7 @@ class VarDumper
 
         $this->indent -= $this->padding;
 
-        if ($temporary != '') {
+        if ($temporary !== '') {
             $temporary .= $this->break();
             if ($object) {
                 $temporary .= $this->indent($this->indent);
@@ -364,7 +361,7 @@ class VarDumper
      * @param  object  $object
      * @return string
      */
-    protected function refcount($object) : string
+    protected function refcount($object): string
     {
         ob_start();
         debug_zval_dump($object);
@@ -386,7 +383,7 @@ class VarDumper
         $temporary = '';
         $reflection = new ReflectionObject($object);
         $this->indent += $this->padding;
-       
+
         foreach ($reflection->getProperties() as $size => $prop) {
             if ($prop->isPrivate()) {
                 $temporary .= "{$this->break()}{$this->indent($this->indent)}{$this->color('protected', 'visibility')}{$this->pad(2)} {$this->color(':', 'arrow')} ";
@@ -400,17 +397,17 @@ class VarDumper
             $temporary .= $this->color("'{$prop->getName()}'", 'name') . " {$this->color('=>', 'arrow')} {$this->evaluate([$prop->getValue($object)], true, true)}";
         }
 
-        if ($temporary != '') {
+        if ($temporary !== '') {
             $temporary .= $this->break();
         }
 
         $this->indent -= $this->padding;
 
-        $temporary .= $temporary != '' ? $this->indent($this->indent) : '';
+        $temporary .= $temporary !== '' ? $this->indent($this->indent) : '';
 
-        if (!$this->console) {
-            $id = time() . rand(0, 9999);
-            $format = $this->color('Object (:name) [:id] {<span onclick="__vardump(\'debug_' . $id . '\', this)"> ▼ </span><span id="debug_' . $id .'">:content</span>}', 'object');
+        if (! $this->console) {
+            $id = time() . mt_rand(0, 9999);
+            $format = $this->color('Object (:name) [:id] {<span onclick="__vardump(\'debug_' . $id . '\', this)"> ▼ </span><span id="debug_' . $id . '">:content</span>}', 'object');
         } else {
             $format = $this->color('Object (:name) [:id] {:content}', 'object');
         }
@@ -418,7 +415,7 @@ class VarDumper
         $temporary = str_replace([':name', ':id', ':content'], [
             $reflection->getName(),
             $this->color("#{$this->refcount($object)}", 'size'),
-            $temporary
+            $temporary,
        ], $format);
 
         return $temporary;
@@ -430,21 +427,21 @@ class VarDumper
      * @param  bool   $object
      * @return string
      */
-    protected function evaluate(array $args, bool $called = false, bool $object = false) : string
+    protected function evaluate(array $args, bool $called = false, bool $object = false): string
     {
         $temporary = null;
         foreach ($args as $each) {
             $type = gettype($each);
             switch ($type) {
                 case 'string':
-                    if (!$this->console) {
+                    if (! $this->console) {
                         $each = nl2br(str_replace(['<', ' '], ['&lt;', '&nbsp;'], $each));
                     }
 
-                    $temporary .=  $this->color("'{$each}'", $type) . " {$this->counter(strlen($each), 1)}{$this->type($type)}";
+                    $temporary .= $this->color("'{$each}'", $type) . " {$this->counter(mb_strlen($each), 1)}{$this->type($type)}";
                     break;
                 case 'integer':
-                    $temporary .=  "{$this->color((string) $each, $type)}{$this->type($type)}";
+                    $temporary .= "{$this->color((string) $each, $type)}{$this->type($type)}";
                     break;
                 case 'double':
                     $temporary .= "{$this->color((string) $each, $type)}{$this->type($type)}";
@@ -456,16 +453,16 @@ class VarDumper
                     $temporary .= "{$this->color($each ? 'true' : 'false', $type)}{$this->type($type)}";
                     break;
                 case 'array':
-                    if (!$this->console) {
-                        $id = time() . rand(0, 9999);
-                        $format = $this->color('Array :size [<span onclick="__vardump(\'debug_' . $id . '\', this)"> ▼ </span><span id="debug_' . $id .'">:content</span>]', 'array');
+                    if (! $this->console) {
+                        $id = time() . mt_rand(0, 9999);
+                        $format = $this->color('Array :size [<span onclick="__vardump(\'debug_' . $id . '\', this)"> ▼ </span><span id="debug_' . $id . '">:content</span>]', 'array');
                     } else {
                         $format = $this->color('Array :size [:content]', 'array');
                     }
 
                     $temporary .= str_replace([':size', ':content'], [
                         $this->counter(count($each)),
-                        $this->array($each, $object)
+                        $this->array($each, $object),
                    ], $format);
                     break;
                 case 'object':
@@ -473,7 +470,7 @@ class VarDumper
                     break;
             }
 
-            if (!$called) {
+            if (! $called) {
                 $temporary .= $this->break();
             }
         }

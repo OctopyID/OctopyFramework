@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -14,18 +14,16 @@
 
 namespace Octopy\Provider;
 
-use Octopy\Validation\Validator;
-
 class ValidationServiceProvider extends ServiceProvider
 {
     /**
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $app = $this->app;
         $app->request->macro('validate', function (array $rules) use ($app) {
-            if (!$app->validator->validate($this, $rules)) {
+            if (! $app->validator->validate($this, $rules)) {
                 $message = array_reverse($app->validator->message());
 
                 if ($this->ajax()) {

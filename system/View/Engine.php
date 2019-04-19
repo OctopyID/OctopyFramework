@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -17,9 +17,6 @@ namespace Octopy\View;
 use Closure;
 use Exception;
 use RuntimeException;
-
-use Octopy\View\Finder;
-use Octopy\View\Parser;
 
 class Engine
 {
@@ -67,12 +64,12 @@ class Engine
         $this->parser = new Parser($this);
         $this->finder = new Finder($resource, $compiled);
     }
-    
+
     /**
      * @param string $varname
      * @param mixed  $value
      */
-    public function share(string $varname, $value = null)
+    public function share(string $varname, $value = null): void
     {
         $this->shared[$varname] = $value;
     }
@@ -87,7 +84,7 @@ class Engine
             return $this->directive[$name] ?? null;
         }
 
-        if (!array_key_exists($name, $this->directive)) {
+        if (! array_key_exists($name, $this->directive)) {
             $this->directive[$name] = $handler;
         }
     }
@@ -106,7 +103,7 @@ class Engine
         if ($storage->octopy() && $storage->expired()) {
             $this->parser->compile($storage);
         }
-        
+
         try {
             $content = $this->evaluate($storage);
         } catch (Exception $exception) {
@@ -126,14 +123,14 @@ class Engine
             return $value;
         }
 
-        return is_string($value) ? htmlspecialchars($value, ENT_QUOTES|ENT_SUBSTITUTE, 'UTF-8', false) : $value;
+        return is_string($value) ? htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8', false) : $value;
     }
 
     /**
-      * @param  string $name
-      * @param  string $default
-      * @return string
-      */
+     * @param  string $name
+     * @param  string $default
+     * @return string
+     */
     protected function yield(string $name, string $default = null)
     {
         return ltrim($this->section[$this->trim($name)] ?? $default, "\n");
@@ -144,10 +141,10 @@ class Engine
      * @param  string $value
      * @return void
      */
-    protected function section(string $name, string $content = null)
+    protected function section(string $name, string $content = null): void
     {
         $name = $this->trim($name);
-        if (!array_key_exists($name, $this->section)) {
+        if (! array_key_exists($name, $this->section)) {
             if (ob_start()) {
                 $this->section[$name] = $content;
             }
@@ -157,7 +154,7 @@ class Engine
     /**
      * @return void
      */
-    protected function endsection()
+    protected function endsection(): void
     {
         $name = array_keys($this->section);
         if (array_key_exists($name = end($name), $this->section)) {
@@ -179,12 +176,13 @@ class Engine
             if ($octopy__[0]->octopy() && $octopy__[0]->compiled()) {
                 ob_start();
                 require $octopy__[0];
-                return ob_get_clean();
-            } else {
-                ob_start();
-                eval('; ?>' . $octopy__[0] . '<?php ;');
+
                 return ob_get_clean();
             }
+            ob_start();
+            eval('; ?>' . $octopy__[0] . '<?php ;');
+
+            return ob_get_clean();
         } catch (Exception $exception) {
             throw $exception;
         }
@@ -196,7 +194,7 @@ class Engine
      * @param  string $name
      * @return string
      */
-    protected function trim(string $name) : string
+    protected function trim(string $name): string
     {
         return trim(preg_replace('/(\.|\/)+/', '.', $name), '.');
     }

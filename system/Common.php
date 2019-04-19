@@ -6,15 +6,14 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
  */
-
 use Octopy\Support\App;
 
-if (!function_exists('app')) {
+if (! function_exists('app')) {
     /**
      * @param  string  $abstract
      * @param  array   $parameter
@@ -30,7 +29,7 @@ if (!function_exists('app')) {
     }
 }
 
-if (!function_exists('bcrypt')) {
+if (! function_exists('bcrypt')) {
     /**
      * @param  string $value
      * @param  array  $option
@@ -42,7 +41,7 @@ if (!function_exists('bcrypt')) {
     }
 }
 
-if (!function_exists('config')) {
+if (! function_exists('config')) {
     /**
      * @param  string $key
      * @param  mixed  $default
@@ -62,22 +61,22 @@ if (!function_exists('config')) {
     }
 }
 
-if (!function_exists('csrf')) {
+if (! function_exists('csrf')) {
     /**
      * @return string
      */
-    function csrf() : string
+    function csrf(): string
     {
         return App::make(Octopy\HTTP\Middleware\VerifyCSRFToken::class)->generate();
     }
 }
 
-if (!function_exists('dd')) {
+if (! function_exists('dd')) {
     /**
      * @param  mixed $dump
      * @return void
      */
-    function dd(...$dump)
+    function dd(...$dump): void
     {
         App::make('vardumper')->dd(...$dump);
     }
@@ -94,18 +93,18 @@ if (! function_exists('decrypt')) {
     }
 }
 
-if (!function_exists('dump')) {
+if (! function_exists('dump')) {
     /**
      * @param  mixed $dump
      * @return void
      */
-    function dump(...$dump)
+    function dump(...$dump): void
     {
         App::make('vardumper')->dump(...$dump);
     }
 }
 
-if (!function_exists('encrypt')) {
+if (! function_exists('encrypt')) {
     /**
      * @param  string $value
      * @return mixed
@@ -116,7 +115,7 @@ if (!function_exists('encrypt')) {
     }
 }
 
-if (!function_exists('env')) {
+if (! function_exists('env')) {
     /**
      * @param  string  $key
      * @param  mixed   $default
@@ -134,7 +133,7 @@ if (!function_exists('env')) {
             return $default;
         }
 
-        switch (strtolower($value)) {
+        switch (mb_strtolower($value)) {
             case 'true':
                 return true;
             case 'false':
@@ -142,14 +141,14 @@ if (!function_exists('env')) {
             case 'empty':
                 return '';
             case 'null':
-                return null;
+                return;
         }
 
         return $value;
     }
 }
 
-if (!function_exists('head')) {
+if (! function_exists('head')) {
     /**
      * @param  array $array
      * @return mixed
@@ -160,7 +159,7 @@ if (!function_exists('head')) {
     }
 }
 
-if (!function_exists('last')) {
+if (! function_exists('last')) {
     /**
      * @param  array $array
      * @return mixed
@@ -171,7 +170,7 @@ if (!function_exists('last')) {
     }
 }
 
-if (!function_exists('byteformatter')) {
+if (! function_exists('byteformatter')) {
     /**
      * @param  float $byte
      * @return string
@@ -179,7 +178,7 @@ if (!function_exists('byteformatter')) {
     function byteformatter($byte)
     {
         if ($byte < 1024) {
-            return ' ' .$byte . 'B';
+            return ' ' . $byte . 'B';
         } elseif ($byte < 1048576) {
             return ' ' . round($byte / 1024, 2) . 'KB';
         }
@@ -188,34 +187,34 @@ if (!function_exists('byteformatter')) {
     }
 }
 
-if (!function_exists('route')) {
+if (! function_exists('route')) {
     /**
      * @param  string $name
      * @param  array  $default
      * @return string
      */
-    function route(string $name, $default = []) : string
+    function route(string $name, $default = []): string
     {
-        if (!is_array($default)) {
-            $default = (array)$default;
+        if (! is_array($default)) {
+            $default = (array) $default;
         }
-        
+
         return App::make(Octopy\HTTP\Routing\URLGenerator::class)->route($name, $default);
     }
 }
 
-if (!function_exists('url')) {
+if (! function_exists('url')) {
     /**
      * @param  string $path
      * @return string
      */
-    function url(string $path) : string
+    function url(string $path): string
     {
         return config('app.url') . $path;
     }
 }
 
-if (!function_exists('value')) {
+if (! function_exists('value')) {
     /**
      * @param  mixed $value
      * @return mixed

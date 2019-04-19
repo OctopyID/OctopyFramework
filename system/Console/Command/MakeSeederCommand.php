@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -41,11 +41,11 @@ class MakeSeederCommand extends Command
         if (file_exists($location = $this->app['path']->app->DB->seeder($parsed['location']))) {
             return $output->warning('Seeder already exists.');
         }
-        
-        $data = array(
+
+        $data = [
             'DummyClassName' => $parsed['classname'],
-        );
-        
+        ];
+
         if ($this->generate($location, 'Seeder', $data)) {
             return $output->success('Seeder created successfully.');
         }

@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -15,7 +15,6 @@
 namespace Octopy\Bootstrap;
 
 use Throwable;
-
 use Octopy\Application;
 use Octopy\Config\DotEnv;
 
@@ -24,7 +23,7 @@ class RegisterEnvironmentVariable
     /**
      * @param Application $app
      */
-    public function bootstrap(Application $app)
+    public function bootstrap(Application $app): void
     {
         try {
             $app->instance('env', new DotEnv($app->basepath() . '.env'))->load();

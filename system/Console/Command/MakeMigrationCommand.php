@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -43,16 +43,16 @@ class MakeMigrationCommand extends Command
         }
 
         if (($table = $argv->get('-t')) === false && ($table = $argv->get('--table')) === false) {
-            $table = strtolower($parsed['classname']);
+            $table = mb_strtolower($parsed['classname']);
         }
 
-        $data = array(
+        $data = [
             'DummyTimeStamp' => time(),
             'DummyTableName' => $table,
             'DummyNameSpace' => $parsed['namespace'],
             'DummyClassName' => $parsed['classname'],
-        );
-        
+        ];
+
         if ($this->generate($location, 'Migration', $data)) {
             return $output->success('Migration created successfully.');
         }

@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -42,9 +42,9 @@ class Argv
                 } else {
                     $this->option[$array[0]] = true;
                 }
-            } elseif (preg_match('/^-(.*?)/', $value) && strlen($value) === 2) {
+            } elseif (preg_match('/^-(.*?)/', $value) && mb_strlen($value) === 2) {
                 $this->option[$value] = $argv[$i + 1] ?? true;
-            } elseif (!array_key_exists('value', $this->option)) {
+            } elseif (! array_key_exists('value', $this->option)) {
                 $this->option['value'] = $value;
             }
         }
@@ -54,7 +54,7 @@ class Argv
      * @param  array $option
      * @return void
      */
-    public function option(array $option)
+    public function option(array $option): void
     {
         $this->option = array_merge($this->option, $option);
     }
@@ -75,7 +75,7 @@ class Argv
      */
     public function command(string $command = null)
     {
-        if (!is_null($command)) {
+        if (! is_null($command)) {
             return $this->command === $command;
         }
 
@@ -94,7 +94,7 @@ class Argv
     /**
      * @param string $key
      */
-    public function remove(string $key)
+    public function remove(string $key): void
     {
         if (isset($this->option[$key])) {
             unset($this->option[$key]);

@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -35,7 +35,7 @@ class DebugBar
     /**
      * @return bool
      */
-    public function enabled() : bool
+    public function enabled(): bool
     {
         return $this->app['config']['debugbar.enable'] && $this->app['config']['app.debug'];
     }
@@ -44,13 +44,13 @@ class DebugBar
      * @param  Response $response
      * @return Response
      */
-    public function modify(Response $response) : Response
+    public function modify(Response $response): Response
     {
-        $debugbar  = '<div class="debugbar"></div>' . $this->javascript();
+        $debugbar = '<div class="debugbar"></div>' . $this->javascript();
 
-        $position = strripos($body = $response->body, '</body>');
+        $position = mb_strripos($body = $response->body, '</body>');
         if ($position !== false) {
-            $body = substr($body, 0, $position) . $debugbar . substr($body, $position);
+            $body = mb_substr($body, 0, $position) . $debugbar . mb_substr($body, $position);
         } else {
             $body = $body . $debugbar;
         }
@@ -65,9 +65,9 @@ class DebugBar
     /**
      * @return string
      */
-    private function javascript() : string
+    private function javascript(): string
     {
-        $js  = '<script type="text/javascript" src="' . route('debugbar.assets', 'jquery.js') . '"></script>';
+        $js = '<script type="text/javascript" src="' . route('debugbar.assets', 'jquery.js') . '"></script>';
         $js .= '<script type="text/javascript">$(document).ready(function(){$("div.debugbar").load("' . route('debugbar') . '");});</script>';
 
         return $js;

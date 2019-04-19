@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -43,7 +43,7 @@ class Stream
     /**
      * @return string
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         return printf('%s(%s)', $this->code(), $this->expression());
     }
@@ -51,7 +51,7 @@ class Stream
     /**
      * @return string
      */
-    public function code() : string
+    public function code(): string
     {
         return $this->code;
     }
@@ -59,7 +59,7 @@ class Stream
     /**
      * @return int
      */
-    public function token() : int
+    public function token(): int
     {
         return $this->token;
     }
@@ -67,10 +67,10 @@ class Stream
     /**
      * @return string
      */
-    public function expression() : string
+    public function expression(): string
     {
-        if (strstr($this->expression, '(')) {
-            return substr($this->expression, 1, -1);
+        if (mb_strstr($this->expression, '(')) {
+            return mb_substr($this->expression, 1, -1);
         }
 
         return $this->expression;
@@ -80,7 +80,7 @@ class Stream
      * @param  mixed $expression
      * @return bool
      */
-    public function next($expression) : bool
+    public function next($expression): bool
     {
         return $expression === $this->code || $expression === $this->token;
     }

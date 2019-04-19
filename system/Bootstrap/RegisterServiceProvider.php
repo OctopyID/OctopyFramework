@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -21,12 +21,12 @@ class RegisterServiceProvider
     /**
      * @param Application $app
      */
-    public function bootstrap(Application $app)
+    public function bootstrap(Application $app): void
     {
         $array = $app->config->get('app.provider', []);
 
         usort($array, function ($provider) {
-            return substr($provider, 0, 3) === 'App';
+            return mb_substr($provider, 0, 3) === 'App';
         });
 
         foreach ($array as $provider) {

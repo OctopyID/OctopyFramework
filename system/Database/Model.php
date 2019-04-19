@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -16,8 +16,8 @@ namespace Octopy\Database;
 
 use ArrayIterator;
 use Octopy\Database;
-use Octopy\Container;
 use JsonSerializable;
+use Octopy\Container;
 use IteratorAggregate;
 
 class Model implements IteratorAggregate, JsonSerializable
@@ -64,7 +64,7 @@ class Model implements IteratorAggregate, JsonSerializable
             $db->table($this->table);
         } else {
             $model = explode(BS, static::class);
-            $db->table(strtolower(end($model)));
+            $db->table(mb_strtolower(end($model)));
         }
 
         return $db->$method(...$args);
@@ -95,7 +95,7 @@ class Model implements IteratorAggregate, JsonSerializable
             $db->table($instance->table);
         } else {
             $model = explode(BS, $model);
-            $db->table(strtolower(end($model)));
+            $db->table(mb_strtolower(end($model)));
         }
 
         return $db->where($foreign, $this->$primary);

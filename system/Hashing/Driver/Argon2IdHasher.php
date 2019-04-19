@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -24,13 +24,13 @@ class Argon2IdHasher extends ArgonHasher
      * @param  array  $option
      * @return bool
      */
-    public function verify($value, $hashed, array $option = []) : bool
+    public function verify($value, $hashed, array $option = []): bool
     {
         if ($this->verify && $this->info($hashed)['algoName'] !== 'argon2id') {
             throw new RuntimeException('This password does not use the Argon2id algorithm.');
         }
 
-        if (strlen($hashed) === 0) {
+        if (mb_strlen($hashed) === 0) {
             return false;
         }
 

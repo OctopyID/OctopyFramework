@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -19,7 +19,6 @@ use Throwable;
 use ArrayAccess;
 use ReflectionClass;
 use ReflectionException;
-
 use Octopy\Container\Exception\BindingResolutionException;
 
 class Container implements ArrayAccess
@@ -57,7 +56,7 @@ class Container implements ArrayAccess
      * @param string   $abstract
      * @param callable $instance
      */
-    public function __set(string $abstract, $instance)
+    public function __set(string $abstract, $instance): void
     {
         static::instance($abstract, $instance);
     }
@@ -66,7 +65,7 @@ class Container implements ArrayAccess
      * @param  string $abstract
      * @return bool
      */
-    public static function has(string $abstract) : bool
+    public static function has(string $abstract): bool
     {
         return isset(static::$instances[$abstract]);
     }
@@ -79,7 +78,7 @@ class Container implements ArrayAccess
     public static function instance(string $abstract, $instance)
     {
         $abstract = static::alias($abstract);
-        if (!array_key_exists($abstract, static::$instances)) {
+        if (! array_key_exists($abstract, static::$instances)) {
             static::$instances[$abstract] = $instance;
         }
 
@@ -96,7 +95,7 @@ class Container implements ArrayAccess
             unset(static::$instances[$abstract]);
         }
 
-        return new Container;
+        return new self;
     }
 
     /**
@@ -112,7 +111,7 @@ class Container implements ArrayAccess
 
         static::$aliases[$abstract] = $concrete;
     }
-    
+
     /**
      * @param  string $abstract
      * @param  array  $parameter
@@ -131,8 +130,8 @@ class Container implements ArrayAccess
     public static function resolve($abstract, array $parameter = [])
     {
         $abstract = static::alias($abstract);
-        
-        if (!empty($parameter)) {
+
+        if (! empty($parameter)) {
             static::unset($abstract);
         }
 
@@ -167,22 +166,22 @@ class Container implements ArrayAccess
 
         $reflector = new ReflectionClass($concrete);
 
-        if (!$reflector->isInstantiable()) {
+        if (! $reflector->isInstantiable()) {
             if (empty(static::$concretes)) {
                 throw new BindingResolutionException(
                     sprintf('Class [%s] is not instantiable.', $concrete)
                 );
-            } else {
-                throw new BindingResolutionException(
+            }
+            throw new BindingResolutionException(
                     sprintf('Class [%s] is not instantiable while building [%s].', $concrete, implode(', ', static::$concretes))
                 );
-            }
         }
 
         static::$concretes[] = $concrete;
 
         if (is_null($constructor = $reflector->getConstructor())) {
             array_pop(static::$concretes);
+
             return $reflector->newInstance();
         }
 
@@ -192,7 +191,7 @@ class Container implements ArrayAccess
                 $depedencies[] = $parameter[$dependency->name];
             } else {
                 try {
-                    if (!is_null($dependency->getClass())) {
+                    if (! is_null($dependency->getClass())) {
                         try {
                             $depedencies[] = static::make($dependency->getClass()->name);
                         } catch (BindingResolutionException $exception) {
@@ -203,12 +202,12 @@ class Container implements ArrayAccess
                             throw $exception;
                         }
                     } else {
-                        if (!$dependency->isDefaultValueAvailable()) {
+                        if (! $dependency->isDefaultValueAvailable()) {
                             throw new BindingResolutionException(
                                 sprintf('Unresolvable dependency resolving [%s] in class [%s]', $dependency, $dependency->getDeclaringClass()->getName())
                             );
                         }
-               
+
                         $depedencies[] = $dependency->getDefaultValue();
                     }
                 } catch (ReflectionException $exception) {
@@ -255,7 +254,7 @@ class Container implements ArrayAccess
     /**
      * @param string $key
      */
-    public function offsetUnset($key)
+    public function offsetUnset($key): void
     {
         static::unset($key);
     }

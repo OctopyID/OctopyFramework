@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
     /**
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         //
     }
@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
     /**
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         //
     }

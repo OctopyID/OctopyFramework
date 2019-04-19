@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -15,7 +15,6 @@
 namespace Octopy\Provider;
 
 use RuntimeException;
-
 use Octopy\Encryption\Encrypter;
 
 class EncryptionServiceProvider extends ServiceProvider
@@ -23,12 +22,12 @@ class EncryptionServiceProvider extends ServiceProvider
     /**
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         if ($this->app->console()) {
             return;
         }
-        
+
         $key = $this->key(
             $config = $this->app['config']['app']
         );
@@ -40,7 +39,7 @@ class EncryptionServiceProvider extends ServiceProvider
      * @param  array $config
      * @return string
      */
-    protected function key(array $config) : string
+    protected function key(array $config): string
     {
         if (empty($key = $config['key'])) {
             throw new RuntimeException(
@@ -49,7 +48,7 @@ class EncryptionServiceProvider extends ServiceProvider
         }
 
         if (preg_match('/base64:/', $key)) {
-            $key = base64_decode(substr($key, 7));
+            $key = base64_decode(mb_substr($key, 7));
         }
 
         return $key;

@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -41,12 +41,12 @@ class MakeMiddlewareCommand extends Command
         if (file_exists($location = $this->app['path']->app->HTTP->middleware($parsed['location']))) {
             return $output->warning('Middleware already exists.');
         }
-        
-        $data = array(
+
+        $data = [
             'DummyNameSpace' => $parsed['namespace'],
             'DummyClassName' => $parsed['classname'],
-        );
-        
+        ];
+
         if ($this->generate($location, 'Middleware', $data)) {
             return $output->success('Middleware created successfully.');
         }

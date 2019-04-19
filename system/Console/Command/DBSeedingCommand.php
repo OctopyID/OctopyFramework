@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -39,13 +39,13 @@ class DBSeedingCommand extends Command
     {
         $directory = $this->app['path']->app->DB('Seeder');
 
-        if (!is_dir($directory)) {
+        if (! is_dir($directory)) {
             return $output->warning('Nothing to seeds.');
         }
 
-        $seed = !$argv->get('value') || !$argv->get('--seed') ? 'DatabaseSeeder' : $argv->get('value');
-            
-        if (!class_exists('App\DB\Seeder\DatabaseSeeder')) {
+        $seed = ! $argv->get('value') || ! $argv->get('--seed') ? 'DatabaseSeeder' : $argv->get('value');
+
+        if (! class_exists('App\DB\Seeder\DatabaseSeeder')) {
             $this->call('make:seeder', ['value' => 'DatabaseSeeder']);
         }
 
@@ -56,13 +56,13 @@ class DBSeedingCommand extends Command
      * @param Output $output
      * @param string $seed
      */
-    private function seed(Output $output, string $seed)
+    private function seed(Output $output, string $seed): void
     {
         echo $output->success('Seeding : {white}' . $seed);
 
         call_user_func([$seeder = $this->app->make('App\\DB\\Seeder\\' . $seed), 'seed']);
-       
-        if (!empty($seeds = $seeder->call())) {
+
+        if (! empty($seeds = $seeder->call())) {
             foreach ($seeds as $i => $seed) {
                 $this->seed($output, str_replace('App\\DB\\Seeder\\', '', $seed));
             }

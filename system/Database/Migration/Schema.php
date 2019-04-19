@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @version : v1.0
  * @license : MIT
@@ -15,8 +15,6 @@
 namespace Octopy\Database\Migration;
 
 use Closure;
-use Exception;
-
 use Octopy\Application;
 use Octopy\Database\Exception\DBException;
 

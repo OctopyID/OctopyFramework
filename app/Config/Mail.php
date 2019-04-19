@@ -6,14 +6,13 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
  */
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | SMTP Host Address
@@ -37,7 +36,7 @@ return [
     |
     */
     'port' => env('MAIL_PORT', 465),
-        
+
     /*
     |--------------------------------------------------------------------------
     | SMTP Server Authentication
@@ -50,6 +49,6 @@ return [
     */
     'auth' => [
         'username' => env('MAIL_USERNAME'),
-        'password' => env('MAIL_PASSWORD')
-   ]
+        'password' => env('MAIL_PASSWORD'),
+   ],
 ];

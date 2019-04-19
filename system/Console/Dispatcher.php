@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -16,11 +16,9 @@ namespace Octopy\Console;
 
 use Closure;
 use ReflectionMethod;
-use ReflectionFunction;
-
 use Octopy\Application;
 use Octopy\Support\Arr;
-use Octopy\Console\Route;
+use ReflectionFunction;
 
 class Dispatcher
 {
@@ -28,12 +26,12 @@ class Dispatcher
      * @var Octopy\Application
      */
     protected $app;
-    
+
     /**
      * @var Octopy\Console\Route
      */
     protected $command;
-    
+
     /**
      * @param Application $app
      * @param Route     $command
@@ -47,10 +45,10 @@ class Dispatcher
     /**
      * @return string
      */
-    public function run() : ?string
+    public function run(): ?string
     {
         $parameter = [];
-        if (!$this->command->handler instanceof Closure) {
+        if (! $this->command->handler instanceof Closure) {
             $parameter = $this->class($parameter, $command = $this->app->make($this->command->handler), 'handle');
 
             return $this->trim($command->handle(...array_values($parameter)));
@@ -69,7 +67,7 @@ class Dispatcher
      */
     protected function class(array $parameter, $instance, string $method)
     {
-        if (!method_exists($instance, $method)) {
+        if (! method_exists($instance, $method)) {
             return $parameter;
         }
 
@@ -81,7 +79,7 @@ class Dispatcher
      * @param  unknown $reflector
      * @return array
      */
-    public function method(array $parameter, $reflector) : array
+    public function method(array $parameter, $reflector): array
     {
         $count = 0;
 
@@ -90,10 +88,10 @@ class Dispatcher
         foreach ($reflector->getParameters() as $key => $dependency) {
             $instance = $this->transform($dependency, $parameter);
 
-            if (!is_null($instance)) {
+            if (! is_null($instance)) {
                 $count++;
                 $this->splice($parameter, $key, $instance);
-            } elseif (!isset($array[$key - $count]) && $dependency->isDefaultValueAvailable()) {
+            } elseif (! isset($array[$key - $count]) && $dependency->isDefaultValueAvailable()) {
                 $this->splice($parameter, $key, $dependency->getDefaultValue());
             }
         }
@@ -110,7 +108,7 @@ class Dispatcher
     {
         $class = $dependency->getClass();
 
-        if ($class && !$this->already($class->name, $parameter)) {
+        if ($class && ! $this->already($class->name, $parameter)) {
             return $dependency->isDefaultValueAvailable() ? $dependency->getDefaultValue() : $this->app->make($class->name);
         }
     }
@@ -122,7 +120,7 @@ class Dispatcher
      */
     protected function already($class, array $parameter)
     {
-        return !is_null(Arr::first($parameter, function ($array) use ($class) {
+        return ! is_null(Arr::first($parameter, function ($array) use ($class) {
             return $array instanceof $class;
         }));
     }
@@ -133,7 +131,7 @@ class Dispatcher
      * @param  mixed  $array
      * @return void
      */
-    protected function splice(array &$parameter, $offset, $array)
+    protected function splice(array &$parameter, $offset, $array): void
     {
         array_splice($parameter, $offset, 0, [$array]);
     }

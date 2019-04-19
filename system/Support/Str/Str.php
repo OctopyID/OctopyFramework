@@ -6,16 +6,13 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
  */
 
 namespace Octopy\Support;
-
-use Octopy\Support\Arr;
-use Octopy\Support\Macroable;
 
 class Str
 {
@@ -38,7 +35,7 @@ class Str
             // If the given value is an exact match we can of course return true right
             // from the beginning. Otherwise, we will translate asterisks and do an
             // actual pattern match against the two strings to see if they match.
-            if ($pattern == $value) {
+            if ($pattern === $value) {
                 return true;
             }
 
@@ -49,7 +46,7 @@ class Str
             // pattern such as "library/*", making any string check convenient.
             $pattern = str_replace('\*', '.*', $pattern);
 
-            if (preg_match('#^'.$pattern.'\z#u', $value) === 1) {
+            if (preg_match('#^' . $pattern . '\z#u', $value) === 1) {
                 return true;
             }
         }
@@ -83,7 +80,7 @@ class Str
             return $value;
         }
 
-        return rtrim(mb_strimwidth($value, 0, $limit, '', 'UTF-8')).$end;
+        return rtrim(mb_strimwidth($value, 0, $limit, '', 'UTF-8')) . $end;
     }
 
     /**
@@ -103,13 +100,13 @@ class Str
      */
     public static function words($value, $words = 100, $end = '...')
     {
-        preg_match('/^\s*+(?:\S++\s*+){1,'.$words.'}/u', $value, $matches);
+        preg_match('/^\s*+(?:\S++\s*+){1,' . $words . '}/u', $value, $matches);
 
         if (! isset($matches[0]) || static::length($value) === static::length($matches[0])) {
             return $value;
         }
 
-        return rtrim($matches[0]).$end;
+        return rtrim($matches[0]) . $end;
     }
 
     /**
@@ -120,12 +117,12 @@ class Str
     {
         $string = '';
 
-        while (($len = strlen($string)) < $length) {
+        while (($len = mb_strlen($string)) < $length) {
             $size = $length - $len;
 
             $bytes = random_bytes($size);
 
-            $string .= substr(str_replace(['/', '+', '='], '', base64_encode($bytes)), 0, $size);
+            $string .= mb_substr(str_replace(['/', '+', '='], '', base64_encode($bytes)), 0, $size);
         }
 
         return $string;

@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -14,7 +14,6 @@
 
 namespace Octopy;
 
-use Octopy\Application;
 use Octopy\Console\Argv;
 use Octopy\Console\Route;
 use Octopy\Console\Output;
@@ -52,7 +51,7 @@ class Console
     /**
      * @return array
      */
-    public function all() : array
+    public function all(): array
     {
         return $this->collection->all();
     }
@@ -65,7 +64,7 @@ class Console
     public function dispatch(Argv $input, Output $output)
     {
         $command = $input->command();
-        
+
         if ($this->has($command)) {
             return $this->call($command);
         }
@@ -77,7 +76,7 @@ class Console
      * @param  string $command
      * @return bool
      */
-    public function has(?string $command) : bool
+    public function has(?string $command): bool
     {
         return isset($this->collection[$command]);
     }
@@ -94,7 +93,7 @@ class Console
     /**
      * @param string $route
      */
-    public function load(string $route)
+    public function load(string $route): void
     {
         require $this->app['path']->app->route($route);
     }

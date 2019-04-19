@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -33,7 +33,7 @@ class PathLocator
      * @var array
      */
     protected $extension = ['octopy', 'php', 'html', 'js', 'css', 'cache', 'png', 'jpg', 'ico', 'svg', 'mp4', 'flv', 'mp3', 'log'];
-    
+
     /**
      * @param Application $app
      */
@@ -55,16 +55,16 @@ class PathLocator
      * @param  string $path
      * @return $this
      */
-    public function __get(string $path) : PathLocator
+    public function __get(string $path): self
     {
-        if (!empty($this->subpath)) {
-            if ($path !== 'app' && !in_array($path, ['app', 'system', 'public', 'storage'])) {
+        if (! empty($this->subpath)) {
+            if ($path !== 'app' && ! in_array($path, ['app', 'system', 'public', 'storage'])) {
                 $path = ucfirst($path);
             }
         }
 
         $this->subpath[] = $path;
-        
+
         return $this;
     }
 
@@ -75,7 +75,7 @@ class PathLocator
      */
     public function __call(string $path, array $additional = [])
     {
-        if (!in_array($path, ['app', 'system', 'public', 'storage'])) {
+        if (! in_array($path, ['app', 'system', 'public', 'storage'])) {
             $path = ucfirst($path);
         }
 
@@ -83,7 +83,7 @@ class PathLocator
 
         if (isset($additional[0])) {
             $this->subpath[] = $additional[0];
-            if (!preg_match('/\.(' . implode('|', $this->extension) . ')/', strtolower($additional[0]))) {
+            if (! preg_match('/\.(' . implode('|', $this->extension) . ')/', mb_strtolower($additional[0]))) {
                 $this->subpath[] = '/';
             }
         } else {
@@ -99,7 +99,7 @@ class PathLocator
             return preg_replace('/\/+/', '/', $location);
         };
 
-        return $location(function () {
+        return $location(function (): void {
             $this->subpath = [];
         });
     }

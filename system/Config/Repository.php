@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -78,7 +78,7 @@ class Repository implements ArrayAccess
      * @param mixed $key
      * @param mixed $value
      */
-    public function set($key, $value = null)
+    public function set($key, $value = null): void
     {
         $keys = is_array($key) ? $key : [$key => $value];
 
@@ -91,7 +91,7 @@ class Repository implements ArrayAccess
      * @param string $key
      * @param mixed  $value
      */
-    public function prepend($key, $value)
+    public function prepend($key, $value): void
     {
         $array = $this->get($key);
 
@@ -104,15 +104,15 @@ class Repository implements ArrayAccess
      * @param string $key
      * @param mixed  $value
      */
-    public function push(string $key, $value)
+    public function push(string $key, $value): void
     {
-        $this->set($key, array_merge($this->get($key), (array)$value));
+        $this->set($key, array_merge($this->get($key), (array) $value));
     }
 
     /**
      * @return array
      */
-    public function all() : array
+    public function all(): array
     {
         return $this->items;
     }
@@ -139,7 +139,7 @@ class Repository implements ArrayAccess
      * @param string $key
      * @param mixed  $value
      */
-    public function offsetSet($key, $value)
+    public function offsetSet($key, $value): void
     {
         $this->set($key, $value);
     }
@@ -147,7 +147,7 @@ class Repository implements ArrayAccess
     /**
      * @param string $key
      */
-    public function offsetUnset($key)
+    public function offsetUnset($key): void
     {
         $this->set($key, null);
     }

@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -39,7 +39,7 @@ class Finder
      */
     public function __construct($resource = [], ?string $compiled = null)
     {
-        if (!is_array($resource)) {
+        if (! is_array($resource)) {
             $resource = (array) $resource;
         }
 
@@ -50,15 +50,15 @@ class Finder
     /**
      * @param mixed $resource
      */
-    public function set($resource)
+    public function set($resource): void
     {
-        $this->resource = array_merge($this->resource, (array)$resource);
+        $this->resource = array_merge($this->resource, (array) $resource);
     }
 
     /**
      * @return array
      */
-    public function template() : array
+    public function template(): array
     {
         return $this->template;
     }
@@ -67,14 +67,14 @@ class Finder
      * @param  string $name
      * @return Storage
      */
-    public function find(string $name) : Storage
+    public function find(string $name): Storage
     {
         if (array_key_exists($name, $this->template)) {
             return $this->template[$name];
         }
 
         $compiled = $this->compiled ? $this->compiled . md5($name) . '.php' : null;
-        
+
         $template = str_replace('.', '/', $name);
         foreach ($this->resource as $resource) {
             $resource = array_map(function ($extension) use ($resource, $template) {

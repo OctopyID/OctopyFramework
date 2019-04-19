@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -26,14 +26,14 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         // http
         $route = $this->app['route'];
-        $route->namespace($this->namespace, function () use ($route) {
+        $route->namespace($this->namespace, function () use ($route): void {
             $route->load('Web.php');
 
-            $route->prefix('api', function () use ($route) {
+            $route->prefix('api', function () use ($route): void {
                 $route->load('Api.php');
             });
         });

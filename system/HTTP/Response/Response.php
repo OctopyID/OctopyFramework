@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -16,9 +16,8 @@ namespace Octopy\HTTP;
 
 use ArrayObject;
 use JsonSerializable;
-use UnexpectedValueException;
-
 use Octopy\Support\Macroable;
+use UnexpectedValueException;
 use Octopy\HTTP\Response\Header;
 use Octopy\HTTP\Response\JsonResponse;
 use Octopy\HTTP\Response\RedirectResponse;
@@ -123,7 +122,7 @@ class Response
         510 => 'Not Extended',
         511 => 'Network Authentication Required',
         598 => 'Network Read Timeout Error',
-        599 => 'Network Connect Timeout Error'
+        599 => 'Network Connect Timeout Error',
    ];
 
     /**
@@ -168,7 +167,7 @@ class Response
      */
     public function make($data, int $status = 200, array $header = [])
     {
-        if ($data instanceof Response) {
+        if ($data instanceof self) {
             return $data;
         }
 
@@ -189,7 +188,7 @@ class Response
      */
     public function body($body)
     {
-        if (!is_null($body) && !is_string($body) && !is_numeric($body) && !is_callable([$body, '__toString'])) {
+        if (! is_null($body) && ! is_string($body) && ! is_numeric($body) && ! is_callable([$body, '__toString'])) {
             throw new UnexpectedValueException(
                 'The response body must be a string or object implementing __toString() given ' . gettype($body)
             );
@@ -244,7 +243,7 @@ class Response
      * @param  int $status
      * @return string
      */
-    public function reason(int $status) : string
+    public function reason(int $status): string
     {
         if ($status < 99 || $status > 599) {
             $status = 500;
@@ -268,14 +267,14 @@ class Response
         }
 
         $this->header->set(...$header);
-        
+
         return $this;
     }
 
     /**
      * @return array
      */
-    public function headers() : array
+    public function headers(): array
     {
         return $this->header->all();
     }
@@ -283,9 +282,9 @@ class Response
     /**
      * @return void
      */
-    public function send()
+    public function send(): void
     {
-        if (!headers_sent()) {
+        if (! headers_sent()) {
             $status = $this->status;
             $server = $_SERVER['SERVER_PROTOCOL'] ?? 'HTTP/1.0';
 

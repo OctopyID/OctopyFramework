@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -25,12 +25,12 @@ class RawPHPDirective extends Directive
     public function parse(Stream $stream)
     {
         // @php($foo = 'bar')
-        if ($stream->next('php') && $stream->expression() != '') {
+        if ($stream->next('php') && $stream->expression() !== '') {
             return $this->php('%s;', $stream->expression());
         }
 
         // @php
-        if ($stream->next('php') && $stream->expression() == '') {
+        if ($stream->next('php') && $stream->expression() === '') {
             return '<?php ';
         }
 
@@ -44,7 +44,7 @@ class RawPHPDirective extends Directive
         }
 
         if ($stream->next(T_EXIT)) {
-            if ($stream->expression() == '') {
+            if ($stream->expression() === '') {
                 return $this->php('%s;', $stream->code());
             }
 

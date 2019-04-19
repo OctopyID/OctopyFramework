@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -27,7 +27,7 @@ class Route
     public function __construct(array $data)
     {
         $this->data = array_merge($data, [
-            'name' => ''
+            'name' => '',
        ]);
     }
 
@@ -44,7 +44,7 @@ class Route
      * @param string $key
      * @param mixed  $value
      */
-    public function __set(string $key, $value)
+    public function __set(string $key, $value): void
     {
         $this->data[$key] = $value;
     }
@@ -52,7 +52,7 @@ class Route
     /**
      * @return string
      */
-    public function uri() : string
+    public function uri(): string
     {
         return $this->data['uri'];
     }
@@ -60,7 +60,7 @@ class Route
     /**
      * @return array
      */
-    public function method() : array
+    public function method(): array
     {
         return $this->data['method'];
     }
@@ -74,7 +74,7 @@ class Route
         if (is_null($name)) {
             return $this->data['name'];
         }
-        
+
         return $this->update('name', trim($name));
     }
 
@@ -101,9 +101,10 @@ class Route
      * @param  mixed  $value
      * @return Route
      */
-    protected function update(string $key, $value) : Route
+    protected function update(string $key, $value): self
     {
         $this->data[$key] = $value;
+
         return $this;
     }
 }

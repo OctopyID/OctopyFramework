@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @version : v1.0
  * @license : MIT
@@ -151,8 +151,8 @@ class MySQL extends BluePrint
     public function default($default = 'NULL')
     {
         $index = count($this->query) - 1;
-        
-        if (!in_array($default, ['NULL', 'CURRENT_TIMESTAMP'])) {
+
+        if (! in_array($default, ['NULL', 'CURRENT_TIMESTAMP'])) {
             $default = sprintf("'%s'", $default);
         }
 
@@ -242,19 +242,19 @@ class MySQL extends BluePrint
      */
     public function create(string $table)
     {
-        if (!empty($this->primary)) {
+        if (! empty($this->primary)) {
             $this->query[] = sprintf('PRIMARY KEY (%s)', implode(', ', array_map(function ($name) {
                 return sprintf('`%s`', $name);
             }, $this->primary)));
         }
 
-        if (!empty($this->unique)) {
+        if (! empty($this->unique)) {
             $this->query[] = sprintf('UNIQUE (%s)', implode(', ', array_map(function ($name) {
                 return sprintf('`%s`', $name);
             }, $this->unique)));
         }
 
-        if (!empty($this->index)) {
+        if (! empty($this->index)) {
             $this->query[] = sprintf('INDEX (%s)', implode(', ', array_map(function ($name) {
                 return sprintf('`%s`', $name);
             }, $this->index)));

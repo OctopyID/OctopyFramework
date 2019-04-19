@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -44,10 +44,10 @@ class Arr
     }
 
     /**
-    * @param  array  $array
-    * @return array
-    */
-    public static function divide(array $array) : array
+     * @param  array  $array
+     * @return array
+     */
+    public static function divide(array $array): array
     {
         return [array_keys($array), array_values($array)];
     }
@@ -57,11 +57,11 @@ class Arr
      * @param  string  $prepend
      * @return array
      */
-    public static function dot(array $array, $prepend = '') : array
+    public static function dot(array $array, $prepend = ''): array
     {
         $results = [];
         foreach ($array as $key => $value) {
-            if (is_array($value) && !empty($value)) {
+            if (is_array($value) && ! empty($value)) {
                 $results = array_merge($results, static::dot($value, $prepend . $key . '.'));
             } else {
                 $results[$prepend . $key] = $value;
@@ -76,7 +76,7 @@ class Arr
      * @param  mixed  $keys
      * @return array
      */
-    public static function except(array $array, $keys) : array
+    public static function except(array $array, $keys): array
     {
         static::forget($array, $keys);
 
@@ -88,7 +88,7 @@ class Arr
      * @param  string  $key
      * @return bool
      */
-    public static function exists(array $array, $key) : bool
+    public static function exists(array $array, $key): bool
     {
         if ($array instanceof ArrayAccess) {
             return $array->offsetExists($key);
@@ -144,7 +144,7 @@ class Arr
      * @param  array  $keys
      * @return void
      */
-    public static function forget(&$array, $keys)
+    public static function forget(&$array, $keys): void
     {
         $original = &$array;
 
@@ -184,7 +184,7 @@ class Arr
      */
     public static function get($array, $key, $default = null)
     {
-        if (!static::accessible($array)) {
+        if (! static::accessible($array)) {
             return value($default);
         }
 
@@ -196,7 +196,7 @@ class Arr
             return $array[$key];
         }
 
-        if (strpos($key, '.') === false) {
+        if (mb_strpos($key, '.') === false) {
             return $array[$key] ?? value($default);
         }
 
@@ -224,7 +224,7 @@ class Arr
 
         $keys = (array) $keys;
 
-        if (!$array) {
+        if (! $array) {
             return false;
         }
 
@@ -356,7 +356,7 @@ class Arr
 
         while (count($keys) > 1) {
             $key = array_shift($keys);
-            if (!isset($array[$key]) || !is_array($array[$key])) {
+            if (! isset($array[$key]) || ! is_array($array[$key])) {
                 $array[$key] = [];
             }
 
@@ -378,9 +378,9 @@ class Arr
         if (is_null($seed)) {
             shuffle($array);
         } else {
-            srand($seed);
+            mt_srand($seed);
             usort($array, function () {
-                return rand(-1, 1);
+                return mt_rand(-1, 1);
             });
         }
 
@@ -412,7 +412,7 @@ class Arr
      * @param  array  $array
      * @return string
      */
-    public static function query(array $array) : string
+    public static function query(array $array): string
     {
         return http_build_query($array, null, '&', PHP_QUERY_RFC3986);
     }
@@ -422,7 +422,7 @@ class Arr
      * @param  callable  $callback
      * @return array
      */
-    public static function where(array $array, callable $callback) : array
+    public static function where(array $array, callable $callback): array
     {
         return array_filter($array, $callback, ARRAY_FILTER_USE_BOTH);
     }

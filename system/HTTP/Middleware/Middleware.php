@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -15,7 +15,6 @@
 namespace Octopy\HTTP;
 
 use Closure;
-
 use Octopy\HTTP\Middleware\Dispatcher;
 
 class Middleware
@@ -34,13 +33,13 @@ class Middleware
      * @param string $layer
      * @param mixed  $middleware
      */
-    public function set(string $layer, $middleware = null)
+    public function set(string $layer, $middleware = null): void
     {
         if (is_null($middleware)) {
-            if (!isset($this->global[$layer])) {
+            if (! isset($this->global[$layer])) {
                 $this->global[] = $layer;
             }
-        } elseif (!isset($this->route[$layer])) {
+        } elseif (! isset($this->route[$layer])) {
             $this->route[$layer] = $middleware;
         }
     }
@@ -55,7 +54,7 @@ class Middleware
             return $this->route;
         }
 
-        if (!is_string($layer)) {
+        if (! is_string($layer)) {
             return $layer;
         }
 
@@ -65,12 +64,12 @@ class Middleware
     /**
      * @return array
      */
-    public function global() : array
+    public function global(): array
     {
         return $this->global ?? [];
     }
 
-    public function dispatch(array $middleware = [], Request $object, Closure $next)
+    public function dispatch(array $middleware, Request $object, Closure $next)
     {
         return (new Dispatcher($middleware))->dispatch($object, $next);
     }

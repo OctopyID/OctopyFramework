@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -15,7 +15,6 @@
 namespace Octopy\Console\Command;
 
 use Exception;
-
 use Octopy\Console\Argv;
 use Octopy\Console\Output;
 use Octopy\Console\Command;
@@ -51,11 +50,11 @@ class MaintenanceDownCommand extends Command
 
         try {
             $location = $this->app['path']->storage('framework') . 'down';
-            $this->app['filesystem']->put($location, json_encode(array(
+            $this->app['filesystem']->put($location, json_encode([
                 'time'    => time(),
                 'message' => $message,
                 'allowed' => $allowed,
-            ), JSON_PRETTY_PRINT));
+            ], JSON_PRETTY_PRINT));
 
             return $output->warning('Application is now in maintenance mode.');
         } catch (Exception $exception) {

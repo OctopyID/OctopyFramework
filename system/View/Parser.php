@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -47,7 +47,7 @@ class Parser
      * @param  string $compiled
      * @return string
      */
-    public function footer(?string $compiled) : string
+    public function footer(?string $compiled): string
     {
         $this->footer[] = $compiled;
 
@@ -58,21 +58,21 @@ class Parser
      * @param  Storage $storage
      * @return string
      */
-    public function compile(Storage $storage) : ?string
+    public function compile(Storage $storage): ?string
     {
         $source = $storage->source();
-        
+
         // Removing PHP Comment parser adapted from Laravel Blade
         $source = preg_replace('/{{--(.*?)--}}/s', '', $source);
 
         // Unescaped output parser adapted from Laravel Blade
         $source = preg_replace_callback('/(@)?{{{\s*(.+?)\s*}}}?/s', function ($match) {
-            return $match[1] ? substr($match[0], 1) : sprintf('<?php echo %s; ?>', $match[2]);
+            return $match[1] ? mb_substr($match[0], 1) : sprintf('<?php echo %s; ?>', $match[2]);
         }, $source);
 
         // Escaped output parser adapted from Laravel Blade
         $source = preg_replace_callback('/(@)?{{\s*(.+?)\s*}}?/s', function ($match) {
-            return $match[1] ? substr($match[0], 1) : sprintf('<?php echo $this->escape(%s); ?>', $match[2]);
+            return $match[1] ? mb_substr($match[0], 1) : sprintf('<?php echo $this->escape(%s); ?>', $match[2]);
         }, $source);
 
         //
@@ -82,7 +82,7 @@ class Parser
         }
 
         unset($source);
-            
+
         if (count($this->footer) > 0) {
             $compiled = ltrim($compiled) . "\n" . implode("\n", array_reverse($this->footer));
             $this->footer = [];
@@ -110,7 +110,7 @@ class Parser
 
             foreach ($match[1] as $x => $type) {
                 $key = $match[0][$x];
-                if (!array_key_exists($key, $search)) {
+                if (! array_key_exists($key, $search)) {
                     $search[$key] = $this->stream($type, $match[3][$x]);
                 }
             }
@@ -131,14 +131,13 @@ class Parser
     protected function stream(string $type, string $parameter)
     {
         $stream = new Stream(token_get_all('<?php ' . $type), $parameter);
-                    
+
         if ($directive = $this->engine->directive($type)) {
             return $directive($stream->expression());
-        } else {
-            foreach ($this->directive as $directive) {
-                if ($compiled = $directive->parse($stream, $this)) {
-                    return $compiled;
-                }
+        }
+        foreach ($this->directive as $directive) {
+            if ($compiled = $directive->parse($stream, $this)) {
+                return $compiled;
             }
         }
     }

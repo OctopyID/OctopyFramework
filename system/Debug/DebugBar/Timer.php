@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -28,7 +28,7 @@ class Timer
      * @param  float  $start
      * @return $this
      */
-    public function start(string $name, float $start = null) : Timer
+    public function start(string $name, float $start = null): self
     {
         $this->timers[$name] = [
             'start' => $start ?? microtime(true),
@@ -44,7 +44,7 @@ class Timer
      */
     public function stop(string $name)
     {
-        if (!$this->has($name)) {
+        if (! $this->has($name)) {
             throw new RuntimeException('Cannot stop timer: invalid name given.');
         }
 
@@ -61,7 +61,7 @@ class Timer
     public function elapsed(string $name, int $decimal = 4)
     {
         if (empty($this->timers[$name])) {
-            return null;
+            return;
         }
 
         $timer = $this->timers[$name];
@@ -70,14 +70,14 @@ class Timer
             $timer['end'] = microtime(true);
         }
 
-        return (float)number_format($timer['end'] - $timer['start'], $decimal);
+        return (float) number_format($timer['end'] - $timer['start'], $decimal);
     }
 
     /**
      * @param  int $decimal
      * @return array
      */
-    public function timers(int $decimal = 4) : array
+    public function timers(int $decimal = 4): array
     {
         $timers = $this->timers;
 
@@ -86,7 +86,7 @@ class Timer
                 $timer['end'] = microtime(true);
             }
 
-            $timer['duration'] = (float)number_format($timer['end'] - $timer['start'], $decimal);
+            $timer['duration'] = (float) number_format($timer['end'] - $timer['start'], $decimal);
         }
 
         return $timers;
@@ -96,8 +96,8 @@ class Timer
      * @param  string $name
      * @return bool
      */
-    public function has(string $name) : bool
+    public function has(string $name): bool
     {
-        return array_key_exists(strtolower($name), $this->timers);
+        return array_key_exists(mb_strtolower($name), $this->timers);
     }
 }

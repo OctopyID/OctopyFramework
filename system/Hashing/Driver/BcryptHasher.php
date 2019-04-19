@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -59,7 +59,7 @@ class BcryptHasher extends Hasher
      * @param  array  $option
      * @return bool
      */
-    public function verify($value, $hashed, array $option = []) : bool
+    public function verify($value, $hashed, array $option = []): bool
     {
         if ($this->verify && $this->info($hashed)['algoName'] !== 'bcrypt') {
             throw new RuntimeException('This password does not use the Bcrypt algorithm.');

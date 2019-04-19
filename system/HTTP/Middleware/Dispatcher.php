@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -15,7 +15,6 @@
 namespace Octopy\HTTP\Middleware;
 
 use Closure;
-
 use Octopy\Support\App;
 use Octopy\HTTP\Request;
 
@@ -73,7 +72,7 @@ class Dispatcher
             if ($middleware instanceof Closure) {
                 return $middleware($object, $next);
             }
-            
+
             return App::make($middleware)->handle($object, $next);
         };
     }

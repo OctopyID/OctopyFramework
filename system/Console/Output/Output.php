@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -88,34 +88,34 @@ class Output extends Color
         }
 
         $vers = $this->app->version();
-        
-        $octopy[] = "   ___       _                     ";
+
+        $octopy[] = '   ___       _                     ';
         $octopy[] = "  / _ \  ___| |_ ___  _ __  _   _  ";
         $octopy[] = " | | | |/ __| __/ _ \| '_ \| | | | ";
-        $octopy[] = " | |_| | (__| || (_) | |_) | |_| | ";
+        $octopy[] = ' | |_| | (__| || (_) | |_) | |_| | ';
         $octopy[] = "  \___/ \___|\__\___/| .__/ \__, | ";
-        $octopy[] = "   www.octopy.xyz    |_|    |___/  ";
+        $octopy[] = '   www.octopy.xyz    |_|    |___/  ';
 
-        $output  = $this->yellow(implode("\n", $octopy)) . "\n";
+        $output = $this->yellow(implode("\n", $octopy)) . "\n";
         $output .= $this->white(' USAGE : command [options] [args]') . "\n";
 
         // Header
-        $this->table->add(['header'], array(
-            'header' => $this->yellow('Available Options')
-        ));
+        $this->table->add(['header'], [
+            'header' => $this->yellow('Available Options'),
+        ]);
 
         // Command without prefix
         $rows = [];
 
         $this->table->margin(3);
         foreach ($this->app['console']->all() as $command => $row) {
-            if (substr($command, 0, 1) === '-' || substr($command, 0, 2) === '--') {
+            if (mb_substr($command, 0, 1) === '-' || mb_substr($command, 0, 2) === '--') {
                 $this->table->add(['command', 'description'], [
                     'command'     => $this->green($command),
-                    'description' => $this->white($row->describe)
+                    'description' => $this->white($row->describe),
                 ]);
             } else {
-                if (strpos($command, ':') == false) {
+                if (mb_strpos($command, ':') === false) {
                     $rows[0][$command] = $row;
                 } else {
                     $rows[1][$command] = $row;
@@ -124,42 +124,42 @@ class Output extends Color
         }
 
         $this->table->margin(0);
-        $this->table->add(['margin'], array(
-            'margin' => ''
-        ));
-        
-        $this->table->add(['header'], array(
-            'header' => $this->yellow('Available Commands')
-        ));
+        $this->table->add(['margin'], [
+            'margin' => '',
+        ]);
+
+        $this->table->add(['header'], [
+            'header' => $this->yellow('Available Commands'),
+        ]);
 
         $this->table->margin(3);
         foreach ($rows[0] as $command => $row) {
             $this->table->add(['command', 'description'], [
                 'command'     => $this->green($command),
-                'description' => $this->white($row->describe)
+                'description' => $this->white($row->describe),
             ]);
         }
 
         asort($rows);
-        if (!empty($rows[1])) {
+        if (! empty($rows[1])) {
             $group = [];
             foreach ($rows[1] as $command => $row) {
                 list($prefix) = explode(':', $command);
 
-                if (!in_array($prefix, $group)) {
+                if (! in_array($prefix, $group)) {
                     $this->table->margin(2);
-                    $this->table->add(['group'], array(
+                    $this->table->add(['group'], [
                         'group' => $this->yellow($prefix),
-                    ));
+                    ]);
 
                     $group[] = $prefix;
                 }
 
                 $this->table->margin(3);
-                $this->table->add(['command', 'description'], array(
+                $this->table->add(['command', 'description'], [
                     'command'     => $this->green($command),
-                    'description' => $this->white($row->describe)
-                ));
+                    'description' => $this->white($row->describe),
+                ]);
             }
         }
 

@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -61,7 +61,7 @@ class Color
         'blink'            => 5,
         'reverse'          => 7,
         'concealed'        => 8,
-        
+
         'default'          => 39,
         'black'            => 30,
         'red'              => 31,
@@ -71,7 +71,7 @@ class Color
         'magenta'          => 35,
         'cyan'             => 36,
         'light_gray'       => 37,
-        
+
         'dark_gray'        => 90,
         'light_red'        => 91,
         'light_green'      => 92,
@@ -80,7 +80,7 @@ class Color
         'light_magenta'    => 95,
         'light_cyan'       => 96,
         'white'            => 97,
-        
+
         'bg_default'       => 49,
         'bg_black'         => 40,
         'bg_red'           => 41,
@@ -90,7 +90,7 @@ class Color
         'bg_magenta'       => 45,
         'bg_cyan'          => 46,
         'bg_light_gray'    => 47,
-        
+
         'bg_dark_gray'     => 100,
         'bg_light_red'     => 101,
         'bg_light_green'   => 102,
@@ -101,9 +101,6 @@ class Color
         'bg_white'         => 107,
    ];
 
-    /**
-     *
-     */
     public function __construct()
     {
         $this->supported = $this->supported();
@@ -114,7 +111,7 @@ class Color
      * @param  array  $args
      * @return string
      */
-    public function __call(string $color, array $args = []) : string
+    public function __call(string $color, array $args = []): string
     {
         return $this->format('{' . $color . '}' . ($args[0] ?? ''));
     }
@@ -131,7 +128,7 @@ class Color
             $match[0][$i] = '{' . $key . '}';
             $match[1][$i] = sprintf("\033[%um", $this->style[$key]);
         }
-  
+
         return str_replace($match[0], $match[1], $text) . "\033[0m\n";
     }
 
@@ -142,15 +139,15 @@ class Color
      */
     public function apply($style, $text)
     {
-        if (!$this->forced() && !$this->supported()) {
+        if (! $this->forced() && ! $this->supported()) {
             return $text;
         }
 
         if (is_string($style)) {
             $style = [$style];
         }
-        
-        if (!is_array($style)) {
+
+        if (! is_array($style)) {
             throw new InvalidArgumentException('Style must be string or array');
         }
 
@@ -174,15 +171,15 @@ class Color
             return $text;
         }
 
-        return $this->concat(implode(';', $sequence)) . $text . $this->concat(Color::RESET_STYLE);
+        return $this->concat(implode(';', $sequence)) . $text . $this->concat(self::RESET_STYLE);
     }
 
     /**
      * @param bool $force
      */
-    public function force($force)
+    public function force($force): void
     {
-        $this->force = (bool)$force;
+        $this->force = (bool) $force;
     }
 
     /**
@@ -194,9 +191,9 @@ class Color
     }
 
     /**
-    * @param array $theme
-    */
-    public function set(array $theme)
+     * @param array $theme
+     */
+    public function set(array $theme): void
     {
         $this->theme = [];
         foreach ($theme as $name => $styles) {
@@ -208,17 +205,17 @@ class Color
      * @param string $name
      * @param mixed  $styles
      */
-    public function theme($name, $styles)
+    public function theme($name, $styles): void
     {
         if (is_string($styles)) {
             $styles = [$styles];
         }
-        if (!is_array($styles)) {
+        if (! is_array($styles)) {
             throw new InvalidArgumentException('Style must be string or array.');
         }
 
         foreach ($styles as $style) {
-            if (!$this->validate($style)) {
+            if (! $this->validate($style)) {
                 throw new InvalidStyleException($style);
             }
         }
@@ -230,7 +227,7 @@ class Color
      * @param  string $name
      * @return bool
      */
-    public function has($name) : bool
+    public function has($name): bool
     {
         return isset($this->theme[$name]);
     }
@@ -238,7 +235,7 @@ class Color
     /**
      * @param string $name
      */
-    public function remove($name)
+    public function remove($name): void
     {
         unset($this->theme[$name]);
     }
@@ -254,10 +251,11 @@ class Color
             } elseif (getenv('ANSICON') !== false || getenv('ConEmuANSI') === 'ON') {
                 return true;
             }
+
             return false;
-        } else {
-            return function_exists('posix_isatty') && @posix_isatty(STDOUT);
         }
+
+        return function_exists('posix_isatty') && @posix_isatty(STDOUT);
     }
 
     /**
@@ -267,16 +265,16 @@ class Color
     {
         if (DIRECTORY_SEPARATOR === '\\') {
             return function_exists('sapi_windows_vt100_support') && @sapi_windows_vt100_support(STDOUT);
-        } else {
-            return strpos(getenv('TERM'), '256color') !== false;
         }
+
+        return mb_strpos(getenv('TERM'), '256color') !== false;
     }
 
     /**
      * @param  string $name
      * @return array
      */
-    protected function sequence($name) : array
+    protected function sequence($name): array
     {
         $sequences = [];
         foreach ($this->theme[$name] as $style) {
@@ -290,19 +288,19 @@ class Color
      * @param  string $style
      * @return string
      */
-    protected function style($style) : string
+    protected function style($style): string
     {
         if (array_key_exists($style, $this->style)) {
             return $this->style[$style];
         }
 
-        if (!$this->are256supported()) {
+        if (! $this->are256supported()) {
             return null;
         }
 
-        preg_match(Color::COLOR256_REGEXP, $style, $matches);
+        preg_match(self::COLOR256_REGEXP, $style, $matches);
 
-        $type  = $matches[1] === 'bg_' ? Color::BACKGROUND : Color::FOREGROUND;
+        $type = $matches[1] === 'bg_' ? self::BACKGROUND : self::FOREGROUND;
         $value = $matches[2];
 
         return "$type;5;$value";
@@ -312,16 +310,16 @@ class Color
      * @param  string $style
      * @return bool
      */
-    protected function validate(string $style) : bool
+    protected function validate(string $style): bool
     {
-        return array_key_exists($style, $this->style) || preg_match(Color::COLOR256_REGEXP, $style);
+        return array_key_exists($style, $this->style) || preg_match(self::COLOR256_REGEXP, $style);
     }
 
     /**
      * @param  string $value
      * @return string
      */
-    protected function concat(string $value) : string
+    protected function concat(string $value): string
     {
         return "\033[{$value}m";
     }

@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -17,7 +17,6 @@ namespace Octopy\HTTP\Routing;
 use Countable;
 use ArrayIterator;
 use IteratorAggregate;
-
 use Octopy\HTTP\Request;
 use Octopy\HTTP\Middleware;
 use Octopy\HTTP\Routing\Exception\RouteNotFoundException;
@@ -59,7 +58,7 @@ class Collection implements Countable, IteratorAggregate
      * @param  string $method
      * @return array
      */
-    public function get(string $method) : array
+    public function get(string $method): array
     {
         return $this->route[$method] ?? [];
     }
@@ -67,11 +66,11 @@ class Collection implements Countable, IteratorAggregate
     /**
      * @return void
      */
-    public function refresh()
+    public function refresh(): void
     {
         foreach ($this->route as $array) {
             foreach ($array as $route) {
-                if ($route->name && !isset($this->alias[$route->name])) {
+                if ($route->name && ! isset($this->alias[$route->name])) {
                     $this->alias[$route->name] = $route;
                 }
 
@@ -81,7 +80,7 @@ class Collection implements Countable, IteratorAggregate
             }
         }
     }
-    
+
     /**
      * @param  Request $request
      * @return Response
@@ -102,13 +101,13 @@ class Collection implements Countable, IteratorAggregate
         }
 
         if ($match instanceof Route) {
-            if (!in_array($request->method(), $match->method())) {
+            if (! in_array($request->method(), $match->method())) {
                 throw new MethodNotAllowedException;
             }
 
             return $match;
         }
-        
+
         throw new RouteNotFoundException;
     }
 
@@ -122,7 +121,7 @@ class Collection implements Countable, IteratorAggregate
         if (isset($route[$request])) {
             return $route[$request];
         }
-        
+
         foreach ($route as $uri => $route) {
             if (preg_match($route->pattern, $request, $parameter)) {
                 return $route->parameter(array_filter($parameter, function ($value, $key) {
@@ -137,7 +136,7 @@ class Collection implements Countable, IteratorAggregate
     /**
      * @return array
      */
-    public function all() : array
+    public function all(): array
     {
         return $this->route;
     }
@@ -145,7 +144,7 @@ class Collection implements Countable, IteratorAggregate
     /**
      * @return array
      */
-    public function alias() : array
+    public function alias(): array
     {
         return $this->alias;
     }

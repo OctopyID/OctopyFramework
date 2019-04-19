@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -52,7 +52,7 @@ class Storage extends FileSystem
             return $this->compiled;
         }
 
-        if ($this->octopy() && !$this->compiled) {
+        if ($this->octopy() && ! $this->compiled) {
             return $this->content;
         }
 
@@ -62,7 +62,7 @@ class Storage extends FileSystem
     /**
      * @return string
      */
-    public function template() : string
+    public function template(): string
     {
         return $this->template;
     }
@@ -70,7 +70,7 @@ class Storage extends FileSystem
     /**
      * @return string
      */
-    public function compiled() : ?string
+    public function compiled(): ?string
     {
         return $this->compiled;
     }
@@ -78,19 +78,19 @@ class Storage extends FileSystem
     /**
      * @return bool
      */
-    public function octopy() : bool
+    public function octopy(): bool
     {
-        return substr($this->template, -11) === '.octopy.php' || substr($this->template, -7) === '.octopy';
+        return mb_substr($this->template, -11) === '.octopy.php' || mb_substr($this->template, -7) === '.octopy';
     }
 
     /**
      * @param string $content
      */
-    public function write(string $content)
+    public function write(string $content): void
     {
         $this->content = $content;
-        
-        if (!is_null($this->compiled)) {
+
+        if (! is_null($this->compiled)) {
             if ($this->mkdir(dirname($this->compiled))) {
                 $this->put($this->compiled, $content);
             }
@@ -108,15 +108,14 @@ class Storage extends FileSystem
     /**
      * @return bool
      */
-    public function expired() : bool
+    public function expired(): bool
     {
-        if (is_null($this->compiled) || !file_exists($this->compiled)) {
+        if (is_null($this->compiled) || ! file_exists($this->compiled)) {
             return true;
         }
 
         return filemtime($this->template) > filemtime($this->compiled);
     }
-
 
     /**
      * @param  [type] $time

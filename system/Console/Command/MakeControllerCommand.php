@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -41,12 +41,12 @@ class MakeControllerCommand extends Command
         if (file_exists($location = $this->app['path']->app->HTTP->controller($parsed['location']))) {
             return $output->warning('Controller already exists.');
         }
-        
-        $data = array(
+
+        $data = [
             'DummyNameSpace' => $parsed['namespace'],
             'DummyClassName' => $parsed['classname'],
-        );
-        
+        ];
+
         if ($this->generate($location, 'Controller', $data)) {
             return $output->success('Controller created successfully.');
         }

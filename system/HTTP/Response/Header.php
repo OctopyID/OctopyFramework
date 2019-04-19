@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -32,15 +32,15 @@ class Header
             $this->set($key, $value);
         }
 
-        if (!isset($this->header['Content-Type'])) {
+        if (! isset($this->header['Content-Type'])) {
             $this->set('Content-Type', 'text/html; charset=UTF-8');
         }
 
-        if (!isset($this->header['Cache-Control'])) {
+        if (! isset($this->header['Cache-Control'])) {
             $this->set('Cache-Control', 'no-store, max-age=0, no-cache');
         }
 
-        if (!isset($this->header['Date'])) {
+        if (! isset($this->header['Date'])) {
             $this->set('Date', (new DateTime)->now()->format('D, d M Y H:i:s') . ' GMT');
         }
     }
@@ -50,7 +50,7 @@ class Header
      */
     public function __toString()
     {
-        if (!$header = $this->all()) {
+        if (! $header = $this->all()) {
             return '';
         }
 
@@ -76,19 +76,19 @@ class Header
     {
         if (is_array($value)) {
             $value = array_values($value);
-            if ($replace === true || !isset($this->header[$key])) {
+            if ($replace === true || ! isset($this->header[$key])) {
                 $this->header[$key] = $value;
             } else {
                 $this->header[$key] = array_merge($this->header[$key], $value);
             }
         } else {
-            if ($replace === true || !isset($this->header[$key])) {
+            if ($replace === true || ! isset($this->header[$key])) {
                 $this->header[$key] = [$value];
             } else {
                 $this->header[$key][] = $value;
             }
         }
-        
+
         return $this;
     }
 
@@ -102,7 +102,7 @@ class Header
     {
         $header = $this->all();
 
-        if (!array_key_exists($key, $header)) {
+        if (! array_key_exists($key, $header)) {
             if (null === $default) {
                 return $first ? null : [];
             }
@@ -121,7 +121,7 @@ class Header
      * @param  string $key
      * @return bool
      */
-    public function has(string $key) : bool
+    public function has(string $key): bool
     {
         return array_key_exists($key, $this->all());
     }
@@ -129,7 +129,7 @@ class Header
     /**
      * @return array
      */
-    public function all() : array
+    public function all(): array
     {
         return $this->header;
     }
@@ -138,7 +138,7 @@ class Header
      * @param  string $key
      * @return void
      */
-    public function remove(string $key)
+    public function remove(string $key): void
     {
         if ($this->has($key)) {
             unset($this->header[$key]);

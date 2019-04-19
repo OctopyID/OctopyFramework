@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -22,7 +22,7 @@ class ConsoleServiceProvider extends ServiceProvider
     /**
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         if ($this->app->console()) {
             $console = $this->app['console'];
@@ -43,20 +43,20 @@ class ConsoleServiceProvider extends ServiceProvider
     /**
      * @return void
      */
-    private function autodiscover()
+    private function autodiscover(): void
     {
-        $autodiscover = array(
+        $autodiscover = [
             'App\\Console\\Command\\' => $this->app['path']->app->console->command(),
-            'Octopy\\Console\\Command\\' => $this->app['path']->system->console->command()
-        );
+            'Octopy\\Console\\Command\\' => $this->app['path']->system->console->command(),
+        ];
 
         foreach ($autodiscover as $namespace => $directory) {
             foreach ($this->app['filesystem']->iterator($directory) as $row) {
-                if (substr($row->getFilename(), -4) !== '.php') {
+                if (mb_substr($row->getFilename(), -4) !== '.php') {
                     continue;
                 }
 
-                if (($class = substr($row->getFilename(), 0, -4)) === 'Command') {
+                if (($class = mb_substr($row->getFilename(), 0, -4)) === 'Command') {
                     continue;
                 }
 

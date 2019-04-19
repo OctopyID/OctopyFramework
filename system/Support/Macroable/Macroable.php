@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -31,7 +31,7 @@ trait Macroable
      * @param  callable  $macro
      * @return void
      */
-    public static function macro(string $name, $macro)
+    public static function macro(string $name, $macro): void
     {
         static::$macro[$name] = $macro;
     }
@@ -40,7 +40,7 @@ trait Macroable
      * @param  object  $mixin
      * @return void
      */
-    public static function mixin($mixin)
+    public static function mixin($mixin): void
     {
         $methods = (new ReflectionClass($mixin))->getMethods(
             ReflectionMethod::IS_PUBLIC | ReflectionMethod::IS_PROTECTED
@@ -60,7 +60,7 @@ trait Macroable
      */
     public static function __callStatic($method, $parameter)
     {
-        if (!isset(static::$macro[$method])) {
+        if (! isset(static::$macro[$method])) {
             throw new BadMethodCallException(
                 sprintf('Method %s::%s does not exist.', static::class, $method)
             );
@@ -80,7 +80,7 @@ trait Macroable
      */
     public function __call($method, $parameter)
     {
-        if (!isset(static::$macro[$method])) {
+        if (! isset(static::$macro[$method])) {
             throw new BadMethodCallException(
                 sprintf('Method %s::%s does not exist.', static::class, $method)
             );

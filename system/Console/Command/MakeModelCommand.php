@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -43,15 +43,15 @@ class MakeModelCommand extends Command
         }
 
         if (($table = $argv->get('-t')) === false && ($table = $argv->get('--table')) === false) {
-            $table = strtolower($parsed['classname']);
+            $table = mb_strtolower($parsed['classname']);
         }
-        
-        $data = array(
+
+        $data = [
             'DummyTableName' => $table,
             'DummyNameSpace' => $parsed['namespace'],
             'DummyClassName' => $parsed['classname'],
-        );
-        
+        ];
+
         if ($this->generate($location, 'Model', $data)) {
             return $output->success('Model created successfully.');
         }

@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -45,6 +45,6 @@ abstract class Support
             return static::$resolved[static::$name];
         }
 
-        return static::$resolved[static::$name]  = Container::make(static::$name);
+        return static::$resolved[static::$name] = Container::make(static::$name);
     }
 }

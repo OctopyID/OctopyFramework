@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -20,7 +20,7 @@ abstract class Hasher
      * @param  string $hashed
      * @return array
      */
-    public function info($hashed) : array
+    public function info($hashed): array
     {
         return password_get_info($hashed);
     }
@@ -31,9 +31,9 @@ abstract class Hasher
      * @param  array  $option
      * @return bool
      */
-    public function verify($value, $hashed, array $option = []) : bool
+    public function verify($value, $hashed, array $option = []): bool
     {
-        if (strlen($hashed) === 0) {
+        if (mb_strlen($hashed) === 0) {
             return false;
         }
 
