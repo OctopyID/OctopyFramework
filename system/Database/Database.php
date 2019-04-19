@@ -157,6 +157,9 @@ class Database implements IteratorAggregate, JsonSerializable
      */
     public function where($column, $value = null, string $operator = '=')
     {
+        // If the column is an array, we will assume it is an array of key-value pairs
+        // and can add them each as a where clause. We will maintain the boolean we
+        // received when the method was called and pass it into the nested where.
         if (is_array($column)) {
             foreach ($column as $key => $value) {
                 $this->where($key, $value);
@@ -183,7 +186,7 @@ class Database implements IteratorAggregate, JsonSerializable
     {
         if (is_array($column)) {
             foreach ($column as $key => $value) {
-                $this->where($key, $value);
+                $this->or($key, $value);
             }
 
             return $this;
