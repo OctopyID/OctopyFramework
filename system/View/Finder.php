@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -39,7 +39,7 @@ class Finder
      */
     public function __construct($resource = [], ?string $compiled = null)
     {
-        if (!is_array($resource)) {
+        if (! is_array($resource)) {
             $resource = (array) $resource;
         }
 
@@ -52,7 +52,7 @@ class Finder
      */
     public function set($resource)
     {
-        $this->resource = array_merge($this->resource, (array)$resource);
+        $this->resource = array_merge($this->resource, (array) $resource);
     }
 
     /**
@@ -74,7 +74,7 @@ class Finder
         }
 
         $compiled = $this->compiled ? $this->compiled . md5($name) . '.php' : null;
-        
+
         $template = str_replace('.', '/', $name);
         foreach ($this->resource as $resource) {
             $resource = array_map(function ($extension) use ($resource, $template) {

@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -32,7 +32,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate
     public function set(Route $command)
     {
         $this->command = array_merge($this->command, [
-            $command->command() => $command
+            $command->command() => $command,
         ]);
 
         return $command;
@@ -44,6 +44,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate
     public function all() : array
     {
         asort($this->command);
+
         return $this->command;
     }
 

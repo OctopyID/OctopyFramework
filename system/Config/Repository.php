@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -106,7 +106,7 @@ class Repository implements ArrayAccess
      */
     public function push(string $key, $value)
     {
-        $this->set($key, array_merge($this->get($key), (array)$value));
+        $this->set($key, array_merge($this->get($key), (array) $value));
     }
 
     /**

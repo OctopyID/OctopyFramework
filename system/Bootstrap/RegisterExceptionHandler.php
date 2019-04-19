@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @link    : www.octopy.xyz
  * @author  : Supian M <supianidz@gmail.com>
  * @license : MIT
@@ -17,7 +17,6 @@ namespace Octopy\Bootstrap;
 use Exception;
 use Throwable;
 use ErrorException;
-
 use Octopy\Application;
 use App\Exception\Handler;
 
@@ -52,12 +51,12 @@ class RegisterExceptionHandler
         error_reporting(-1);
 
         set_error_handler([$this, 'error']);
-        
+
         set_exception_handler([$this, 'exception']);
 
         register_shutdown_function([$this, 'shutdown']);
 
-        if (!$app->env('testing')) {
+        if (! $app->env('testing')) {
             ini_set('display_errors', 'Off');
         }
     }
@@ -68,7 +67,7 @@ class RegisterExceptionHandler
      */
     public function exception(Throwable $exception)
     {
-        if (!$exception instanceof Exception) {
+        if (! $exception instanceof Exception) {
             $exception = new ErrorException($exception);
         }
 
@@ -110,7 +109,7 @@ class RegisterExceptionHandler
     public function shutdown()
     {
         $type = [E_COMPILE_ERROR, E_CORE_ERROR, E_ERROR, E_PARSE];
-        if (!is_null($error = error_get_last()) && in_array($error['type'], $type)) {
+        if (! is_null($error = error_get_last()) && in_array($error['type'], $type)) {
             $this->exception(new ErrorException($error['message'], $error['type'], 0, $error['file'], $error['line']));
         }
     }

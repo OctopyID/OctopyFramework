@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -53,7 +53,7 @@ require 'Autoload.php';
 
 $autoload = new Octopy\Autoload($basepath, [
     'App' => 'app',
-    'Octopy' => 'system'
+    'Octopy' => 'system',
 ]);
 
 // Now load Composer's if it's available
@@ -69,12 +69,12 @@ require 'Common.php';
  */
 $app = new Octopy\Application($basepath);
 
-/**
+/*
  *
  */
 $app->instance(Octopy\Autoload::class, $autoload);
 
-/**
+/*
  * @return Octopy\Application
  */
 return $app;

@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -30,7 +30,7 @@ final class Autoload
      * @var array
      */
     private $classmap = [];
-        
+
     /**
      * @param string $basepath
      * @param array  $autoload
@@ -50,7 +50,7 @@ final class Autoload
     public function set(string $namespace, string $directory)
     {
         $this->autoload = array_merge($this->autoload, [
-            $namespace => $directory
+            $namespace => $directory,
         ]);
     }
 

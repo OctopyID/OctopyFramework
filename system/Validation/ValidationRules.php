@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @version : v1.0
  * @license : MIT
@@ -19,9 +19,9 @@ use Octopy\HTTP\Request\FileHandler;
 trait ValidationRules
 {
     /**
-    * @param  string $attribute
-    * @return string
-    */
+     * @param  string $attribute
+     * @return string
+     */
     public function accepted(string $attribute)
     {
         $value = $this->value($attribute);
@@ -41,7 +41,7 @@ trait ValidationRules
     public function between(string $attribute, int $min, int $max)
     {
         $value = $this->value($attribute);
-        
+
         if ($value instanceof FileHandler) {
             $length = $value->size() / 1024;
             if (($length >= $min && $length <= $max) === false) {
@@ -87,7 +87,7 @@ trait ValidationRules
      */
     public function boolean(string $attribute)
     {
-        if (!is_bool($this->value($attribute))) {
+        if (! is_bool($this->value($attribute))) {
             return $this->format('The `:attribute` field must be true or false.', [
                 ':attribute' => $attribute,
             ]);
@@ -114,7 +114,7 @@ trait ValidationRules
      */
     public function email(string $attribute)
     {
-        if (!filter_var($this->value($attribute), FILTER_VALIDATE_EMAIL)) {
+        if (! filter_var($this->value($attribute), FILTER_VALIDATE_EMAIL)) {
             return $this->format('The `:attribute` must be a valid email address.', [
                 ':attribute' => $attribute,
             ]);
@@ -145,7 +145,7 @@ trait ValidationRules
     public function file(string $attribute)
     {
         $value = $this->value($attribute);
-        if (!$value instanceof FileHandler) {
+        if (! $value instanceof FileHandler) {
             return $this->format('The `:attribute` must be a file.', [
                 ':attribute' => $attribute,
             ]);
@@ -159,7 +159,7 @@ trait ValidationRules
     public function integer(string $attribute)
     {
         $value = $this->value($attribute);
-        if (!is_integer($value)) {
+        if (! is_integer($value)) {
             return $this->format('The `:attribute` must be an integer.', [
                 ':attribute' => $attribute,
             ]);
@@ -172,7 +172,7 @@ trait ValidationRules
      */
     public function ip(string $attribute)
     {
-        if (!filter_var($this->value($attribute), FILTER_VALIDATE_IP)) {
+        if (! filter_var($this->value($attribute), FILTER_VALIDATE_IP)) {
             return $this->format('The `:attribute` must be a valid IP address.', [
                 ':attribute' => $attribute,
             ]);
@@ -260,10 +260,10 @@ trait ValidationRules
     }
 
     /**
-    * @param  string $attribute
-    * @param  string $type
-    * @return string
-    */
+     * @param  string $attribute
+     * @param  string $type
+     * @return string
+     */
     public function mime(string $attribute, string $type)
     {
         $value = $this->value($attribute);
@@ -303,7 +303,7 @@ trait ValidationRules
      */
     public function string(string $attribute)
     {
-        if (!is_string($this->value($attribute))) {
+        if (! is_string($this->value($attribute))) {
             return $this->format('The `:attribute` must be a string.', [
                 ':attribute' => $attribute,
             ]);
@@ -347,7 +347,7 @@ trait ValidationRules
      */
     public function url(string $attribute)
     {
-        if (!filter_var($this->value($attribute), FILTER_VALIDATE_URL)) {
+        if (! filter_var($this->value($attribute), FILTER_VALIDATE_URL)) {
             return $this->format('The `:attribute` is not valid URL.', [
                 ':attribute' => $attribute,
             ]);

@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -17,8 +17,6 @@ namespace Octopy;
 use ArrayIterator;
 use JsonSerializable;
 use IteratorAggregate;
-
-use Octopy\Application;
 use Octopy\Database\Connection;
 use Octopy\Database\Exception\DBException;
 
@@ -28,7 +26,7 @@ class Database implements IteratorAggregate, JsonSerializable
      * @var Octopy\Application
      */
     protected $app;
-    
+
     /**
      * @var string
      */
@@ -40,8 +38,8 @@ class Database implements IteratorAggregate, JsonSerializable
     protected $model;
 
     /**
-    * @var string
-    */
+     * @var string
+     */
     protected $table;
 
     /**
@@ -61,7 +59,7 @@ class Database implements IteratorAggregate, JsonSerializable
     {
         $this->app = $app;
 
-        if (!$this->driver) {
+        if (! $this->driver) {
             $this->driver($app['config']['database.default']);
         }
     }
@@ -72,7 +70,7 @@ class Database implements IteratorAggregate, JsonSerializable
      */
     public function __get(string $property)
     {
-        if (!is_array($this->data)) {
+        if (! is_array($this->data)) {
             return $this->data->$property ?? null;
         }
     }
@@ -192,7 +190,7 @@ class Database implements IteratorAggregate, JsonSerializable
             return $this;
         }
 
-        if (!$this->match('WHERE')) {
+        if (! $this->match('WHERE')) {
             return $this->where($column, $value, $operator);
         }
 
@@ -205,7 +203,7 @@ class Database implements IteratorAggregate, JsonSerializable
      */
     public function limit(int $limit)
     {
-        if (!$this->match('SELECT')) {
+        if (! $this->match('SELECT')) {
             $this->select('*');
         }
 
@@ -219,7 +217,7 @@ class Database implements IteratorAggregate, JsonSerializable
      */
     public function offset(int $start, int $end)
     {
-        if (!$this->match('LIMIT')) {
+        if (! $this->match('LIMIT')) {
             $this->limit($start);
         }
 
@@ -233,7 +231,7 @@ class Database implements IteratorAggregate, JsonSerializable
      */
     public function order(string $column, string $order = 'ASC')
     {
-        if (!$this->match('SELECT')) {
+        if (! $this->match('SELECT')) {
             $this->select('*');
         }
 
@@ -245,11 +243,11 @@ class Database implements IteratorAggregate, JsonSerializable
      */
     public function first()
     {
-        if (!$this->match('SELECT')) {
+        if (! $this->match('SELECT')) {
             $this->select('*');
         }
 
-        if (!$this->match('LIMIT')) {
+        if (! $this->match('LIMIT')) {
             $this->limit(1);
         }
 
@@ -261,7 +259,7 @@ class Database implements IteratorAggregate, JsonSerializable
      */
     public function get()
     {
-        if (!$this->match('SELECT')) {
+        if (! $this->match('SELECT')) {
             $this->select('*');
         }
 
@@ -295,7 +293,7 @@ class Database implements IteratorAggregate, JsonSerializable
      */
     protected function data($data)
     {
-        if (!empty($model = $this->model)) {
+        if (! empty($model = $this->model)) {
             if (is_array($data)) {
                 foreach ($data as $key => $value) {
                     $data[$key] = new $model($value);
@@ -370,7 +368,7 @@ class Database implements IteratorAggregate, JsonSerializable
     protected function reset() : string
     {
         $query = $this->query;
-        
+
         $this->query = null;
 
         return trim($query);

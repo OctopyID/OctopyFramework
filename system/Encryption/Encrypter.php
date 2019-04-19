@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -14,11 +14,8 @@
 
 namespace Octopy\Encryption;
 
-use RuntimeException;
-
-use Octopy\Application;
-use Octopy\Encryption\Exception\EncryptException;
 use Octopy\Encryption\Exception\DecryptException;
+use Octopy\Encryption\Exception\EncryptException;
 use Octopy\Encryption\Exception\CipherKeyException;
 
 class Encrypter
@@ -130,7 +127,7 @@ class Encrypter
      */
     protected function hash($iv, $value)
     {
-        return hash_hmac('sha256', $iv.$value, $this->key);
+        return hash_hmac('sha256', $iv . $value, $this->key);
     }
 
     /**
@@ -144,11 +141,11 @@ class Encrypter
         // If the payload is not valid JSON or does not have the proper keys set we will
         // assume it is invalid and bail out of the routine since we will not be able
         // to decrypt the given value. We'll also check the MAC for this encryption.
-        if (!$this->jsonvalidate($payload)) {
+        if (! $this->jsonvalidate($payload)) {
             throw new DecryptException('The payload is invalid.');
         }
 
-        if (!$this->hmacvalidate($payload)) {
+        if (! $this->hmacvalidate($payload)) {
             throw new DecryptException('The MAC is invalid.');
         }
 

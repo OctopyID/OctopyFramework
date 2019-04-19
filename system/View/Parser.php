@@ -6,7 +6,7 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
@@ -61,7 +61,7 @@ class Parser
     public function compile(Storage $storage) : ?string
     {
         $source = $storage->source();
-        
+
         // Removing PHP Comment parser adapted from Laravel Blade
         $source = preg_replace('/{{--(.*?)--}}/s', '', $source);
 
@@ -82,7 +82,7 @@ class Parser
         }
 
         unset($source);
-            
+
         if (count($this->footer) > 0) {
             $compiled = ltrim($compiled) . "\n" . implode("\n", array_reverse($this->footer));
             $this->footer = [];
@@ -110,7 +110,7 @@ class Parser
 
             foreach ($match[1] as $x => $type) {
                 $key = $match[0][$x];
-                if (!array_key_exists($key, $search)) {
+                if (! array_key_exists($key, $search)) {
                     $search[$key] = $this->stream($type, $match[3][$x]);
                 }
             }
@@ -131,7 +131,7 @@ class Parser
     protected function stream(string $type, string $parameter)
     {
         $stream = new Stream(token_get_all('<?php ' . $type), $parameter);
-                    
+
         if ($directive = $this->engine->directive($type)) {
             return $directive($stream->expression());
         } else {
