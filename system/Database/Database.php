@@ -157,6 +157,14 @@ class Database implements IteratorAggregate, JsonSerializable
      */
     public function where(string $column, $value, string $operator = '=')
     {
+        if (is_array($value)) {
+            foreach ($value as $key => $value) {
+                $this->where($column, $value);
+            }
+
+            return $this;
+        }
+
         $clause = 'WHERE';
         if ($this->match('WHERE')) {
             $clause = 'AND';
@@ -173,6 +181,14 @@ class Database implements IteratorAggregate, JsonSerializable
      */
     public function or(string $column, $value, string $operator = '=')
     {
+        if (is_array($value)) {
+            foreach ($value as $key => $value) {
+                $this->or($column, $value);
+            }
+
+            return $this;
+        }
+
         if (!$this->match('WHERE')) {
             return $this->where($column, $value, $operator);
         }

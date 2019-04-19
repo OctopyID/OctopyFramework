@@ -14,6 +14,7 @@
 
 namespace Octopy;
 
+use Octopy\Container;
 use Octopy\Support\Macroable;
 
 class Application extends Container
@@ -62,7 +63,7 @@ class Application extends Container
      */
     public function name() : string
     {
-        return $this->config['app.name'];
+        return $this['config']['app.name'];
     }
 
     /**
@@ -78,7 +79,7 @@ class Application extends Container
      */
     public function locale() : string
     {
-        return $this->config['app.locale'];
+        return $this['config']['app.locale'];
     }
 
     /**
@@ -95,7 +96,7 @@ class Application extends Container
      */
     public function debug() : bool
     {
-        return $this->config['app.debug'];
+        return $this['config']['app.debug'];
     }
 
     /**
@@ -104,10 +105,10 @@ class Application extends Container
     public function env(string $env = null)
     {
         if (!is_null($env)) {
-            return $this->config['app.env'] === $env;
+            return $this['config']['app.env'] === $env;
         }
 
-        return $this->config['app.env'];
+        return $this['config']['app.env'];
     }
 
     /**
