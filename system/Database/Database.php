@@ -155,11 +155,11 @@ class Database implements IteratorAggregate, JsonSerializable
      * @param  string $operator
      * @return $this
      */
-    public function where(string $column, $value, string $operator = '=')
+    public function where($column, $value = null, string $operator = '=')
     {
-        if (is_array($value)) {
-            foreach ($value as $key => $value) {
-                $this->where($column, $value);
+        if (is_array($column)) {
+            foreach ($column as $key => $value) {
+                $this->where($key, $value);
             }
 
             return $this;
@@ -179,11 +179,11 @@ class Database implements IteratorAggregate, JsonSerializable
      * @param  string $operator
      * @return $this
      */
-    public function or(string $column, $value, string $operator = '=')
+    public function or($column, $value = null, string $operator = '=')
     {
-        if (is_array($value)) {
-            foreach ($value as $key => $value) {
-                $this->or($column, $value);
+        if (is_array($column)) {
+            foreach ($column as $key => $value) {
+                $this->where($key, $value);
             }
 
             return $this;
