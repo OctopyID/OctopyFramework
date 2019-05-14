@@ -17,14 +17,11 @@ namespace Octopy;
 use Exception;
 use ArrayAccess;
 use SessionHandlerInterface;
+use Octopy\Session\Handler\FileSessionHandler;
+use Octopy\Session\Handler\NullSessionHandler;
 
 class Session implements ArrayAccess
 {
-    /**
-     * @var  Octopy\Session\Handler\SessionHandler
-     */
-    protected $handler;
-
     /**
      * @param Application             $app
      * @param SessionHandlerInterface $handler
@@ -35,20 +32,24 @@ class Session implements ArrayAccess
             throw new Exception('You don\'t need to manually use session_start()');
         }
 
-        session_set_save_handler($handler, true);
+        extract($config = $app['config']['session'], EXTR_SKIP);
 
-        extract($config = $app->config['session']);
+        if (! $handler instanceof NullSessionHandler) {
+            session_set_save_handler($handler, true);
 
-        if (empty($lifetime)) {
-            $lifetime = $config['lifetime'] = (int) ini_get('session.gc_maxlifetime');
-        } else {
-            ini_set('session.gc_maxlifetime', (int) $lifetime);
-        }
+            if (empty($lifetime)) {
+                $lifetime = $config['lifetime'] = (int) ini_get('session.gc_maxlifetime');
+            } else {
+                ini_set('session.gc_maxlifetime', (int) $lifetime);
+            }
 
-        if (empty($storage)) {
-            $storage = $config['storage'] = ini_get('session.save_path');
-        } else {
-            ini_set('session.save_path', $storage);
+            if (empty($storage)) {
+                $storage = $config['storage'] = ini_get('session.save_path');
+            } else {
+                ini_set('session.save_path', $storage);
+            }
+
+            session_set_cookie_params($lifetime, $path, $domain, $secure, $httponly);
         }
 
         // Security is king
@@ -57,7 +58,6 @@ class Session implements ArrayAccess
         ini_set('session.use_strict_mode', 1);
         ini_set('session.use_only_cookies', 1);
 
-        session_set_cookie_params($lifetime, $path, $domain, $secure, $httponly);
         session_start();
     }
 
@@ -163,13 +163,14 @@ class Session implements ArrayAccess
      * @param  string $name
      * @return string
      */
-    public static function handler(string $name) : string
+    public static function handler(?string $name) : string
     {
         $handler = [
-            'file' => \Octopy\Session\Handler\FileSessionHandler::class,
+            'file'  => FileSessionHandler::class,
+            'array' => NullSessionHandler::class,
         ];
 
-        return $handler[$name] ?? $handler['file'];
+        return $handler[$name] ?? $handler['array'];
     }
 
     /**

@@ -19,8 +19,6 @@ use Octopy\HTTP\Kernel as HTTPKernel;
 class Kernel extends HTTPKernel
 {
     /**
-     * These middleware are run during every request to your application.
-     *
      * @var array
      */
     protected $middleware = [
@@ -29,8 +27,6 @@ class Kernel extends HTTPKernel
     ];
 
     /**
-     * These middleware may be assigned to groups or used individually.
-     *
      * @var array
      */
     protected $routemiddleware = [

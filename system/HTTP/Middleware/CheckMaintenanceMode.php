@@ -53,7 +53,7 @@ class CheckMaintenanceMode
 
         if (file_exists($down = $this->app['path']->storage('framework') . 'down')) {
             $down = json_decode($this->app['filesystem']->get($down));
-            
+
             if (in_array($request->ip(), $down->allowed)) {
                 return $next($request);
             }

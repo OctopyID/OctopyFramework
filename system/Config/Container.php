@@ -34,6 +34,7 @@ return [
     'schema'     => Octopy\Database\Migration\Schema::class,
     'session'    => Octopy\Session::class,
     'syntax'     => Octopy\Support\Syntax::class,
+    'url'        => Octopy\HTTP\Routing\URLGenerator::class,
     'validator'  => Octopy\Validation\Validator::class,
     'vardumper'  => Octopy\Debug\VarDumper::class,
     'view'       => Octopy\View\Engine::class,

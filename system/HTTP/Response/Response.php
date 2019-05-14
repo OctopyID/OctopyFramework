@@ -21,6 +21,7 @@ use UnexpectedValueException;
 use Octopy\Support\Macroable;
 use Octopy\HTTP\Response\Header;
 use Octopy\HTTP\Response\JsonResponse;
+use Octopy\HTTP\Response\DownloadResponse;
 use Octopy\HTTP\Response\RedirectResponse;
 
 class Response
@@ -217,6 +218,17 @@ class Response
     }
 
     /**
+     * @param  string $filepath
+     * @param  string $filename
+     * @param  string $disposition
+     * @return DownloadResponse
+     */
+    public function download(string $filepath, string $filename = null, string $disposition = 'attachment')
+    {
+        return new DownloadResponse($filepath, $filename, $disposition);
+    }
+
+    /**
      * @param  string $data
      * @param  int    $status
      * @param  array  $header
@@ -268,7 +280,7 @@ class Response
         }
 
         $this->header->set(...$header);
-        
+
         return $this;
     }
 

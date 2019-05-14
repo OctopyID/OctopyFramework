@@ -151,7 +151,7 @@ class MySQL extends BluePrint
     public function default($default = 'NULL')
     {
         $index = count($this->query) - 1;
-        
+
         if (!in_array($default, ['NULL', 'CURRENT_TIMESTAMP'])) {
             $default = sprintf("'%s'", $default);
         }

@@ -27,9 +27,9 @@ class DotEnv
      * @param string $path
      * @param string $file
      */
-    public function __construct(string $path)
+    public function __construct(string $path, string $file = '.env')
     {
-        $this->path = $path;
+        $this->path = preg_replace('/\/+/', '/', $path . DS . $file);
     }
 
     /**
@@ -44,7 +44,7 @@ class DotEnv
         }
 
         if (! is_readable($this->path)) {
-            throw new DotEnvException("The .env file is not readable: {$this->path}");
+            throw new DotEnvException("The .env file is not readable: $this->path");
         }
 
         $lines = file($this->path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -70,7 +70,7 @@ class DotEnv
      */
     protected function set(string $key, string $value = '')
     {
-        extract($this->normalise($key, $value));
+        extract($this->normalize($key, $value));
 
         if (! getenv($key, true)) {
             putenv("$key=$value");
@@ -87,22 +87,33 @@ class DotEnv
 
     /**
      * @param  string $key
+     * @param  mixed  $default
      * @return mixed
      */
-    protected function get(string $key)
+    public function get(string $key, $default = null)
     {
-        switch (true) {
-            case array_key_exists($key, $_ENV):
-                return $_ENV[$key];
-                break;
-            case array_key_exists($key, $_SERVER):
-                return $_SERVER[$key];
-                break;
-            default:
-                $value = getenv($key);
+        $value = getenv($key);
 
-                return $value === false ? null : $value;
+        if ($value === false) {
+            $value = $_ENV[$key] ?? $_SERVER[$key] ?? false;
         }
+
+        if ($value === false) {
+            return $default;
+        }
+
+        switch (strtolower($value)) {
+            case 'true':
+                return true;
+            case 'false':
+                return false;
+            case 'empty':
+                return '';
+            case 'null':
+                return null;
+        }
+
+        return $value;
     }
 
     /**
@@ -118,10 +129,10 @@ class DotEnv
      * @param  string $value
      * @return array
      */
-    protected function normalise(string $key, string $value = ''): array
+    protected function normalize(string $key, string $value = ''): array
     {
         if (strpos($key, '=') !== false) {
-            list($key, $value) = explode('=', $key, 2);
+            [$key, $value] = explode('=', $key, 2);
         }
 
         $key = trim($key);

@@ -14,6 +14,8 @@
 
 namespace Octopy\Console\Command;
 
+use Exception;
+
 use Octopy\Console\Argv;
 use Octopy\Console\Output;
 use Octopy\Console\Command;
@@ -28,7 +30,7 @@ class MakeConsoleCommand extends Command
     /**
      * @var string
      */
-    protected $description = 'Create a new Octopy command';
+    protected $description = 'Create a new Console command';
 
     /**
      * @param  Argv   $argv
@@ -37,15 +39,20 @@ class MakeConsoleCommand extends Command
      */
     public function handle(Argv $argv, Output $output)
     {
-        $parsed = $this->parse($argv);
+        try {
+            $parsed = $this->parse($argv);
+        } catch (Exception $exception) {
+            return $output->error('Not enough arguments (missing : "name").');
+        }
+
         if (file_exists($location = $this->app['path']->app->console->command($parsed['location']))) {
             return $output->warning('Command already exists.');
         }
 
-        $data = array(
+        $data = [
             'DummyClassName' => $parsed['classname'],
-        );
-        
+        ];
+
         if ($this->generate($location, 'Command', $data)) {
             return $output->success('Command created successfully.');
         }

@@ -16,13 +16,10 @@ namespace Octopy\Validation;
 
 use Octopy\Application;
 use Octopy\HTTP\Request;
-use BadMethodCallException;
+use Octopy\Validation\Exception\ValidationRuleException;
 
 class Validator
 {
-    /*
-     * @ValidationRules
-     */
     use ValidationRules;
 
     /**
@@ -58,11 +55,9 @@ class Validator
         $this->request = $request;
         foreach ($rules as $attribute => $rule) {
             foreach ($this->parse($rule) as $rule) {
-                list($method, $parameter) = $rule;
+                [$method, $parameter] = $rule;
                 if (! method_exists($this, $method)) {
-                    throw new BadMethodCallException(
-                        sprintf('Call to undefined method %s::%s(arguments)', __CLASS__, $method)
-                    );
+                    throw new ValidationRuleException("Call to undefined rule [$method].");
                 }
 
                 $this->$method($attribute, ...$parameter);
@@ -118,7 +113,7 @@ class Validator
             if (! strstr($rule, ':')) {
                 $args = [];
             } else {
-                list($rule, $args) = explode(':', $rule);
+                [$rule, $args] = explode(':', $rule);
                 $args = (array) $args;
                 if (strstr($args[0], ',')) {
                     $args = explode(',', $args[0]);

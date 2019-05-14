@@ -72,7 +72,7 @@ class FileHandler
         if ($this->error() > 0) {
             return false;
         }
-        
+
         if (is_null($destination)) {
             $destination = $this->name();
         }

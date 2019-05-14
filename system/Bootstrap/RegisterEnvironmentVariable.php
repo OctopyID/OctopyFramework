@@ -26,7 +26,7 @@ class RegisterEnvironmentVariable
     public function bootstrap(Application $app)
     {
         try {
-            $app->instance('env', new DotEnv($app->basepath() . '.env'))->load();
+            $app->instance('env', new DotEnv($app->basepath()))->load();
         } catch (Throwable $exception) {
             throw $exception;
         }

@@ -48,7 +48,7 @@ class AutoloadCacheCommand extends Command
             if (!$row->isFile()) {
                 continue;
             }
-            
+
             if (substr($row->getFilename(), -4) === '.php') {
                 $classname = preg_replace(['/^system/', '/^app/'], ['Octopy', 'App'], implode('\\', array_unique(explode('/', str_replace($this->basepath, '', substr($row = $row->getRealpath(), 0, -4))))));
 
@@ -72,7 +72,7 @@ class AutoloadCacheCommand extends Command
             $banner[] = " * @link    : www.octopy.xyz                 ";
             $banner[] = " * @license : MIT                            ";
             $banner[] = " */                                          ";
-            
+
             $template = sprintf("<?php \n\n%s\n\nreturn %s;", implode("\n", $banner), var_export($classmap, true));
 
             if (!is_dir($location = dirname($classmap = $this->app['path']->storage('framework/autoload.php')))) {

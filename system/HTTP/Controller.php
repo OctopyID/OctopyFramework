@@ -20,6 +20,11 @@ use Octopy\HTTP\Middleware\ControllerMiddleware;
 class Controller
 {
     /**
+     * @var Octopy\Application
+     */
+    protected $app;
+
+    /**
      * @var array
      */
     protected $middleware = [];
@@ -45,11 +50,21 @@ class Controller
 
         foreach ((array) $middleware as $layer) {
             $this->middleware[] = [
+                'option'     => &$option,
                 'middleware' => $layer,
-                'option' => &$option,
             ];
         }
 
         return new ControllerMiddleware($option);
+    }
+
+    /**
+     * @param  Request $request
+     * @param  array   $rules
+     * @return bool
+     */
+    public function validate(Request $request, array $rules = [])
+    {
+        return $request->validate($rules);
     }
 }

@@ -38,13 +38,11 @@ class DBMigrateCommand extends Command
     public function handle(Argv $argv, Output $output)
     {
         if ($name = $argv->get('name')) {
-            /**
-             * Single
-             */
-            $data = array(
+            // Single
+            $data = [
                 'name'  => $name,
                 'class' => '\\App\\DB\\Migration\\' . $name
-            );
+            ];
 
             if ($argv->get('-r') || $argv->get('--refresh')) {
                 $this->drop($output, $data);
@@ -54,9 +52,7 @@ class DBMigrateCommand extends Command
 
             $this->create($output, $data);
         } else {
-            /**
-             * Multiple
-             */
+            // Multiple
             $directory = $this->app['path']->app->DB('Migration');
 
             if (!is_dir($directory)) {
@@ -72,19 +68,17 @@ class DBMigrateCommand extends Command
                 }
 
                 $class = '\\App\\DB\\Migration\\' . ($file = substr($row->getFilename(), 0, -4));
-                $migration[ $class::$timestamp ] = array(
+                $migration[ $class::$timestamp ] = [
                     'name'  => $file,
                     'class' => $class,
-                );
+                ];
             }
 
             if (empty($migration)) {
                 return $output->warning('Nothing to migrate.');
             }
 
-            /**
-             * Rolling Back Tables
-             */
+            // Rollingback
             if ($argv->get('-r') || $argv->get('--refresh')) {
                 foreach ($migration as $data) {
                     $this->drop($output, $data);
@@ -93,9 +87,9 @@ class DBMigrateCommand extends Command
                 echo $output->white(str_repeat('-', 40));
             }
 
-            /**
-             * Migrating Tables
-             */
+            // Migrating
+            sort($migration);
+
             foreach ($migration as $data) {
                 $this->create($output, $data);
             }

@@ -1,13 +1,13 @@
 <?php
 
 /**
- * @  ___       _
- * @ / _ \  ___| |_ ___  _ __  _   _
- * @| | | |/ __| __/ _ \| '_ \| | | |
- * @| |_| | (__| || (_) | |_) | |_| |
- * @ \___/ \___|\__\___/| .__/ \__, |
- * @                    |_|    |___/
- * @author  : Supian M <supianidzgmail.com>
+ *   ___       _
+ *  / _ \  ___| |_ ___  _ __  _   _
+ * | | | |/ __| __/ _ \| '_ \| | | |
+ * | |_| | (__| || (_) | |_) | |_| |
+ *  \___/ \___|\__\___/| .__/ \__, |
+ *                     |_|    |___/.
+ * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
  */
@@ -22,9 +22,19 @@ use Octopy\Session\Exception\SessionException;
 class FileSessionHandler implements SessionHandlerInterface
 {
     /**
+     * @var Octopy\Application
+     */
+    protected $app;
+
+    /**
      * @var string
      */
     protected $data;
+
+    /**
+     * @var bool
+     */
+    protected $encrypt;
 
     /**
      * @@var string
@@ -34,11 +44,14 @@ class FileSessionHandler implements SessionHandlerInterface
     /**
      * @@param Application $app
      */
-    public function __construct(array $config)
+    public function __construct(Application $app)
     {
-        $this->storage = $config['storage'];
+        $this->app = $app;
+
+        $this->encrypt = $app['config']['session.encrypt'];
+        $this->storage = $app['config']['session.storage'];
     }
-    
+
     /**
      * @@param  string $storage
      * @@param  string $name
@@ -50,10 +63,10 @@ class FileSessionHandler implements SessionHandlerInterface
 
         if (!is_dir($this->storage)) {
             if (!mkdir($this->storage, 0755, true)) {
-                throw new SessionException("Configured save path [{$this->storage}] is not a directory, doesn't exist or cannot be created.");
+                throw new SessionException("Configured save path [$this->storage] is not a directory, doesn't exist or cannot be created.");
             }
         } elseif (!is_writable($this->storage)) {
-            throw new SessionException("Configured save path [{$this->storage}] is not writable by the PHP process.");
+            throw new SessionException("Configured save path [$this->storage] is not writable by the PHP process.");
         }
 
         return true;
@@ -73,15 +86,18 @@ class FileSessionHandler implements SessionHandlerInterface
      */
     public function read($id)
     {
-        $filename = $this->storage . md5($id);
+        $filename = $this->storage . strtoupper(md5($id));
 
         if (file_exists($filename)) {
-            $this->data = file_get_contents($filename);
+            $this->data = $this->app['filesystem']->get($filename);
+
+            if ($this->encrypt) {
+                $this->data = $this->app['encrypter']->decrypt($this->data);
+            }
         }
 
         return $this->data ?? '';
     }
-
 
     /**
      * @param  string $id
@@ -90,14 +106,13 @@ class FileSessionHandler implements SessionHandlerInterface
      */
     public function write($id, $data)
     {
-        $filename = $this->storage . md5($id);
-       
-        // check if data has changed since first read
-        if ($data !== $this->data) {
-            return file_put_contents($filename, $data, LOCK_EX) === false ? false : true;
-        } else {
-            return touch($filename);
+        $filename = $this->storage . strtoupper(md5($id));
+
+        if ($this->encrypt) {
+            $data = $this->app['encrypter']->encrypt($data);
         }
+
+        return $this->app['filesystem']->put($filename, $data);
     }
 
     /**
@@ -106,7 +121,7 @@ class FileSessionHandler implements SessionHandlerInterface
      */
     public function destroy($id)
     {
-        $filename = $this->storage . md5($id);
+        $filename = $this->storage . strtoupper(md5($id));
         if (file_exists($filename)) {
             unlink($filename);
         }

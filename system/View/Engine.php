@@ -98,7 +98,7 @@ class Engine
     {
         $storage = $this->finder->find($name = $this->trim($name));
 
-        $this->parameter = array_merge($this->parameter, array_replace($this->shared, $parameter));
+        $this->parameter($parameter);
 
         if ($storage->octopy() && $storage->expired()) {
             $this->parser->compile($storage);
@@ -114,16 +114,25 @@ class Engine
     }
 
     /**
+     * @param  array $parameter
+     * @return void
+     */
+    protected function parameter(array $parameter) : void
+    {
+        $this->parameter = array_merge($this->parameter, array_replace($this->shared, $parameter));
+    }
+
+    /**
      * @param  mixed $value
      * @return mixed
      */
     protected function escape($value)
     {
-        if (is_numeric($value)) {
-            return $value;
+        if (is_string($value)) {
+            return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8', false);
         }
 
-        return is_string($value) ? htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8', false) : $value;
+        return $value;
     }
 
     /**
@@ -165,22 +174,22 @@ class Engine
     }
 
     /**
-     * @param  array $octopy__
+     * @param  array $octopy
      * @return mixed
      */
-    protected function evaluate(...$octopy__)
+    protected function evaluate(...$octopy)
     {
         extract($this->parameter);
 
         try {
-            if ($octopy__[0]->octopy() && $octopy__[0]->compiled()) {
+            if ($octopy[0]->octopy() && $octopy[0]->compiled()) {
                 ob_start();
-                require $octopy__[0];
+                require $octopy[0];
 
                 return ob_get_clean();
             } else {
                 ob_start();
-                eval('; ?>' . $octopy__[0] . '<?php ;');
+                eval('; ?>' . $octopy[0] . '<?php ;');
 
                 return ob_get_clean();
             }

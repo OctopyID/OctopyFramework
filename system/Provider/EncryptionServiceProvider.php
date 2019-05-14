@@ -47,7 +47,7 @@ class EncryptionServiceProvider extends ServiceProvider
             );
         }
 
-        if (preg_match('/base64:/', $key)) {
+        if (preg_match('/^base64:/', $key)) {
             $key = base64_decode(substr($key, 7));
         }
 

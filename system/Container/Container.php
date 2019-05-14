@@ -161,7 +161,7 @@ class Container implements ArrayAccess
         $parameter = count(static::$parameters) ? end(static::$parameters) : [];
 
         if ($concrete instanceof Closure) {
-            return $concrete($this, $parameter);
+            return $concrete(new Container, $parameter);
         }
 
         $reflector = new ReflectionClass($concrete);

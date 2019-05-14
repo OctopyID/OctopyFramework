@@ -7,32 +7,35 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
  * @link    : www.octopy.xyz
  * @license : MIT
  */
 
-/**
- * Check minimum requirement
- */
-if (!version_compare(PHP_VERSION, '7.1', '>=')) {
-    die('Your PHP version must be 7.1 or higher to run Octopy Framework. Current version: ' . PHP_VERSION);
-}
-
-/**
- *
- */
-define('STARTING_TIME', microtime(true));
-
-/**
- * Octopy\Application
- */
+/*
+|--------------------------------------------------------------------------
+| Turn On The Lights
+|--------------------------------------------------------------------------
+|
+| We need to Octopy PHP development, so let us turn on the lights.
+| This bootstraps the framework and gets it ready for use, then it
+| will load up this application so that we can run it and send
+| the responses back to the terminal and delight our users.
+|
+*/
 $app = require 'system/Octopy.php';
 
-/**
- * App\Console\Kernel
- */
+/*
+|--------------------------------------------------------------------------
+| Run The Octopy Application
+|--------------------------------------------------------------------------
+|
+| When we run the console application, the current CLI command will be
+| executed in this console and the response sent back to a terminal
+| or another output device for the developers. Here goes nothing!
+|
+*/
 $kernel = $app->make(App\Console\Kernel::class);
 
 $status = $kernel->handle(

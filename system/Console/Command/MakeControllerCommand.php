@@ -14,6 +14,8 @@
 
 namespace Octopy\Console\Command;
 
+use Exception;
+
 use Octopy\Console\Argv;
 use Octopy\Console\Output;
 use Octopy\Console\Command;
@@ -37,16 +39,21 @@ class MakeControllerCommand extends Command
      */
     public function handle(Argv $argv, Output $output)
     {
-        $parsed = $this->parse($argv);
+        try {
+            $parsed = $this->parse($argv);
+        } catch (Exception $exception) {
+            return $output->error('Not enough arguments (missing : "name").');
+        }
+
         if (file_exists($location = $this->app['path']->app->HTTP->controller($parsed['location']))) {
             return $output->warning('Controller already exists.');
         }
-        
-        $data = array(
+
+        $data = [
             'DummyNameSpace' => $parsed['namespace'],
             'DummyClassName' => $parsed['classname'],
-        );
-        
+        ];
+
         if ($this->generate($location, 'Controller', $data)) {
             return $output->success('Controller created successfully.');
         }

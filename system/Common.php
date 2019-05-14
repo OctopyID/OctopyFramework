@@ -12,7 +12,7 @@
  * @license : MIT
  */
 
-use Octopy\Support\App;
+use Octopy\Support\Facade\App;
 
 if (! function_exists('app')) {
     /**
@@ -124,28 +124,7 @@ if (! function_exists('env')) {
      */
     function env(string $key, $default = null)
     {
-        $value = getenv($key);
-
-        if ($value === false) {
-            $value = $_ENV[$key] ?? $_SERVER[$key] ?? false;
-        }
-
-        if ($value === false) {
-            return $default;
-        }
-
-        switch (strtolower($value)) {
-            case 'true':
-                return true;
-            case 'false':
-                return false;
-            case 'empty':
-                return '';
-            case 'null':
-                return null;
-        }
-
-        return $value;
+        return App::make('env')->get($key, $default);
     }
 }
 
@@ -209,9 +188,9 @@ if (! function_exists('url')) {
      * @param  string $path
      * @return string
      */
-    function url(string $path) : string
+    function url(string $url) : string
     {
-        return config('app.url') . $path;
+        return App::make('url')->url($url);
     }
 }
 

@@ -14,6 +14,8 @@
 
 namespace Octopy\Console\Command;
 
+use Exception;
+
 use Octopy\Console\Argv;
 use Octopy\Console\Output;
 use Octopy\Console\Command;
@@ -28,7 +30,7 @@ class MakeModelCommand extends Command
     /**
      * @var string
      */
-    protected $description = 'Create a new model class';
+    protected $description = 'Create a new database model class';
 
     /**
      * @param  Argv   $argv
@@ -37,7 +39,12 @@ class MakeModelCommand extends Command
      */
     public function handle(Argv $argv, Output $output)
     {
-        $parsed = $this->parse($argv);
+        try {
+            $parsed = $this->parse($argv);
+        } catch (Exception $exception) {
+            return $output->error('Not enough arguments (missing : "name").');
+        }
+
         if (file_exists($location = $this->app['path']->app->DB($parsed['location']))) {
             return $output->warning('Model already exists.');
         }
@@ -45,13 +52,13 @@ class MakeModelCommand extends Command
         if (($table = $argv->get('-t')) === false && ($table = $argv->get('--table')) === false) {
             $table = strtolower($parsed['classname']);
         }
-        
-        $data = array(
+
+        $data = [
             'DummyTableName' => $table,
             'DummyNameSpace' => $parsed['namespace'],
             'DummyClassName' => $parsed['classname'],
-        );
-        
+        ];
+
         if ($this->generate($location, 'Model', $data)) {
             return $output->success('Model created successfully.');
         }

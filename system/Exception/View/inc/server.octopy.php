@@ -10,6 +10,15 @@
 	</thead>
 	<tbody>
 	@foreach ($GLOBALS[$var] as $key => $value)
+		@php
+			if($var === '_SERVER') {
+				$key = strtoupper(str_replace('-', '_', $key));
+				
+				if(preg_match('/PASSWORD/i', $key)) {
+					$value = preg_replace('/(.*)/', str_repeat('*', strlen($value)), $value);
+				}
+			}
+		@endphp
 		<tr>
 			<td>{{ $key }}</td>
 			<td>

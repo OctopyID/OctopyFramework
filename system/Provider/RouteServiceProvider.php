@@ -17,12 +17,27 @@ namespace Octopy\Provider;
 class RouteServiceProvider extends ServiceProvider
 {
     /**
+     * @var string
+     */
+    protected $namespace;
+
+    /**
      * @return void
      */
     public function boot()
     {
-        $this->app->boot(function () {
-            $this->app['router']->collection->refresh();
-        });
+        if (file_exists($cache = $this->app->storage('framework/route.php'))) {
+            $this->app['router']->load(unserialize(base64_decode(
+                require $cache
+            )));
+        } else {
+            if (method_exists($this, 'map')) {
+                $this->map();
+            }
+
+            $this->app->boot(function () {
+                $this->app['router']->collection->refresh();
+            });
+        }
     }
 }

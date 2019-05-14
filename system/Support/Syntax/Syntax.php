@@ -37,32 +37,35 @@ class Syntax
             case 'cli':
                 $this->parser = $app->make(CLIParser::class);
                 break;
-   
+
             default:
                 $this->parser = $app->make(HTMLParser::class);
                 break;
         }
     }
 
+    public function __call(string $method, array $args = [])
+    {
+        return $this->parser->$method(...$args);
+    }
+
     /**
      * @param  string $source
      * @param  int    $marker
-     * @param  int    $before
-     * @param  int    $after
+     * @param  string $offset
+     * @param  string $lang
      * @return string
      */
-    public function highlight(string $source, int $marker = null, int $before = 0, int $after = 0) : string
+    public function highlight(string $source, int $marker = 0, string $offset = null, string $lang = 'php')
     {
-        if (is_file($source) && is_readable($source)) {
-            try {
-                $source = file_get_contents($source);
-            } catch (Exception $exception) {
-                throw $exception;
-            }
+        try {
+            $source = file_get_contents($source);
+        } catch (Exception $exception) {
+            throw $exception;
         }
 
         try {
-            return $this->parser->highlight($source, $marker, $before, $after);
+            return $this->parser->highlight($source, $marker, $offset, $lang);
         } catch (Exception $exception) {
             throw $exception;
         }

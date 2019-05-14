@@ -43,7 +43,7 @@ class Output extends Color
      * @param  string $value
      * @return string
      */
-    public function success(string $value)
+    public function success(string $value) : string
     {
         return $this->format('{green}' . $value);
     }
@@ -52,7 +52,7 @@ class Output extends Color
      * @param  string $value
      * @return string
      */
-    public function info(string $value)
+    public function info(string $value) : string
     {
         return $this->format('{light_gray}' . $value);
     }
@@ -61,7 +61,7 @@ class Output extends Color
      * @param  string $value
      * @return string
      */
-    public function warning(string $value)
+    public function warning(string $value) : string
     {
         return $this->format('{yellow}' . $value);
     }
@@ -70,15 +70,24 @@ class Output extends Color
      * @param  string $value
      * @return string
      */
-    public function error(string $value)
+    public function error(string $value) : string
     {
         return $this->format('{red}' . $value);
     }
 
     /**
+     * @param  string $value
      * @return string
      */
-    public function help()
+    public function comment(string $value) : string
+    {
+        return $this->warning($value);
+    }
+
+    /**
+     * @return string
+     */
+    public function help() : string
     {
         foreach (['system', 'shell_exec', 'exec'] as $function) {
             if (function_exists($function)) {
@@ -88,7 +97,7 @@ class Output extends Color
         }
 
         $vers = $this->app->version();
-        
+
         $octopy[] = "   ___       _                     ";
         $octopy[] = "  / _ \  ___| |_ ___  _ __  _   _  ";
         $octopy[] = " | | | |/ __| __/ _ \| '_ \| | | | ";
@@ -100,9 +109,9 @@ class Output extends Color
         $output .= $this->white(' USAGE : command [options] [args]') . "\n";
 
         // Header
-        $this->table->add(['header'], array(
+        $this->table->add(['header'], [
             'header' => $this->yellow('Available Options')
-        ));
+        ]);
 
         // Command without prefix
         $rows = [];
@@ -124,13 +133,13 @@ class Output extends Color
         }
 
         $this->table->margin(0);
-        $this->table->add(['margin'], array(
+        $this->table->add(['margin'], [
             'margin' => ''
-        ));
-        
-        $this->table->add(['header'], array(
+        ]);
+
+        $this->table->add(['header'], [
             'header' => $this->yellow('Available Commands')
-        ));
+        ]);
 
         $this->table->margin(3);
         foreach ($rows[0] as $command => $row) {
@@ -148,21 +157,69 @@ class Output extends Color
 
                 if (!in_array($prefix, $group)) {
                     $this->table->margin(2);
-                    $this->table->add(['group'], array(
+                    $this->table->add(['group'], [
                         'group' => $this->yellow($prefix),
-                    ));
+                    ]);
 
                     $group[] = $prefix;
                 }
 
                 $this->table->margin(3);
-                $this->table->add(['command', 'description'], array(
+                $this->table->add(['command', 'description'], [
                     'command'     => $this->green($command),
                     'description' => $this->white($row->describe)
-                ));
+                ]);
             }
         }
 
         return $output . $this->table->render();
+    }
+
+    /**
+     * @param  string $command
+     * @return string
+     */
+    public function undefined(string $command) : string
+    {
+        if (substr($command, 0, 2) === '--') {
+            return $this->error(sprintf('The "%s" option does not exist.', $command));
+        }
+
+        $list = array_filter($this->app['console']->all(), function ($key) {
+            return substr($key, 0, 2) !== '--';
+        }, ARRAY_FILTER_USE_KEY);
+
+        $possible = [];
+
+        foreach ($list as $key => $value) {
+            if (preg_match('/' . str_replace(':', '|', $key) . '/', $command)) {
+                $possible[] = $key;
+            }
+        }
+
+        $error[] = sprintf('  Command "%s" is not defined.  ', $command);
+
+        if (!empty($possible)) {
+            $error[] = '';
+            $error[] = '  Did you mean one of these ?';
+            foreach ($possible as $value) {
+                $error[] = "      $value";
+            }
+
+            $error[] = '';
+        }
+
+        $length = 0;
+        foreach ($error as $value) {
+            if (strlen($value) > $length) {
+                $length = strlen($value);
+            }
+        }
+
+        foreach ($error as $key => $value) {
+            $error[$key] = $value . str_repeat(' ', $length - strlen($value));
+        }
+
+        return $this->format('{bg_red}{white}' . implode("\n", $error));
     }
 }

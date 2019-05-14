@@ -44,7 +44,7 @@ class DBSeedingCommand extends Command
         }
 
         $seed = !$argv->get('value') || !$argv->get('--seed') ? 'DatabaseSeeder' : $argv->get('value');
-            
+
         if (!class_exists('App\DB\Seeder\DatabaseSeeder')) {
             $this->call('make:seeder', ['value' => 'DatabaseSeeder']);
         }
@@ -61,7 +61,7 @@ class DBSeedingCommand extends Command
         echo $output->success('Seeding : {white}' . $seed);
 
         call_user_func([$seeder = $this->app->make('App\\DB\\Seeder\\' . $seed), 'seed']);
-       
+
         if (!empty($seeds = $seeder->call())) {
             foreach ($seeds as $i => $seed) {
                 $this->seed($output, str_replace('App\\DB\\Seeder\\', '', $seed));

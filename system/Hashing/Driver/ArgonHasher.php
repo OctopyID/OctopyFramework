@@ -105,7 +105,7 @@ class ArgonHasher extends Hasher
             'memory_cost' => $this->memory($option),
         ]);
     }
-    
+
     /**
      * @param  array $option
      * @return int

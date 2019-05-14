@@ -61,7 +61,7 @@ class Color
         'blink'            => 5,
         'reverse'          => 7,
         'concealed'        => 8,
-        
+
         'default'          => 39,
         'black'            => 30,
         'red'              => 31,
@@ -71,7 +71,7 @@ class Color
         'magenta'          => 35,
         'cyan'             => 36,
         'light_gray'       => 37,
-        
+
         'dark_gray'        => 90,
         'light_red'        => 91,
         'light_green'      => 92,
@@ -80,7 +80,7 @@ class Color
         'light_magenta'    => 95,
         'light_cyan'       => 96,
         'white'            => 97,
-        
+
         'bg_default'       => 49,
         'bg_black'         => 40,
         'bg_red'           => 41,
@@ -90,7 +90,7 @@ class Color
         'bg_magenta'       => 45,
         'bg_cyan'          => 46,
         'bg_light_gray'    => 47,
-        
+
         'bg_dark_gray'     => 100,
         'bg_light_red'     => 101,
         'bg_light_green'   => 102,
@@ -131,7 +131,7 @@ class Color
             $match[0][$i] = '{' . $key . '}';
             $match[1][$i] = sprintf("\033[%um", $this->style[$key]);
         }
-  
+
         return str_replace($match[0], $match[1], $text) . "\033[0m\n";
     }
 
@@ -149,7 +149,7 @@ class Color
         if (is_string($style)) {
             $style = [$style];
         }
-        
+
         if (!is_array($style)) {
             throw new InvalidArgumentException('Style must be string or array');
         }

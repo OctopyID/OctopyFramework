@@ -76,10 +76,10 @@ class VerifyCSRFToken
             $token = $this->app['session']->get('X-CSRF-TOKEN');
         }
 
-        $this->app['session']->set(array(
+        $this->app['session']->set([
             'X-CSRF-TOKEN'        => $token,
             'X-CSRF-TOKEN-EXPIRE' => microtime(true)
-        ));
+        ]);
 
         return $token;
     }

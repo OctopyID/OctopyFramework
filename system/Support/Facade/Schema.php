@@ -12,14 +12,14 @@
  * @license : MIT
  */
 
-namespace Octopy\Support;
+namespace Octopy\Support\Facade;
 
-use Octopy\Support;
+use Octopy\Support\Facade;
 
-class App extends Support
+class Schema extends Facade
 {
     /**
      * @var string
      */
-    protected static $name = 'app';
+    protected static $name = 'schema';
 }

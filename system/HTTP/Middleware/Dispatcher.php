@@ -16,8 +16,8 @@ namespace Octopy\HTTP\Middleware;
 
 use Closure;
 
-use Octopy\Support\App;
 use Octopy\HTTP\Request;
+use Octopy\Support\Facade\App;
 
 class Dispatcher
 {
@@ -73,7 +73,7 @@ class Dispatcher
             if ($middleware instanceof Closure) {
                 return $middleware($object, $next);
             }
-            
+
             return App::make($middleware)->handle($object, $next);
         };
     }

@@ -25,9 +25,10 @@ class ViewEngineServiceProvider extends ServiceProvider
     {
         $app = $this->app;
 
+        $config = $app['config']['view'];
         $app->instance('view', new Engine(
-            $this->app['config']['view.resource'],
-            $this->app['config']['view.compiled']
+            $config['resource'],
+            $config['compiled']
         ));
 
         // We adding a view macro method in Response class.

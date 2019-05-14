@@ -130,11 +130,29 @@ return [
          */
         Octopy\Provider\SessionServiceProvider::class,
         Octopy\Provider\ConsoleServiceProvider::class,
-        Octopy\Provider\DebugBarServiceProvider::class,
         Octopy\Provider\ResponseServiceProvider::class,
         Octopy\Provider\AutoloadServiceProvider::class,
         Octopy\Provider\ValidationServiceProvider::class,
         Octopy\Provider\ViewEngineServiceProvider::class,
         Octopy\Provider\EncryptionServiceProvider::class,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Class Aliases
+    |--------------------------------------------------------------------------
+    |
+    | This array of class aliases will be registered when this application
+    | is started. However, feel free to register as many as you wish as
+    | the aliases are "lazy" loaded so they don't hinder performance.
+    |
+    */
+    'aliases' => [
+        'App'       => Octopy\Support\Facade\App::class,
+        'View'      => Octopy\Support\Facade\View::class,
+        'Route'     => Octopy\Support\Facade\Route::class,
+        'Schema'    => Octopy\Support\Facade\Schema::class,
+        'Console'   => Octopy\Support\Facade\Console::class,
+        'Validator' => Octopy\Support\Facade\Validator::class,
     ],
 ];

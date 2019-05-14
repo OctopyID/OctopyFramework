@@ -14,7 +14,6 @@
 
 namespace Octopy\FileSystem;
 
-use Closure;
 use Octopy\Application;
 
 class PathLocator
@@ -90,17 +89,10 @@ class PathLocator
             $this->subpath[] = '/';
         }
 
-        $location = function (Closure $callback) {
-            $location = $this->basepath . implode('/', $this->subpath);
-            if ($callback instanceof Closure) {
-                $callback();
-            }
+        $location = $this->basepath . implode('/', $this->subpath);
 
-            return preg_replace('/\/+/', '/', $location);
-        };
+        $this->subpath = [];
 
-        return $location(function () {
-            $this->subpath = [];
-        });
+        return preg_replace('/\/+/', '/', $location);
     }
 }
