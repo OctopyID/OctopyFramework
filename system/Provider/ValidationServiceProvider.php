@@ -30,7 +30,7 @@ class ValidationServiceProvider extends ServiceProvider
                     return $app->response->json($message, 422)->send();
                 }
 
-                return $app->response->flash($message)->redirect()->back(422)->send();
+                return $app->response->flash('error', $message)->redirect()->back(422)->send();
             }
         });
     }

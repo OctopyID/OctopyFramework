@@ -25,7 +25,7 @@ class MaintenanceDownCommand extends Command
     /**
      * @var string
      */
-    protected $signature = 'down';
+    protected $signature = 'maintenance:down';
 
     /**
      * @var string
@@ -50,12 +50,13 @@ class MaintenanceDownCommand extends Command
         }
 
         try {
-            $location = $this->app['path']->storage('framework') . 'down';
-            $this->app['filesystem']->put($location, json_encode(array(
+            $location = $this->app['path']->writeable() . 'DOWN';
+
+            $this->app['filesystem']->put($location, json_encode([
                 'time'    => time(),
                 'message' => $message,
                 'allowed' => $allowed,
-            ), JSON_PRETTY_PRINT));
+            ], JSON_PRETTY_PRINT));
 
             return $output->warning('Application is now in maintenance mode.');
         } catch (Exception $exception) {

@@ -58,7 +58,7 @@ class JsonResponse extends Response
             if (get_class($exception) == 'Exception' && strpos($exception->getMessage(), 'Failed calling ') == 0) {
                 throw $exception->getPrevious() ? : $exception;
             }
-         
+
             throw $exception;
         }
 

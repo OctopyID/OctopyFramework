@@ -37,7 +37,7 @@ abstract class BluePrint
      * @var array
      */
     protected $primary = [];
-        
+
     /**
      * @var array
      */

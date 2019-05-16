@@ -88,7 +88,7 @@ class Header
                 $this->header[$key][] = $value;
             }
         }
-        
+
         return $this;
     }
 

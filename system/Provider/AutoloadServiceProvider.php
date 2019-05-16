@@ -21,8 +21,27 @@ class AutoloadServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if (file_exists($autoload = $this->app['path']->storage('framework/autoload.php'))) {
-            $this->app['autoload']->classmap(require $autoload);
+        $autoload  = $this->app['path']->writeable();
+
+        // we hashing the autoload name & encrypted content
+        // to confused attacker, because sometimes there's
+        // contains a sensitive contents
+        $autoload .= '46AE3E009A9883E4F2C38542E300A16D';
+
+        if (file_exists($autoload)) {
+            $this->app['autoload']->classmap(
+                $this->app['encrypter']->decrypt(file_get_contents($autoload))
+            );
+        }
+
+        if ($composer = $this->app['config']['app.composer']) {
+            if (is_string($composer) && $composer != null) {
+                $composer = substr($composer, 0, -4);
+            } else {
+                $composer = 'vendor/autoload';
+            }
+
+            $this->app['autoload']->require($composer);
         }
     }
 }

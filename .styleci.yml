@@ -17,7 +17,7 @@ finder:
   exclude:
     - modules
     - node_modules
-    - storage
+    - writeable
     - vendor
   exclude:
     - "tests"

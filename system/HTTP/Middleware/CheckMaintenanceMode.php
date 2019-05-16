@@ -51,9 +51,9 @@ class CheckMaintenanceMode
             return $next($request);
         }
 
-        if (file_exists($down = $this->app['path']->storage('framework') . 'down')) {
+        if (file_exists($down = $this->app['path']->writeable('framework') . 'down')) {
             $down = json_decode($this->app['filesystem']->get($down));
-            
+
             if (in_array($request->ip(), $down->allowed)) {
                 return $next($request);
             }

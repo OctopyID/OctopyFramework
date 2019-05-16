@@ -14,6 +14,7 @@
 
 namespace App\Provider;
 
+use Octopy\Support\Facade\Route;
 use Octopy\Provider\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
@@ -26,21 +27,14 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * @return void
      */
-    public function register()
+    public function map() : void
     {
-        // http
-        $route = $this->app['route'];
-        $route->namespace($this->namespace, function () use ($route) {
-            $route->load('Web.php');
+        Route::group(['namespace' => $this->namespace], function () {
+            Route::load('Web.php');
 
-            $route->prefix('api', function () use ($route) {
-                $route->load('Api.php');
+            Route::group(['prefix' =>'api'], function () {
+                Route::load('Api.php');
             });
         });
-
-        // cli
-        if ($this->app->console()) {
-            $this->app['console']->load('Console.php');
-        }
     }
 }

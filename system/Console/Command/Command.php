@@ -42,7 +42,7 @@ abstract class Command
     {
         $this->app = $app;
     }
-        
+
     /**
      * @param  string $property
      * @return mixed
@@ -59,12 +59,12 @@ abstract class Command
     protected function parse(string $string) : array
     {
         preg_match('/(.*)\/(.*)/', trim($string, '/'), $match);
-        
-        return array(
+
+        return [
             'location'  => $string . '.php',
             'classname' => $match[2] ?? $string,
             'namespace' => str_replace('/', '\\', $match[1] ?? null)
-        );
+        ];
     }
 
     /**
@@ -82,7 +82,7 @@ abstract class Command
         } catch (Exception $exception) {
             throw $exception;
         }
-        
+
         if (!empty($data)) {
             if (isset($data['DummyNameSpace']) && $data['DummyNameSpace'] == null) {
                 unset($data['DummyNameSpace']);
@@ -112,11 +112,7 @@ abstract class Command
         if ($this->app['console']->has($command)) {
             $this->app['argv']->option($option);
 
-            try {
-                return $this->app['console']->call($command);
-            } catch (Exception $exception) {
-                return $exception->getMessage();
-            }
+            return $this->app['console']->call($command);
         }
     }
 }

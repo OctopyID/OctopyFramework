@@ -12,9 +12,11 @@
  * @license : MIT
  */
 
-namespace Octopy;
+namespace Octopy\Support;
 
-abstract class Support
+use Octopy\Container;
+
+abstract class Facade
 {
     /**
      * @var Octopy\Container

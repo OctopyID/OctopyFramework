@@ -22,14 +22,14 @@ class ResponseServiceProvider extends ServiceProvider
     public function register()
     {
         $app = $this->app;
-        $app->response->macro('flash', function (array $flash) use ($app) {
-            $app->session->set('error', $flash);
+        $app->response->macro('flash', function (string $name, array $flash) use ($app) {
+            $app['session']->set($name, $flash);
 
             return $this;
         });
 
-        $app->macro('flash', function () use ($app) {
-            return $app->session->pull('error', []);
+        $app->macro('flash', function (string $name) use ($app) {
+            return $app['session']->pull($name, []);
         });
     }
 }

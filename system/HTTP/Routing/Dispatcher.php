@@ -30,12 +30,12 @@ class Dispatcher
      * @var Octopy\Application
      */
     protected $app;
-    
+
     /**
      * @var Octopy\Routing\Route
      */
     protected $route;
-    
+
     /**
      * @param Application $app
      * @param Request     $request

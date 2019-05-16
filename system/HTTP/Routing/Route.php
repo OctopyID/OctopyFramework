@@ -74,7 +74,7 @@ class Route
         if (is_null($name)) {
             return $this->data['name'];
         }
-        
+
         return $this->update('name', trim($name));
     }
 

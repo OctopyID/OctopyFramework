@@ -55,9 +55,7 @@ php_errors.log
 # Test Files
 #-------------------------
 tests/coverage*
-
-# Don't save phpunit under version control.
-phpunit
+.phpunit.result.cache
 
 #-------------------------
 # Composer
@@ -100,9 +98,7 @@ nb-configuration.xml
 
 # Visual Studio Code
 .vscode/
-
 /results/
-/phpunit*.xml
 
 # Misc
 git

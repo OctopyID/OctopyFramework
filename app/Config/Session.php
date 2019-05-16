@@ -42,6 +42,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Session Encryption
+    |--------------------------------------------------------------------------
+    |
+    | This option allows you to easily specify that all of your session data
+    | should be encrypted before it is stored. All encryption will be run
+    | automatically by Octopy and you can use the Session like normal.
+    |
+    */
+    'encrypt' => true,
+
+    /*
+    |--------------------------------------------------------------------------
     | Session File Storage
     |--------------------------------------------------------------------------
     |
@@ -50,7 +62,7 @@ return [
     | location may be specified. This is only needed for file sessions.
     |
     */
-    'storage' => $this->path->storage('framework/session'),
+    'storage' => $this->path->writeable('session'),
 
     /*
     |--------------------------------------------------------------------------

@@ -68,11 +68,16 @@ class Router
     }
 
     /**
-     * @param string $route
+     * @param  mixed $route
+     * @return void
      */
-    public function load(string $route)
+    public function load($route) : void
     {
-        require $this->app['path']->app->route($route);
+        if ($route instanceof Collection) {
+            $this->collection = $route;
+        } else {
+            require $this->app['path']->app->route($route);
+        }
     }
 
     /**

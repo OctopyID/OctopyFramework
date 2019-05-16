@@ -54,7 +54,7 @@ class TableFormatter
         foreach ($keys as $key) {
             if (isset($data[$key])) {
                 $this->margin[$this->state] = $this->prev;
-                
+
                 $this->data[$this->state][] = $data[$key];
             }
         }
@@ -76,7 +76,7 @@ class TableFormatter
                 }
             }
         }
-        
+
         $table = '';
         foreach ($this->data as $rkey => $row) {
             $table .= str_pad(' ', $this->margin[$rkey]);
@@ -87,8 +87,8 @@ class TableFormatter
             $table .= "\n";
         }
 
-        $this->data   = array();
-        $this->margin = array();
+        $this->data   = [];
+        $this->margin = [];
         $this->margin(
             $this->state = 0
         );

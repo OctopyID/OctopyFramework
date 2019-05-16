@@ -110,6 +110,29 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Register The Composer Auto Loader
+    |--------------------------------------------------------------------------
+    |
+    | Composer provides a convenient, automatically generated class loader for
+    | our application. We just need to utilize it! We'll simply require it
+    | into the script here so that we don't have to worry about manual
+    | loading any of our classes later on. It feels great to relax.
+    |
+    | Enabling this setting will tell Octopy to look for a Composer
+    | package auto-loader script in application/vendor/autoload.php.
+    |
+    |   'composer' = true;
+    |
+    | Or if you have your vendor/ directory located somewhere else, you
+    | can opt to set a specific path as well:
+    |
+    |   'composer' = '/path/to/vendor/autoload.php';
+    |
+    */
+   'composer' => true,
+
+    /*
+    |--------------------------------------------------------------------------
     | Autoloaded Service Providers
     |--------------------------------------------------------------------------
     |
@@ -130,11 +153,29 @@ return [
          */
         Octopy\Provider\SessionServiceProvider::class,
         Octopy\Provider\ConsoleServiceProvider::class,
-        Octopy\Provider\DebugBarServiceProvider::class,
         Octopy\Provider\ResponseServiceProvider::class,
         Octopy\Provider\AutoloadServiceProvider::class,
         Octopy\Provider\ValidationServiceProvider::class,
         Octopy\Provider\ViewEngineServiceProvider::class,
         Octopy\Provider\EncryptionServiceProvider::class,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Class Aliases
+    |--------------------------------------------------------------------------
+    |
+    | This array of class aliases will be registered when this application
+    | is started. However, feel free to register as many as you wish as
+    | the aliases are "lazy" loaded so they don't hinder performance.
+    |
+    */
+    'aliases' => [
+        'App'       => Octopy\Support\Facade\App::class,
+        'View'      => Octopy\Support\Facade\View::class,
+        'Route'     => Octopy\Support\Facade\Route::class,
+        'Schema'    => Octopy\Support\Facade\Schema::class,
+        'Console'   => Octopy\Support\Facade\Console::class,
+        'Validator' => Octopy\Support\Facade\Validator::class,
     ],
 ];

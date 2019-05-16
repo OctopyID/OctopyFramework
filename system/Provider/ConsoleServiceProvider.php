@@ -35,7 +35,10 @@ class ConsoleServiceProvider extends ServiceProvider
                 return 'Octopy Framework ' . $output->success($app->version());
             })->describe('Display this application version');
 
-            // auto
+            // load defined user's command
+            $console->load('Console.php');
+
+            // discover system command
             $this->autodiscover();
         }
     }

@@ -25,7 +25,7 @@ class MaintenanceUpCommand extends Command
     /**
      * @var string
      */
-    protected $signature = 'up';
+    protected $signature = 'maintenance:up';
 
     /**
      * @var string
@@ -39,7 +39,8 @@ class MaintenanceUpCommand extends Command
      */
     public function handle(Argv $argv, Output $output)
     {
-        $down = $this->app['path']->storage('framework') . 'down';
+        $down = $this->app['path']->writeable('framework') . 'DOWN';
+
         if (file_exists($down)) {
             unlink($down);
         }

@@ -41,6 +41,11 @@ class Application extends Container
     protected $provider = [];
 
     /**
+     * @var array
+     */
+    protected $terminating = [];
+
+    /**
      * @param string $basepath
      */
     public function __construct(string $basepath)
@@ -49,7 +54,7 @@ class Application extends Container
 
         if ($this->instance(static::class, $this)) {
 
-            // Set instance aliases
+            // set instance aliases
             $aliases = include 'Config/Container.php';
             foreach ($aliases as $abstract => $concrete) {
                 $this->alias($abstract, $concrete);
@@ -70,7 +75,7 @@ class Application extends Container
      */
     public function version() : string
     {
-        return 'v0.2-dev';
+        return 'v0.2.3';
     }
 
     /**
@@ -87,7 +92,21 @@ class Application extends Container
      */
     public function basepath(string $subpath = null) : string
     {
-        return preg_replace('/\/+/', '/', $this->basepath . $subpath . DIRECTORY_SEPARATOR);
+        $fullpath = $this->basepath . $subpath;
+        if (! preg_match('/\.(php)/', $subpath)) {
+            $fullpath .= DS;
+        }
+
+        return preg_replace('/\/+/', '/', $fullpath);
+    }
+
+    /**
+     * @param  string $subpath
+     * @return string
+     */
+    public function writeable(string $subpath = null) : string
+    {
+        return $this->basepath('writeable/' . $subpath);
     }
 
     /**
@@ -177,5 +196,15 @@ class Application extends Container
         }
 
         $this->booted = true;
+    }
+
+    /**
+     * @return void
+     */
+    public function terminate() : void
+    {
+        foreach ($this->terminating as $terminate) {
+            call_user_func($terminate);
+        }
     }
 }

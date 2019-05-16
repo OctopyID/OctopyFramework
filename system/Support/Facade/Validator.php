@@ -12,14 +12,14 @@
  * @license : MIT
  */
 
-namespace Octopy\Support;
+namespace Octopy\Support\Facade;
 
-use Octopy\Support;
+use Octopy\Support\Facade;
 
-class Schema extends Support
+class Validator extends Facade
 {
     /**
      * @var string
      */
-    protected static $name = 'schema';
+    protected static $name = 'validator';
 }

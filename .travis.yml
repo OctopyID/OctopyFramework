@@ -1,0 +1,14 @@
+language: php
+
+php:
+  - 7.1
+
+before_script:
+  - travis_retry composer self-update
+  - travis_retry composer install --prefer-source --no-interaction
+  - cp .env.example .env
+  - php octopy key:generate
+
+script:
+  - vendor/bin/phpunit
+  

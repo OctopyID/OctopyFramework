@@ -186,7 +186,7 @@ class VarDumper
         if ($this->force) {
             return true;
         }
-        
+
         if ($this->windows()) {
             return false;
         }
@@ -194,10 +194,10 @@ class VarDumper
         if (function_exists('posix_isatty')) {
             set_error_handler(function () {
             });
-       
+
             $posix = posix_isatty(STDIN);
             restore_error_handler();
-       
+
             return $posix;
         }
 
@@ -228,7 +228,7 @@ class VarDumper
         if (!$this->console) {
             $data = preg_replace('/&lt;address\>|&lt;\/address><br \/>\n/', '', $data);
             echo '<pre style="background:#0c1021;font:85% Monaco, Consolas, monospace;padding:10px;line-height:1.3;">' . $data . '</pre>';
-           
+
             if (!$this->initialized) {
                 $this->initialized = true;
                 echo '<script>function __vardump(c,b){var a=document.getElementById(c);a.classList.toggle("active")?(b.innerHTML=" \u25b6 ",a.style.display="none") :(b.innerHTML=" \u25bc ",a.style.display="inline")};</script>';
@@ -328,7 +328,7 @@ class VarDumper
         foreach ($array as $key => $arr) {
             if (is_array($arr)) {
                 $temporary .= $this->break() . $this->indent($this->indent) . $this->parent((string) $key)  . 'Array ' . $this->counter(count($arr));
-                
+
                 $result = $this->array($arr, $object);
 
                 if ($object == false && $result != '') {
@@ -337,7 +337,7 @@ class VarDumper
 
                 if (!$this->console) {
                     $id = time() . rand(0, 9999);
-                    
+
                     $temporary .= " [<span onclick=\"__vardump('debug_" . $id . "', this)\"> ▼ </span><span id=\"debug_" . $id ."\">{$result}</span>]";
                 } else {
                     $temporary .= " [{$result}]";
@@ -386,7 +386,7 @@ class VarDumper
         $temporary = '';
         $reflection = new ReflectionObject($object);
         $this->indent += $this->padding;
-       
+
         foreach ($reflection->getProperties() as $size => $prop) {
             if ($prop->isPrivate()) {
                 $temporary .= "{$this->break()}{$this->indent($this->indent)}{$this->color('protected', 'visibility')}{$this->pad(2)} {$this->color(':', 'arrow')} ";

@@ -58,7 +58,9 @@ class Kernel
     public function handle(Argv $argv, Output $output)
     {
         try {
-            return $this->app['console']->dispatch($argv, $output);
+            return $this->ansi(
+                $this->app['console']->dispatch($argv, $output)
+            );
         } catch (Exception $exception) {
             throw $exception;
         }
@@ -69,6 +71,19 @@ class Kernel
      */
     public function terminate(Argv $argv)
     {
-        //
+        $this->app->terminate();
+    }
+
+    /**
+     * @param  string $string
+     * @return string
+     */
+    private function ansi(?string $string) : ?string
+    {
+        if (strcasecmp(substr(PHP_OS, 0, 3), 'WIN') == 0) {
+            $string = preg_replace('#\\x1b[[][^A-Za-z]*[A-Za-z]#', '', $string);
+        }
+
+        return $string;
     }
 }

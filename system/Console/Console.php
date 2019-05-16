@@ -65,11 +65,15 @@ class Console
     {
         $command = $input->command();
 
+        if (is_null($command)) {
+            return $output->help();
+        }
+
         if ($this->has($command)) {
             return $this->call($command);
         }
 
-        return $output->help($this->collection);
+        return $output->undefined($command);
     }
 
     /**

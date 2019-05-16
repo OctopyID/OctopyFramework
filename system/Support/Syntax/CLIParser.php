@@ -27,17 +27,17 @@ class CLIParser
      * @var string
      */
     const TOKEN_STRING = 'token_string';
-        
+
     /**
      * @var string
      */
     const TOKEN_DEFAULT = 'token_default';
-    
+
     /**
      * @var string
      */
     const TOKEN_COMMENT = 'token_comment';
-    
+
     /**
      * @var string
      */
@@ -67,7 +67,6 @@ class CLIParser
         CLIParser::TOKEN_COMMENT    => 'yellow',
         CLIParser::TOKEN_DEFAULT    => 'default',
         CLIParser::TOKEN_KEYWORD    => 'red',
-        
         CLIParser::LINE_NUMBER      => 'light_gray',
         CLIParser::ACTUAL_LINE_MARK => 'red',
    ];
@@ -142,7 +141,7 @@ class CLIParser
                     case T_OPEN_TAG_WITH_ECHO:
                     case T_CLOSE_TAG:
                     case T_VARIABLE:
-                    
+
                     // Constants
                     case T_DIR:
                     case T_FILE:

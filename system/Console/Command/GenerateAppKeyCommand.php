@@ -32,7 +32,7 @@ class GenerateAppKeyCommand extends Command
      * @var string
      */
     protected $description = 'Set the application key';
-    
+
     /**
      * @param  Argv   $argv
      * @param  Output $output
@@ -50,7 +50,7 @@ class GenerateAppKeyCommand extends Command
         // automatically setup for this developer. This key gets generated using a
         // secure random byte generator and is later base64 encoded for storage.
         $this->write($key);
-      
+
         $this->app['config']['app.key'] = $key;
 
         return $output->success('Application key set successfully.');
@@ -61,7 +61,7 @@ class GenerateAppKeyCommand extends Command
      */
     protected function key() : string
     {
-        return 'base64:'.base64_encode(
+        return 'base64:' . base64_encode(
             Encrypter::generate($this->app['config']['app.cipher'])
         );
     }

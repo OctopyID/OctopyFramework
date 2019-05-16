@@ -81,7 +81,7 @@ class Collection implements Countable, IteratorAggregate
             }
         }
     }
-    
+
     /**
      * @param  Request $request
      * @return Response
@@ -108,7 +108,7 @@ class Collection implements Countable, IteratorAggregate
 
             return $match;
         }
-        
+
         throw new RouteNotFoundException;
     }
 
@@ -122,7 +122,7 @@ class Collection implements Countable, IteratorAggregate
         if (isset($route[$request])) {
             return $route[$request];
         }
-        
+
         foreach ($route as $uri => $route) {
             if (preg_match($route->pattern, $request, $parameter)) {
                 return $route->parameter(array_filter($parameter, function ($value, $key) {

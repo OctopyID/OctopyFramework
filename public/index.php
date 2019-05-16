@@ -12,26 +12,30 @@
  * @license : MIT
  */
 
-/**
- * Check minimum requirement.
- */
-if (! version_compare(PHP_VERSION, '7.1', '>=')) {
-    die('Your PHP version must be 7.1 or higher to run Octopy Framework. Current version: ' . PHP_VERSION);
-}
-
 /*
- *
- */
-define('STARTING_TIME', microtime(true));
-
-/**
- * Octopy\Application.
- */
+|--------------------------------------------------------------------------
+| Turn On The Lights
+|--------------------------------------------------------------------------
+|
+| We need to Octopy PHP development, so let us turn on the lights.
+| This bootstraps the framework and gets it ready for use, then it
+| will load up this application so that we can run it and send
+| the responses back to the browser and delight our users.
+|
+*/
 $app = require '../system/Octopy.php';
 
-/**
- * App\HTTP\Kernel.
- */
+/*
+|--------------------------------------------------------------------------
+| Run The Application
+|--------------------------------------------------------------------------
+|
+| Once we have the application, we can handle the incoming request
+| through the kernel, and send the associated response back to
+| the client's browser allowing them to enjoy the creative
+| and wonderful application we have prepared for them.
+|
+*/
 $kernel = $app->make(App\HTTP\Kernel::class);
 
 $response = $kernel->handle(

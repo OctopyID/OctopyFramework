@@ -13,51 +13,39 @@
  */
 
 /*
- * ---------------------------------------------------------------
- * SETUP OUR IMPORTANT CONSTANTS
- * ---------------------------------------------------------------
- *
- * We always using DS constant instead DIRECTORY_SEPARATOR
- * for avoid problem in Windows System
- */
+|---------------------------------------------------------------
+| SETUP OUR IMPORTANT CONSTANTS
+|---------------------------------------------------------------
+|
+| We always using DS constant instead DIRECTORY_SEPARATOR
+| for avoid problem in Windows System
+*/
 defined('DS') || define('DS', '/');
 
 defined('BS') || define('BS', '\\');
 
 /*
- * ---------------------------------------------------------------
- * JUST ROOT PATH DIRECTORY PROJECT
- * ---------------------------------------------------------------
- */
+|--------------------------------------------------------------------------
+| JUST ROOT PATH DIRECTORY PROJECT
+|--------------------------------------------------------------------------
+*/
 $basepath = dirname(__DIR__) . DS;
 
 /*
- * ---------------------------------------------------------------
- * GRAB OUR CONSTANTS
- * ---------------------------------------------------------------
- */
-if (file_exists($constant = $basepath . '../app/Config/Constant.php')) {
-    require $constant;
-}
-
-/*
- * ---------------------------------------------------------------
- * LOAD OUR AUTOLOADER
- * ---------------------------------------------------------------
- *
- * The autoloader allows all of the pieces to work together
- * in the framework. We have to load it here, though, so
- * that the config files can use the path constants.
- */
+|--------------------------------------------------------------------------
+| LOAD OUR AUTOLOADER
+|--------------------------------------------------------------------------
+|
+| The autoloader allows all of the pieces to work together
+| in the framework. We have to load it here, though, so
+| that the config files can use the path constants.
+*/
 require 'Autoload.php';
 
 $autoload = new Octopy\Autoload($basepath, [
     'App' => 'app',
     'Octopy' => 'system',
 ]);
-
-// Now load Composer's if it's available
-$autoload->composer();
 
 /**
  *
@@ -69,9 +57,6 @@ require 'Common.php';
  */
 $app = new Octopy\Application($basepath);
 
-/*
- *
- */
 $app->instance(Octopy\Autoload::class, $autoload);
 
 /*

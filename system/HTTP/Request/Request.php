@@ -22,7 +22,7 @@ use Octopy\HTTP\Request\FileHandler;
 class Request
 {
     use Macroable;
-    
+
     /**
      * @var ctopy\HTTP\Request\Collection
      */
@@ -79,7 +79,7 @@ class Request
 
         return $this->file($key);
     }
-    
+
     /**
      * @param  string $source
      * @param  string $key
@@ -184,7 +184,7 @@ class Request
         $root = explode('/', $this->server('PHP_SELF'));
         array_pop($root);
         $root = implode('/', $root);
-        
+
         return rtrim(preg_replace('/\?.*/', '', preg_replace('/\/+/', '/', str_replace($root, '', $this->server('REQUEST_URI')))), '/') ? : '/';
     }
 
@@ -262,11 +262,11 @@ class Request
                 $header[ucwords(strtolower($name), '-')] = $val;
             }
         }
-        
+
         if (!is_null($name)) {
             return $header[$name] ?? null;
         }
-        
+
         return $header;
     }
 

@@ -14,7 +14,6 @@
 
 namespace Octopy\FileSystem;
 
-use Closure;
 use Octopy\Application;
 
 class PathLocator
@@ -58,7 +57,7 @@ class PathLocator
     public function __get(string $path) : PathLocator
     {
         if (! empty($this->subpath)) {
-            if ($path !== 'app' && ! in_array($path, ['app', 'system', 'public', 'storage'])) {
+            if ($path !== 'app' && ! in_array($path, ['app', 'system', 'public', 'writeable'])) {
                 $path = ucfirst($path);
             }
         }
@@ -75,7 +74,7 @@ class PathLocator
      */
     public function __call(string $path, array $additional = [])
     {
-        if (! in_array($path, ['app', 'system', 'public', 'storage'])) {
+        if (! in_array($path, ['app', 'system', 'public', 'writeable'])) {
             $path = ucfirst($path);
         }
 
@@ -90,17 +89,10 @@ class PathLocator
             $this->subpath[] = '/';
         }
 
-        $location = function (Closure $callback) {
-            $location = $this->basepath . implode('/', $this->subpath);
-            if ($callback instanceof Closure) {
-                $callback();
-            }
+        $location = $this->basepath . implode('/', $this->subpath);
 
-            return preg_replace('/\/+/', '/', $location);
-        };
+        $this->subpath = [];
 
-        return $location(function () {
-            $this->subpath = [];
-        });
+        return preg_replace('/\/+/', '/', $location);
     }
 }

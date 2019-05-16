@@ -24,7 +24,7 @@ final class Autoload
     /**
      * @var array
      */
-    private $autoload = [];
+    private $aliases = [];
 
     /**
      * @var array
@@ -32,66 +32,95 @@ final class Autoload
     private $classmap = [];
 
     /**
-     * @param string $basepath
-     * @param array  $autoload
+     * @var array
      */
-    public function __construct(string $basepath, array $autoload = [])
+    private $namespace = [];
+
+    /**
+     * @param string $basepath
+     * @param array  $namespace
+     */
+    public function __construct(string $basepath, array $namespace = [])
     {
         $this->basepath = $basepath;
-        $this->autoload = $autoload;
+        $this->namespace = $namespace;
 
         spl_autoload_register([$this, 'load'], true, true);
     }
 
     /**
-     * @param string $namespace
-     * @param string $directory
+     * @param  string $namespace
+     * @param  string $directory
+     * @return bool
      */
-    public function set(string $namespace, string $directory)
+    public function namespace(string $namespace, string $directory) : bool
     {
-        $this->autoload = array_merge($this->autoload, [
+        $this->namespace = array_merge($this->namespace, [
             $namespace => $directory,
         ]);
+
+        return true;
     }
 
     /**
-     * @param array $classmap
+     * @param  string $namespace
+     * @return bool
      */
-    public function classmap(array $classmap)
+    public function remove(string $namespace) : bool
+    {
+        if (array_key_exists($namespace, $this->namespace)) {
+            unset($this->namespace[$namespace]);
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  array $classmap
+     * @return void
+     */
+    public function classmap(array $classmap) : void
     {
         $this->classmap = array_merge($this->classmap, $classmap);
     }
 
     /**
+     * @param  array $aliases
      * @return void
      */
-    public function composer()
+    public function aliases(array $aliases) : void
     {
-        $this->require('vendor/autoload');
+        $this->aliases = array_merge($this->aliases, $aliases);
     }
 
     /**
      * @param  string $class
      * @return string
      */
-    protected function load(string $class)
+    public function load(string $class)
     {
+        // Lazy load for class aliases
+        // so they don't hinder performance
+        if (isset($this->aliases[$class])) {
+            return class_alias($this->aliases[$class], $class);
+        }
+
         if (isset($this->classmap[$class]) && file_exists($this->classmap[$class])) {
             return require $this->classmap[$class];
         }
 
-        $class = str_replace(BS, DS, $class);
-        foreach ($this->autoload as $namespace => $directory) {
+        $class = trim(str_replace(BS, DS, $class), DS);
+        foreach ($this->namespace as $namespace => $directory) {
             if (preg_match($pattern = '/^' . $namespace . '/', $class)) {
                 $classpath = str_replace(BS, DS, preg_replace($pattern, $directory, $class));
-                if ($this->require($classpath)) {
-                    return true;
+                if ($fullpath = $this->require($classpath)) {
+                    return $fullpath;
                 }
 
                 $pieces[] = array_slice($pieces = explode(DS, $classpath), -1)[0];
 
-                if ($this->require(implode(DS, $pieces))) {
-                    return true;
+                if ($fullpath = $this->require(implode(DS, $pieces))) {
+                    return $fullpath;
                 }
             }
         }
@@ -103,10 +132,12 @@ final class Autoload
      * @param  string $filepath
      * @return string
      */
-    protected function require(string $filepath)
+    public function require(string $filepath)
     {
-        if (file_exists($filepath = $this->basepath . $filepath . '.php')) {
-            return require $filepath;
+        if (is_file($filepath = $this->basepath . $filepath . '.php')) {
+            if (require_once $filepath) {
+                return $filepath;
+            }
         }
     }
 }

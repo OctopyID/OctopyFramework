@@ -36,5 +36,5 @@ return [
     | directory. However, as usual, you are free to change this value.
     |
     */
-    'compiled' => $this->path->storage('framework/views'),
+    'compiled' => $this->path->writeable('compiled'),
 ];

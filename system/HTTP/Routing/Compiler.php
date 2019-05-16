@@ -54,7 +54,7 @@ class Compiler
         if (preg_match_all('/(?<=\/):([^\/]+)(?=\/|$)/', $uri, $matches)) {
             $search = '';
             $regexp = '/';
-                
+
             foreach ($matches[1] as $key => $value) {
                 $search .= '\/' . preg_quote($matches[0][$key]);
                 $regexp .= sprintf($this->compute($matches[1], $key), trim($value, '?'));
@@ -63,7 +63,7 @@ class Compiler
             $regexp = preg_replace('/' . $search . '/', rtrim($regexp, '/'), $uri);
             $regexp = preg_replace('/\/+/', '/', $regexp .= str_repeat(')?', $this->count));
         }
-        
+
         $this->count = 0;
 
         return '#^' . ($regexp ?? str_replace('/', '\/', $uri)) . '$#sDu';

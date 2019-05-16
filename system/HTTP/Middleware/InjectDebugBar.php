@@ -55,7 +55,7 @@ class InjectDebugBar
         if (!$this->debugbar->enabled() || $request->is($this->except)) {
             return $next($request);
         }
-       
+
         try {
             $response = $next($request);
         } catch (Throwable $exception) {

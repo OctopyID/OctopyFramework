@@ -15,8 +15,9 @@
 namespace Octopy\Support;
 
 use DateTimeZone;
+use DateTime as PHPDateTime;
 
-class DateTime extends \DateTime
+class DateTime extends PHPDateTime
 {
     /**
      * @param int    $time
@@ -73,7 +74,7 @@ class DateTime extends \DateTime
      */
     public function second(int $second)
     {
-        return $this->parse((int)$second . ' second');
+        return $this->parse($second . ' second');
     }
 
     /**
@@ -82,7 +83,7 @@ class DateTime extends \DateTime
      */
     public function minute(int $minute)
     {
-        return $this->parse((int)$minute . ' minute');
+        return $this->parse($minute . ' minute');
     }
 
     /**
@@ -91,7 +92,7 @@ class DateTime extends \DateTime
      */
     public function hour(int $hour)
     {
-        return $this->parse((int)$hour . ' hour');
+        return $this->parse($hour . ' hour');
     }
 
     /**
@@ -100,7 +101,7 @@ class DateTime extends \DateTime
      */
     public function day(int $day)
     {
-        return $this->parse((int)$day . ' day');
+        return $this->parse($day . ' day');
     }
 
     /**
@@ -109,7 +110,7 @@ class DateTime extends \DateTime
      */
     public function week(int $week)
     {
-        return $this->parse((int)$week . ' week');
+        return $this->parse($week . ' week');
     }
 
     /**
@@ -118,7 +119,7 @@ class DateTime extends \DateTime
      */
     public function month(int $month)
     {
-        return $this->parse((int)$month . ' month');
+        return $this->parse($month . ' month');
     }
 
     /**
@@ -127,7 +128,7 @@ class DateTime extends \DateTime
      */
     public function year(int $year)
     {
-        return $this->parse((int)$year . ' year');
+        return $this->parse($year . ' year');
     }
 
     /**

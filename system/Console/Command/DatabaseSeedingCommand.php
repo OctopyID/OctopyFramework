@@ -18,17 +18,17 @@ use Octopy\Console\Argv;
 use Octopy\Console\Output;
 use Octopy\Console\Command;
 
-class DBSeedingCommand extends Command
+class DatabaseSeedingCommand extends Command
 {
     /**
      * @var string
      */
-    protected $signature = 'db:seed';
+    protected $signature = 'database:seed';
 
     /**
      * @var string
      */
-    protected $description = 'Seed the database with records';
+    protected $description = 'Seed the database with record';
 
     /**
      * @param  Argv   $argv
@@ -44,7 +44,7 @@ class DBSeedingCommand extends Command
         }
 
         $seed = !$argv->get('value') || !$argv->get('--seed') ? 'DatabaseSeeder' : $argv->get('value');
-            
+
         if (!class_exists('App\DB\Seeder\DatabaseSeeder')) {
             $this->call('make:seeder', ['value' => 'DatabaseSeeder']);
         }
@@ -61,7 +61,7 @@ class DBSeedingCommand extends Command
         echo $output->success('Seeding : {white}' . $seed);
 
         call_user_func([$seeder = $this->app->make('App\\DB\\Seeder\\' . $seed), 'seed']);
-       
+
         if (!empty($seeds = $seeder->call())) {
             foreach ($seeds as $i => $seed) {
                 $this->seed($output, str_replace('App\\DB\\Seeder\\', '', $seed));
