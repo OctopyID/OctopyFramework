@@ -129,7 +129,7 @@ return [
     |   'composer' = '/path/to/vendor/autoload.php';
     |
     */
-   'composer' => true,
+    'composer' => true,
 
     /*
     |--------------------------------------------------------------------------

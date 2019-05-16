@@ -21,7 +21,7 @@ class AutoloadServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $autoload  = $this->app['path']->writeable();
+        $autoload = $this->app['path']->writeable();
 
         // we hashing the autoload name & encrypted content
         // to confused attacker, because sometimes there's

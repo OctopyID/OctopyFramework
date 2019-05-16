@@ -26,7 +26,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $cache  = $this->app->writeable();
+        $cache = $this->app->writeable();
         $cache .= '9C46408A3BC655C68505C57A11D6C4EE';
 
         if (file_exists($cache)) {
