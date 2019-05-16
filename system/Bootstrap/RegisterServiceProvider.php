@@ -33,6 +33,8 @@ class RegisterServiceProvider
             return substr($provider, 0, 3) === 'App';
         });
 
+        $array['provider'] = array_merge(['Octopy\Provider\EncryptionServiceProvider'], $array['provider']);
+
         foreach ($array['provider'] as $provider) {
             $app->register($provider, true);
         }

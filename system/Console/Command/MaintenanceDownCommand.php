@@ -25,7 +25,7 @@ class MaintenanceDownCommand extends Command
     /**
      * @var string
      */
-    protected $signature = 'down';
+    protected $signature = 'maintenance:down';
 
     /**
      * @var string
@@ -50,7 +50,8 @@ class MaintenanceDownCommand extends Command
         }
 
         try {
-            $location = $this->app['path']->storage('framework') . 'down';
+            $location = $this->app['path']->writeable() . 'DOWN';
+
             $this->app['filesystem']->put($location, json_encode([
                 'time'    => time(),
                 'message' => $message,

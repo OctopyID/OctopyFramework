@@ -62,7 +62,7 @@ return [
     | location may be specified. This is only needed for file sessions.
     |
     */
-    'storage' => $this->path->storage('framework/session'),
+    'storage' => $this->path->writeable('session'),
 
     /*
     |--------------------------------------------------------------------------

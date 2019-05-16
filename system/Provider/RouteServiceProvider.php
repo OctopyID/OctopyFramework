@@ -26,10 +26,13 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (file_exists($cache = $this->app->storage('framework/route.php'))) {
-            $this->app['router']->load(unserialize(base64_decode(
-                require $cache
-            )));
+        $cache = $this->app->writeable();
+        $cache .= '9C46408A3BC655C68505C57A11D6C4EE';
+
+        if (file_exists($cache)) {
+            $this->app['router']->load(
+                $this->app['encrypter']->decrypt(file_get_contents($cache))
+            );
         } else {
             if (method_exists($this, 'map')) {
                 $this->map();

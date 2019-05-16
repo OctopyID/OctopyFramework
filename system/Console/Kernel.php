@@ -78,7 +78,7 @@ class Kernel
      * @param  string $string
      * @return string
      */
-    private function ansi(string $string) : string
+    private function ansi(?string $string) : ?string
     {
         if (strcasecmp(substr(PHP_OS, 0, 3), 'WIN') == 0) {
             $string = preg_replace('#\\x1b[[][^A-Za-z]*[A-Za-z]#', '', $string);

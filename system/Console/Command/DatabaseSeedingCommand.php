@@ -18,17 +18,17 @@ use Octopy\Console\Argv;
 use Octopy\Console\Output;
 use Octopy\Console\Command;
 
-class DBSeedingCommand extends Command
+class DatabaseSeedingCommand extends Command
 {
     /**
      * @var string
      */
-    protected $signature = 'db:seed';
+    protected $signature = 'database:seed';
 
     /**
      * @var string
      */
-    protected $description = 'Seed the database with records';
+    protected $description = 'Seed the database with record';
 
     /**
      * @param  Argv   $argv

@@ -20,7 +20,7 @@ use Octopy\Validation\Exception\ValidationRuleException;
 
 class Validator
 {
-    use ValidationRules;
+    use ValidationRule;
 
     /**
      * @var Octopy\Application

@@ -109,7 +109,7 @@ class FileSessionHandler implements SessionHandlerInterface
         $filename = $this->storage . strtoupper(md5($id));
 
         if ($this->encrypt) {
-            $data = $this->app['encrypter']->encrypt($data);
+            $data = chunk_split($this->app['encrypter']->encrypt($data));
         }
 
         return $this->app['filesystem']->put($filename, $data);

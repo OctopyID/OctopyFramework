@@ -16,4 +16,4 @@ Console::command('inspire', function (Octopy\Console\Output $output) {
     return $output->comment(
         Octopy\Stuff\Inspiring::quote()
     );
-})->describe('Display an inspiring quote');;
+})->describe('Display an inspiring quote');

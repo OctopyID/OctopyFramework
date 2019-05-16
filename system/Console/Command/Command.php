@@ -112,11 +112,7 @@ abstract class Command
         if ($this->app['console']->has($command)) {
             $this->app['argv']->option($option);
 
-            try {
-                return $this->app['console']->call($command);
-            } catch (Exception $exception) {
-                return $exception->getMessage();
-            }
+            return $this->app['console']->call($command);
         }
     }
 }

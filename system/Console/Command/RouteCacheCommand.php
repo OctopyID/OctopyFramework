@@ -51,15 +51,23 @@ class RouteCacheCommand extends Command
             $collection = $this->app->router->collection
         );
 
-        $location = $this->app->storage('framework/route.php');
+        try {
+            if (!is_dir($location = $this->app['path']->writeable())) {
+                $this->app->mkdir($location, 0755, true);
+            }
 
-        $this->generate($location, 'Route', [
-            'SerializedContent' => base64_encode(serialize(
-                $collection
-            ))
-        ]);
+            // we hashing the route name & encrypted content
+            // to confused attacker, because sometimes there's
+            // contains a sensitive contents
+            $location .= '9C46408A3BC655C68505C57A11D6C4EE';
+            $encrypted = chunk_split($this->app['encrypter']->encrypt($collection));
 
-        return $output->success('Routes cached successfully.');
+            if ($this->app['filesystem']->put($location, $encrypted)) {
+                return $output->success('Route cached successfully.');
+            }
+        } catch (Exception $exception) {
+            return $output->error('Failed generating autoload cache.');
+        }
     }
 
     /**

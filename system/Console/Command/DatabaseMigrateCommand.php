@@ -18,12 +18,12 @@ use Octopy\Console\Argv;
 use Octopy\Console\Output;
 use Octopy\Console\Command;
 
-class DBMigrateCommand extends Command
+class DatabaseMigrateCommand extends Command
 {
     /**
      * @var string
      */
-    protected $signature = 'db:migrate';
+    protected $signature = 'database:migrate';
 
     /**
      * @var string
@@ -101,7 +101,7 @@ class DBMigrateCommand extends Command
         if ($argv->get('-s') || $argv->get('--seed')) {
             $argv->remove('name');
             echo $output->white(str_repeat('-', 40));
-            return $this->app->make(SeedingCommand::class)->handle($argv, $output);
+            echo $this->call('db:seed');
         }
     }
 
@@ -122,8 +122,8 @@ class DBMigrateCommand extends Command
      */
     protected function drop(Output $output, array $data)
     {
-        echo $output->warning('Rolling Back : {white}' . $data['name']);
+        echo $output->warning('Dropping Table : {white}' . $data['name']);
         $this->app->make($data['class'])->drop();
-        echo $output->success('Rolled Back  : {white}' . $data['name']);
+        echo $output->success('Table Dropped  : {white}' . $data['name']);
     }
 }

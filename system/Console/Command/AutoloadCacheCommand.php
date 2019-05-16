@@ -41,51 +41,44 @@ class AutoloadCacheCommand extends Command
      */
     public function handle(Argv $argv, Output $output)
     {
-        $this->basepath = $this->app->basepath();
+        $basepath = $this->app->basepath();
+
+        // pattern for skipping vendor files
+        $composer = '/' . str_replace('/', '\/', preg_quote($basepath) . 'vendor') . '/';
 
         $classmap = [];
-        foreach ($this->app['filesystem']->iterator($this->basepath) as $row) {
-            if (!$row->isFile()) {
+        foreach ($this->app['filesystem']->iterator($basepath) as $splfile) {
+
+            // we do not discover all files form "vendor"
+            // cause it's already handled by Composer
+            if (!$splfile->isFile() || preg_match($composer, $splfile)) {
                 continue;
             }
 
-            if (substr($row->getFilename(), -4) === '.php') {
-                $classname = preg_replace(['/^system/', '/^app/'], ['Octopy', 'App'], implode('\\', array_unique(explode('/', str_replace($this->basepath, '', substr($row = $row->getRealpath(), 0, -4))))));
+            if (substr($splfile->getFilename(), -4) === '.php') {
+                $classname = preg_replace(['/^system/', '/^app/'], ['Octopy', 'App'], implode('\\', array_unique(explode('/', str_replace($basepath, '', substr($splfile = $splfile->getRealpath(), 0, -4))))));
 
                 if (!preg_match('/^Octopy|^App/', $classname)) {
                     continue;
                 }
 
-                $classmap[$classname] = $row;
+                $classmap[$classname] = $splfile;
             }
         }
 
         try {
-            $banner[] = "/**                                          ";
-            $banner[] = " *   ___       _                             ";
-            $banner[] = " *  / _ \  ___| |_ ___  _ __  _   _          ";
-            $banner[] = " * | | | |/ __| __/ _ \| '_ \| | | |         ";
-            $banner[] = " * | |_| | (__| || (_) | |_) | |_| |         ";
-            $banner[] = " *  \___/ \___|\__\___/| .__/ \__, |         ";
-            $banner[] = " *                     |_|    |___/          ";
-            $banner[] = " * @author  : Supian M <supianidz@gmail.com> ";
-            $banner[] = " * @link    : www.octopy.xyz                 ";
-            $banner[] = " * @license : MIT                            ";
-            $banner[] = " */                                          ";
-
-            $template = sprintf("<?php \n\n%s\n\nreturn %s;", implode("\n", $banner), var_export($classmap, true));
-
-            if (!is_dir($location = dirname($classmap = $this->app['path']->storage('framework/autoload.php')))) {
+            if (!is_dir($location = $this->app['path']->writeable())) {
                 $this->app->mkdir($location, 0755, true);
             }
 
-            $message = 'Generating autoload cache.';
-            if (file_exists($classmap)) {
-                $message = 'Re-Generating autoload cache.';
-            }
+            // we hashing the autoload name & encrypted content
+            // to confused attacker, because sometimes there's
+            // contains a sensitive contents
+            $location .= '46AE3E009A9883E4F2C38542E300A16D';
+            $encrypted = chunk_split($this->app['encrypter']->encrypt($classmap));
 
-            if ($this->app['filesystem']->put($classmap, $template)) {
-                return $output->success($message);
+            if ($this->app['filesystem']->put($location, $encrypted)) {
+                return $output->success('Autoload cached successfully.');
             }
         } catch (Exception $exception) {
             return $output->error('Failed generating autoload cache.');

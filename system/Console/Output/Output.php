@@ -110,7 +110,7 @@ class Output extends Color
 
         // Header
         $this->table->add(['header'], [
-            'header' => $this->yellow('Available Options')
+            'header' => $this->yellow('Available Option :')
         ]);
 
         // Command without prefix
@@ -138,7 +138,7 @@ class Output extends Color
         ]);
 
         $this->table->add(['header'], [
-            'header' => $this->yellow('Available Commands')
+            'header' => $this->yellow('Available Command :')
         ]);
 
         $this->table->margin(3);

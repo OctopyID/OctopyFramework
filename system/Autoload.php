@@ -94,14 +94,6 @@ final class Autoload
     }
 
     /**
-     * @return void
-     */
-    public function composer()
-    {
-        $this->require('vendor/autoload');
-    }
-
-    /**
      * @param  string $class
      * @return string
      */
@@ -140,7 +132,7 @@ final class Autoload
      * @param  string $filepath
      * @return string
      */
-    protected function require(string $filepath)
+    public function require(string $filepath)
     {
         if (is_file($filepath = $this->basepath . $filepath . '.php')) {
             if (require_once $filepath) {

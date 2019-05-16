@@ -22,7 +22,7 @@ class HTMLParser
     public function stylesheet() : string
     {
         return sprintf('<style type="text/css">%s</style>', file_get_contents(
-            sprintf('%s/assets/prism.min.css', __DIR__)
+            sprintf('%s/Vendor/prism.min.css', __DIR__)
         ));
     }
 
@@ -32,7 +32,7 @@ class HTMLParser
     public function javascript()
     {
         return sprintf('<script type="text/javascript">%s</script>', file_get_contents(
-            sprintf('%s/assets/prism.min.js', __DIR__)
+            sprintf('%s/Vendor/prism.min.js', __DIR__)
         ));
     }
 
@@ -57,18 +57,12 @@ class HTMLParser
     private function format(...$format) : string
     {
         if ($format[0] > 0) {
-            return sprintf(
-                '<pre class="line-numbers" data-line="%s" data-start="%s"><code class="language-%s">%s</code></pre>',
-                ...$format
-            );
+            return sprintf('<pre class="line-numbers" data-line="%s" data-start="%s"><code class="language-%s">%s</code></pre>', ...$format);
         }
 
         unset($format[0]);
 
-        return sprintf(
-            '<pre class="line-numbers" data-start="%s"><code class="language-%s">%s</code></pre>',
-            ...$format
-        );
+        return sprintf('<pre class="line-numbers" data-start="%s"><code class="language-%s">%s</code></pre>', ...$format);
     }
 
     /**

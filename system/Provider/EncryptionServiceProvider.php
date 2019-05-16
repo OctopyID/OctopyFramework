@@ -24,10 +24,6 @@ class EncryptionServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if ($this->app->console()) {
-            return;
-        }
-
         $key = $this->key(
             $config = $this->app['config']['app']
         );

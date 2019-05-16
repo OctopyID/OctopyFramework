@@ -16,7 +16,7 @@ namespace Octopy\Validation;
 
 use Octopy\HTTP\Request\FileHandler;
 
-trait ValidationRules
+trait ValidationRule
 {
     /**
      * @param  string $attribute

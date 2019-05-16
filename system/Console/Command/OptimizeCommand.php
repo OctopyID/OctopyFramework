@@ -14,6 +14,8 @@
 
 namespace Octopy\Console\Command;
 
+use Exception;
+
 use Octopy\Console\Argv;
 use Octopy\Console\Output;
 use Octopy\Console\Command;
@@ -37,8 +39,14 @@ class OptimizeCommand extends Command
      */
     public function handle(Argv $argv, Output $output)
     {
-        $this->call('view:clear');
-        $this->call('view:cache');
-        $this->call('autoload:cache');
+        echo $this->call('autoload:cache');
+
+        echo $this->call('view:clear');
+        echo $this->call('view:cache');
+
+        try {
+            echo $this->call('route:cache');
+        } catch (Exception $exception) {
+        }
     }
 }

@@ -116,23 +116,4 @@ class Storage extends FileSystem
 
         return filemtime($this->template) > filemtime($this->compiled);
     }
-
-    /**
-     * @param  [type] $time
-     * @param  [type] $memory
-     * @return [type]
-     */
-    public function benchmark($time, $memory)
-    {
-        $this->info = compact('time', 'memory');
-    }
-
-    /**
-     * @param  string $name
-     * @return mixed
-     */
-    public function info(string $name = null)
-    {
-        return $this->info[$name] ?? $this->info;
-    }
 }

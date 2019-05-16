@@ -43,6 +43,7 @@ class Inspiring
             'When there is no desire, all things are at peace. - Laozi',
             'The advance of technology is based on making it fit in so that you don\'t really even notice it, so it\'s part of everyday life. - Bill Gates',
             'If it keeps up, man will atrophy all his limbs but the push-button finger. - Frank Lloyd Wright',
+            'Every code that programmer makes, it reflects itself - Supian M',
         ]);
     }
 }

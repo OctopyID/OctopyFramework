@@ -47,6 +47,6 @@ class ViewCacheCommand extends Command
             $this->app['view']->render($filename, [], false);
         }
 
-        return $output->success('Templates cached successfully.');
+        return $output->success('Template cached successfully.');
     }
 }

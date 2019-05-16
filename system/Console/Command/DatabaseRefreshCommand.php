@@ -18,17 +18,17 @@ use Octopy\Console\Argv;
 use Octopy\Console\Output;
 use Octopy\Console\Command;
 
-class RouteClearCommand extends Command
+class DatabaseRefreshCommand extends Command
 {
     /**
      * @var string
      */
-    protected $signature = 'route:clear';
+    protected $signature = 'database:refresh';
 
     /**
      * @var string
      */
-    protected $description = 'Remove the route cache file';
+    protected $description = 'Drop all tables and re-run all migration and seeder';
 
     /**
      * @param  Argv   $argv
@@ -37,13 +37,9 @@ class RouteClearCommand extends Command
      */
     public function handle(Argv $argv, Output $output)
     {
-        $cache  = $this->app->writeable();
-        $cache .= '9C46408A3BC655C68505C57A11D6C4EE';
-
-        if (file_exists($cache)) {
-            unlink($cache);
-        }
-
-        return $output->success('Route cache cleared.');
+        echo $this->call('db:migrate', [
+            '--seed'    => true,
+            '--refresh' => true,
+        ]);
     }
 }
