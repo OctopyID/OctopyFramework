@@ -19,12 +19,11 @@ use RuntimeException;
 class Argon2IdHasher extends ArgonHasher
 {
     /**
-     * @param  string  $value
-     * @param  string  $hashed
-     * @param  array  $option
+     * @param  string $value
+     * @param  string $hashed
      * @return bool
      */
-    public function verify($value, $hashed, array $option = []) : bool
+    public function verify($value, $hashed) : bool
     {
         if ($this->verify && $this->info($hashed)['algoName'] !== 'argon2id') {
             throw new RuntimeException('This password does not use the Argon2id algorithm.');

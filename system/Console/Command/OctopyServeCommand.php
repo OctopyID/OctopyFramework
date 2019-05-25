@@ -41,7 +41,7 @@ class OctopyServeCommand extends Command
             $port = 1337;
         }
 
-        echo $output->format('{yellow}Octopy development server started : {white}http://localhost:' . $port, true);
+        echo $output->format('<c:yellow>Octopy development server started : <c:white>http://localhost:' . $port, true);
 
         foreach (['system', 'shell', 'shell_exec', 'exec'] as $shell) {
             if (function_exists($shell)) {

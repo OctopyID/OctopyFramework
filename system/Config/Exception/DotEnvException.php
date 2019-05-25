@@ -18,5 +18,4 @@ use InvalidArgumentException;
 
 class DotEnvException extends InvalidArgumentException
 {
-    //
 }

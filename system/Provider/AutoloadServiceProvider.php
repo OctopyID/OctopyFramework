@@ -14,6 +14,8 @@
 
 namespace Octopy\Provider;
 
+use Octopy\Encryption\Exception\DecryptException;
+
 class AutoloadServiceProvider extends ServiceProvider
 {
     /**
@@ -29,19 +31,15 @@ class AutoloadServiceProvider extends ServiceProvider
         $autoload .= '46AE3E009A9883E4F2C38542E300A16D';
 
         if (file_exists($autoload)) {
-            $this->app['autoload']->classmap(
-                $this->app['encrypter']->decrypt(file_get_contents($autoload))
-            );
-        }
-
-        if ($composer = $this->app['config']['app.composer']) {
-            if (is_string($composer) && $composer != null) {
-                $composer = substr($composer, 0, -4);
-            } else {
-                $composer = 'vendor/autoload';
+            try {
+                $this->app['autoload']->classmap(
+                    $this->app['encrypter']->decrypt(file_get_contents($autoload))
+               );
+            } catch (DecryptException $exception) {
+                if (! $this->app->console()) {
+                    throw new DecryptException('The MAC is invalid, please re-run autoload cache command.');
+                }
             }
-
-            $this->app['autoload']->require($composer);
         }
     }
 }

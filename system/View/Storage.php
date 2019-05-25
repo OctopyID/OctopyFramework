@@ -21,17 +21,17 @@ class Storage extends FileSystem
     /**
      * @var string
      */
-    public $content;
+    protected $content;
 
     /**
      * @var string
      */
-    public $template;
+    protected $template;
 
     /**
      * @var string
      */
-    public $compiled;
+    protected $compiled;
 
     /**
      * @param string $template
@@ -41,6 +41,15 @@ class Storage extends FileSystem
     {
         $this->template = $template;
         $this->compiled = $compiled;
+    }
+
+    /**
+     * @param  string $property
+     * @return string
+     */
+    public function __get(string $property) : ?string
+    {
+        return $this->$property ?? null;
     }
 
     /**
@@ -84,9 +93,10 @@ class Storage extends FileSystem
     }
 
     /**
-     * @param string $content
+     * @param  string $content
+     * @return void
      */
-    public function write(string $content)
+    public function write(string $content) : void
     {
         $this->content = $content;
 
@@ -100,7 +110,7 @@ class Storage extends FileSystem
     /**
      * @return string
      */
-    public function source()
+    public function source() : string
     {
         return $this->get($this->template);
     }

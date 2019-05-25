@@ -94,6 +94,14 @@ final class Autoload
     }
 
     /**
+     * @return void
+     */
+    public function composer() : void
+    {
+        $this->require('vendor/autoload');
+    }
+
+    /**
      * @param  string $class
      * @return string
      */
@@ -106,7 +114,9 @@ final class Autoload
         }
 
         if (isset($this->classmap[$class]) && file_exists($this->classmap[$class])) {
-            return require $this->classmap[$class];
+            if (require_once $this->classmap[$class]) {
+                return $this->classmap[$class];
+            }
         }
 
         $class = trim(str_replace(BS, DS, $class), DS);

@@ -23,6 +23,5 @@ class DatabaseSeeder extends Seeder
      */
     public function seed()
     {
-        //
     }
 }

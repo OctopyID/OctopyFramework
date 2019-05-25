@@ -18,5 +18,5 @@ use Octopy\Console\Kernel as CLIKernel;
 
 class Kernel extends CLIKernel
 {
-    // for now i have no idea for this section
+    // for now I don't have an idea for this section
 }

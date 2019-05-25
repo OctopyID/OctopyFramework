@@ -18,5 +18,5 @@ use Octopy\HTTP\Controller as BaseController;
 
 class Controller extends BaseController
 {
-    //
+    // for now I don't have an idea for this section
 }

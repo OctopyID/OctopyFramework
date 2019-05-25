@@ -23,7 +23,7 @@ class Output extends Color
     /**
      * @var Octopy\Console\Output\TableFormatter
      */
-    public $table;
+    protected $table;
 
     /**
      * @var Octopy\Application
@@ -45,7 +45,7 @@ class Output extends Color
      */
     public function success(string $value) : string
     {
-        return $this->format('{green}' . $value);
+        return $this->format('<c:green>' . $value);
     }
 
     /**
@@ -54,7 +54,7 @@ class Output extends Color
      */
     public function info(string $value) : string
     {
-        return $this->format('{light_gray}' . $value);
+        return $this->format('<c:lightgray>' . $value);
     }
 
     /**
@@ -63,7 +63,7 @@ class Output extends Color
      */
     public function warning(string $value) : string
     {
-        return $this->format('{yellow}' . $value);
+        return $this->format('<c:yellow>' . $value);
     }
 
     /**
@@ -72,7 +72,7 @@ class Output extends Color
      */
     public function error(string $value) : string
     {
-        return $this->format('{red}' . $value);
+        return $this->format('<c:red>' . $value);
     }
 
     /**
@@ -110,7 +110,7 @@ class Output extends Color
 
         // Header
         $this->table->add(['header'], [
-            'header' => $this->yellow('Available Option :')
+            'header' => $this->yellow('Available Option :'),
         ]);
 
         // Command without prefix
@@ -121,10 +121,10 @@ class Output extends Color
             if (substr($command, 0, 1) === '-' || substr($command, 0, 2) === '--') {
                 $this->table->add(['command', 'description'], [
                     'command'     => $this->green($command),
-                    'description' => $this->white($row->describe)
+                    'description' => $this->white($row->describe),
                 ]);
             } else {
-                if (strpos($command, ':') == false) {
+                if (strpos($command, ':') === false) {
                     $rows[0][$command] = $row;
                 } else {
                     $rows[1][$command] = $row;
@@ -134,28 +134,28 @@ class Output extends Color
 
         $this->table->margin(0);
         $this->table->add(['margin'], [
-            'margin' => ''
+            'margin' => '',
         ]);
 
         $this->table->add(['header'], [
-            'header' => $this->yellow('Available Command :')
+            'header' => $this->yellow('Available Command :'),
         ]);
 
         $this->table->margin(3);
         foreach ($rows[0] as $command => $row) {
             $this->table->add(['command', 'description'], [
                 'command'     => $this->green($command),
-                'description' => $this->white($row->describe)
+                'description' => $this->white($row->describe),
             ]);
         }
 
         asort($rows);
-        if (!empty($rows[1])) {
+        if (! empty($rows[1])) {
             $group = [];
             foreach ($rows[1] as $command => $row) {
-                list($prefix) = explode(':', $command);
+                [$prefix] = explode(':', $command);
 
-                if (!in_array($prefix, $group)) {
+                if (! in_array($prefix, $group)) {
                     $this->table->margin(2);
                     $this->table->add(['group'], [
                         'group' => $this->yellow($prefix),
@@ -167,7 +167,7 @@ class Output extends Color
                 $this->table->margin(3);
                 $this->table->add(['command', 'description'], [
                     'command'     => $this->green($command),
-                    'description' => $this->white($row->describe)
+                    'description' => $this->white($row->describe),
                 ]);
             }
         }
@@ -185,7 +185,7 @@ class Output extends Color
             return $this->error(sprintf('The "%s" option does not exist.', $command));
         }
 
-        $list = array_filter($this->app['console']->all(), function ($key) {
+        $list = array_filter($this->app['console']->all(), static function ($key) {
             return substr($key, 0, 2) !== '--';
         }, ARRAY_FILTER_USE_KEY);
 
@@ -199,7 +199,7 @@ class Output extends Color
 
         $error[] = sprintf('  Command "%s" is not defined.  ', $command);
 
-        if (!empty($possible)) {
+        if (! empty($possible)) {
             $error[] = '';
             $error[] = '  Did you mean one of these ?';
             foreach ($possible as $value) {
@@ -220,6 +220,6 @@ class Output extends Color
             $error[$key] = $value . str_repeat(' ', $length - strlen($value));
         }
 
-        return $this->format('{bg_red}{white}' . implode("\n", $error));
+        return $this->format('<b:red><c:white>' . implode("\n", $error));
     }
 }

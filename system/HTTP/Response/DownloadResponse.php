@@ -15,7 +15,6 @@
 namespace Octopy\HTTP\Response;
 
 use Exception;
-
 use Octopy\HTTP\Response;
 use Octopy\FileSystem\Exception\FileNotFoundException;
 
@@ -59,6 +58,6 @@ class DownloadResponse extends Response
             }
         }
 
-        throw new FileNotFoundException;
+        throw new FileNotFoundException();
     }
 }

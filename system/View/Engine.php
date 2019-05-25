@@ -140,7 +140,7 @@ class Engine
      * @param  string $default
      * @return string
      */
-    protected function yield(string $name, string $default = null)
+    protected function yield(string $name, ?string $default = null)
     {
         return ltrim($this->section[$this->trim($name)] ?? $default, "\n");
     }
@@ -150,7 +150,7 @@ class Engine
      * @param  string $value
      * @return void
      */
-    protected function section(string $name, string $content = null)
+    protected function section(string $name, ?string $content = null)
     {
         $name = $this->trim($name);
         if (! array_key_exists($name, $this->section)) {

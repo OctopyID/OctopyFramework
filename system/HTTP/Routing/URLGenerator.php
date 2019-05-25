@@ -54,7 +54,7 @@ class URLGenerator
             }
 
             if (count($passed) !== (count($required) / 2)) {
-                throw new MissingParameterException;
+                throw new MissingParameterException();
             }
 
             return str_replace(array_keys($passed), $passed, $collection[$name]->uri);

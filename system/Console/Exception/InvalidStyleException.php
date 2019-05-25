@@ -18,5 +18,4 @@ use Exception;
 
 class InvalidStyleException extends Exception
 {
-    //
 }

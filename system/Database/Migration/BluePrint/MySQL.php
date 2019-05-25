@@ -61,7 +61,7 @@ class MySQL extends BluePrint
      * @param  string $name
      * @return BluePrint
      */
-    public function integer(string $name)
+    public function int(string $name)
     {
         return $this->set($name, 'INT NOT NULL');
     }
@@ -152,11 +152,11 @@ class MySQL extends BluePrint
     {
         $index = count($this->query) - 1;
 
-        if (!in_array($default, ['NULL', 'CURRENT_TIMESTAMP'])) {
+        if (! in_array($default, ['NULL', 'CURRENT_TIMESTAMP'])) {
             $default = sprintf("'%s'", $default);
         }
 
-        $this->query[$index] = $this->query[$index] . " DEFAULT $default";
+        $this->query[$index] .= " DEFAULT $default";
 
         return $this;
     }
@@ -170,7 +170,7 @@ class MySQL extends BluePrint
     {
         $index = count($this->query) - 1;
 
-        $this->query[$index] = $this->query[$index] . sprintf(', FOREIGN KEY (`%s`) REFERENCES `%s` (`%s`)', $this->name, $parent, $primary);
+        $this->query[$index] .= sprintf(', FOREIGN KEY (`%s`) REFERENCES `%s` (`%s`)', $this->name, $parent, $primary);
 
         return $this;
     }
@@ -193,7 +193,7 @@ class MySQL extends BluePrint
     {
         $index = count($this->query) - 1;
 
-        $this->query[$index] = $this->query[$index] . " ON UPDATE $option";
+        $this->query[$index] .= " ON UPDATE $option";
 
         return $this;
     }
@@ -206,7 +206,7 @@ class MySQL extends BluePrint
     {
         $index = count($this->query) - 1;
 
-        $this->query[$index] = $this->query[$index] . " ON DELETE $option";
+        $this->query[$index] .= " ON DELETE $option";
 
         return $this;
     }
@@ -242,20 +242,20 @@ class MySQL extends BluePrint
      */
     public function create(string $table)
     {
-        if (!empty($this->primary)) {
-            $this->query[] = sprintf('PRIMARY KEY (%s)', implode(', ', array_map(function ($name) {
+        if (! empty($this->primary)) {
+            $this->query[] = sprintf('PRIMARY KEY (%s)', implode(', ', array_map(static function ($name) {
                 return sprintf('`%s`', $name);
             }, $this->primary)));
         }
 
-        if (!empty($this->unique)) {
-            $this->query[] = sprintf('UNIQUE (%s)', implode(', ', array_map(function ($name) {
+        if (! empty($this->unique)) {
+            $this->query[] = sprintf('UNIQUE (%s)', implode(', ', array_map(static function ($name) {
                 return sprintf('`%s`', $name);
             }, $this->unique)));
         }
 
-        if (!empty($this->index)) {
-            $this->query[] = sprintf('INDEX (%s)', implode(', ', array_map(function ($name) {
+        if (! empty($this->index)) {
+            $this->query[] = sprintf('INDEX (%s)', implode(', ', array_map(static function ($name) {
                 return sprintf('`%s`', $name);
             }, $this->index)));
         }

@@ -77,7 +77,7 @@ class Model implements IteratorAggregate, JsonSerializable
      */
     public static function __callStatic(string $method, array $args = [])
     {
-        return (new static)->$method(...$args);
+        return (new static())->$method(...$args);
     }
 
     /**

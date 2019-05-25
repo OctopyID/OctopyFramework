@@ -54,7 +54,7 @@ class Socket
     public function close(string $content, array $recepient)
     {
         if (! $this->parse($this->sock, 220)) {
-            throw new SMTPConnectionException;
+            throw new SMTPConnectionException();
         }
 
         $server = $_SERVER['SERVER_NAME'];
@@ -64,52 +64,52 @@ class Socket
             fputs($this->sock, "HELO $server\r\n");
             if (! $this->parse($this->sock, 250)) {
                 fclose($this->sock);
-                throw new ErrorSendingCommandException;
+                throw new ErrorSendingCommandException();
             }
         }
 
         fputs($this->sock, "AUTH LOGIN\r\n");
         if (! $this->parse($this->sock, 334)) {
             fclose($this->sock);
-            throw new SMTPAuthorizationException;
+            throw new SMTPAuthorizationException();
         }
 
         fputs($this->sock, base64_encode($this->auth['username']) . "\r\n");
         if (! $this->parse($this->sock, 334)) {
             fclose($this->sock);
-            throw new SMTPAuthorizationException;
+            throw new SMTPAuthorizationException();
         }
 
         fputs($this->sock, base64_encode($this->auth['password']) . "\r\n");
         if (! $this->parse($this->sock, 235)) {
             fclose($this->sock);
-            throw new SMTPAuthorizationException;
+            throw new SMTPAuthorizationException();
         }
 
         fputs($this->sock, 'MAIL FROM: <' . $this->auth['username'] . ">\r\n");
         if (! $this->parse($this->sock, 250)) {
             fclose($this->sock);
-            throw new ErrorSendingCommandException;
+            throw new ErrorSendingCommandException();
         }
 
         foreach ($recepient as $email) {
             fputs($this->sock, "RCPT TO: <{$email}>\r\n");
             if (! $this->parse($this->sock, 250)) {
                 fclose($this->sock);
-                throw new ErrorSendingCommandException;
+                throw new ErrorSendingCommandException();
             }
         }
 
         fputs($this->sock, "DATA\r\n");
         if (! $this->parse($this->sock, 354)) {
             fclose($this->sock);
-            throw new ErrorSendingCommandException;
+            throw new ErrorSendingCommandException();
         }
 
         fputs($this->sock, $content . "\r\n.\r\n");
         if (! $this->parse($this->sock, 250)) {
             fclose($this->sock);
-            throw new FailedSendingEmailException;
+            throw new FailedSendingEmailException();
         }
 
         fputs($this->sock, "QUIT\r\n");
@@ -125,7 +125,7 @@ class Socket
     private function parse($sock, int $response)
     {
         $search = '';
-        while (substr($search, 3, 1) != ' ') {
+        while (substr($search, 3, 1) !== ' ') {
             if (! ($search = fgets($sock, 256))) {
                 return false;
             }

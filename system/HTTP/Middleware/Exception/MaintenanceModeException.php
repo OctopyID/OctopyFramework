@@ -19,7 +19,7 @@ use Exception;
 class MaintenanceModeException extends Exception
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $code = 503;
 }

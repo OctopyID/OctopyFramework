@@ -15,8 +15,6 @@
 namespace Octopy\Database\Migration;
 
 use Closure;
-use Exception;
-
 use Octopy\Application;
 use Octopy\Database\Exception\DBException;
 

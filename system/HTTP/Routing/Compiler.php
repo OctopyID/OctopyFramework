@@ -37,9 +37,9 @@ class Compiler
     protected function option(string $uri) : array
     {
         if (preg_match_all('/\:(\w+?)\?/', $uri, $matches)) {
-            return array_filter(array_fill_keys($matches[1], null), function ($value, $key) {
+            return array_filter(array_fill_keys($matches[1], null), static function ($key) {
                 return is_string($key);
-            }, ARRAY_FILTER_USE_BOTH);
+            }, ARRAY_FILTER_USE_KEY);
         }
 
         return [];
@@ -81,14 +81,14 @@ class Compiler
         if ($offset > 0 && substr($array[$offset], -1) === '?') {
             $regexp = '(?:/' . $regexp;
 
-            $this->count++;
+            $this->count += 1;
         }
 
         if ($offset === 0 && substr($array[$offset], -1) === '?') {
             $regexp .= '?';
         }
 
-        if ($this->next($array, $offset) && $this->next($array, ++$offset)) {
+        if ($this->next($array, $offset) && $this->next($array, $offset + 1)) {
             $regexp .= '/';
         }
 
@@ -102,7 +102,7 @@ class Compiler
      */
     protected function next(array $array, int $offset) : bool
     {
-        if (!isset($array[$offset])) {
+        if (! isset($array[$offset])) {
             return true;
         }
 

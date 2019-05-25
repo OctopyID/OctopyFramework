@@ -15,16 +15,12 @@
 namespace Octopy\HTTP\Response;
 
 use Exception;
-use InvalidArgumentException;
-
 use Octopy\HTTP\Response;
+use InvalidArgumentException;
 
 class JsonResponse extends Response
 {
-    /**
-     * @var int
-     */
-    const DEFAULT_ENCODING = 15;
+    public const DEFAULT_ENCODING = 15;
 
     /**
      * @param  mixed $data
@@ -51,18 +47,18 @@ class JsonResponse extends Response
     {
         try {
             $data = json_encode($data, $option);
-            if (!$this->validate(json_last_error(), $option)) {
+            if (! $this->validate(json_last_error(), $option)) {
                 throw new InvalidArgumentException(json_last_error_msg());
             }
         } catch (Exception $exception) {
-            if (get_class($exception) == 'Exception' && strpos($exception->getMessage(), 'Failed calling ') == 0) {
+            if (get_class($exception) === 'Exception' && strpos($exception->getMessage(), 'Failed calling ') === 0) {
                 throw $exception->getPrevious() ? : $exception;
             }
 
             throw $exception;
         }
 
-        if (JSON_ERROR_NONE !== json_last_error()) {
+        if (json_last_error() !== JSON_ERROR_NONE) {
             throw new InvalidArgumentException(json_last_error_msg());
         }
 
@@ -84,6 +80,6 @@ class JsonResponse extends Response
             JSON_ERROR_RECURSION,
             JSON_ERROR_INF_OR_NAN,
             JSON_ERROR_UNSUPPORTED_TYPE,
-       ]);
+        ]);
     }
 }

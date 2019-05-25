@@ -30,7 +30,7 @@ class DummyClassName extends Migration
      */
     public function create()
     {
-        Schema::create('DummyTableName', function (BluePrint $table) {
+        Schema::create('DummyTableName', static function (BluePrint $table) {
             $table->increment('id');
         });
     }

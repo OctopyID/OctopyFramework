@@ -15,7 +15,6 @@
 namespace Octopy\HTTP\Middleware;
 
 use Closure;
-
 use Octopy\HTTP\Request;
 use Octopy\Support\Facade\App;
 
@@ -57,7 +56,7 @@ class Dispatcher
      */
     protected function next(Closure $next)
     {
-        return function ($object) use ($next) {
+        return static function ($object) use ($next) {
             return $next($object);
         };
     }
@@ -69,7 +68,7 @@ class Dispatcher
      */
     protected function create(Closure $next, $middleware)
     {
-        return function ($object) use ($next, $middleware) {
+        return static function ($object) use ($next, $middleware) {
             if ($middleware instanceof Closure) {
                 return $middleware($object, $next);
             }

@@ -18,5 +18,4 @@ use PDOException;
 
 class DBException extends PDOException
 {
-    //
 }

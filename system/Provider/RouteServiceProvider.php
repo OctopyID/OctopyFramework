@@ -14,6 +14,8 @@
 
 namespace Octopy\Provider;
 
+use Octopy\Encryption\Exception\DecryptException;
+
 class RouteServiceProvider extends ServiceProvider
 {
     /**
@@ -30,9 +32,15 @@ class RouteServiceProvider extends ServiceProvider
         $cache .= '9C46408A3BC655C68505C57A11D6C4EE';
 
         if (file_exists($cache)) {
-            $this->app['router']->load(
-                $this->app['encrypter']->decrypt(file_get_contents($cache))
-            );
+            try {
+                $this->app['router']->load(
+                    $this->app['encrypter']->decrypt(file_get_contents($cache))
+                );
+            } catch (DecryptException $exception) {
+                if (! $this->app->console()) {
+                    throw new DecryptException('The MAC is invalid, please re-run route cache command.');
+                }
+            }
         } else {
             if (method_exists($this, 'map')) {
                 $this->map();

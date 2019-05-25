@@ -25,7 +25,7 @@ trait ValidationRule
     public function accepted(string $attribute)
     {
         $value = $this->value($attribute);
-        if ($value != true && $value != 'true' && $value != 1 && $value != 'on') {
+        if ($value !== true && $value !== 'true' && $value !== 1 && $value !== 'on') {
             return $this->format('The `:attribute` must be accepted.', [
                 ':attribute' => $attribute,
             ]);
@@ -51,7 +51,7 @@ trait ValidationRule
                     ':attribute' => $attribute,
                 ]);
             }
-        } elseif (ctype_digit($value) || is_integer($value) || is_int($value) || is_float($value) || is_double($value)) {
+        } elseif (ctype_digit($value) || is_int($value) || is_int($value) || is_float($value) || is_double($value)) {
             $length = $value;
             if (($length >= $min && $length <= $max) === false) {
                 return $this->format('The `:attribute` must be between :min and :max.', [
@@ -129,9 +129,9 @@ trait ValidationRule
      */
     public function exists(string $attribute, string $table, string $column)
     {
-        $db = $this->app['database']->table($table);
-        $db->where($column, $this->value($attribute));
-        if ($db->count() == 0) {
+        $database = $this->app['database']->table($table);
+        $database->where($column, $this->value($attribute));
+        if ($database->count() === 0) {
             return $this->format('The selected `:attribute` is not exists.', [
                 ':attribute' => $attribute,
             ]);
@@ -156,11 +156,11 @@ trait ValidationRule
      * @param  string $attribute
      * @return string
      */
-    public function integer(string $attribute)
+    public function int(string $attribute)
     {
         $value = $this->value($attribute);
-        if (! is_integer($value)) {
-            return $this->format('The `:attribute` must be an integer.', [
+        if (! is_int($value)) {
+            return $this->format('The `:attribute` must be an int.', [
                 ':attribute' => $attribute,
             ]);
         }
@@ -195,7 +195,7 @@ trait ValidationRule
                     ':attribute' => $attribute,
                 ]);
             }
-        } elseif (ctype_digit($value) || is_integer($value) || is_float($value) || is_double($value)) {
+        } elseif (ctype_digit($value) || is_int($value) || is_float($value) || is_double($value)) {
             if (($value < $max) === false) {
                 return $this->format('The `:attribute` may not be greater than :max.', [
                     ':max'       => $max,
@@ -235,7 +235,7 @@ trait ValidationRule
                     ':attribute' => $attribute,
                 ]);
             }
-        } elseif (ctype_digit($value) || is_integer($value) || is_float($value) || is_double($value)) {
+        } elseif (ctype_digit($value) || is_int($value) || is_float($value) || is_double($value)) {
             if (($value > $min) === false) {
                 return $this->format('The `:attribute` must be at least :min.', [
                     ':min'       => $min,
@@ -318,9 +318,9 @@ trait ValidationRule
      */
     public function unique(string $attribute, string $table, string $column)
     {
-        $db = $this->app['database']->table($table);
-        $db->where($column, $this->value($attribute));
-        if ($db->count() > 0) {
+        $database = $this->app['database']->table($table);
+        $database->where($column, $this->value($attribute));
+        if ($database->count() > 0) {
             return $this->format('The selected `:attribute` has already been taken.', [
                 ':attribute' => $attribute,
             ]);

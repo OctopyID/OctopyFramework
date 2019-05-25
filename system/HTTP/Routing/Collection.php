@@ -17,7 +17,6 @@ namespace Octopy\HTTP\Routing;
 use Countable;
 use ArrayIterator;
 use IteratorAggregate;
-
 use Octopy\HTTP\Request;
 use Octopy\HTTP\Middleware;
 use Octopy\HTTP\Routing\Exception\RouteNotFoundException;
@@ -71,12 +70,13 @@ class Collection implements Countable, IteratorAggregate
     {
         foreach ($this->route as $array) {
             foreach ($array as $route) {
-                if ($route->name && !isset($this->alias[$route->name])) {
+                if ($route->name && ! isset($this->alias[$route->name])) {
                     $this->alias[$route->name] = $route;
                 }
 
                 foreach ($route->middleware as $offset => $layer) {
-                    $route->data['middleware'][$offset] = $this->middleware->route($layer);
+                    $middleware = $route->middleware;
+                    $middleware[$offset] = $this->middleware->route($layer);
                 }
             }
         }
@@ -102,14 +102,14 @@ class Collection implements Countable, IteratorAggregate
         }
 
         if ($match instanceof Route) {
-            if (!in_array($request->method(), $match->method())) {
-                throw new MethodNotAllowedException;
+            if (! in_array($request->method(), $match->method())) {
+                throw new MethodNotAllowedException();
             }
 
             return $match;
         }
 
-        throw new RouteNotFoundException;
+        throw new RouteNotFoundException();
     }
 
     /**
@@ -123,11 +123,11 @@ class Collection implements Countable, IteratorAggregate
             return $route[$request];
         }
 
-        foreach ($route as $uri => $route) {
+        foreach ($route as $route) {
             if (preg_match($route->pattern, $request, $parameter)) {
-                return $route->parameter(array_filter($parameter, function ($value, $key) {
+                return $route->parameter(array_filter($parameter, static function ($key) {
                     return is_string($key);
-                }, ARRAY_FILTER_USE_BOTH));
+                }, ARRAY_FILTER_USE_KEY));
             }
         }
 

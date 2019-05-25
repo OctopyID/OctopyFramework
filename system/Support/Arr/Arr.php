@@ -61,7 +61,7 @@ class Arr
     {
         $results = [];
         foreach ($array as $key => $value) {
-            if (is_array($value) && !empty($value)) {
+            if (is_array($value) && ! empty($value)) {
                 $results = array_merge($results, static::dot($value, $prepend . $key . '.'));
             } else {
                 $results[$prepend . $key] = $value;
@@ -184,7 +184,7 @@ class Arr
      */
     public static function get($array, $key, $default = null)
     {
-        if (!static::accessible($array)) {
+        if (! static::accessible($array)) {
             return value($default);
         }
 
@@ -224,7 +224,7 @@ class Arr
 
         $keys = (array) $keys;
 
-        if (!$array) {
+        if (! $array) {
             return false;
         }
 
@@ -356,7 +356,7 @@ class Arr
 
         while (count($keys) > 1) {
             $key = array_shift($keys);
-            if (!isset($array[$key]) || !is_array($array[$key])) {
+            if (! isset($array[$key]) || ! is_array($array[$key])) {
                 $array[$key] = [];
             }
 
@@ -379,7 +379,7 @@ class Arr
             shuffle($array);
         } else {
             srand($seed);
-            usort($array, function () {
+            usort($array, static function () {
                 return rand(-1, 1);
             });
         }

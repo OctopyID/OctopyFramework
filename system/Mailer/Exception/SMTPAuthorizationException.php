@@ -18,5 +18,4 @@ use Exception;
 
 class SMTPAuthorizationException extends Exception
 {
-    //
 }

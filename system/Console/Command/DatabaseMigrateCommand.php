@@ -41,7 +41,7 @@ class DatabaseMigrateCommand extends Command
             // Single
             $data = [
                 'name'  => $name,
-                'class' => '\\App\\DB\\Migration\\' . $name
+                'class' => '\\App\\DB\\Migration\\' . $name,
             ];
 
             if ($argv->get('-r') || $argv->get('--refresh')) {
@@ -55,7 +55,7 @@ class DatabaseMigrateCommand extends Command
             // Multiple
             $directory = $this->app['path']->app->DB('Migration');
 
-            if (!is_dir($directory)) {
+            if (! is_dir($directory)) {
                 return $output->warning('Nothing to migrate.');
             }
 

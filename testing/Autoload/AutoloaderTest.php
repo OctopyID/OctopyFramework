@@ -12,6 +12,8 @@
  * @license : MIT
  */
 
+declare(strict_types=1);
+
 namespace Octopy\Testing\Autoload;
 
 use Octopy\Testing\TestCase;

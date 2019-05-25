@@ -22,12 +22,12 @@ class TableFormatter
     protected $data = [];
 
     /**
-     * @var integer
+     * @var int
      */
     protected $state = 0;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $prev = 0;
 

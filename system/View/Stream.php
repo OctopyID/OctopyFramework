@@ -34,7 +34,7 @@ class Stream
     /**
      * @param array $token
      */
-    public function __construct(array $token, string $expression = null)
+    public function __construct(array $token, ?string $expression = null)
     {
         $this->expression = $expression;
         [$this->token, $this->code] = $token[1];

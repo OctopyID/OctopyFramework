@@ -18,40 +18,19 @@ use Octopy\Console\Output\Color;
 
 class CLIParser
 {
-    /**
-     * @var string
-     */
-    const TOKEN_HTML = 'token_html';
+    public const TOKEN_HTML = 'token_html';
 
-    /**
-     * @var string
-     */
-    const TOKEN_STRING = 'token_string';
+    public const TOKEN_STRING = 'token_string';
 
-    /**
-     * @var string
-     */
-    const TOKEN_DEFAULT = 'token_default';
+    public const TOKEN_DEFAULT = 'token_default';
 
-    /**
-     * @var string
-     */
-    const TOKEN_COMMENT = 'token_comment';
+    public const TOKEN_COMMENT = 'token_comment';
 
-    /**
-     * @var string
-     */
-    const TOKEN_KEYWORD = 'token_keyword';
+    public const TOKEN_KEYWORD = 'token_keyword';
 
-    /**
-     * @var string
-     */
-    const LINE_NUMBER = 'line_number';
+    public const LINE_NUMBER = 'line_number';
 
-    /**
-     * @var string
-     */
-    const ACTUAL_LINE_MARK = 'actual_line_mark';
+    public const ACTUAL_LINE_MARK = 'actual_line_mark';
 
     /**
      * @var Octopy\Console\Color
@@ -62,14 +41,14 @@ class CLIParser
      * @var array
      */
     protected $default = [
-        CLIParser::TOKEN_HTML       => 'cyan',
-        CLIParser::TOKEN_STRING     => 'white',
-        CLIParser::TOKEN_COMMENT    => 'yellow',
-        CLIParser::TOKEN_DEFAULT    => 'default',
-        CLIParser::TOKEN_KEYWORD    => 'red',
-        CLIParser::LINE_NUMBER      => 'light_gray',
-        CLIParser::ACTUAL_LINE_MARK => 'red',
-   ];
+        CLIParser::TOKEN_HTML       => 'c:cyan',
+        CLIParser::TOKEN_STRING     => 'c:white',
+        CLIParser::TOKEN_COMMENT    => 'c:yellow',
+        CLIParser::TOKEN_DEFAULT    => 'c:default',
+        CLIParser::TOKEN_KEYWORD    => 'c:red',
+        CLIParser::LINE_NUMBER      => 'c:lightgray',
+        CLIParser::ACTUAL_LINE_MARK => 'c:red',
+    ];
 
     /**
      * @param Color $color
@@ -79,7 +58,7 @@ class CLIParser
         $this->color = $color;
 
         foreach ($this->default as $name => $styles) {
-            if (!$this->color->has($name)) {
+            if (! $this->color->has($name)) {
                 $this->color->theme($name, $styles);
             }
         }
@@ -123,7 +102,7 @@ class CLIParser
      * @param  string $source
      * @return array
      */
-    protected function tokenize($source)  : array
+    protected function tokenize($source) : array
     {
         $tokens = token_get_all($source);
 
@@ -203,7 +182,7 @@ class CLIParser
      * @param  array $tokens
      * @return array
      */
-    protected function split(array $tokens)  : array
+    protected function split(array $tokens) : array
     {
         $lines = [];
 
@@ -232,7 +211,7 @@ class CLIParser
      * @param  array $token
      * @return array
      */
-    protected function color(array $token)  : array
+    protected function color(array $token) : array
     {
         $lines = [];
         foreach ($token as $count => $tline) {

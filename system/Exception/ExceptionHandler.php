@@ -39,7 +39,6 @@ class ExceptionHandler
      */
     public function report(Throwable $exception)
     {
-        //
     }
 
     /**
@@ -49,22 +48,47 @@ class ExceptionHandler
     {
         $vars = $this->vars($exception);
 
-        $color = new Color;
+        $color = new Color();
 
         $output = "\n";
-        $output .= $color->apply('bg_red', ' ' . $vars['exception'] . ' ');
-        $output .= $color->apply('white', ' : ');
-        $output .= $color->apply('yellow', $vars['message']);
+        $output .= $color->apply('b:red', ' ' . $vars['exception'] . ' ');
+        $output .= $color->apply('c:white', ' : ');
+        $output .= $color->apply('c:yellow', $vars['message']);
         $output .= "\n";
         $output .= "\n";
-        $output .= $color->apply('light_gray', 'at ');
-        $output .= $color->apply('green', $vars['file']);
-        $output .= $color->apply('light_gray', ' on line ');
-        $output .= $color->apply('green', $vars['line']);
+        $output .= $color->apply('c:lightgray', 'at ');
+        $output .= $color->apply('c:green', $vars['file']);
+        $output .= $color->apply('c:lightgray', ' on line ');
+        $output .= $color->apply('c:green', $vars['line']);
         $output .= "\n";
 
         if (is_file($vars['file']) && is_readable($vars['file'])) {
-            $output .= $this->app['syntax']->highlight($vars['file'], $vars['line'], 3, 3);
+            $output .= $this->app['syntax']->highlight($vars['file'], $vars['line'], 2, 2);
+            $output .= "\n";
+        }
+
+        if (! empty($vars['trace'])) {
+            $output .= $color->apply('c:red', 'Stacktrace :');
+            $output .= "\n";
+
+            foreach ($vars['trace'] as $no => $trace) {
+                $no++;
+                $output .= $color->apply('c:lightgray', " $no. ");
+
+                if (isset($trace['file'])) {
+                    $output .= $color->apply('c:green', $trace['file']);
+                    $output .= $color->apply('c:lightgray', ' ');
+                    $output .= $color->apply('c:lightgray', $trace['line']);
+                } elseif (isset($trace['class'])) {
+                    $output .= $color->apply('c:green', $trace['class']);
+                    $output .= $color->apply('c:lightgray', '::');
+                    $output .= $color->apply('c:lightgray', $trace['function']);
+                    $output .= $color->apply('c:lightgray', '(...)');
+                }
+
+                $output .= "\n";
+            }
+        } else {
             $output .= "\n";
         }
 
@@ -95,7 +119,7 @@ class ExceptionHandler
      * @param  Throwable $exception
      * @return array
      */
-    private function vars(Throwable $exception):array
+    private function vars(Throwable $exception) : array
     {
         $code = $exception->getCode();
 
@@ -108,7 +132,7 @@ class ExceptionHandler
             'file'      => $exception->getFile(),
             'line'      => $exception->getLine(),
             'trace'     => $exception->getTrace(),
-            'message'   => $exception->getMessage(),
+            'message'   => head(explode("\n", $exception->getMessage())),
             'exception' => last(explode(BS, get_class($exception))),
         ];
     }

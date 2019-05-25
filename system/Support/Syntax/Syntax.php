@@ -15,7 +15,6 @@
 namespace Octopy\Support;
 
 use Exception;
-
 use Octopy\Application;
 use Octopy\Support\Syntax\CLIParser;
 use Octopy\Support\Syntax\HTMLParser;

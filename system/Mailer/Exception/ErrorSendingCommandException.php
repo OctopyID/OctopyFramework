@@ -18,5 +18,4 @@ use Exception;
 
 class ErrorSendingCommandException extends Exception
 {
-    //
 }

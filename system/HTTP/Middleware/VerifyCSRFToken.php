@@ -15,7 +15,6 @@
 namespace Octopy\HTTP\Middleware;
 
 use Closure;
-
 use Octopy\Application;
 use Octopy\HTTP\Request;
 use Octopy\HTTP\Middleware\Exception\TokenMismatchException;
@@ -31,7 +30,7 @@ class VerifyCSRFToken
      * @var array
      */
     protected $except = [
-        //
+
     ];
 
     /**
@@ -62,7 +61,7 @@ class VerifyCSRFToken
             }
         }
 
-        throw new TokenMismatchException;
+        throw new TokenMismatchException();
     }
 
     /**
@@ -70,7 +69,7 @@ class VerifyCSRFToken
      */
     public function generate() : string
     {
-        if (!$this->app['session']->has('X-CSRF-TOKEN')) {
+        if (! $this->app['session']->has('X-CSRF-TOKEN')) {
             $token = sha1(random_bytes(32));
         } else {
             $token = $this->app['session']->get('X-CSRF-TOKEN');
@@ -78,7 +77,7 @@ class VerifyCSRFToken
 
         $this->app['session']->set([
             'X-CSRF-TOKEN'        => $token,
-            'X-CSRF-TOKEN-EXPIRE' => microtime(true)
+            'X-CSRF-TOKEN-EXPIRE' => microtime(true),
         ]);
 
         return $token;

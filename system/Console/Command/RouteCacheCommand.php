@@ -17,11 +17,9 @@ namespace Octopy\Console\Command;
 use Closure;
 use Exception;
 use LogicException;
-
 use Octopy\Console\Argv;
 use Octopy\Console\Output;
 use Octopy\Console\Command;
-use Octopy\HTTP\Routing\Collection;
 
 class RouteCacheCommand extends Command
 {
@@ -36,11 +34,6 @@ class RouteCacheCommand extends Command
     protected $description = 'Create a route cache file for faster route registration';
 
     /**
-     * @var Octopy\HTTP\Routing\Collection
-     */
-    protected $collection;
-
-    /**
      * @param  Argv   $argv
      * @param  Output $output
      * @return string
@@ -52,7 +45,7 @@ class RouteCacheCommand extends Command
         );
 
         try {
-            if (!is_dir($location = $this->app['path']->writeable())) {
+            if (! is_dir($location = $this->app['path']->writeable())) {
                 $this->app->mkdir($location, 0755, true);
             }
 

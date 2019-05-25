@@ -17,12 +17,8 @@ namespace Octopy\HTTP\Routing;
 use Closure;
 use ReflectionMethod;
 use ReflectionFunction;
-
 use Octopy\Application;
 use Octopy\Support\Arr;
-use Octopy\HTTP\Request;
-use Octopy\HTTP\Middleware;
-use Octopy\HTTP\Routing\Route;
 
 class Dispatcher
 {
@@ -38,7 +34,6 @@ class Dispatcher
 
     /**
      * @param Application $app
-     * @param Request     $request
      * @param Route       $route
      */
     public function __construct(Application $app, Route $route)
@@ -53,8 +48,8 @@ class Dispatcher
     public function run()
     {
         // parameter
-        $parameter = array_reverse(Arr::where($this->route->parameter, function ($array) {
-            return !is_null($array);
+        $parameter = array_reverse(Arr::where($this->route->parameter, static function ($array) {
+            return ! is_null($array);
         }));
 
         // middleware
@@ -71,7 +66,7 @@ class Dispatcher
 
         // layer
         $next = function () use ($controller, $method, $parameter) {
-            if (!$controller instanceof Closure) {
+            if (! $controller instanceof Closure) {
                 $response = $controller->$method(...array_values($parameter));
             } else {
                 $response = $controller(...array_values($this->method($parameter, new ReflectionFunction($controller))));
@@ -91,12 +86,12 @@ class Dispatcher
      */
     protected function middleware(array &$middleware, $controller, string $method)
     {
-        if (!method_exists($controller, 'middleware')) {
+        if (! method_exists($controller, 'middleware')) {
             return;
         }
 
         foreach ($controller->middleware() as $layer) {
-            if (isset($layer['option']['only']) && !in_array($method, $layer['option']['only'])) {
+            if (isset($layer['option']['only']) && ! in_array($method, $layer['option']['only'])) {
                 continue;
             }
 
@@ -116,7 +111,7 @@ class Dispatcher
      */
     protected function class(array $parameter, $instance, string $method)
     {
-        if (!method_exists($instance, $method)) {
+        if (! method_exists($instance, $method)) {
             return $parameter;
         }
 
@@ -137,10 +132,10 @@ class Dispatcher
         foreach ($reflector->getParameters() as $key => $dependency) {
             $instance = $this->transform($dependency, $parameter);
 
-            if (!is_null($instance)) {
+            if (! is_null($instance)) {
                 $count++;
                 $this->splice($parameter, $key, $instance);
-            } elseif (!isset($array[$key - $count]) && $dependency->isDefaultValueAvailable()) {
+            } elseif (! isset($array[$key - $count]) && $dependency->isDefaultValueAvailable()) {
                 $this->splice($parameter, $key, $dependency->getDefaultValue());
             }
         }
@@ -157,7 +152,7 @@ class Dispatcher
     {
         $class = $dependency->getClass();
 
-        if ($class && !$this->already($class->name, $parameter)) {
+        if ($class && ! $this->already($class->name, $parameter)) {
             return $dependency->isDefaultValueAvailable() ? $dependency->getDefaultValue() : $this->app->make($class->name);
         }
     }
@@ -169,7 +164,7 @@ class Dispatcher
      */
     protected function already($class, array $parameter)
     {
-        return !is_null(Arr::first($parameter, function ($array) use ($class) {
+        return ! is_null(Arr::first($parameter, static function ($array) use ($class) {
             return $array instanceof $class;
         }));
     }

@@ -1,12 +1,12 @@
 <table>
 	<tr>
 		<td style="width: 15em">Response Status</td>
-		<td>{{ $code . ' - ' . ($message != null ? $message : $app->response->reason($code)) }}</td>
+		<td>{{ $code . ' - ' . ($message !== null ? $message : $app->response->reason($code)) }}</td>
  	</tr>
 </table>
 
 @php($headers = $app->response->headers(); ksort($headers))
-@if (!empty($headers))
+@if (! empty($headers))
 <h3>Header</h3>
 <table>
 	<thead>

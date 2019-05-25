@@ -26,13 +26,9 @@ class HelperDirective extends Directive
     {
         if ($stream->next('csrf')) {
             return '<input type="hidden" name="__TOKEN__" value="<?php echo csrf(); ?>">';
-        }
-
-        if ($stream->next('dd') || $stream->next('d') || $stream->next('dump')) {
+        } elseif ($stream->next('dd') || $stream->next('d') || $stream->next('dump')) {
             return $this->php('%s(%s)', $stream->code(), $stream->expression());
-        }
-
-        if ($stream->next('session')) {
+        } elseif ($stream->next('session')) {
             return $this->php('if($app->session->has(%s)) : ', $stream->expression());
         } elseif ($stream->next('endsession')) {
             return $this->php('endif;');

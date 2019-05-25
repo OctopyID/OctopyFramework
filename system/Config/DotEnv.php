@@ -110,7 +110,7 @@ class DotEnv
             case 'empty':
                 return '';
             case 'null':
-                return null;
+                return;
         }
 
         return $value;
@@ -129,7 +129,7 @@ class DotEnv
      * @param  string $value
      * @return array
      */
-    protected function normalize(string $key, string $value = ''): array
+    protected function normalize(string $key, string $value = '') : array
     {
         if (strpos($key, '=') !== false) {
             [$key, $value] = explode('=', $key, 2);
@@ -153,7 +153,7 @@ class DotEnv
      * @param  string $value
      * @return string
      */
-    protected function sanitize(string $value): string
+    protected function sanitize(string $value) : string
     {
         if (! $value) {
             return $value;
@@ -202,7 +202,7 @@ class DotEnv
         if (strpos($value, '$') !== false) {
             $loader = $this;
 
-            $value = preg_replace_callback('/\${([a-zA-Z0-9_]+)}/', function ($matched) use ($loader) {
+            $value = preg_replace_callback('/\${([a-zA-Z0-9_]+)}/', static function ($matched) use ($loader) {
                 $nested = $loader->get($matched[1]);
 
                 if (is_null($nested)) {

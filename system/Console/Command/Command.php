@@ -15,7 +15,6 @@
 namespace Octopy\Console;
 
 use Exception;
-
 use Octopy\Application;
 
 abstract class Command
@@ -63,7 +62,7 @@ abstract class Command
         return [
             'location'  => $string . '.php',
             'classname' => $match[2] ?? $string,
-            'namespace' => str_replace('/', '\\', $match[1] ?? null)
+            'namespace' => str_replace('/', '\\', $match[1] ?? null),
         ];
     }
 
@@ -83,8 +82,8 @@ abstract class Command
             throw $exception;
         }
 
-        if (!empty($data)) {
-            if (isset($data['DummyNameSpace']) && $data['DummyNameSpace'] == null) {
+        if (! empty($data)) {
+            if (isset($data['DummyNameSpace']) && $data['DummyNameSpace'] === null) {
                 unset($data['DummyNameSpace']);
                 $data['\DummyNameSpace'] = '';
             }
@@ -93,7 +92,7 @@ abstract class Command
         }
 
         try {
-            if (!is_dir($basedir = dirname($location))) {
+            if (! is_dir($basedir = dirname($location))) {
                 $this->app['filesystem']->mkdir($basedir, 0755, true);
             }
 

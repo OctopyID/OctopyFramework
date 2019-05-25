@@ -28,10 +28,9 @@ abstract class Hasher
     /**
      * @param  string $value
      * @param  string $hashed
-     * @param  array  $option
      * @return bool
      */
-    public function verify($value, $hashed, array $option = []) : bool
+    public function verify($value, $hashed) : bool
     {
         if (strlen($hashed) === 0) {
             return false;

@@ -22,13 +22,11 @@ class ResponseServiceProvider extends ServiceProvider
     public function register()
     {
         $app = $this->app;
-        $app->response->macro('flash', function (string $name, array $flash) use ($app) {
+        $app->response->macro('flash', static function (string $name, array $flash) use ($app) {
             $app['session']->set($name, $flash);
-
-            return $this;
         });
 
-        $app->macro('flash', function (string $name) use ($app) {
+        $app->macro('flash', static function (string $name) use ($app) {
             return $app['session']->pull($name, []);
         });
     }

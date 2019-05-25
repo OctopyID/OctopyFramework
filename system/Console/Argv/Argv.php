@@ -44,7 +44,7 @@ class Argv
                 }
             } elseif (preg_match('/^-(.*?)/', $value) && strlen($value) === 2) {
                 $this->option[$value] = $argv[$i + 1] ?? true;
-            } elseif (!array_key_exists('value', $this->option)) {
+            } elseif (! array_key_exists('value', $this->option)) {
                 $this->option['value'] = $value;
             }
         }
@@ -75,7 +75,7 @@ class Argv
      */
     public function command(string $command = null)
     {
-        if (!is_null($command)) {
+        if (! is_null($command)) {
             return $this->command === $command;
         }
 

@@ -1,5 +1,5 @@
 @foreach (['_SERVER', '_SESSION'] as $var)
-	@continue(empty($GLOBALS[$var]) || !is_array($GLOBALS[$var]))
+	@continue(empty($GLOBALS[$var]) || ! is_array($GLOBALS[$var]))
 	<h3>${{ $var }}</h3>
 	<table>
 	<thead>
@@ -23,7 +23,7 @@
 			<td>{{ $key }}</td>
 			<td>
 				@if (is_string($value))
-					@continue($value == '')
+					@continue($value === '')
 					{{ htmlspecialchars(strip_tags($value), ENT_SUBSTITUTE, 'UTF-8') }}
 				@else
 					{{ print_r($value, true) }}
@@ -36,7 +36,7 @@
 @endforeach
 
 @php($constants = get_defined_constants(true)) 
-@if (!empty($constants['user']))
+@if (! empty($constants['user']))
 @php(asort($constants['user']))
 <h3>Constant</h3>
 <table>
@@ -51,7 +51,7 @@
 		<tr>
 			<td>{{ $key }}</td>
 			<td>
-				@if (!is_array($value) && !is_object($value))
+				@if (! is_array($value) && ! is_object($value))
 					{{ $value }}
 				@else
 					<pre>{{ print_r($value, true) }}</pre>

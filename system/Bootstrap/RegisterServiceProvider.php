@@ -29,7 +29,7 @@ class RegisterServiceProvider
         $app['autoload']->aliases($array['aliases'] ?? []);
 
         // register service provider
-        usort($array['provider'], function ($provider) {
+        usort($array['provider'], static function ($provider) {
             return substr($provider, 0, 3) === 'App';
         });
 

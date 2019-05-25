@@ -32,16 +32,16 @@ class Header
             $this->set($key, $value);
         }
 
-        if (!isset($this->header['Content-Type'])) {
+        if (! isset($this->header['Content-Type'])) {
             $this->set('Content-Type', 'text/html; charset=UTF-8');
         }
 
-        if (!isset($this->header['Cache-Control'])) {
+        if (! isset($this->header['Cache-Control'])) {
             $this->set('Cache-Control', 'no-store, max-age=0, no-cache');
         }
 
-        if (!isset($this->header['Date'])) {
-            $this->set('Date', (new DateTime)->now()->format('D, d M Y H:i:s') . ' GMT');
+        if (! isset($this->header['Date'])) {
+            $this->set('Date', (new DateTime())->now()->format('D, d M Y H:i:s') . ' GMT');
         }
     }
 
@@ -50,7 +50,7 @@ class Header
      */
     public function __toString()
     {
-        if (!$header = $this->all()) {
+        if (! $header = $this->all()) {
             return '';
         }
 
@@ -76,13 +76,13 @@ class Header
     {
         if (is_array($value)) {
             $value = array_values($value);
-            if ($replace === true || !isset($this->header[$key])) {
+            if ($replace === true || ! isset($this->header[$key])) {
                 $this->header[$key] = $value;
             } else {
                 $this->header[$key] = array_merge($this->header[$key], $value);
             }
         } else {
-            if ($replace === true || !isset($this->header[$key])) {
+            if ($replace === true || ! isset($this->header[$key])) {
                 $this->header[$key] = [$value];
             } else {
                 $this->header[$key][] = $value;
@@ -102,8 +102,8 @@ class Header
     {
         $header = $this->all();
 
-        if (!array_key_exists($key, $header)) {
-            if (null === $default) {
+        if (! array_key_exists($key, $header)) {
+            if ($default === null) {
                 return $first ? null : [];
             }
 

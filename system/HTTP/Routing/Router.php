@@ -15,13 +15,9 @@
 namespace Octopy\HTTP\Routing;
 
 use Closure;
-
 use Octopy\Application;
 use Octopy\HTTP\Request;
 use Octopy\HTTP\Middleware;
-use Octopy\HTTP\Routing\Route;
-use Octopy\HTTP\Routing\Collection;
-use Octopy\HTTP\Routing\Dispatcher;
 
 class Router
 {
@@ -89,7 +85,7 @@ class Router
         foreach (['prefix', 'namespace', 'middleware'] as $attrname) {
             if (isset($attribute[$attrname])) {
                 if ($attrname === 'middleware') {
-                    $attribute[$attrname] = (array)$attribute[$attrname];
+                    $attribute[$attrname] = (array) $attribute[$attrname];
                 }
 
                 $this->group[$attrname][] = $attribute[$attrname];
@@ -202,7 +198,7 @@ class Router
             }
 
             $controller = explode('@', $controller);
-            if (!isset($controller[1])) {
+            if (! isset($controller[1])) {
                 $controller[1] = '__invoke';
             }
 
@@ -253,7 +249,7 @@ class Router
      */
     protected function normalize($value)
     {
-        if (!is_string($value)) {
+        if (! is_string($value)) {
             return $value;
         }
 

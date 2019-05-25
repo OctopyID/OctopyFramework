@@ -14,9 +14,8 @@
 
 namespace Octopy\Session\Handler;
 
-use SessionHandlerInterface;
-
 use Octopy\Application;
+use SessionHandlerInterface;
 use Octopy\Session\Exception\SessionException;
 
 class FileSessionHandler implements SessionHandlerInterface
@@ -61,11 +60,11 @@ class FileSessionHandler implements SessionHandlerInterface
     {
         $this->storage = $this->storage ?? $storage;
 
-        if (!is_dir($this->storage)) {
-            if (!mkdir($this->storage, 0755, true)) {
+        if (! is_dir($this->storage)) {
+            if (! mkdir($this->storage, 0755, true)) {
                 throw new SessionException("Configured save path [$this->storage] is not a directory, doesn't exist or cannot be created.");
             }
-        } elseif (!is_writable($this->storage)) {
+        } elseif (! is_writable($this->storage)) {
             throw new SessionException("Configured save path [$this->storage] is not writable by the PHP process.");
         }
 

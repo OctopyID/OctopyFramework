@@ -18,5 +18,4 @@ use RuntimeException;
 
 class CipherKeyException extends RuntimeException
 {
-    //
 }

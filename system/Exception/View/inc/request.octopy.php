@@ -31,7 +31,7 @@
 
 @php($empty = true)
 @foreach (['_GET', '_POST', '_COOKIE'] as $var)
- 	@continue(empty($GLOBALS[$var]) || !is_array($GLOBALS[$var]))
+ 	@continue(empty($GLOBALS[$var]) || ! is_array($GLOBALS[$var]))
 	@php($empty = false)
 	<h3>${{ $var }}</h3>
 	<table style="width: 100%">
@@ -46,7 +46,7 @@
 			<tr>
 				<td>{{ $key }}</td>
 				<td>
-					@if (!is_array($value) && !is_object($value))
+					@if (! is_array($value) && ! is_object($value))
 						{{ $value }}
 					@else
 						{{ print_r($value, true) }}
@@ -63,7 +63,7 @@
 @endif
 
 @php($headers = $request->header())
-@if (!empty($headers))
+@if (! empty($headers))
 <h3>Header</h3>
 <table>
 	<thead>

@@ -35,12 +35,12 @@ class Parser
     {
         $this->engine = $engine;
 
-        $this->directive[] = new Compiler\RawPHPDirective;
-        $this->directive[] = new Compiler\HelperDirective;
-        $this->directive[] = new Compiler\LayoutDirective;
-        $this->directive[] = new Compiler\IncludeDirective;
-        $this->directive[] = new Compiler\ControlDirective;
-        $this->directive[] = new Compiler\IteratorDirective;
+        $this->directive[] = new Compiler\RawPHPDirective();
+        $this->directive[] = new Compiler\HelperDirective();
+        $this->directive[] = new Compiler\LayoutDirective();
+        $this->directive[] = new Compiler\IncludeDirective();
+        $this->directive[] = new Compiler\ControlDirective();
+        $this->directive[] = new Compiler\IteratorDirective();
     }
 
     /**
@@ -66,16 +66,15 @@ class Parser
         $source = preg_replace('/{{--(.*?)--}}/s', '', $source);
 
         // Unescaped output parser adapted from Laravel Blade
-        $source = preg_replace_callback('/(@)?{{{\s*(.+?)\s*}}}?/s', function ($match) {
+        $source = preg_replace_callback('/(@)?{{{\s*(.+?)\s*}}}?/s', static function ($match) {
             return $match[1] ? substr($match[0], 1) : sprintf('<?php echo %s; ?>', $match[2]);
         }, $source);
 
         // Escaped output parser adapted from Laravel Blade
-        $source = preg_replace_callback('/(@)?{{\s*(.+?)\s*}}?/s', function ($match) {
+        $source = preg_replace_callback('/(@)?{{\s*(.+?)\s*}}?/s', static function ($match) {
             return $match[1] ? substr($match[0], 1) : sprintf('<?php echo $this->escape(%s); ?>', $match[2]);
         }, $source);
 
-        //
         $compiled = '';
         foreach (token_get_all($source) as $token) {
             $compiled .= is_array($token) ? $this->parse(...$token) : $token;
@@ -108,10 +107,10 @@ class Parser
         if ($token === T_INLINE_HTML) {
             preg_match_all('/\B@(@?\w+(?:::\w+)?)([ \t]*)(\( ( (?>[^()]+) | (?3) )* \))?/x', $content, $match);
 
-            foreach ($match[1] as $x => $type) {
-                $key = $match[0][$x];
+            foreach ($match[1] as $int => $type) {
+                $key = $match[0][$int];
                 if (! array_key_exists($key, $search)) {
-                    $search[$key] = $this->stream($type, $match[3][$x]);
+                    $search[$key] = $this->stream($type, $match[3][$int]);
                 }
             }
         }
@@ -128,7 +127,7 @@ class Parser
      * @param  string $parameter
      * @return string
      */
-    protected function stream(string $type, string $parameter)
+    protected function stream(string $type, string $parameter) : string
     {
         $stream = new Stream(token_get_all('<?php ' . $type), $parameter);
 

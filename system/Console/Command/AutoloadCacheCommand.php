@@ -15,9 +15,6 @@
 namespace Octopy\Console\Command;
 
 use Exception;
-use RecursiveIteratorIterator;
-use RecursiveDirectoryIterator;
-
 use Octopy\Console\Argv;
 use Octopy\Console\Output;
 use Octopy\Console\Command;
@@ -51,14 +48,14 @@ class AutoloadCacheCommand extends Command
 
             // we do not discover all files form "vendor"
             // cause it's already handled by Composer
-            if (!$splfile->isFile() || preg_match($composer, $splfile)) {
+            if (! $splfile->isFile() || preg_match($composer, $splfile)) {
                 continue;
             }
 
             if (substr($splfile->getFilename(), -4) === '.php') {
                 $classname = preg_replace(['/^system/', '/^app/'], ['Octopy', 'App'], implode('\\', array_unique(explode('/', str_replace($basepath, '', substr($splfile = $splfile->getRealpath(), 0, -4))))));
 
-                if (!preg_match('/^Octopy|^App/', $classname)) {
+                if (! preg_match('/^Octopy|^App/', $classname)) {
                     continue;
                 }
 
@@ -67,7 +64,7 @@ class AutoloadCacheCommand extends Command
         }
 
         try {
-            if (!is_dir($location = $this->app['path']->writeable())) {
+            if (! is_dir($location = $this->app['path']->writeable())) {
                 $this->app->mkdir($location, 0755, true);
             }
 

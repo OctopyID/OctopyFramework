@@ -47,6 +47,8 @@ $autoload = new Octopy\Autoload($basepath, [
     'Octopy' => 'system',
 ]);
 
+$autoload->composer();
+
 /**
  *
  */

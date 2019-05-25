@@ -12,6 +12,7 @@ enabled:
   - compact_nullable_typehint
   - concat_with_spaces
   - phpdoc_annotation_without_dot
+  - multiline_comment_opening_closing
   
 finder:
   exclude:
@@ -28,3 +29,4 @@ finder:
     - "*.octopy.php"
   depth:
     - "< 3"
+    

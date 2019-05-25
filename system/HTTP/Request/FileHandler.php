@@ -77,7 +77,7 @@ class FileHandler
             $destination = $this->name();
         }
 
-        if (!$replace && file_exists($destination)) {
+        if (! $replace && file_exists($destination)) {
             return true;
         }
 

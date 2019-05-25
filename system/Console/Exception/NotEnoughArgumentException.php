@@ -18,5 +18,4 @@ use InvalidArgumentException;
 
 class NotEnoughArgumentException extends InvalidArgumentException
 {
-    //
 }

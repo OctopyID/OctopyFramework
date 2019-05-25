@@ -15,7 +15,6 @@
 namespace Octopy\HTTP;
 
 use Closure;
-
 use Octopy\HTTP\Middleware\Dispatcher;
 
 class Middleware
@@ -23,12 +22,21 @@ class Middleware
     /**
      * @var array
      */
-    public $route = [];
+    protected $route = [];
 
     /**
      * @var array
      */
-    public $global = [];
+    protected $global = [];
+
+    /**
+     * @param  string $property
+     * @return array
+     */
+    public function __get(string $property) : array
+    {
+        return $this->$property;
+    }
 
     /**
      * @param string $layer
@@ -37,10 +45,10 @@ class Middleware
     public function set(string $layer, $middleware = null)
     {
         if (is_null($middleware)) {
-            if (!isset($this->global[$layer])) {
+            if (! isset($this->global[$layer])) {
                 $this->global[] = $layer;
             }
-        } elseif (!isset($this->route[$layer])) {
+        } elseif (! isset($this->route[$layer])) {
             $this->route[$layer] = $middleware;
         }
     }
@@ -55,7 +63,7 @@ class Middleware
             return $this->route;
         }
 
-        if (!is_string($layer)) {
+        if (! is_string($layer)) {
             return $layer;
         }
 
@@ -70,7 +78,7 @@ class Middleware
         return $this->global ?? [];
     }
 
-    public function dispatch(array $middleware = [], Request $object, Closure $next)
+    public function dispatch(array $middleware, Request $object, Closure $next)
     {
         return (new Dispatcher($middleware))->dispatch($object, $next);
     }

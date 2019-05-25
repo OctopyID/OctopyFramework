@@ -60,7 +60,7 @@ trait Macroable
      */
     public static function __callStatic($method, $parameter)
     {
-        if (!isset(static::$macro[$method])) {
+        if (! isset(static::$macro[$method])) {
             throw new BadMethodCallException(
                 sprintf('Method %s::%s does not exist.', static::class, $method)
             );
@@ -80,7 +80,7 @@ trait Macroable
      */
     public function __call($method, $parameter)
     {
-        if (!isset(static::$macro[$method])) {
+        if (! isset(static::$macro[$method])) {
             throw new BadMethodCallException(
                 sprintf('Method %s::%s does not exist.', static::class, $method)
             );

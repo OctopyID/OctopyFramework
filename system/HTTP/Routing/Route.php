@@ -19,7 +19,7 @@ class Route
     /**
      * @var array
      */
-    public $data;
+    protected $data;
 
     /**
      * @param array $data
@@ -27,8 +27,8 @@ class Route
     public function __construct(array $data)
     {
         $this->data = array_merge($data, [
-            'name' => ''
-       ]);
+            'name' => '',
+        ]);
     }
 
     /**

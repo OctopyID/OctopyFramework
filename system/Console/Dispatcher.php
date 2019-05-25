@@ -120,7 +120,7 @@ class Dispatcher
      */
     protected function already($class, array $parameter)
     {
-        return ! is_null(Arr::first($parameter, function ($array) use ($class) {
+        return ! is_null(Arr::first($parameter, static function ($array) use ($class) {
             return $array instanceof $class;
         }));
     }

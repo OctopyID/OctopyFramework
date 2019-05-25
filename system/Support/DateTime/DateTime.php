@@ -25,7 +25,7 @@ class DateTime extends PHPDateTime
      */
     public function __construct(?string $time = 'now', $timezone = null)
     {
-        if (!$timezone instanceof DateTimeZone) {
+        if (! $timezone instanceof DateTimeZone) {
             $timezone = new DateTimeZone($timezone ?? 'UTC');
         }
 
@@ -69,7 +69,7 @@ class DateTime extends PHPDateTime
     }
 
     /**
-     * @param  integer $second
+     * @param  int $second
      * @return $this
      */
     public function second(int $second)
@@ -78,7 +78,7 @@ class DateTime extends PHPDateTime
     }
 
     /**
-     * @param  integer $minute
+     * @param  int $minute
      * @return $this
      */
     public function minute(int $minute)
@@ -87,7 +87,7 @@ class DateTime extends PHPDateTime
     }
 
     /**
-     * @param  integer $hour
+     * @param  int $hour
      * @return $this
      */
     public function hour(int $hour)
@@ -96,7 +96,7 @@ class DateTime extends PHPDateTime
     }
 
     /**
-     * @param  integer $day
+     * @param  int $day
      * @return $this
      */
     public function day(int $day)
@@ -105,7 +105,7 @@ class DateTime extends PHPDateTime
     }
 
     /**
-     * @param  integer $week
+     * @param  int $week
      * @return $this
      */
     public function week(int $week)
@@ -114,7 +114,7 @@ class DateTime extends PHPDateTime
     }
 
     /**
-     * @param  integer $month
+     * @param  int $month
      * @return $this
      */
     public function month(int $month)
@@ -123,7 +123,7 @@ class DateTime extends PHPDateTime
     }
 
     /**
-     * @param  integer $year
+     * @param  int $year
      * @return $this
      */
     public function year(int $year)

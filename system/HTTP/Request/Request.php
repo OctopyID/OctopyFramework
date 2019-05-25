@@ -53,12 +53,17 @@ class Request
      */
     public function __construct()
     {
-        foreach (['query' => $_GET, 'request' => $_POST, 'file' => $_FILES, 'cookie' => $_COOKIE,
-             'server' => $_SERVER] as $property => $request) {
+        $properties = [
+            'query'   => $_GET,
+            'request' => $_POST,
+            'file'    => $_FILES,
+            'cookie'  => $_COOKIE,
+            'server'  => $_SERVER,
+        ];
 
-            //
+        foreach ($properties as $property => $request) {
             if ($property === 'file') {
-                $request = array_map(function ($value) {
+                $request = array_map(static function ($value) {
                     return new FileHandler($value);
                 }, $request);
             }
@@ -88,7 +93,7 @@ class Request
      */
     public function retrieve(string $source, string $key = null, $default = null)
     {
-        if (!is_null($key)) {
+        if (! is_null($key)) {
             return $this->$source->get($key, $default);
         }
 
@@ -263,7 +268,7 @@ class Request
             }
         }
 
-        if (!is_null($name)) {
+        if (! is_null($name)) {
             return $header[$name] ?? null;
         }
 

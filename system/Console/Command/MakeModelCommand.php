@@ -15,7 +15,6 @@
 namespace Octopy\Console\Command;
 
 use Exception;
-
 use Octopy\Console\Argv;
 use Octopy\Console\Output;
 use Octopy\Console\Command;

@@ -19,7 +19,7 @@ use Exception;
 class InvalidRecepientException extends Exception
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $code = 406;
 }

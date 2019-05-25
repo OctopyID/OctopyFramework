@@ -15,7 +15,6 @@
 namespace Octopy\HTTP\Middleware;
 
 use Closure;
-
 use Octopy\Application;
 use Octopy\HTTP\Request;
 use Octopy\HTTP\Middleware\Exception\MaintenanceModeException;

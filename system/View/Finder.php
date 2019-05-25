@@ -77,7 +77,7 @@ class Finder
 
         $template = str_replace('.', '/', $name);
         foreach ($this->resource as $resource) {
-            $resource = array_map(function ($extension) use ($resource, $template) {
+            $resource = array_map(static function ($extension) use ($resource, $template) {
                 return $resource . $template . $extension;
             }, ['.octopy.php', '.octopy', '.php']);
 

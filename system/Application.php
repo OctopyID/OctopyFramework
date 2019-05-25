@@ -104,6 +104,15 @@ class Application extends Container
      * @param  string $subpath
      * @return string
      */
+    public function vendor(string $subpath = null) : string
+    {
+        return $this->basepath('vendor/' . $subpath);
+    }
+
+    /**
+     * @param  string $subpath
+     * @return string
+     */
     public function writeable(string $subpath = null) : string
     {
         return $this->basepath('writeable/' . $subpath);
@@ -138,7 +147,7 @@ class Application extends Container
             return $_ENV['APP_RUNNING_IN_CONSOLE'] === 'true';
         }
 
-        return php_sapi_name() === 'cli' || php_sapi_name() === 'phpdbg';
+        return PHP_SAPI === 'cli' || PHP_SAPI === 'phpdbg';
     }
 
     /**

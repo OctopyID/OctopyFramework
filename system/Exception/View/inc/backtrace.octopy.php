@@ -17,7 +17,7 @@
 		&nbsp;&mdash;&nbsp;{{ $row['class'].$row['type'].$row['function'] }}
 		
 		@php($identity = uniqid('error') . $index)
-		@if (!empty($row['args']))
+		@if (! empty($row['args']))
 		( <a href="#" onclick="return toggle('{{ $identity }}');">arguments</a> )
 			<div class="args" id="{{ $identity }}">
 			<table cellspacing="0">
@@ -46,7 +46,7 @@
 	@endif
  --}}
 	
-	@if (!isset($row['class']) && isset($row['function']))
+	@if (! isset($row['class']) && isset($row['function']))
 		&nbsp;&nbsp;&mdash;&nbsp;&nbsp;{{ $row['function'] }}()
 	@endif
 	</p>@if(isset($row['file']) && is_file($row['file']) &&  isset($row['class']))

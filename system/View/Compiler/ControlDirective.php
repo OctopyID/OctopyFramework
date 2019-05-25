@@ -30,9 +30,7 @@ class ControlDirective extends Directive
             }
 
             return $this->php('%s(%s) :', $stream->code(), $stream->expression());
-        }
-
-        if ($stream->next(T_ENDIF)) {
+        } elseif ($stream->next(T_ENDIF)) {
             return $this->php('%s;', $stream->code());
         }
     }

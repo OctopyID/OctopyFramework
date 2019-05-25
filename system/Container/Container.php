@@ -95,7 +95,7 @@ class Container implements ArrayAccess
             unset(static::$instances[$abstract]);
         }
 
-        return new Container;
+        return new Container();
     }
 
     /**
@@ -161,7 +161,7 @@ class Container implements ArrayAccess
         $parameter = count(static::$parameters) ? end(static::$parameters) : [];
 
         if ($concrete instanceof Closure) {
-            return $concrete(new Container, $parameter);
+            return $concrete(new Container(), $parameter);
         }
 
         $reflector = new ReflectionClass($concrete);

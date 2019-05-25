@@ -110,29 +110,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Register The Composer Auto Loader
-    |--------------------------------------------------------------------------
-    |
-    | Composer provides a convenient, automatically generated class loader for
-    | our application. We just need to utilize it! We'll simply require it
-    | into the script here so that we don't have to worry about manual
-    | loading any of our classes later on. It feels great to relax.
-    |
-    | Enabling this setting will tell Octopy to look for a Composer
-    | package auto-loader script in application/vendor/autoload.php.
-    |
-    |   'composer' = true;
-    |
-    | Or if you have your vendor/ directory located somewhere else, you
-    | can opt to set a specific path as well:
-    |
-    |   'composer' = '/path/to/vendor/autoload.php';
-    |
-    */
-    'composer' => true,
-
-    /*
-    |--------------------------------------------------------------------------
     | Autoloaded Service Providers
     |--------------------------------------------------------------------------
     |

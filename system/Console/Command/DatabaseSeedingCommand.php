@@ -39,13 +39,13 @@ class DatabaseSeedingCommand extends Command
     {
         $directory = $this->app['path']->app->DB('Seeder');
 
-        if (!is_dir($directory)) {
+        if (! is_dir($directory)) {
             return $output->warning('Nothing to seeds.');
         }
 
-        $seed = !$argv->get('value') || !$argv->get('--seed') ? 'DatabaseSeeder' : $argv->get('value');
+        $seed = ! $argv->get('value') || ! $argv->get('--seed') ? 'DatabaseSeeder' : $argv->get('value');
 
-        if (!class_exists('App\DB\Seeder\DatabaseSeeder')) {
+        if (! class_exists('App\DB\Seeder\DatabaseSeeder')) {
             $this->call('make:seeder', ['value' => 'DatabaseSeeder']);
         }
 
@@ -62,7 +62,7 @@ class DatabaseSeedingCommand extends Command
 
         call_user_func([$seeder = $this->app->make('App\\DB\\Seeder\\' . $seed), 'seed']);
 
-        if (!empty($seeds = $seeder->call())) {
+        if (! empty($seeds = $seeder->call())) {
             foreach ($seeds as $i => $seed) {
                 $this->seed($output, str_replace('App\\DB\\Seeder\\', '', $seed));
             }

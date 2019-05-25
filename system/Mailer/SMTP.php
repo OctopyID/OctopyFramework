@@ -125,7 +125,7 @@ class SMTP
     public function attachment(string $path)
     {
         if (! is_file($path)) {
-            throw new AttachmentNotExistException;
+            throw new AttachmentNotExistException();
         }
 
         $fopen = fopen($path, 'rb');
@@ -162,7 +162,7 @@ class SMTP
     private function email(string $email)
     {
         if (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            throw new InvalidRecepientException;
+            throw new InvalidRecepientException();
         }
 
         return $email;

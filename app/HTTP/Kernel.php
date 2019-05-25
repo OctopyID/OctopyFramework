@@ -30,6 +30,6 @@ class Kernel extends HTTPKernel
      * @var array
      */
     protected $routemiddleware = [
-        //
+
     ];
 }

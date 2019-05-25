@@ -16,7 +16,6 @@ namespace Octopy\HTTP\Middleware;
 
 use Closure;
 use Throwable;
-
 use Octopy\Application;
 use Octopy\HTTP\Request;
 use Octopy\Debug\DebugBar;
@@ -27,7 +26,7 @@ class InjectDebugBar
      * @var array
      */
     protected $except = [
-        '__debugbar'
+        '__debugbar',
     ];
 
     /**
@@ -52,7 +51,7 @@ class InjectDebugBar
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!$this->debugbar->enabled() || $request->is($this->except)) {
+        if (! $this->debugbar->enabled() || $request->is($this->except)) {
             return $next($request);
         }
 

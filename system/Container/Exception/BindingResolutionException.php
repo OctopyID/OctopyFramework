@@ -18,5 +18,4 @@ use RuntimeException;
 
 class BindingResolutionException extends RuntimeException
 {
-    //
 }

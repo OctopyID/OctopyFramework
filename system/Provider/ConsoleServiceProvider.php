@@ -27,11 +27,11 @@ class ConsoleServiceProvider extends ServiceProvider
         if ($this->app->console()) {
             $console = $this->app['console'];
 
-            $console->command('--help', function (Output $output) {
+            $console->command('--help', static function (Output $output) {
                 return $output->help();
             })->describe('Display this help message');
 
-            $console->command('--version', function (Application $app, Output $output) {
+            $console->command('--version', static function (Application $app, Output $output) {
                 return 'Octopy Framework ' . $output->success($app->version());
             })->describe('Display this application version');
 

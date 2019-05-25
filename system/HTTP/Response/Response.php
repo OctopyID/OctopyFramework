@@ -17,7 +17,6 @@ namespace Octopy\HTTP;
 use ArrayObject;
 use JsonSerializable;
 use UnexpectedValueException;
-
 use Octopy\Support\Macroable;
 use Octopy\HTTP\Response\Header;
 use Octopy\HTTP\Response\JsonResponse;
@@ -124,8 +123,8 @@ class Response
         510 => 'Not Extended',
         511 => 'Network Authentication Required',
         598 => 'Network Read Timeout Error',
-        599 => 'Network Connect Timeout Error'
-   ];
+        599 => 'Network Connect Timeout Error',
+    ];
 
     /**
      * @param mixed $data
@@ -190,7 +189,7 @@ class Response
      */
     public function body($body)
     {
-        if (!is_null($body) && !is_string($body) && !is_numeric($body) && !is_callable([$body, '__toString'])) {
+        if (! is_null($body) && ! is_string($body) && ! is_numeric($body) && ! is_callable([$body, '__toString'])) {
             throw new UnexpectedValueException(
                 'The response body must be a string or object implementing __toString() given ' . gettype($body)
             );
@@ -297,7 +296,7 @@ class Response
      */
     public function send()
     {
-        if (!headers_sent()) {
+        if (! headers_sent()) {
             $status = $this->status;
             $server = $_SERVER['SERVER_PROTOCOL'] ?? 'HTTP/1.0';
 

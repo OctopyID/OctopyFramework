@@ -38,7 +38,7 @@ class FileSystem
     public function get($path, $lock = false)
     {
         if (is_file($path)) {
-            if ($lock == true) {
+            if ($lock === true) {
                 $handle = fopen($path, 'rb');
                 $content = '';
 
@@ -141,7 +141,7 @@ class FileSystem
     public function delete(string $path, bool $preserve = false)
     {
         if (is_file($path)) {
-            return @unlink($path);
+            return unlink($path);
         } elseif (is_dir($path)) {
             $items = new FilesystemIterator($path);
 
@@ -150,13 +150,13 @@ class FileSystem
                     $status = $this->delete($item);
                 } elseif ($item->isDir() && ! $item->isLink()) {
                     if ($this->delete($item)) {
-                        $status = @rmdir($item);
+                        $status = rmdir($item);
                     }
                 }
             }
 
             if ($preserve) {
-                @rmdir($path);
+                rmdir($path);
             }
 
             return $status;
@@ -186,7 +186,9 @@ class FileSystem
         }
 
         if (is_dir($directory)) {
-            $flag = $flag ?: FilesystemIterator::SKIP_DOTS;
+            if (! $flag) {
+                $flag = FilesystemIterator::SKIP_DOTS;
+            }
 
             if (! is_dir($destination)) {
                 $this->mkdir($destination, 0755, true);
@@ -211,7 +213,7 @@ class FileSystem
             return true;
         }
 
-        return @copy($directory, $destination);
+        return copy($directory, $destination);
     }
 
     /**
@@ -226,7 +228,7 @@ class FileSystem
             return true;
         }
 
-        return @mkdir($path, $permission, $recursive);
+        return mkdir($path, $permission, $recursive);
     }
 
     /**

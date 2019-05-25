@@ -19,7 +19,7 @@ use RuntimeException;
 class PostTooLargeException extends RuntimeException
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $code = 413;
 }

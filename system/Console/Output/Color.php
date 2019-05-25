@@ -19,25 +19,13 @@ use Exception as InvalidStyleException;
 
 class Color
 {
-    /**
-     * @var int
-     */
-    const FOREGROUND = 38;
+    public const RESET_STYLE     = 0;
 
-    /**
-     * @var int
-     */
-    const BACKGROUND = 48;
+    public const FOREGROUND      = 38;
 
-    /**
-     * @var string
-     */
-    const COLOR256_REGEXP = '~^(bg_)?color_([0-9]{1,3})$~';
+    public const BACKGROUND      = 48;
 
-    /**
-     * @var int
-     */
-    const RESET_STYLE = 0;
+    public const COLOR256_REGEXP = '~^(b:)?color_([0-9]{1,3})$~';
 
     /**
      * @var bool
@@ -53,53 +41,53 @@ class Color
      * @var array
      */
     protected $style = [
-        'none'             => null,
-        'bold'             => 1,
-        'dark'             => 2,
-        'italic'           => 3,
-        'underline'        => 4,
-        'blink'            => 5,
-        'reverse'          => 7,
-        'concealed'        => 8,
+        's:none'          => null,
+        's:bold'          => 1,
+        's:dark'          => 2,
+        's:italic'        => 3,
+        's:underline'     => 4,
+        's:blink'         => 5,
+        's:reverse'       => 7,
+        's:concealed'     => 8,
 
-        'default'          => 39,
-        'black'            => 30,
-        'red'              => 31,
-        'green'            => 32,
-        'yellow'           => 33,
-        'blue'             => 34,
-        'magenta'          => 35,
-        'cyan'             => 36,
-        'light_gray'       => 37,
+        'c:default'       => 39,
+        'c:black'         => 30,
+        'c:red'           => 31,
+        'c:green'         => 32,
+        'c:yellow'        => 33,
+        'c:blue'          => 34,
+        'c:magenta'       => 35,
+        'c:cyan'          => 36,
+        'c:lightgray'    => 37,
 
-        'dark_gray'        => 90,
-        'light_red'        => 91,
-        'light_green'      => 92,
-        'light_yellow'     => 93,
-        'light_blue'       => 94,
-        'light_magenta'    => 95,
-        'light_cyan'       => 96,
-        'white'            => 97,
+        'c:darkgray'     => 90,
+        'c:lightred'     => 91,
+        'c:lightgreen'   => 92,
+        'c:lightyellow'  => 93,
+        'c:lightblue'    => 94,
+        'c:lightmagenta' => 95,
+        'c:lightcyan'    => 96,
+        'c:white'         => 97,
 
-        'bg_default'       => 49,
-        'bg_black'         => 40,
-        'bg_red'           => 41,
-        'bg_green'         => 42,
-        'bg_yellow'        => 43,
-        'bg_blue'          => 44,
-        'bg_magenta'       => 45,
-        'bg_cyan'          => 46,
-        'bg_light_gray'    => 47,
+        'b:default'       => 49,
+        'b:black'         => 40,
+        'b:red'           => 41,
+        'b:green'         => 42,
+        'b:yellow'        => 43,
+        'b:blue'          => 44,
+        'b:magenta'       => 45,
+        'b:cyan'          => 46,
+        'b:lightgray'    => 47,
 
-        'bg_dark_gray'     => 100,
-        'bg_light_red'     => 101,
-        'bg_light_green'   => 102,
-        'bg_light_yellow'  => 103,
-        'bg_light_blue'    => 104,
-        'bg_light_magenta' => 105,
-        'bg_light_cyan'    => 106,
-        'bg_white'         => 107,
-   ];
+        'b:darkgray'     => 100,
+        'b:lightred'     => 101,
+        'b:lightgreen'   => 102,
+        'b:lightyellow'  => 103,
+        'b:lightblue'    => 104,
+        'b:lightmagenta' => 105,
+        'b:lightcyan'    => 106,
+        'b:white'         => 107,
+    ];
 
     /**
      *
@@ -116,7 +104,7 @@ class Color
      */
     public function __call(string $color, array $args = []) : string
     {
-        return $this->format('{' . $color . '}' . ($args[0] ?? ''));
+        return $this->format('<c:' . $color . '>' . ($args[0] ?? ''));
     }
 
     /**
@@ -125,10 +113,10 @@ class Color
      */
     public function format(string $text)
     {
-        preg_match_all('^\{' . implode('|', array_keys($this->style)) . '\}^', $text, $match);
+        preg_match_all('^\<' . implode('|', array_keys($this->style)) . '\>^', $text, $match);
         $match[1] = [];
         foreach ($match[0] as $i  => $key) {
-            $match[0][$i] = '{' . $key . '}';
+            $match[0][$i] = '<' . $key . '>';
             $match[1][$i] = sprintf("\033[%um", $this->style[$key]);
         }
 
@@ -142,7 +130,7 @@ class Color
      */
     public function apply($style, $text)
     {
-        if (!$this->forced() && !$this->supported()) {
+        if (! $this->forced() && ! $this->supported()) {
             return $text;
         }
 
@@ -150,7 +138,7 @@ class Color
             $style = [$style];
         }
 
-        if (!is_array($style)) {
+        if (! is_array($style)) {
             throw new InvalidArgumentException('Style must be string or array');
         }
 
@@ -166,7 +154,7 @@ class Color
             }
         }
 
-        $sequence = array_filter($sequence, function ($value) {
+        $sequence = array_filter($sequence, static function ($value) {
             return $value !== null;
         });
 
@@ -182,7 +170,7 @@ class Color
      */
     public function force($force)
     {
-        $this->force = (bool)$force;
+        $this->force = (bool) $force;
     }
 
     /**
@@ -213,12 +201,12 @@ class Color
         if (is_string($styles)) {
             $styles = [$styles];
         }
-        if (!is_array($styles)) {
+        if (! is_array($styles)) {
             throw new InvalidArgumentException('Style must be string or array.');
         }
 
         foreach ($styles as $style) {
-            if (!$this->validate($style)) {
+            if (! $this->validate($style)) {
                 throw new InvalidStyleException($style);
             }
         }
@@ -249,14 +237,14 @@ class Color
     public function supported()
     {
         if (DIRECTORY_SEPARATOR === '\\') {
-            if (function_exists('sapi_windows_vt100_support') && @sapi_windows_vt100_support(STDOUT)) {
+            if (function_exists('sapi_windows_vt100_support') && sapi_windows_vt100_support(STDOUT)) {
                 return true;
             } elseif (getenv('ANSICON') !== false || getenv('ConEmuANSI') === 'ON') {
                 return true;
             }
             return false;
         } else {
-            return function_exists('posix_isatty') && @posix_isatty(STDOUT);
+            return function_exists('posix_isatty') && posix_isatty(STDOUT);
         }
     }
 
@@ -266,7 +254,7 @@ class Color
     public function are256supported()
     {
         if (DIRECTORY_SEPARATOR === '\\') {
-            return function_exists('sapi_windows_vt100_support') && @sapi_windows_vt100_support(STDOUT);
+            return function_exists('sapi_windows_vt100_support') && sapi_windows_vt100_support(STDOUT);
         } else {
             return strpos(getenv('TERM'), '256color') !== false;
         }
@@ -296,13 +284,13 @@ class Color
             return $this->style[$style];
         }
 
-        if (!$this->are256supported()) {
+        if (! $this->are256supported()) {
             return null;
         }
 
         preg_match(Color::COLOR256_REGEXP, $style, $matches);
 
-        $type  = $matches[1] === 'bg_' ? Color::BACKGROUND : Color::FOREGROUND;
+        $type  = $matches[1] === 'b:' ? Color::BACKGROUND : Color::FOREGROUND;
         $value = $matches[2];
 
         return "$type;5;$value";

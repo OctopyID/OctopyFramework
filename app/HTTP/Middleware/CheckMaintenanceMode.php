@@ -22,6 +22,6 @@ class CheckMaintenanceMode extends Middleware
      * @var array
      */
     protected $except = [
-        //
+
     ];
 }

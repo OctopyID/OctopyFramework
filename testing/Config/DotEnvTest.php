@@ -12,6 +12,8 @@
  * @license : MIT
  */
 
+declare(strict_types=1);
+
 namespace Octopy\Testing\Config;
 
 use Octopy\Config\DotEnv;
@@ -52,7 +54,7 @@ class DotEnvTest extends TestCase
         $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('.env values containing spaces must be surrounded by quotes.');
 
-        (new Dotenv(__DIR__, '.env_error'))->load();
+        (new DotEnv(__DIR__, '.env_error'))->load();
     }
 
     /**
