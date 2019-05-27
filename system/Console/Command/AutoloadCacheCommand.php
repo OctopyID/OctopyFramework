@@ -64,17 +64,13 @@ class AutoloadCacheCommand extends Command
         }
 
         try {
-            if (! is_dir($location = $this->app['path']->writeable())) {
-                $this->app->mkdir($location, 0755, true);
-            }
+            $cache = $this->app['path']->writeable('Autoload.php');
 
-            // we hashing the autoload name & encrypted content
-            // to confused attacker, because sometimes there's
-            // contains a sensitive contents
-            $location .= '46AE3E009A9883E4F2C38542E300A16D';
-            $encrypted = chunk_split($this->app['encrypter']->encrypt($classmap));
+            // we encrypting the content to confused attacker,
+            // because sometimes there's contains a sensitive contents
+            $encrypted = $this->app['encrypter']->encrypt($classmap);
 
-            if ($this->app['filesystem']->put($location, $encrypted)) {
+            if ($this->generate($cache, 'Cache', ['SerializedContent' => $encrypted])) {
                 return $output->success('Autoload cached successfully.');
             }
         } catch (Exception $exception) {

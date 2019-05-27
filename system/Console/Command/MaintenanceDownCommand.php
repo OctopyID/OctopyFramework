@@ -49,7 +49,7 @@ class MaintenanceDownCommand extends Command
         }
 
         try {
-            $location = $this->app['path']->writeable() . 'DOWN';
+            $location = $this->app['path']->writeable() . 'MAINTENANCE';
 
             $this->app['filesystem']->put($location, json_encode([
                 'time'    => time(),

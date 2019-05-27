@@ -155,7 +155,7 @@ if (! function_exists('byteformatter')) {
      * @param  float $byte
      * @return string
      */
-    function byteformatter($byte)
+    function byteformatter($byte) : string
     {
         if ($byte < 1024) {
             return ' ' . $byte . 'B';
@@ -179,7 +179,7 @@ if (! function_exists('route')) {
             $default = (array) $default;
         }
 
-        return App::make(Octopy\HTTP\Routing\URLGenerator::class)->route($name, $default);
+        return App::make('url')->route($name, $default);
     }
 }
 

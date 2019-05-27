@@ -23,17 +23,12 @@ class AutoloadServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $autoload = $this->app['path']->writeable();
-
-        // we hashing the autoload name & encrypted content
-        // to confused attacker, because sometimes there's
-        // contains a sensitive contents
-        $autoload .= '46AE3E009A9883E4F2C38542E300A16D';
+        $autoload = $this->app['path']->writeable('Autoload.php');
 
         if (file_exists($autoload)) {
             try {
                 $this->app['autoload']->classmap(
-                    $this->app['encrypter']->decrypt(file_get_contents($autoload))
+                    $this->app['encrypter']->decrypt(require $autoload)
                );
             } catch (DecryptException $exception) {
                 if (! $this->app->console()) {

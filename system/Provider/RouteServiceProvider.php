@@ -28,13 +28,12 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $cache = $this->app->writeable();
-        $cache .= '9C46408A3BC655C68505C57A11D6C4EE';
+        $cache = $this->app->writeable('Route.php');
 
         if (file_exists($cache)) {
             try {
                 $this->app['router']->load(
-                    $this->app['encrypter']->decrypt(file_get_contents($cache))
+                    $this->app['encrypter']->decrypt(require $cache)
                 );
             } catch (DecryptException $exception) {
                 if (! $this->app->console()) {

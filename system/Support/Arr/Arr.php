@@ -53,8 +53,8 @@ class Arr
     }
 
     /**
-     * @param  array   $array
-     * @param  string  $prepend
+     * @param  array  $array
+     * @param  string $prepend
      * @return array
      */
     public static function dot(array $array, $prepend = '') : array
@@ -72,8 +72,8 @@ class Arr
     }
 
     /**
-     * @param  array  $array
-     * @param  mixed  $keys
+     * @param  array $array
+     * @param  mixed $keys
      * @return array
      */
     public static function except(array $array, $keys) : array
@@ -84,8 +84,8 @@ class Arr
     }
 
     /**
-     * @param  mixed   $array
-     * @param  string  $key
+     * @param  mixed  $array
+     * @param  string $key
      * @return bool
      */
     public static function exists(array $array, $key) : bool

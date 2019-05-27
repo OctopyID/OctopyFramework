@@ -8,7 +8,7 @@
  *  \___/ \___|\__\___/| .__/ \__, |
  *                     |_|    |___/
  * @author  : Supian M <supianidz@gmail.com>
- * @version : v1.0
+ * @link    : www.octopy.xyz
  * @license : MIT
  */
 
@@ -50,7 +50,7 @@ class CheckMaintenanceMode
             return $next($request);
         }
 
-        if (file_exists($down = $this->app['path']->writeable('framework') . 'down')) {
+        if (file_exists($down = $this->app['path']->writeable() . 'MAINTENANCE')) {
             $down = json_decode($this->app['filesystem']->get($down));
 
             if (in_array($request->ip(), $down->allowed)) {

@@ -45,17 +45,13 @@ class RouteCacheCommand extends Command
         );
 
         try {
-            if (! is_dir($location = $this->app['path']->writeable())) {
-                $this->app->mkdir($location, 0755, true);
-            }
+            $cache = $this->app['path']->writeable('Route.php');
 
-            // we hashing the route name & encrypted content
-            // to confused attacker, because sometimes there's
-            // contains a sensitive contents
-            $location .= '9C46408A3BC655C68505C57A11D6C4EE';
-            $encrypted = chunk_split($this->app['encrypter']->encrypt($collection));
+            // we encrypting the content to confused attacker,
+            // because sometimes there's contains a sensitive contents
+            $encrypted = $this->app['encrypter']->encrypt($collection);
 
-            if ($this->app['filesystem']->put($location, $encrypted)) {
+            if ($this->generate($cache, 'Cache', ['SerializedContent' => $encrypted])) {
                 return $output->success('Route cached successfully.');
             }
         } catch (Exception $exception) {
