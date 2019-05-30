@@ -37,6 +37,7 @@ class Route
      */
     public function __get(string $key)
     {
+        ;
         return $this->data[$key];
     }
 

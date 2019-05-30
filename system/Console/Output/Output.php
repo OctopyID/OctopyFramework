@@ -16,12 +16,12 @@ namespace Octopy\Console;
 
 use Octopy\Application;
 use Octopy\Console\Output\Color;
-use Octopy\Console\Output\TableFormatter;
+use Octopy\Console\Output\MenuFormatter;
 
 class Output extends Color
 {
     /**
-     * @var Octopy\Console\Output\TableFormatter
+     * @var Octopy\Console\Output\MenuFormatter
      */
     protected $table;
 
@@ -36,7 +36,7 @@ class Output extends Color
     public function __construct(Application $app)
     {
         $this->app = $app;
-        $this->table = new TableFormatter($app);
+        $this->table = new MenuFormatter($app);
     }
 
     /**
@@ -82,6 +82,15 @@ class Output extends Color
     public function comment(string $value) : string
     {
         return $this->warning($value);
+    }
+
+    /**
+     * @param  string $value
+     * @return string
+     */
+    public function reset(string $value) : string
+    {
+        return $this->format('<c:white>' . $value);
     }
 
     /**

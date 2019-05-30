@@ -6,93 +6,180 @@
  * | | | |/ __| __/ _ \| '_ \| | | |
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
- *                     |_|    |___/
+ *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
- * @version : v1.0
+ * @link    : www.octopy.xyz
  * @license : MIT
  */
 
 namespace Octopy\Console\Output;
 
+use Exception;
+
 class TableFormatter
 {
     /**
-     * @var array
-     */
-    protected $data = [];
-
-    /**
-     * @var int
-     */
-    protected $state = 0;
-
-    /**
-     * @var int
-     */
-    protected $prev = 0;
+    * @var array
+    */
+    private $data = [];
 
     /**
      * @var array
      */
-    protected $margin = [];
+    private $header = [];
 
     /**
-     * @param int $margin
+     * @var array
      */
-    public function margin(int $margin = 0)
-    {
-        $this->prev = $margin;
-    }
+    private $length = [];
 
     /**
-     * @param array $keys
+     * @var int
+     */
+    private $column;
+
+    /**
+     * @var string
+     */
+    private $line;
+
+    /**
+     * @var string
+     */
+    private $table;
+
+    /**
      * @param array $data
-     * @param array $color
      */
-    public function add(array $keys, array $data, array $color = [])
+    public function __construct(array $data)
     {
-        foreach ($keys as $key) {
-            if (isset($data[$key])) {
-                $this->margin[$this->state] = $this->prev;
+        $this->data = $data;
 
-                $this->data[$this->state][] = $data[$key];
-            }
-        }
-
-        $this->state++;
+        $this->prepare();
     }
 
     /**
      * @return string
      */
-    public function render() : string
+    public function __toString() : string
     {
-        $column = [];
-        foreach ($this->data as $rkey => $row) {
-            foreach ($row as $ckey => $cell) {
-                $length = strlen($cell);
-                if (empty($column[$ckey]) || $column[$ckey] < $length) {
-                    $column[$ckey] = $length;
+        return $this->display();
+    }
+
+    /**
+     * @return string
+     */
+    public function display() : string
+    {
+        $table = '';
+
+        for ($int = 0; $int < $this->column; $int++) {
+            $table .= '+';
+            $length = $this->length[$int] - 7; //ensures that the longest string has a space after it
+            $table .= sprintf("%'-{$length}s", '');
+        }
+
+        $table .= "+\n";
+
+        $this->line = $table; //the first and the last line of the header
+
+        //column names
+        for ($int = 0; $int < $this->column; $int++) {
+            $length = $this->length[$int] + 1; //ensures that the longest string has a space after it
+            $table .= '| ';
+            $table .= sprintf("%' -{$length}s", $this->header[$int]);
+        }
+
+        $table .= "|\n";
+
+        //add the ending line
+        $table .= $this->line;
+
+        $this->table = $table;
+
+        foreach ($this->data as $row) {
+            $int = 0;
+            foreach ($row as $field) {
+                $length = $this->length[$int] + 1; //ensures that the longest string has a space after it
+                $this->table .= '| ' . sprintf("%' -{$length}s", $field);
+                $int++;
+            }
+
+            $this->table .= "|\n";
+        }
+
+        $this->table .= $this->line;
+
+        return $this->table;
+    }
+
+    /**
+     * @return void
+     */
+    private function prepare() : void
+    {
+        if (! is_array($this->data)) {
+            throw new Exception('Data passed must be an array');
+        }
+
+        if (is_object($this->data[0])) {
+            $this->header();
+            $temp = [];
+
+            foreach ($this->data as $obj) {
+                $arr = [];
+
+                foreach ($obj as $item) {
+                    $arr[] = $item;
+                }
+
+                $temp[] = $arr;
+            }
+
+            $this->data = $temp;
+        } elseif (is_array($this->data[0])) {
+            $this->header();
+        } else {
+            throw new Exception('Passed data must be array of objects or arrays');
+        }
+
+        for ($int = 0; $int < $this->column; $int++) {
+            $this->length[$int] = 0;
+
+            foreach ($this->header as $field) {
+                if (mb_strlen($field) > $this->length[$int]) {
+                    $this->length[$int] = mb_strlen($field);
                 }
             }
         }
 
-        $table = '';
-        foreach ($this->data as $rkey => $row) {
-            $table .= str_pad(' ', $this->margin[$rkey]);
-            foreach ($row as $ckey => $cell) {
-                $table .= str_replace("\n", '', str_pad($cell, $column[$ckey]));
+        foreach ($this->data as $row) {
+            $int = 0;
+            foreach ($row as $field) {
+                if (mb_strlen($field) > $this->length[$int]) {
+                    $this->length[$int] = mb_strlen($field);
+                }
+
+                $int++;
+            }
+        }
+    }
+
+    /**
+     * @return void
+     */
+    private function header() : void
+    {
+        if (! $this->header) {
+            $temp = [];
+
+            foreach ($this->data[0] as $key => $item) {
+                $temp[] = $key;
             }
 
-            $table .= "\n";
+            $this->header = $temp;
+
+            $this->column = count($temp);
         }
-
-        $this->data   = [];
-        $this->margin = [];
-        $this->margin(
-            $this->state = 0
-        );
-
-        return $table;
     }
 }
