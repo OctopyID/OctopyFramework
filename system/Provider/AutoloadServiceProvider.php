@@ -23,7 +23,7 @@ class AutoloadServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $autoload = $this->app['path']->writeable('Autoload.php');
+        $autoload = $this->app['path']->writeable('autoload.php');
 
         if (file_exists($autoload)) {
             try {

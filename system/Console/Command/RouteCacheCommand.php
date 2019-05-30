@@ -45,7 +45,7 @@ class RouteCacheCommand extends Command
         );
 
         try {
-            $cache = $this->app['path']->writeable('Route.php');
+            $cache = $this->app['path']->writeable('route.php');
 
             // we encrypting the content to confused attacker,
             // because sometimes there's contains a sensitive contents

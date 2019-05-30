@@ -123,7 +123,7 @@ class ExceptionHandler
     {
         $code = $exception->getCode();
 
-        if ($code < 100 || $code > 500) {
+        if ($code < 100 || $code > 599) {
             $code = 500;
         }
 

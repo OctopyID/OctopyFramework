@@ -73,7 +73,7 @@ class Finder
             return $this->template[$name];
         }
 
-        $compiled = $this->compiled ? $this->compiled . strtoupper(md5($name)) : null;
+        $compiled = $this->compiled ? $this->compiled . strtoupper(md5($name)) . '.php' : null;
 
         $template = str_replace('.', '/', $name);
         foreach ($this->resource as $resource) {
