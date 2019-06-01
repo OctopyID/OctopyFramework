@@ -24,7 +24,19 @@ class GenerateAppKeyCommand extends Command
     /**
      * @var string
      */
-    protected $signature = 'key:generate';
+    protected $command = 'key:generate';
+
+    /**
+     * @var array
+     */
+    protected $options = [
+        '--show' => 'Display the key instead of modifying files',
+    ];
+
+    /**
+     * @var array
+     */
+    protected $argument = [];
 
     /**
      * @var string

@@ -25,7 +25,17 @@ class RouteListCommand extends Command
     /**
      * @var string
      */
-    protected $signature = 'route:list';
+    protected $command = 'route:list';
+
+    /**
+     * @var array
+     */
+    protected $options = [];
+
+    /**
+     * @var array
+     */
+    protected $argument = [];
 
     /**
      * @var string

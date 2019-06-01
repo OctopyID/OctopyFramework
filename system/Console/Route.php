@@ -24,12 +24,13 @@ class Route
     /**
      * @param string $command
      * @param array  $option
-     * @param mixed  $handler
+     * @param array  $argument
+     * @param string $handler
      * @param string $describe
      */
-    public function __construct(string $command, array $option, $handler, string $describe = '')
+    public function __construct(string $command, array $option, array $argument, $handler, string $describe)
     {
-        $this->data = compact('command', 'describe', 'option', 'handler');
+        $this->data = compact('command', 'describe', 'option', 'argument', 'handler');
     }
 
     /**
@@ -51,27 +52,36 @@ class Route
 
     /**
      * @param  mixed $handler
-     * @return $this
+     * @return Route
      */
-    public function handler($handler)
+    public function handler($handler) : Route
     {
         return $this->update('handler', $handler);
     }
 
     /**
      * @param  array $option
-     * @return $this
+     * @return Route
      */
-    public function option(array $option)
+    public function option(array $option) : Route
     {
         return $this->update('option', array_merge($this->data['option'], $option));
     }
 
     /**
-     * @param  string $describe
-     * @return $this
+     * @param  array  $argument
+     * @return Route
      */
-    public function describe(?string $describe)
+    public function argument(array $argument) : Route
+    {
+        return $this->update('argument', array_merge($this->data['argument'], $option));
+    }
+
+    /**
+     * @param  string $describe
+     * @return Route
+     */
+    public function describe(?string $describe) : Route
     {
         return $this->update('describe', trim($describe));
     }
@@ -79,9 +89,9 @@ class Route
     /**
      * @param  string $key
      * @param  mixed  $value
-     * @return $this
+     * @return Route
      */
-    protected function update(string $key, $value)
+    protected function update(string $key, $value) : Route
     {
         $this->data[$key] = $value;
 

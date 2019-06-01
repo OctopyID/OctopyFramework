@@ -24,7 +24,19 @@ class MakeMiddlewareCommand extends Command
     /**
      * @var string
      */
-    protected $signature = 'make:middleware';
+    protected $command = 'make:middleware';
+
+    /**
+     * @var array
+     */
+    protected $options = [];
+
+    /**
+     * @var array
+     */
+    protected $argument = [
+        'name' => 'The name of the class',
+    ];
 
     /**
      * @var string

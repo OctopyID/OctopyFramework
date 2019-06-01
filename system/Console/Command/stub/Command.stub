@@ -23,7 +23,17 @@ class DummyClassName extends Command
     /**
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $command = 'DummyCommandName';
+
+    /**
+     * @var array
+     */
+    protected $options = [];
+
+    /**
+     * @var array
+     */
+    protected $argument = [];
 
     /**
      * @var string

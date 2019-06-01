@@ -39,21 +39,21 @@ class ConsoleServiceProvider extends ServiceProvider
             $console->load('Console.php');
 
             // discover system command
-            $this->autodiscover();
+            $this->discover();
         }
     }
 
     /**
      * @return void
      */
-    private function autodiscover()
+    private function discover()
     {
-        $autodiscover = [
+        $discover = [
             'App\\Console\\Command\\' => $this->app['path']->app->console->command(),
             'Octopy\\Console\\Command\\' => $this->app['path']->system->console->command(),
         ];
 
-        foreach ($autodiscover as $namespace => $directory) {
+        foreach ($discover as $namespace => $directory) {
             foreach ($this->app['filesystem']->iterator($directory) as $row) {
                 if (substr($row->getFilename(), -4) !== '.php') {
                     continue;
@@ -65,7 +65,13 @@ class ConsoleServiceProvider extends ServiceProvider
 
                 $console = $this->app->make($class = $namespace . $class);
 
-                $this->app['console']->command($console->signature, $class)->describe($console->description);
+                $option = array_merge($console->options, [
+                    '-h, --help' => 'Display this help message',
+                ]);
+
+                $this->app['console']->command($console->command, $class, $option, $console->argument)->describe(
+                    $console->description
+                );
             }
         }
     }

@@ -23,7 +23,19 @@ class OctopyServeCommand extends Command
     /**
      * @var string
      */
-    protected $signature = 'serve';
+    protected $command = 'serve';
+
+    /**
+     * @var array
+     */
+    protected $option = [
+        '--port[=PORT]' => 'The port to serve the application on [default: 1337]',
+    ];
+
+    /**
+     * @var array
+     */
+    protected $argument = [];
 
     /**
      * @var string

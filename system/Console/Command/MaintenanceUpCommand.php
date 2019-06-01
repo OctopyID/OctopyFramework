@@ -23,7 +23,17 @@ class MaintenanceUpCommand extends Command
     /**
      * @var string
      */
-    protected $signature = 'maintenance:up';
+    protected $command = 'maintenance:up';
+
+    /**
+     * @var array
+     */
+    protected $options = [];
+
+    /**
+     * @var array
+     */
+    protected $argument = [];
 
     /**
      * @var string

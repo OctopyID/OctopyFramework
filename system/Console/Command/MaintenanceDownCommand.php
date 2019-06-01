@@ -24,7 +24,20 @@ class MaintenanceDownCommand extends Command
     /**
      * @var string
      */
-    protected $signature = 'maintenance:down';
+    protected $command = 'maintenance:down';
+
+    /**
+     * @var array
+     */
+    protected $options = [
+        '--message[=MESSAGE]' => 'The message for the maintenance mode',
+        '--allow[=ALLOW]'     => 'IP or networks allowed to access the application while in maintenance mode',
+    ];
+
+    /**
+     * @var array
+     */
+    protected $argument = [];
 
     /**
      * @var string
@@ -44,8 +57,8 @@ class MaintenanceDownCommand extends Command
         }
 
         $allowed = [];
-        if ($argv->get('--allowed')) {
-            $allowed = array_map('trim', explode(',', $argv->get('--allowed')));
+        if ($argv->get('--allow')) {
+            $allowed = array_map('trim', explode(',', $argv->get('--allow')));
         }
 
         try {

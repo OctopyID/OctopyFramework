@@ -37,14 +37,16 @@ class Console
     }
 
     /**
-     * @param string $command
-     * @param mixed  $handler
-     * @param array  $option
+     * @param  string $command
+     * @param  mixed  $handler
+     * @param  array  $option
+     * @param  array  $argument
+     * @return Route
      */
-    public function command(string $command, $handler = null, array $option = [])
+    public function command(string $command, $handler = null, array $option = [], array $argument = []) : Route
     {
         return $this->collection->set(
-            new Route($command, $option, $handler)
+            new Route($command, $option, $argument, $handler, '')
         );
     }
 
@@ -66,10 +68,14 @@ class Console
         $command = $input->command();
 
         if (is_null($command)) {
-            return $output->help();
+            return $output->list();
         }
 
         if ($this->has($command)) {
+            if ($input->get('-h') || $input->get('--help')) {
+                return $output->help($this->collection[$command]);
+            }
+
             return $this->call($command);
         }
 

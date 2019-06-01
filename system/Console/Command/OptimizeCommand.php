@@ -24,7 +24,17 @@ class OptimizeCommand extends Command
     /**
      * @var string
      */
-    protected $signature = 'optimize';
+    protected $command = 'optimize';
+
+    /**
+     * @var array
+     */
+    protected $options = [];
+
+    /**
+     * @var array
+     */
+    protected $argument = [];
 
     /**
      * @var string

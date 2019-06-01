@@ -94,49 +94,124 @@ class Output extends Color
     }
 
     /**
+     * @param  Route $route
      * @return string
      */
-    public function help() : string
+    public function help(Route $route) : string
     {
-        foreach (['system', 'shell_exec', 'exec'] as $function) {
-            if (function_exists($function)) {
-                $function('clear');
-                break;
+        $output  = $this->banner();
+
+        // description
+        $this->table->add(['header'], [
+            'header' => $this->yellow('Description :'),
+        ]);
+
+        $this->table->margin(3);
+        $this->table->add(['description'], [
+            'description' => $this->white($route->describe),
+        ]);
+
+        $this->table->margin(0);
+        $this->table->add(['margin'], [
+            'margin' => '',
+        ]);
+
+        // usage
+        $this->table->add(['usage'], [
+            'usage' => $this->yellow('Usage :'),
+        ]);
+
+        $this->table->margin(3);
+
+        $route->command .= ' [options]';
+        if (count($route->argument)) {
+            $route->command .= ' [--] ';
+
+            foreach ($route->argument as $argument => $description) {
+                $route->command .= "<$argument> ";
             }
         }
 
-        $vers = $this->app->version();
+        $this->table->add(['usage'], [
+            'usage' => $this->white($route->command),
+        ]);
 
-        $octopy[] = "   ___       _                     ";
-        $octopy[] = "  / _ \  ___| |_ ___  _ __  _   _  ";
-        $octopy[] = " | | | |/ __| __/ _ \| '_ \| | | | ";
-        $octopy[] = " | |_| | (__| || (_) | |_) | |_| | ";
-        $octopy[] = "  \___/ \___|\__\___/| .__/ \__, | ";
-        $octopy[] = "   www.octopy.xyz    |_|    |___/  ";
+        // for avoiding unnecessary whitespace
+        $output .= $this->table->render();
 
-        $output  = $this->yellow(implode("\n", $octopy)) . "\n";
+        // argument
+        if (count($route->argument) > 0) {
+            $this->table->margin(0);
+            $this->table->add(['margin'], [
+                'margin' => '',
+            ]);
+
+            $this->table->add(['argument'], [
+                'argument' => $this->yellow('Arguments :'),
+            ]);
+
+            $this->table->margin(3);
+            foreach ($route->argument as $argument => $description) {
+                $this->table->add(['argument', 'description'], [
+                    'argument'    => $this->green($argument),
+                    'description' => $this->white($description),
+                ]);
+            }
+        }
+
+        $this->table->margin(0);
+        $this->table->add(['margin'], [
+            'margin' => '',
+        ]);
+
+        // option
+        $this->table->add(['option'], [
+            'option' => $this->yellow('Options :'),
+        ]);
+
+        $this->table->margin(3);
+        foreach ($route->option as $option => $description) {
+            $description = preg_replace_callback('/\[(.*)\]/', function ($colored) {
+                return $this->yellow($colored[0]);
+            }, $description);
+
+            $this->table->add(['option', 'description'], [
+                'option'      => $this->green($option),
+                'description' => str_repeat(' ', 3) . $this->white($description),
+            ]);
+        }
+
+        return $output . $this->table->render();
+    }
+
+    /**
+     * @return string
+     */
+    public function list() : string
+    {
+        $output  = $this->banner();
         $output .= $this->white(' USAGE : command [options] [args]') . "\n";
 
         // Header
         $this->table->add(['header'], [
-            'header' => $this->yellow('Available Option :'),
+            'header' => $this->yellow('Available Options :'),
         ]);
 
         // Command without prefix
-        $rows = [];
+        $routes = [];
 
         $this->table->margin(3);
-        foreach ($this->app['console']->all() as $command => $row) {
+        foreach ($this->app['console']->all() as $command => $route) {
             if (substr($command, 0, 1) === '-' || substr($command, 0, 2) === '--') {
                 $this->table->add(['command', 'description'], [
                     'command'     => $this->green($command),
-                    'description' => $this->white($row->describe),
+                    'description' => $this->white($route->describe),
                 ]);
             } else {
                 if (strpos($command, ':') === false) {
-                    $rows[0][$command] = $row;
+                    $routes[0][$command] = $route;
                 } else {
-                    $rows[1][$command] = $row;
+                    $routes[1][$command] = $route;
                 }
             }
         }
@@ -147,21 +222,21 @@ class Output extends Color
         ]);
 
         $this->table->add(['header'], [
-            'header' => $this->yellow('Available Command :'),
+            'header' => $this->yellow('Available Commands :'),
         ]);
 
         $this->table->margin(3);
-        foreach ($rows[0] as $command => $row) {
+        foreach ($routes[0] as $command => $route) {
             $this->table->add(['command', 'description'], [
                 'command'     => $this->green($command),
-                'description' => $this->white($row->describe),
+                'description' => $this->white($route->describe),
             ]);
         }
 
-        asort($rows);
-        if (! empty($rows[1])) {
+        asort($routes);
+        if (! empty($routes[1])) {
             $group = [];
-            foreach ($rows[1] as $command => $row) {
+            foreach ($routes[1] as $command => $route) {
                 [$prefix] = explode(':', $command);
 
                 if (! in_array($prefix, $group)) {
@@ -176,7 +251,7 @@ class Output extends Color
                 $this->table->margin(3);
                 $this->table->add(['command', 'description'], [
                     'command'     => $this->green($command),
-                    'description' => $this->white($row->describe),
+                    'description' => $this->white($route->describe),
                 ]);
             }
         }
@@ -230,5 +305,29 @@ class Output extends Color
         }
 
         return $this->format('<b:red><c:white>' . implode("\n", $error));
+    }
+
+    /**
+     * @return string
+     */
+    private function banner() : string
+    {
+        foreach (['system', 'shell_exec', 'exec'] as $shell) {
+            if (function_exists($shell)) {
+                $shell('clear');
+                break;
+            }
+        }
+
+        $octopy[] = "   ___       _                     ";
+        $octopy[] = "  / _ \  ___| |_ ___  _ __  _   _  ";
+        $octopy[] = " | | | |/ __| __/ _ \| '_ \| | | | ";
+        $octopy[] = " | |_| | (__| || (_) | |_) | |_| | ";
+        $octopy[] = "  \___/ \___|\__\___/| .__/ \__, | ";
+        $octopy[] = "   www.octopy.xyz    |_|    |___/  ";
+        $octopy[] = "";
+
+
+        return $this->yellow(implode("\n", $octopy));
     }
 }

@@ -27,12 +27,22 @@ abstract class Command
     /**
      * @var string
      */
-    protected $signature = '';
+    protected $command;
+
+    /**
+     * @var array
+     */
+    protected $options = [];
+
+    /**
+     * @var array
+     */
+    protected $argument = [];
 
     /**
      * @var string
      */
-    protected $description = '';
+    protected $description;
 
     /**
      * @param Application $app

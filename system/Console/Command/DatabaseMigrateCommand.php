@@ -23,7 +23,20 @@ class DatabaseMigrateCommand extends Command
     /**
      * @var string
      */
-    protected $signature = 'database:migrate';
+    protected $command = 'database:migrate';
+
+    /**
+     * @var array
+     */
+    protected $options = [
+        '-s, --seed'    => 'Seed the database with record',
+        '-r, --refresh' => 'Reset and re-run all migrations',
+    ];
+
+    /**
+     * @var array
+     */
+    protected $argument = [];
 
     /**
      * @var string
@@ -78,7 +91,7 @@ class DatabaseMigrateCommand extends Command
                 return $output->warning('Nothing to migrate.');
             }
 
-            // Rollingback
+            // refresh
             if ($argv->get('-r') || $argv->get('--refresh')) {
                 foreach ($migration as $data) {
                     $this->drop($output, $data);

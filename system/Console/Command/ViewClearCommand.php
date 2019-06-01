@@ -23,7 +23,17 @@ class ViewClearCommand extends Command
     /**
      * @var string
      */
-    protected $signature = 'view:clear';
+    protected $command = 'view:clear';
+
+    /**
+     * @var array
+     */
+    protected $options = [];
+
+    /**
+     * @var array
+     */
+    protected $argument = [];
 
     /**
      * @var string

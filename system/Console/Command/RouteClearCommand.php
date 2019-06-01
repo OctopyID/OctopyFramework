@@ -23,7 +23,17 @@ class RouteClearCommand extends Command
     /**
      * @var string
      */
-    protected $signature = 'route:clear';
+    protected $command = 'route:clear';
+
+    /**
+     * @var array
+     */
+    protected $options = [];
+
+    /**
+     * @var array
+     */
+    protected $argument = [];
 
     /**
      * @var string

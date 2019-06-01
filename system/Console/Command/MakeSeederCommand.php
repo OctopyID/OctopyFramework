@@ -24,7 +24,19 @@ class MakeSeederCommand extends Command
     /**
      * @var string
      */
-    protected $signature = 'make:seeder';
+    protected $command = 'make:seeder';
+
+    /**
+     * @var array
+     */
+    protected $options = [];
+
+    /**
+     * @var array
+     */
+    protected $argument = [
+        'name' => 'The name of the class',
+    ];
 
     /**
      * @var string

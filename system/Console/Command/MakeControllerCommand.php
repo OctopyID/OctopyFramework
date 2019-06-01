@@ -24,7 +24,19 @@ class MakeControllerCommand extends Command
     /**
      * @var string
      */
-    protected $signature = 'make:controller';
+    protected $command = 'make:controller';
+
+    /**
+     * @var array
+     */
+    protected $options = [];
+
+    /**
+     * @var array
+     */
+    protected $argument = [
+        'name' => 'The name of the class',
+    ];
 
     /**
      * @var string

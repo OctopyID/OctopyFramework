@@ -23,7 +23,19 @@ class DatabaseSeedingCommand extends Command
     /**
      * @var string
      */
-    protected $signature = 'database:seed';
+    protected $command = 'database:seed';
+
+    /**
+     * @var array
+     */
+    protected $options = [
+        '--seed[=CLASS]' => 'The class name of the root seeder [default: "DatabaseSeeder"]',
+    ];
+
+    /**
+     * @var array
+     */
+    protected $argument = [];
 
     /**
      * @var string

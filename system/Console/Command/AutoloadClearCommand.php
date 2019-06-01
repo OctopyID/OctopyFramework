@@ -23,7 +23,17 @@ class AutoloadClearCommand extends Command
     /**
      * @var string
      */
-    protected $signature = 'autoload:clear';
+    protected $command = 'autoload:clear';
+
+    /**
+     * @var array
+     */
+    protected $options = [];
+
+    /**
+     * @var array
+     */
+    protected $argument = [];
 
     /**
      * @var string

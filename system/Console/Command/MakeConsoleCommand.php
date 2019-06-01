@@ -24,7 +24,21 @@ class MakeConsoleCommand extends Command
     /**
      * @var string
      */
-    protected $signature = 'make:command';
+    protected $command = 'make:command';
+
+    /**
+     * @var array
+     */
+    protected $options = [
+        '--command[=COMMAND]' => 'The terminal command that should be assigned [default: "command:name"]',
+    ];
+
+    /**
+     * @var array
+     */
+    protected $argument = [
+        'name' => 'The name of the class',
+    ];
 
     /**
      * @var string
@@ -48,8 +62,14 @@ class MakeConsoleCommand extends Command
             return $output->warning('Command already exists.');
         }
 
+
+        if (! ($command = $argv->get('--command'))) {
+            $command = 'command:name';
+        }
+
         $data = [
             'DummyClassName' => $parsed['classname'],
+            'DummyCommandName' => $command,
         ];
 
         if ($this->generate($location, 'Command', $data)) {

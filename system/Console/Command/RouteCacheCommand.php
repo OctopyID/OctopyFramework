@@ -26,7 +26,17 @@ class RouteCacheCommand extends Command
     /**
      * @var string
      */
-    protected $signature = 'route:cache';
+    protected $command = 'route:cache';
+
+    /**
+     * @var array
+     */
+    protected $options = [];
+
+    /**
+     * @var array
+     */
+    protected $argument = [];
 
     /**
      * @var string

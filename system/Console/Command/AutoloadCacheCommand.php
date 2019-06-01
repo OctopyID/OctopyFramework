@@ -24,7 +24,17 @@ class AutoloadCacheCommand extends Command
     /**
      * @var string
      */
-    protected $signature = 'autoload:cache';
+    protected $command = 'autoload:cache';
+
+    /**
+     * @var array
+     */
+    protected $options = [];
+
+    /**
+     * @var array
+     */
+    protected $argument = [];
 
     /**
      * @var string

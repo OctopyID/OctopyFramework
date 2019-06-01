@@ -23,7 +23,17 @@ class DatabaseRefreshCommand extends Command
     /**
      * @var string
      */
-    protected $signature = 'database:refresh';
+    protected $command = 'database:refresh';
+
+    /**
+     * @var array
+     */
+    protected $options = [];
+
+    /**
+     * @var array
+     */
+    protected $argument = [];
 
     /**
      * @var string

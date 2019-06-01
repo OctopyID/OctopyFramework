@@ -23,7 +23,17 @@ class ViewCacheCommand extends Command
     /**
      * @var string
      */
-    protected $signature = 'view:cache';
+    protected $command = 'view:cache';
+
+    /**
+     * @var array
+     */
+    protected $options = [];
+
+    /**
+     * @var array
+     */
+    protected $argument = [];
 
     /**
      * @var string

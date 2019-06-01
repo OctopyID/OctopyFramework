@@ -24,7 +24,19 @@ class MakeModelCommand extends Command
     /**
      * @var string
      */
-    protected $signature = 'make:model';
+    protected $command = 'make:model';
+
+    /**
+     * @var array
+     */
+    protected $options = [];
+
+    /**
+     * @var array
+     */
+    protected $argument = [
+        'name' => 'The name of the class',
+    ];
 
     /**
      * @var string
