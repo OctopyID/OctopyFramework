@@ -38,7 +38,7 @@ class AutoloaderTest extends TestCase
     /**
      * @return void
      */
-    public function testServiceAutoLoaderFromShareInstance()
+    public function testServiceAutoLoaderFromShareInstance() : void
     {
         $actual = $this->loader->load('App\HTTP\Controller');
         $expect = $this->app->basepath('app/HTTP/Controller/Controller.php');
@@ -49,7 +49,7 @@ class AutoloaderTest extends TestCase
     /**
      * @return void
      */
-    public function testAddNamespaceStringToArray()
+    public function testAddNamespaceStringToArray() : void
     {
         $this->loader->namespace('Testing', 'testing');
 
@@ -59,7 +59,7 @@ class AutoloaderTest extends TestCase
     /**
      * @return void
      */
-    public function testRemoveNamespace()
+    public function testRemoveNamespace() : void
     {
         $this->testAddNamespaceStringToArray();
 
@@ -83,7 +83,7 @@ class AutoloaderTest extends TestCase
     /**
      * @return void
      */
-    public function testMissingFile()
+    public function testMissingFile() : void
     {
         $this->assertFalse(
             $this->loader->load('\App\Missing\Classname')

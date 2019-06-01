@@ -12,7 +12,7 @@
  * @license : MIT
  */
 
-Console::command('inspire', function (Octopy\Console\Output $output) {
+Console::command('inspire', static function (Octopy\Console\Output $output) {
     return $output->comment(
         Octopy\Stuff\Inspiring::quote()
     );

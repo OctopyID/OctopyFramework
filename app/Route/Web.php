@@ -12,6 +12,8 @@
  * @license : MIT
  */
 
-Route::get('/', function (Octopy\HTTP\Response $response) {
+use Octopy\HTTP\Response;
+
+Route::get('/', static function (Response $response) {
     return $response->view('welcome', [], 200);
 });

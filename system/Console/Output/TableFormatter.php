@@ -110,7 +110,7 @@ class TableFormatter
 
         $this->table .= $this->line;
 
-        return $this->table;
+        return rtrim($this->table, "\n");
     }
 
     /**

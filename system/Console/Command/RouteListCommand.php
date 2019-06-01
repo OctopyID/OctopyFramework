@@ -39,7 +39,7 @@ class RouteListCommand extends Command
      */
     public function handle(Argv $argv, Output $output)
     {
-        $color = function ($text) use ($output) {
+        $color = static function ($text) use ($output) {
             return rtrim($output->format('<c:green>' . $text), "\n");
         };
 
@@ -58,7 +58,7 @@ class RouteListCommand extends Command
                 $action = $row->controller instanceof Closure ? 'Closure' : $row->controller;
 
                 $data[$uri] = [
-                    $color('Method')     => $color(implode('|', $row->method)),
+                    $color('Method')     => $color(implode(' & ', $row->method)),
                     $color('URI')        => $color($uri),
                     $color('Name')       => $color($row->name),
                     $color('Action')     => $color($action),

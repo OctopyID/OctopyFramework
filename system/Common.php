@@ -204,3 +204,15 @@ if (! function_exists('value')) {
         return $value instanceof Closure ? $value() : $value;
     }
 }
+
+if (! function_exists('view')) {
+    /**
+     * @param  string $name
+     * @param  array  $parameter
+     * @return string
+     */
+    function view(string $name, array $parameter = []) : string
+    {
+        return App::make('view')->render($name, $parameter);
+    }
+}

@@ -23,7 +23,7 @@ class ApplicationTest extends TestCase
     /**
      * @return void
      */
-    public function testAppCreated()
+    public function testAppCreated() : void
     {
         $this->assertInstanceOf(Application::class, $this->app);
     }

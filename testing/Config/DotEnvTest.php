@@ -41,7 +41,7 @@ class DotEnvTest extends TestCase
     /**
      * @return void
      */
-    public function testReturnFalseIfCannotFindFile()
+    public function testReturnFalseIfCannotFindFile() : void
     {
         $this->assertFalse((new DotEnv(__DIR__, 'notfound'))->load());
     }
@@ -49,7 +49,7 @@ class DotEnvTest extends TestCase
     /**
      * @return void
      */
-    public function testSpacedValueWithoutQuotesThrowException()
+    public function testSpacedValueWithoutQuotesThrowException() : void
     {
         $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('.env values containing spaces must be surrounded by quotes.');
@@ -60,7 +60,7 @@ class DotEnvTest extends TestCase
     /**
      * @return void
      */
-    public function testLoadVar()
+    public function testLoadVar() : void
     {
         $this->assertEquals('', getenv('NULL'));
         $this->assertEquals('bar', getenv('FOO'));
@@ -71,7 +71,7 @@ class DotEnvTest extends TestCase
     /**
      * @return void
      */
-    public function testCommentedLoadVar()
+    public function testCommentedLoadVar() : void
     {
         $this->assertFalse(getenv('CBAR'));
         $this->assertFalse(getenv('CZOO'));
@@ -86,7 +86,7 @@ class DotEnvTest extends TestCase
     /**
      * @return void
      */
-    public function testLoadServerGlobal()
+    public function testLoadServerGlobal() : void
     {
         $this->assertEquals('', $_SERVER['NULL']);
         $this->assertEquals('bar', $_SERVER['FOO']);
@@ -97,7 +97,7 @@ class DotEnvTest extends TestCase
     /**
      * @return void
      */
-    public function testNestedEnvironmentVar()
+    public function testNestedEnvironmentVar() : void
     {
         $this->assertEquals('Hello World!', $_ENV['NVAR4']);
         $this->assertEquals('$NVAR1 {NVAR2}', $_ENV['NVAR5']);
@@ -107,7 +107,7 @@ class DotEnvTest extends TestCase
     /**
      * @return void
      */
-    public function testDotenvAllowSpecialCharacter()
+    public function testDotenvAllowSpecialCharacter() : void
     {
         $this->assertEquals('22222:22#2^{', getenv('SPVAR4'));
         $this->assertEquals('$a6^C7k%zs+e^.jvjXk', getenv('SPVAR1'));

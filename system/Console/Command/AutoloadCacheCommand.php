@@ -38,6 +38,28 @@ class AutoloadCacheCommand extends Command
      */
     public function handle(Argv $argv, Output $output)
     {
+        $classmap = $this->classmap();
+
+        try {
+            $cache = $this->app['path']->writeable('autoload.php');
+
+            // we encrypting the content to confused attacker,
+            // because sometimes there's contains a sensitive contents
+            $encrypted = $this->app['encrypter']->encrypt($classmap);
+
+            if ($this->generate($cache, 'Cache', ['SerializedContent' => $encrypted])) {
+                return $output->success('Autoload cached successfully.');
+            }
+        } catch (Exception $exception) {
+            return $output->error('Failed generating autoload cache.');
+        }
+    }
+
+    /**
+     * @return array
+     */
+    private function classmap() : array
+    {
         $basepath = $this->app->basepath();
 
         // pattern for skipping vendor files
@@ -63,18 +85,6 @@ class AutoloadCacheCommand extends Command
             }
         }
 
-        try {
-            $cache = $this->app['path']->writeable('autoload.php');
-
-            // we encrypting the content to confused attacker,
-            // because sometimes there's contains a sensitive contents
-            $encrypted = $this->app['encrypter']->encrypt($classmap);
-
-            if ($this->generate($cache, 'Cache', ['SerializedContent' => $encrypted])) {
-                return $output->success('Autoload cached successfully.');
-            }
-        } catch (Exception $exception) {
-            return $output->error('Failed generating autoload cache.');
-        }
+        return $classmap;
     }
 }

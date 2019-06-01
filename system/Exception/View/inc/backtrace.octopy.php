@@ -50,7 +50,7 @@
 		&nbsp;&nbsp;&mdash;&nbsp;&nbsp;{{ $row['function'] }}()
 	@endif
 	</p>@if(isset($row['file']) && is_file($row['file']) &&  isset($row['class']))
-		{{{ $app->syntax->highlight($row['file'], $row['line'], '2:2') }}}
+		{{{ $app->syntax->highlight($row['file'], $row['line'], '3:3') }}}
 	@endif</li>
 @endforeach
 </ol>
