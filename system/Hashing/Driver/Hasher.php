@@ -32,7 +32,7 @@ abstract class Hasher
      */
     public function verify($value, $hashed) : bool
     {
-        if (strlen($hashed) === 0) {
+        if (mb_strlen($hashed) === 0) {
             return false;
         }
 

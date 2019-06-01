@@ -174,7 +174,7 @@ class Router
     public function set(array $method, string $uri, $controller)
     {
         // Method
-        $method = array_map('strtoupper', $method);
+        $method = array_map('mb_strtoupper', $method);
 
         // URI
         if (isset($this->group['prefix'])) {
@@ -187,7 +187,7 @@ class Router
             $uri = rtrim($uri, DS);
         }
 
-        if (substr($uri, 0, 1) !== DS) {
+        if (mb_substr($uri, 0, 1) !== DS) {
             $uri = DS . $uri;
         }
 

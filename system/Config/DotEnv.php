@@ -50,13 +50,13 @@ class DotEnv
         $lines = file($this->path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
         foreach ($lines as $line) {
-            if (strpos(trim($line), '#') === 0) {
+            if (mb_strpos(trim($line), '#') === 0) {
                 continue;
             }
 
             // If there is an equal sign, then we know we
             // are assigning a variable.
-            if (strpos($line, '=') !== false) {
+            if (mb_strpos($line, '=') !== false) {
                 $this->set($line);
             }
         }
@@ -102,7 +102,7 @@ class DotEnv
             return $default;
         }
 
-        switch (strtolower($value)) {
+        switch (mb_strtolower($value)) {
             case 'true':
                 return true;
             case 'false':
@@ -131,7 +131,7 @@ class DotEnv
      */
     protected function normalize(string $key, string $value = '') : array
     {
-        if (strpos($key, '=') !== false) {
+        if (mb_strpos($key, '=') !== false) {
             [$key, $value] = explode('=', $key, 2);
         }
 
@@ -199,7 +199,7 @@ class DotEnv
      */
     protected function nested(string $value) : string
     {
-        if (strpos($value, '$') !== false) {
+        if (mb_strpos($value, '$') !== false) {
             $loader = $this;
 
             $value = preg_replace_callback('/\${([a-zA-Z0-9_]+)}/', static function ($matched) use ($loader) {

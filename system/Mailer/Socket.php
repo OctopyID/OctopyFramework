@@ -125,13 +125,13 @@ class Socket
     private function parse($sock, int $response)
     {
         $search = '';
-        while (substr($search, 3, 1) !== ' ') {
+        while (mb_substr($search, 3, 1) !== ' ') {
             if (! ($search = fgets($sock, 256))) {
                 return false;
             }
         }
 
-        if (substr($search, 0, 3) !== $response) {
+        if (mb_substr($search, 0, 3) !== $response) {
             return false;
         }
 

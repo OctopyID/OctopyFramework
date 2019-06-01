@@ -67,12 +67,12 @@ class Parser
 
         // Unescaped output parser adapted from Laravel Blade
         $source = preg_replace_callback('/(@)?{{{\s*(.+?)\s*}}}?/s', static function ($match) {
-            return $match[1] ? substr($match[0], 1) : sprintf('<?php echo %s; ?>', $match[2]);
+            return $match[1] ? mb_substr($match[0], 1) : sprintf('<?php echo %s; ?>', $match[2]);
         }, $source);
 
         // Escaped output parser adapted from Laravel Blade
         $source = preg_replace_callback('/(@)?{{\s*(.+?)\s*}}?/s', static function ($match) {
-            return $match[1] ? substr($match[0], 1) : sprintf('<?php echo $this->escape(%s); ?>', $match[2]);
+            return $match[1] ? mb_substr($match[0], 1) : sprintf('<?php echo $this->escape(%s); ?>', $match[2]);
         }, $source);
 
         $compiled = '';

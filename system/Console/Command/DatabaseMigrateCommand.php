@@ -80,7 +80,7 @@ class DatabaseMigrateCommand extends Command
                     continue;
                 }
 
-                $class = '\\App\\DB\\Migration\\' . ($file = substr($row->getFilename(), 0, -4));
+                $class = '\\App\\DB\\Migration\\' . ($file = mb_substr($row->getFilename(), 0, -4));
                 $migration[ $class::$timestamp ] = [
                     'name'  => $file,
                     'class' => $class,

@@ -70,7 +70,7 @@ class Stream
     public function expression() : string
     {
         if (strstr($this->expression, '(')) {
-            return substr($this->expression, 1, -1);
+            return mb_substr($this->expression, 1, -1);
         }
 
         return $this->expression;

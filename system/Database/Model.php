@@ -64,7 +64,7 @@ class Model implements IteratorAggregate, JsonSerializable
             $db->table($this->table);
         } else {
             $model = explode(BS, static::class);
-            $db->table(strtolower(end($model)));
+            $db->table(mb_strtolower(end($model)));
         }
 
         return $db->$method(...$args);
@@ -95,7 +95,7 @@ class Model implements IteratorAggregate, JsonSerializable
             $db->table($instance->table);
         } else {
             $model = explode(BS, $model);
-            $db->table(strtolower(end($model)));
+            $db->table(mb_strtolower(end($model)));
         }
 
         return $db->where($foreign, $this->$primary);

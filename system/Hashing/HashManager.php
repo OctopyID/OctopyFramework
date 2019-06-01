@@ -51,7 +51,7 @@ class HashManager
      */
     public function driver(string $driver = null)
     {
-        $driver = strtolower($driver ?? $this->app['config']['hashing.driver']);
+        $driver = mb_strtolower($driver ?? $this->app['config']['hashing.driver']);
 
         if ($this->hasher && $this->driver === $driver) {
             return $this->hasher;

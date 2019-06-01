@@ -30,7 +30,7 @@ class RegisterServiceProvider
 
         // register service provider
         usort($array['provider'], static function ($provider) {
-            return substr($provider, 0, 3) === 'App';
+            return mb_substr($provider, 0, 3) === 'App';
         });
 
         $array['provider'] = array_merge(['Octopy\Provider\EncryptionServiceProvider'], $array['provider']);

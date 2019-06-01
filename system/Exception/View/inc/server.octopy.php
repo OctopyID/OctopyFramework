@@ -12,10 +12,10 @@
 	@foreach ($GLOBALS[$var] as $key => $value)
 		@php
 			if($var === '_SERVER') {
-				$key = strtoupper(str_replace('-', '_', $key));
+				$key = mb_strtoupper(str_replace('-', '_', $key));
 				
 				if(preg_match('/PASSWORD/i', $key)) {
-					$value = preg_replace('/(.*)/', str_repeat('*', strlen($value)), $value);
+					$value = preg_replace('/(.*)/', str_repeat('*', mb_strlen($value)), $value);
 				}
 			}
 		@endphp

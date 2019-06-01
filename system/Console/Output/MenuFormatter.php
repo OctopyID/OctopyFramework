@@ -70,7 +70,7 @@ class MenuFormatter
         $column = [];
         foreach ($this->data as $rkey => $row) {
             foreach ($row as $ckey => $cell) {
-                $length = strlen($cell);
+                $length = mb_strlen($cell);
                 if (empty($column[$ckey]) || $column[$ckey] < $length) {
                     $column[$ckey] = $length;
                 }

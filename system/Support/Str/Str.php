@@ -89,7 +89,7 @@ class Str
      */
     public static function lower($value)
     {
-        return mb_strtolower($value, 'UTF-8');
+        return mb_mb_strtolower($value, 'UTF-8');
     }
 
     /**
@@ -117,12 +117,12 @@ class Str
     {
         $string = '';
 
-        while (($len = strlen($string)) < $length) {
+        while (($len = mb_strlen($string)) < $length) {
             $size = $length - $len;
 
             $bytes = random_bytes($size);
 
-            $string .= substr(str_replace(['/', '+', '='], '', base64_encode($bytes)), 0, $size);
+            $string .= mb_substr(str_replace(['/', '+', '='], '', base64_encode($bytes)), 0, $size);
         }
 
         return $string;
@@ -134,7 +134,7 @@ class Str
      */
     public static function upper($value)
     {
-        return mb_strtoupper($value, 'UTF-8');
+        return mb_mb_strtoupper($value, 'UTF-8');
     }
 
     /**

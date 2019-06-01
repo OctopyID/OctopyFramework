@@ -256,7 +256,7 @@ class Color
         if (DIRECTORY_SEPARATOR === '\\') {
             return function_exists('sapi_windows_vt100_support') && sapi_windows_vt100_support(STDOUT);
         } else {
-            return strpos(getenv('TERM'), '256color') !== false;
+            return mb_strpos(getenv('TERM'), '256color') !== false;
         }
     }
 

@@ -73,7 +73,7 @@ class HTMLParser
      */
     private function slice(string $source, int $marker, string $offset = null) : array
     {
-        if ($offset && strpos($offset, ':')) {
+        if ($offset && mb_strpos($offset, ':')) {
             [$before, $after] = explode(':', $offset, 2);
             $offset = max($marker - $before - 1, 0);
             $length = $after + $before + 1;

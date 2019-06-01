@@ -89,7 +89,7 @@ class Storage extends FileSystem
      */
     public function octopy() : bool
     {
-        return substr($this->template, -11) === '.octopy.php' || substr($this->template, -7) === '.octopy';
+        return mb_substr($this->template, -11) === '.octopy.php' || mb_substr($this->template, -7) === '.octopy';
     }
 
     /**

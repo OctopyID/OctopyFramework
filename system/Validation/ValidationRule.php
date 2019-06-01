@@ -70,7 +70,7 @@ trait ValidationRule
                 ]);
             }
         } elseif (is_string($value) || is_null($value)) {
-            $length = strlen($value);
+            $length = mb_strlen($value);
             if (($length >= $min && $length <= $max) === false) {
                 return $this->format('The `:attribute` must be between :min and :max characters.', [
                     ':min'       => $min,
@@ -210,7 +210,7 @@ trait ValidationRule
                 ]);
             }
         } elseif (is_string($value) || is_null($value)) {
-            if ((strlen($value) < $max) === false) {
+            if ((mb_strlen($value) < $max) === false) {
                 return $this->format('The `:attribute` may not be greater than :max characters.', [
                     ':max'       => $max,
                     ':attribute' => $attribute,
@@ -250,7 +250,7 @@ trait ValidationRule
                 ]);
             }
         } elseif (is_string($value) || is_null($value)) {
-            if ((strlen($value) > $min) === false) {
+            if ((mb_strlen($value) > $min) === false) {
                 return $this->format('The `:attribute` must be at least :min characters.', [
                     ':min'       => $min,
                     ':attribute' => $attribute,

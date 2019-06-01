@@ -42,7 +42,7 @@ class Argv
                 } else {
                     $this->option[$array[0]] = true;
                 }
-            } elseif (preg_match('/^-(.*?)/', $value) && strlen($value) === 2) {
+            } elseif (preg_match('/^-(.*?)/', $value) && mb_strlen($value) === 2) {
                 $this->option[$value] = $argv[$i + 1] ?? true;
             } elseif (! array_key_exists('value', $this->option)) {
                 $this->option['value'] = $value;

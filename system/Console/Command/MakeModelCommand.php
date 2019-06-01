@@ -61,7 +61,7 @@ class MakeModelCommand extends Command
         }
 
         if (($table = $argv->get('-t')) === false && ($table = $argv->get('--table')) === false) {
-            $table = strtolower($parsed['classname']);
+            $table = mb_strtolower($parsed['classname']);
         }
 
         $data = [

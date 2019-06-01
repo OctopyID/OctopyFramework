@@ -242,7 +242,7 @@ class Request
      */
     public function ajax() : bool
     {
-        return strtoupper($this->server('HTTP_X_REQUESTED_WITH')) === 'XMLHTTPREQUEST';
+        return mb_strtoupper($this->server('HTTP_X_REQUESTED_WITH')) === 'XMLHTTPREQUEST';
     }
 
     /**
@@ -256,7 +256,7 @@ class Request
             if (preg_match('/\AHTTP_/', $key)) {
                 $name  = preg_replace('/\AHTTP_/', '', $key);
                 $match = explode('_', $name);
-                if (count($match) > 0 and strlen($name) > 2) {
+                if (count($match) > 0 and mb_strlen($name) > 2) {
                     foreach ($match as $subkey => $subvalue) {
                         $match[$subkey] = ucfirst($subvalue);
                     }
@@ -264,7 +264,7 @@ class Request
                     $name = implode('-', $match);
                 }
 
-                $header[ucwords(strtolower($name), '-')] = $val;
+                $header[ucwords(mb_strtolower($name), '-')] = $val;
             }
         }
 

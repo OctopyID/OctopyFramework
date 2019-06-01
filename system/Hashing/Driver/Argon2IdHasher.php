@@ -29,7 +29,7 @@ class Argon2IdHasher extends ArgonHasher
             throw new RuntimeException('This password does not use the Argon2id algorithm.');
         }
 
-        if (strlen($hashed) === 0) {
+        if (mb_strlen($hashed) === 0) {
             return false;
         }
 
@@ -39,7 +39,7 @@ class Argon2IdHasher extends ArgonHasher
     /**
      * @return int
      */
-    protected function algorithm()
+    protected function algorithm() : int
     {
         return PASSWORD_ARGON2ID;
     }

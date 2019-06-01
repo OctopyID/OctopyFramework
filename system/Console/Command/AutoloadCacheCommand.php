@@ -84,8 +84,8 @@ class AutoloadCacheCommand extends Command
                 continue;
             }
 
-            if (substr($splfile->getFilename(), -4) === '.php') {
-                $classname = preg_replace(['/^system/', '/^app/'], ['Octopy', 'App'], implode('\\', array_unique(explode('/', str_replace($basepath, '', substr($splfile = $splfile->getRealpath(), 0, -4))))));
+            if (mb_substr($splfile->getFilename(), -4) === '.php') {
+                $classname = preg_replace(['/^system/', '/^app/'], ['Octopy', 'App'], implode('\\', array_unique(explode('/', str_replace($basepath, '', mb_substr($splfile = $splfile->getRealpath(), 0, -4))))));
 
                 if (! preg_match('/^Octopy|^App/', $classname)) {
                     continue;

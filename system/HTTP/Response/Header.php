@@ -55,7 +55,7 @@ class Header
         }
 
         ksort($header);
-        $max = max(array_map('strlen', array_keys($header))) + 1;
+        $max = max(array_map('mb_strlen', array_keys($header))) + 1;
         $content = '';
         foreach ($header as $name => $value) {
             $name = ucwords($name, '-');

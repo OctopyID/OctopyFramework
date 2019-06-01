@@ -137,7 +137,7 @@ class VarDumper
      */
     public function __construct()
     {
-        if (substr(PHP_SAPI, 0, 3) === 'cli') {
+        if (mb_substr(PHP_SAPI, 0, 3) === 'cli') {
             $this->console = true;
             $this->posix = $this->posix();
         }
@@ -175,7 +175,7 @@ class VarDumper
      */
     protected function windows() : bool
     {
-        return (defined('PHP_OS') && (substr_compare(PHP_OS, 'win', 0, 3, true) === 0)) || (getenv('OS') !== false && substr_compare(getenv('OS'), 'windows', 0, 7, true));
+        return (defined('PHP_OS') && (mb_substr_compare(PHP_OS, 'win', 0, 3, true) === 0)) || (getenv('OS') !== false && mb_substr_compare(getenv('OS'), 'windows', 0, 7, true));
     }
 
     /**
@@ -440,7 +440,7 @@ class VarDumper
                         $each = nl2br(str_replace(['<', ' '], ['&lt;', '&nbsp;'], $each));
                     }
 
-                    $temporary .=  $this->color("'{$each}'", $type) . " {$this->counter(strlen($each), 1)}{$this->type($type)}";
+                    $temporary .=  $this->color("'{$each}'", $type) . " {$this->counter(mb_strlen($each), 1)}{$this->type($type)}";
                     break;
                 case 'int':
                     $temporary .=  "{$this->color((string) $each, $type)}{$this->type($type)}";

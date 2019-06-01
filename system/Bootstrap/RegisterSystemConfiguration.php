@@ -69,7 +69,7 @@ class RegisterSystemConfiguration
                 continue;
             }
 
-            $key = strtolower(substr($row->getFilename(), 0, -4));
+            $key = mb_strtolower(mb_substr($row->getFilename(), 0, -4));
 
             $config[$key] = require $row->getRealpath();
         }

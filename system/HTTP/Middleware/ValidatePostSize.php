@@ -45,7 +45,7 @@ class ValidatePostSize
             return (int) $size;
         }
 
-        $metric = strtoupper(substr($size, -1));
+        $metric = mb_strtoupper(mb_substr($size, -1));
 
         switch ($metric) {
             case 'K':

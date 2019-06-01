@@ -23,7 +23,7 @@
 			<table cellspacing="0">
 			@php
 				$params = null;
-				if (substr($row['function'], -1) !== '}') {
+				if (mb_substr($row['function'], -1) !== '}') {
 					$mirror = isset($row['class']) ? new \ReflectionMethod($row['class'], $row['function']) : new \ReflectionFunction($row['function']);
 					$params = $mirror->getParameters();
 				}

@@ -196,7 +196,7 @@ class Arr
             return $array[$key];
         }
 
-        if (strpos($key, '.') === false) {
+        if (mb_strpos($key, '.') === false) {
             return $array[$key] ?? value($default);
         }
 

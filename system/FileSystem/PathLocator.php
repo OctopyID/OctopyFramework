@@ -82,7 +82,7 @@ class PathLocator
 
         if (isset($additional[0])) {
             $this->subpath[] = $additional[0];
-            if (! preg_match('/\.(' . implode('|', $this->extension) . ')/', strtolower($additional[0]))) {
+            if (! preg_match('/\.(' . implode('|', $this->extension) . ')/', mb_strtolower($additional[0]))) {
                 $this->subpath[] = '/';
             }
         } else {

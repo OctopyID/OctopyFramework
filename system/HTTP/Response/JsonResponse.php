@@ -51,7 +51,7 @@ class JsonResponse extends Response
                 throw new InvalidArgumentException(json_last_error_msg());
             }
         } catch (Exception $exception) {
-            if (get_class($exception) === 'Exception' && strpos($exception->getMessage(), 'Failed calling ') === 0) {
+            if (get_class($exception) === 'Exception' && mb_strpos($exception->getMessage(), 'Failed calling ') === 0) {
                 throw $exception->getPrevious() ? : $exception;
             }
 

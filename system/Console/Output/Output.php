@@ -202,13 +202,13 @@ class Output extends Color
 
         $this->table->margin(3);
         foreach ($this->app['console']->all() as $command => $route) {
-            if (substr($command, 0, 1) === '-' || substr($command, 0, 2) === '--') {
+            if (mb_substr($command, 0, 1) === '-' || mb_substr($command, 0, 2) === '--') {
                 $this->table->add(['command', 'description'], [
                     'command'     => $this->green($command),
                     'description' => $this->white($route->describe),
                 ]);
             } else {
-                if (strpos($command, ':') === false) {
+                if (mb_strpos($command, ':') === false) {
                     $routes[0][$command] = $route;
                 } else {
                     $routes[1][$command] = $route;
@@ -265,12 +265,12 @@ class Output extends Color
      */
     public function undefined(string $command) : string
     {
-        if (substr($command, 0, 2) === '--') {
+        if (mb_substr($command, 0, 2) === '--') {
             return $this->error(sprintf('The "%s" option does not exist.', $command));
         }
 
         $list = array_filter($this->app['console']->all(), static function ($key) {
-            return substr($key, 0, 2) !== '--';
+            return mb_substr($key, 0, 2) !== '--';
         }, ARRAY_FILTER_USE_KEY);
 
         $possible = [];
@@ -295,13 +295,13 @@ class Output extends Color
 
         $length = 0;
         foreach ($error as $value) {
-            if (strlen($value) > $length) {
-                $length = strlen($value);
+            if (mb_strlen($value) > $length) {
+                $length = mb_strlen($value);
             }
         }
 
         foreach ($error as $key => $value) {
-            $error[$key] = $value . str_repeat(' ', $length - strlen($value));
+            $error[$key] = $value . str_repeat(' ', $length - mb_strlen($value));
         }
 
         return $this->format('<b:red><c:white>' . implode("\n", $error));

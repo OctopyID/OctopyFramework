@@ -240,7 +240,7 @@ class CLIParser
     protected function number(array $lines, int $marker = null)
     {
         end($lines);
-        $length = strlen(key($lines) + 1);
+        $length = mb_strlen(key($lines) + 1);
 
         $snippet = '';
         foreach ($lines as $i => $line) {

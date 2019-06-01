@@ -78,13 +78,13 @@ class Compiler
     {
         $regexp = '(?P<%s>[^/]++)';
 
-        if ($offset > 0 && substr($array[$offset], -1) === '?') {
+        if ($offset > 0 && mb_substr($array[$offset], -1) === '?') {
             $regexp = '(?:/' . $regexp;
 
             $this->count += 1;
         }
 
-        if ($offset === 0 && substr($array[$offset], -1) === '?') {
+        if ($offset === 0 && mb_substr($array[$offset], -1) === '?') {
             $regexp .= '?';
         }
 

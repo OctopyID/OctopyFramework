@@ -130,7 +130,7 @@ class FileSystem
             return chmod($path, $permission);
         }
 
-        return substr(sprintf('%o', fileperms($path)), -4);
+        return mb_substr(sprintf('%o', fileperms($path)), -4);
     }
 
     /**

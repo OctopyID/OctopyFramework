@@ -43,7 +43,7 @@ class Connection
      */
     public function connect()
     {
-        switch (strtolower($this->driver)) {
+        switch (mb_strtolower($this->driver)) {
             case 'mysql':
                 return new \Octopy\Database\Driver\MySQL(
                     $this->config['hostname'],

@@ -55,11 +55,11 @@ class ConsoleServiceProvider extends ServiceProvider
 
         foreach ($discover as $namespace => $directory) {
             foreach ($this->app['filesystem']->iterator($directory) as $row) {
-                if (substr($row->getFilename(), -4) !== '.php') {
+                if (mb_substr($row->getFilename(), -4) !== '.php') {
                     continue;
                 }
 
-                if (($class = substr($row->getFilename(), 0, -4)) === 'Command') {
+                if (($class = mb_substr($row->getFilename(), 0, -4)) === 'Command') {
                     continue;
                 }
 
