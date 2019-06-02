@@ -4,6 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta name="description" content="Octopy Framework">
+		<meta name="keywords" content="octopy, framework, laravel, lighweight framework">
 		<title>Octopy Framework</title>
 		<link rel="icon" type="image/x-icon" href="favicon.ico">
 		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Nunito">

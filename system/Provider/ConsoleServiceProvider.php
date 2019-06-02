@@ -65,11 +65,7 @@ class ConsoleServiceProvider extends ServiceProvider
 
                 $console = $this->app->make($class = $namespace . $class);
 
-                $option = array_merge($console->options, [
-                    '-h, --help' => 'Display this help message',
-                ]);
-
-                $this->app['console']->command($console->command, $class, $option, $console->argument)->describe(
+                $this->app['console']->command($console->command, $class, $console->options, $console->argument)->describe(
                     $console->description
                 );
             }

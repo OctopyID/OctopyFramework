@@ -14,7 +14,7 @@
 
 namespace Octopy\Exception;
 
-use Throwable;
+use Exception;
 use Octopy\Application;
 use Octopy\HTTP\Request;
 use Octopy\Console\Output\Color;
@@ -35,27 +35,26 @@ class ExceptionHandler
     }
 
     /**
-     * @param Throwable $exception
+     * @param Exception $exception
      */
-    public function report(Throwable $exception)
+    public function report(Exception $exception)
     {
     }
 
     /**
-     * @param Throwable $exception
+     * @param Exception $exception
      */
-    public function console(Throwable $exception)
+    public function console(Exception $exception)
     {
         $vars = $this->vars($exception);
 
         $color = new Color();
 
-        $output = "\n";
+        $output  = "\n";
         $output .= $color->apply('b:red', ' ' . $vars['exception'] . ' ');
         $output .= $color->apply('c:white', ' : ');
         $output .= $color->apply('c:yellow', $vars['message']);
-        $output .= "\n";
-        $output .= "\n";
+        $output .= "\n\n";
         $output .= $color->apply('c:lightgray', 'at ');
         $output .= $color->apply('c:green', $vars['file']);
         $output .= $color->apply('c:lightgray', ' on line ');
@@ -97,10 +96,10 @@ class ExceptionHandler
 
     /**
      * @param  Request   $request
-     * @param  Throwable $exception
+     * @param  Exception $exception
      * @return Response
      */
-    public function render(Request $request, Throwable $exception)
+    public function render(Request $request, Exception $exception)
     {
         $vars = $this->vars($exception);
 
@@ -116,10 +115,10 @@ class ExceptionHandler
     }
 
     /**
-     * @param  Throwable $exception
+     * @param  Exception $exception
      * @return array
      */
-    private function vars(Throwable $exception) : array
+    private function vars(Exception $exception) : array
     {
         $code = $exception->getCode();
 
@@ -144,7 +143,7 @@ class ExceptionHandler
      */
     private function view(string $name, array $vars = []) : string
     {
-        $view = $this->app->resolve('view', ['resource' => sprintf('%s/View/', __DIR__)]);
+        $view = $this->app->resolve('view', ['resource' => __DIR__ . '/View/']);
 
         return $view->render($name, array_merge($vars, [
             'app' => $this->app,

@@ -14,26 +14,26 @@
 
 namespace App\Exception;
 
-use Throwable;
+use Exception;
 use Octopy\HTTP\Request;
 use Octopy\Exception\ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
     /**
-     * @param Throwable $exception
+     * @param Exception $exception
      */
-    public function report(Throwable $exception)
+    public function report(Exception $exception)
     {
         return parent::report($exception);
     }
 
     /**
      * @param  Request   $request
-     * @param  Throwable $exception
+     * @param  Exception $exception
      * @return mixed
      */
-    public function render(Request $request, Throwable $exception)
+    public function render(Request $request, Exception $exception)
     {
         return parent::render($request, $exception);
     }

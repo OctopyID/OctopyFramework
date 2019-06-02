@@ -45,6 +45,10 @@ class Console
      */
     public function command(string $command, $handler = null, array $option = [], array $argument = []) : Route
     {
+        $option = array_merge($option, [
+            '-h, --help' => 'Display this help message',
+        ]);
+
         return $this->collection->set(
             new Route($command, $option, $argument, $handler, '')
         );

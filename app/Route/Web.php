@@ -17,11 +17,3 @@ use Octopy\HTTP\Response;
 Route::get('/', static function (Response $response) {
     return $response->view('welcome', [], 200);
 });
-
-Route::get('/test', function () {
-    $x = '⚔' . md5('dwad') . '⚔';
-    echo $x . '<br>';
-    echo 'substr(string, start) => ' . substr($x, 0, 10);
-    echo '<br>';
-    echo 'mb_substr(str, start) => ' . mb_substr($x, 0, 10);
-});

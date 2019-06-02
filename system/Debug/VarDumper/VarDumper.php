@@ -429,7 +429,7 @@ class VarDumper
      * @param  bool   $object
      * @return string
      */
-    protected function evaluate(array $args, bool $called = false, bool $object = false) : string
+    protected function evaluate(array $args, bool $called = false, bool $object = false) : ?string
     {
         $temporary = null;
         foreach ($args as $each) {
