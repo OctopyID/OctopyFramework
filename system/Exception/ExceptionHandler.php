@@ -58,7 +58,7 @@ class ExceptionHandler
 
         $color = new Color();
 
-        $output  = "\n";
+        $output = "\n";
         $output .= $color->apply('b:red', ' ' . $vars['exception'] . ' ');
         $output .= $color->apply('c:white', ' : ');
         $output .= $color->apply('c:yellow', $vars['message']);
