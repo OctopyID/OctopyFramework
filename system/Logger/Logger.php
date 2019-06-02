@@ -243,8 +243,8 @@ class Logger
         }
 
         // Add special placeholders
-        $replace['{ENV}']  = '$_ENV : ' . print_r($_ENV, true);
-        $replace['{GET}']  = '$_GET : ' . print_r($_GET, true);
+        $replace['{ENV}'] = '$_ENV : ' . print_r($_ENV, true);
+        $replace['{GET}'] = '$_GET : ' . print_r($_GET, true);
         $replace['{POST}'] = '$_POST : ' . print_r($_POST, true);
 
         // Allow us to log the file/line that we are logging from
@@ -281,8 +281,8 @@ class Logger
         // Determine the file and line by finding the first
         // backtrace that is not part of our logging system.
         $trace = debug_backtrace();
-        $file  = null;
-        $line  = null;
+        $file = null;
+        $line = null;
 
         foreach ($trace as $row) {
             if (in_array($row['function'], ['interpolate', 'determineFile', 'log', 'log_message'])) {
