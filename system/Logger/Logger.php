@@ -280,12 +280,12 @@ class Logger
     {
         // Determine the file and line by finding the first
         // backtrace that is not part of our logging system.
-        $trace = debug_backtrace();
         $file = null;
         $line = null;
+        $trace = debug_backtrace();
 
         foreach ($trace as $row) {
-            if (in_array($row['function'], ['interpolate', 'determineFile', 'log', 'log_message'])) {
+            if (in_array($row['function'], ['interpolate', 'determine', 'log'])) {
                 continue;
             }
 
