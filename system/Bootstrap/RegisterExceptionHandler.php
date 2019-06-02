@@ -56,9 +56,9 @@ class RegisterExceptionHandler
 
         register_shutdown_function([$this, 'shutdown']);
 
-        if (! $app->env('testing')) {
-            ini_set('display_errors', 'Off');
-        }
+        // if (! $app->env('testing')) {
+        //     ini_set('display_errors', 'Off');
+        // }
     }
 
     /**

@@ -39,6 +39,14 @@ class ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        $logger = $this->app['logger'];
+
+        $threshold = $logger->handler->config['threshold'];
+        if ($threshold > 0 && ! in_array($exception->getCode(), $logger->config('ignored'))) {
+            $logger->log($threshold, $exception->getMessage() . "\n{TRACE}", [
+                'TRACE' => $exception->getTraceAsString(),
+            ]);
+        }
     }
 
     /**

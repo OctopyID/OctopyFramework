@@ -25,6 +25,7 @@ return [
     'env'        => Octopy\Config\DotEnv::class,
     'filesystem' => Octopy\FileSystem::class,
     'hash'       => Octopy\Hashing\HashManager::class,
+    'logger'     => Octopy\Logger::class,
     'middleware' => Octopy\HTTP\Middleware::class,
     'path'       => Octopy\FileSystem\PathLocator::class,
     'request'    => Octopy\HTTP\Request::class,
