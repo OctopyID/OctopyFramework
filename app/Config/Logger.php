@@ -54,7 +54,7 @@ return [
     | your log files will fill up very fast.
     |
     */
-    'threshold' => 1,
+    'threshold' => 3,
 
     /*
     |--------------------------------------------------------------------------
@@ -71,7 +71,9 @@ return [
     'configuration' => [
 
         'file' => [
-            'ignored'    => [],
+            'ignored'    => [
+                403, 404,
+            ],
             'filepath'   => $this->path->writeable('octopy.log'),
             'permission' => 0644,
         ],
