@@ -152,7 +152,9 @@ abstract class ExceptionHandler
      */
     private function view(string $name, array $vars = []) : string
     {
-        $view = $this->app->resolve('view', ['resource' => __DIR__ . '/View/']);
+        $view = $this->app->resolve('view', [
+            'resource' => __DIR__ . '/View/',
+        ]);
 
         return $view->render($name, array_merge($vars, [
             'app' => $this->app,

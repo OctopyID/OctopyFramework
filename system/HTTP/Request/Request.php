@@ -216,7 +216,7 @@ class Request
     /**
      * @return string
      */
-    public function uagent() : string
+    public function uagent() : ?string
     {
         return $this->server('HTTP_USER_AGENT');
     }

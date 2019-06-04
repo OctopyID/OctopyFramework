@@ -1,7 +1,7 @@
 <table>
 	<tr>
 		<td style="width: 15em">Response Status</td>
-		<td>{{ $code . ' - ' . ($message !== null ? $message : $app->response->reason($code)) }}</td>
+		<td>{{ $code . ' - ' . ($message != null ? $message : $app->response->reason($code)) }}</td>
  	</tr>
 </table>
 

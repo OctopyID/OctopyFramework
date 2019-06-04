@@ -49,7 +49,7 @@
 	@if (! isset($row['class']) && isset($row['function']))
 		&nbsp;&nbsp;&mdash;&nbsp;&nbsp;{{ $row['function'] }}()
 	@endif
-	</p>@if(isset($row['file']) && is_file($row['file']) &&  isset($row['class']))
+	</p>@if(isset($row['file']) && is_file($row['file']) && isset($row['class']))
 		{{{ $app->syntax->highlight($row['file'], $row['line'], '3:3') }}}
 	@endif</li>
 @endforeach

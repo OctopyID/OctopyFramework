@@ -43,7 +43,7 @@ $basepath = dirname(__DIR__) . DS;
 require 'Autoload.php';
 
 $autoload = new Octopy\Autoload($basepath, [
-    'App' => 'app',
+    'App'    => 'app',
     'Octopy' => 'system',
 ]);
 

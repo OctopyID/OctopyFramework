@@ -67,6 +67,7 @@ class HashManager
                     $this->app['config']['hashing.argon']
                 );
             case 'bcrypt':
+            default:
                 return $this->hasher = new BcryptHasher(
                     $this->app['config']['hashing.bcrypt']
                 );
