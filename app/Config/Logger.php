@@ -61,9 +61,8 @@ return [
     | Log Handler Configuration
     |--------------------------------------------------------------------------
     |
-    | Here you may configure the log handlers for your application. Out of
-    | the box, Laravel uses the Monolog PHP logging library. This gives
-    | you a variety of powerful log handlers / formatters to utilize.
+    | Here you may configure the log handlers for your application.
+    | This gives you a variety of powerful log handlers / formatters to utilize.
     |
     | Available Handler : "file"
     |
@@ -71,9 +70,6 @@ return [
     'configuration' => [
 
         'file' => [
-            'ignored'    => [
-                403, 404,
-            ],
             'filepath'   => $this->path->writeable('octopy.log'),
             'permission' => 0644,
         ],

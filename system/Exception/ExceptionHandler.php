@@ -19,7 +19,7 @@ use Octopy\Application;
 use Octopy\HTTP\Request;
 use Octopy\Console\Output\Color;
 
-class ExceptionHandler
+abstract class ExceptionHandler
 {
     /**
      * @var Octopy\Application
@@ -40,9 +40,10 @@ class ExceptionHandler
     public function report(Exception $exception)
     {
         $logger = $this->app['logger'];
+        $config = $this->app['config']['exception'];
 
         $threshold = $logger->handler->config['threshold'];
-        if ($threshold > 0 && ! in_array($exception->getCode(), $logger->config('ignored'))) {
+        if ($config['log'] && ! in_array($exception->getCode(), $config['ignored'])) {
             $logger->log($threshold, $exception->getMessage() . "\n{TRACE}", [
                 'TRACE' => $exception->getTraceAsString(),
             ]);

@@ -34,7 +34,7 @@ class FileHandler extends BaseHandler
      * @param  string $message
      * @return bool
      */
-    public function handle($level, $message) : bool
+    public function handle($level, string $message) : bool
     {
         if (empty($filepath = $this->config('filepath'))) {
             throw new InvalidLogPathException();

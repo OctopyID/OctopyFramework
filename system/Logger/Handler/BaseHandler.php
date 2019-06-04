@@ -50,4 +50,11 @@ abstract class BaseHandler
      * @return mixed
      */
     abstract public function config(string $key = null);
+
+    /**
+     * @param  mixed  $level
+     * @param  string $message
+     * @return bool
+     */
+    abstract public function handle($level, string $message) : bool;
 }
