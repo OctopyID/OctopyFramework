@@ -29,11 +29,11 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map() : void
     {
-        Route::group(['namespace' => $this->namespace], static function () {
-            Route::load('Web.php');
+        Route::group(['namespace' => $this->namespace], static function ($route) {
+            $route->load('Web.php');
 
-            Route::group(['prefix' =>'api'], static function () {
-                Route::load('Api.php');
+            $route->group(['prefix' =>'api'], static function ($route) {
+                $route->load('Api.php');
             });
         });
     }

@@ -18,7 +18,7 @@ use Closure;
 use Exception;
 use RuntimeException;
 
-class Engine
+final class Engine
 {
     /**
      * @var Octopy\View\Finder

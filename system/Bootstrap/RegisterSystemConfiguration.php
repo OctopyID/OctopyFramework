@@ -43,15 +43,15 @@ class RegisterSystemConfiguration
      */
     public function bootstrap(Application $app)
     {
-        // Set path locator
+        // set path locator
         $this->path = $app->path;
 
-        // Set item to config repository
+        // set item to config repository
         $app->instance('config', $config = new Repository(
             $this->search($this->path->app->config())
         ));
 
-        // Setting up default config
+        // setting up default config
         mb_internal_encoding('UTF-8');
         date_default_timezone_set($config->get('app.timezone', 'UTC'));
     }
@@ -64,7 +64,8 @@ class RegisterSystemConfiguration
     {
         $config = [];
 
-        foreach ($this->filesystem->iterator($path) as $row) {
+        $iterator = $this->filesystem->iterator($path);
+        foreach ($iterator as $row) {
             if ($row->isDir()) {
                 continue;
             }

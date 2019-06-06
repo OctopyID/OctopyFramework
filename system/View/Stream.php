@@ -14,7 +14,7 @@
 
 namespace Octopy\View;
 
-class Stream
+final class Stream
 {
     /**
      * @var string

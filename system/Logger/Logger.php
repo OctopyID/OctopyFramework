@@ -16,6 +16,7 @@ namespace Octopy;
 
 use Throwable;
 use Octopy\Logger\Handler\BaseHandler;
+use Octopy\Logger\Handler\FileHandler;
 use Octopy\Logger\Exception\InvalidLogLevelException;
 
 class Logger
@@ -97,7 +98,7 @@ class Logger
     public function handler(string $default) : BaseHandler
     {
         $handler = [
-            'file' => \Octopy\Logger\Handler\FileHandler::class,
+            'file' => FileHandler::class,
         ];
 
         if (isset($handler[$default])) {

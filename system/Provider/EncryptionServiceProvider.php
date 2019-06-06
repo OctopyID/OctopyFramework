@@ -24,7 +24,7 @@ class EncryptionServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if (empty(env('APP_KEY'))) {
+        if (empty(env('APP_KEY')) && $this->app->console()) {
             $this->app['config']->set('app', array_merge($this->app['config']['app'], [
                 'key' => 'base64:F8EDudSAuRK08KoAtb3otCzYQ9yzF+KlpaN12H/vQAw=',
             ]));

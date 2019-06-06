@@ -56,13 +56,13 @@ class RegisterExceptionHandler
 
         register_shutdown_function([$this, 'shutdown']);
 
-        // if (! $app->env('testing')) {
-        //     ini_set('display_errors', 'Off');
-        // }
+        if (! $app->env('testing')) {
+            ini_set('display_errors', 'Off');
+        }
     }
 
     /**
-     * @param  Throwable  $exception
+     * @param  Throwable $exception
      * @return void
      */
     public function exception(Throwable $exception)
@@ -91,12 +91,13 @@ class RegisterExceptionHandler
     }
 
     /**
-     * @param int    $level
-     * @param string $message
-     * @param string $file
-     * @param int    $line
+     * @param  int    $level
+     * @param  string $message
+     * @param  string $file
+     * @param  int    $line
+     * @return void
      */
-    public function error(int $level, string $message, string $file = '', int $line = 0)
+    public function error(int $level, string $message, string $file = '', int $line = 0) : void
     {
         if (error_reporting() & $level) {
             throw new ErrorException($message, 0, $level, $file, $line);
@@ -104,9 +105,9 @@ class RegisterExceptionHandler
     }
 
     /**
-     *
+     * @return void
      */
-    public function shutdown()
+    public function shutdown() : void
     {
         $type = [E_COMPILE_ERROR, E_CORE_ERROR, E_ERROR, E_PARSE];
         if (! is_null($error = error_get_last()) && in_array($error['type'], $type)) {

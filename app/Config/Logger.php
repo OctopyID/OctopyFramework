@@ -64,7 +64,7 @@ return [
     | Here you may configure the log handlers for your application.
     | This gives you a variety of powerful log handlers / formatters to utilize.
     |
-    | Available Handler : "file"
+    | Supported : "file"
     |
     */
     'configuration' => [

@@ -23,7 +23,7 @@ return [
     | requests. By default, we will use the lightweight native handler but
     | you may specify any of the other wonderful handlers provided here.
     |
-    | Supported: "file"
+    | Supported : "file", "array"
     |
     */
     'handler' => 'file',

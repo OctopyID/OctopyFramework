@@ -31,7 +31,9 @@ class PathLocator
     /**
      * @var array
      */
-    protected $extension = ['octopy', 'php', 'html', 'js', 'css', 'cache', 'png', 'jpg', 'ico', 'svg', 'mp4', 'flv', 'mp3', 'log'];
+    protected $extension = [
+        'octopy', 'php', 'html', 'js', 'css', 'cache', 'png', 'jpg', 'ico', 'svg', 'mp4', 'flv', 'mp3', 'log',
+    ];
 
     /**
      * @param Application $app

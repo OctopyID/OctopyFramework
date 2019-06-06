@@ -20,9 +20,14 @@
 | We always using DS constant instead DIRECTORY_SEPARATOR
 | for avoid problem in Windows System
 */
-defined('DS') || define('DS', '/');
 
-defined('BS') || define('BS', '\\');
+if (! defined('DS')) {
+    define('DS', '/');
+}
+
+if (! defined('BS')) {
+    define('BS', '\\');
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +67,11 @@ $app = new Octopy\Application($basepath);
 $app->instance(Octopy\Autoload::class, $autoload);
 
 /*
- * @return Octopy\Application
+ |---------------------------------------------------------------
+ | LAUNCH THE APPLICATION
+ |---------------------------------------------------------------
+ | Now that everything is setup, it's time to actually fire
+ | up the engines and make this app do its thang.
+ |
  */
 return $app;

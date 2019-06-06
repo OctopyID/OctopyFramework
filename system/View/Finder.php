@@ -16,7 +16,7 @@ namespace Octopy\View;
 
 use Octopy\View\Exception\ViewException;
 
-class Finder
+final class Finder
 {
     /**
      * @var array

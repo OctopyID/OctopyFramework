@@ -16,7 +16,7 @@ namespace Octopy\View;
 
 use Throwable;
 
-class Parser
+final class Parser
 {
     /**
      * @var array

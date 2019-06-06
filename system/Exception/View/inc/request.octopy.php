@@ -59,7 +59,7 @@
 @endforeach
 
 @if ($empty)
-	<div class="alert">No $_GET, $_POST, or $_COOKIE information to show.</div>
+	<div class="alert">No $_GET, $_POST, or $_COOKIE Information to show.</div>
 @endif
 
 @php($headers = $request->header())

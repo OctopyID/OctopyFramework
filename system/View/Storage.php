@@ -16,7 +16,7 @@ namespace Octopy\View;
 
 use Octopy\FileSystem;
 
-class Storage extends FileSystem
+final class Storage extends FileSystem
 {
     /**
      * @var string

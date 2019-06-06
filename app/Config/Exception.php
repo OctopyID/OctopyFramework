@@ -20,7 +20,7 @@ return [
      |--------------------------------------------------------------------------
      | If true, then exceptions will be logged
      |
-     | Default: true
+     | Default : true
      */
     'log' => true,
 

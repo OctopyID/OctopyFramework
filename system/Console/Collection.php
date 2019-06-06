@@ -85,7 +85,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate
     /**
      * @param  string $key
      * @param  mixed  $value
-     * @return mixed
+     * @return null
      */
     public function offsetSet($key, $value)
     {

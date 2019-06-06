@@ -44,7 +44,7 @@ abstract class ExceptionHandler
 
         $threshold = $logger->handler->config['threshold'];
         if ($config['log'] && ! in_array($exception->getCode(), $config['ignored'])) {
-            $logger->log($threshold, $exception->getMessage() . "\n{TRACE}", [
+            $logger->log($threshold, $exception->getMessage() . "\n[StackTrace]\n{TRACE}\n", [
                 'TRACE' => $exception->getTraceAsString(),
             ]);
         }
