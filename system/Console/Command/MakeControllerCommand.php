@@ -29,7 +29,9 @@ class MakeControllerCommand extends Command
     /**
      * @var array
      */
-    protected $options = [];
+    protected $options = [
+        '--resource' => 'Generate a resource controller class.',
+    ];
 
     /**
      * @var array
@@ -65,7 +67,12 @@ class MakeControllerCommand extends Command
             'DummyClassName' => $parsed['classname'],
         ];
 
-        if ($this->generate($location, 'Controller', $data)) {
+        $template = 'Controller.plain';
+        if ($argv->get('--resource')) {
+            $template = 'Controller.resource';
+        }
+
+        if ($this->generate($location, $template, $data)) {
             return $output->success('Controller created successfully.');
         }
     }

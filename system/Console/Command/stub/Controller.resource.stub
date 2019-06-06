@@ -1,0 +1,84 @@
+<?php
+
+/**
+ *   ___       _
+ *  / _ \  ___| |_ ___  _ __  _   _
+ * | | | |/ __| __/ _ \| '_ \| | | |
+ * | |_| | (__| || (_) | |_) | |_| |
+ *  \___/ \___|\__\___/| .__/ \__, |
+ *                     |_|    |___/.
+ * @author  : Supian M <supianidz@gmail.com>
+ * @link    : www.octopy.xyz
+ * @license : MIT
+ */
+
+namespace App\HTTP\Controller\DummyNameSpace;
+
+use App\HTTP\Controller;
+use Octopy\HTTP\Request;
+use Octopy\HTTP\Response;
+
+class DummyClassName extends Controller
+{
+    /**
+     * @return Response
+     */
+    public function index()
+    {
+        //
+    }
+
+    /**
+     * @return Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * @param  Request $request
+     * @return Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * @param  int $id
+     * @return Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * @param  int $id
+     * @return Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * @param  Request $request
+     * @param  int     $id
+     * @return Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * @param  int $id
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+}

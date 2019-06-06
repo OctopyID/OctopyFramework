@@ -93,7 +93,7 @@ abstract class Command
         }
 
         if (! empty($data)) {
-            if (isset($data['DummyNameSpace']) && $data['DummyNameSpace'] === null) {
+            if (isset($data['DummyNameSpace']) && $data['DummyNameSpace'] == null) {
                 unset($data['DummyNameSpace']);
                 $data['\DummyNameSpace'] = '';
             }

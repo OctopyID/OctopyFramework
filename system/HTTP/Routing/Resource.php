@@ -44,7 +44,7 @@ trait Resource
             throw new ResourceControllerException('Controller for route resource should not use Closure.');
         }
 
-        $method = isset($option['only']) ? is_string($option['only']) ? explode(',', $option['only']) : $option['only'] : ['index', 'show', 'create', 'update', 'delete', 'new', 'edit'];
+        $method = isset($option['only']) ? is_string($option['only']) ? explode(',', $option['only']) : $option['only'] : ['index', 'show', 'create', 'update', 'destroy', 'store', 'edit'];
 
         if (isset($option['except'])) {
             $option['except'] = is_array($option['except']) ? $option['except'] : explode(',', $option['except']);
@@ -62,28 +62,28 @@ trait Resource
             $this->get($uri, $controller . '@index')->name($name . '.index');
         }
 
-        if (in_array('new', $method)) {
-            $this->get($uri . '/new', $controller . '@new')->name($name . '.new');
+        if (in_array('create', $method)) {
+            $this->get($uri . '/create', $controller . '@create')->name($name . '.create');
         }
 
         if (in_array('edit', $method)) {
-            $this->get($uri . '/edit/:id', $controller . '@edit')->name($name . '.delete');
+            $this->get($uri . '/edit/:id', $controller . '@edit')->name($name . '.edit');
         }
 
         if (in_array('show', $method)) {
             $this->get($uri . '/show/:id', $controller . '@show')->name($name . '.show');
         }
 
-        if (in_array('create', $method)) {
-            $this->post($uri, $controller . '@create')->name($name . '.create');
+        if (in_array('store', $method)) {
+            $this->post($uri . '/store', $controller . '@store')->name($name . '.store');
         }
 
         if (in_array('update', $method)) {
             $this->post($uri . '/:id', $controller . '@update')->name($name . '.update');
         }
 
-        if (in_array('delete', $method)) {
-            $this->post($uri . '/delete/:id', $controller . '@delete')->name($name . '.delete');
+        if (in_array('destroy', $method)) {
+            $this->post($uri . '/destroy/:id', $controller . '@destroy')->name($name . '.destroy');
         }
     }
 }
