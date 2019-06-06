@@ -30,7 +30,9 @@ class MakeControllerCommand extends Command
      * @var array
      */
     protected $options = [
-        '--resource' => 'Generate a resource controller class.',
+        '--model[=MODEL]' => 'Generate a resource controller for the given model.',
+        '--resource'      => 'Generate a resource controller class.',
+        '--api'           => 'Exclude the create and edit methods from the controller.',
     ];
 
     /**
@@ -67,13 +69,43 @@ class MakeControllerCommand extends Command
             'DummyClassName' => $parsed['classname'],
         ];
 
-        $template = 'Controller.plain';
-        if ($argv->get('--resource')) {
-            $template = 'Controller.resource';
+        $template = $this->template($argv);
+
+        if ($model = $argv->get('--model')) {
+            $this->model($model);
         }
 
         if ($this->generate($location, $template, $data)) {
             return $output->success('Controller created successfully.');
         }
+    }
+
+    /**
+     * @param  Argv $argv
+     * @return string
+     */
+    private function template(Argv $argv) : string
+    {
+        if ($argv->get('--api')) {
+            return 'Controller.api';
+        } elseif ($argv->get('--resource')) {
+            return 'Controller.resource';
+        }
+
+        return 'Controller.plain';
+    }
+
+    /**
+     * @param  string $model
+     * @param  Argv   $argv
+     * @return void
+     */
+    private function model($model, Argv $argv) : void
+    {
+        $model = $model === true ? $argv->get('value') : $model;
+
+        echo $this->call('make:model', [
+            'name' => $model,
+        ]);
     }
 }
