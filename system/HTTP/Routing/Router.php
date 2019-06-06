@@ -21,6 +21,8 @@ use Octopy\HTTP\Middleware;
 
 class Router
 {
+    use Resource;
+
     /**
      * @var Octopy\Application
      */

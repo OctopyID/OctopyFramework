@@ -56,10 +56,6 @@ class RouteListCommand extends Command
         $data = [];
         foreach ($this->app['router']->collection as $method => $routes) {
             foreach ($routes as $uri => $row) {
-                if (in_array($uri, $data)) {
-                    continue;
-                }
-
                 $middleware = [];
                 foreach ($row->middleware as $layer) {
                     $middleware[] = $layer instanceof Closure ? 'Closure' : $layer;
@@ -67,8 +63,10 @@ class RouteListCommand extends Command
 
                 $action = $row->controller instanceof Closure ? 'Closure' : $row->controller;
 
-                $data[$uri] = [
-                    $color('Method')     => $color(implode(' & ', $row->method)),
+                $method = implode(' & ', $row->method);
+
+                $data[$method . $uri] = [
+                    $color('Method')     => $color($method),
                     $color('URI')        => $color($uri),
                     $color('Name')       => $color($row->name),
                     $color('Action')     => $color($action),
