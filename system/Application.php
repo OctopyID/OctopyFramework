@@ -108,6 +108,7 @@ class Application extends Container
     {
         return $this->basepath('system/' . $subpath);
     }
+
     /**
      * @param  string $subpath
      * @return string
