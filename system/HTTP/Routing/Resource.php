@@ -47,10 +47,9 @@ trait Resource
         $method = isset($option['only']) ? is_string($option['only']) ? explode(',', $option['only']) : $option['only'] : ['index', 'show', 'create', 'update', 'delete', 'new', 'edit'];
 
         if (isset($option['except'])) {
-            $count            = count($method);
             $option['except'] = is_array($option['except']) ? $option['except'] : explode(',', $option['except']);
 
-            for ($int = 0; $int < $count; $int++) {
+            for ($int = 0; $int < count($method); $int++) {
                 if (in_array($method[$int], $option['except'])) {
                     unset($method[$int]);
                 }
