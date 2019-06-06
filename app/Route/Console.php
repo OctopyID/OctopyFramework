@@ -12,8 +12,8 @@
  * @license : MIT
  */
 
+use Octopy\Stuff\Inspiring;
+
 Console::command('inspire', static function (Octopy\Console\Output $output) {
-    return $output->comment(
-        Octopy\Stuff\Inspiring::quote()
-    );
+    return $output->comment(Inspiring::quote());
 })->describe('Display an inspiring quote');

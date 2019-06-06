@@ -53,7 +53,14 @@ class OctopyServeCommand extends Command
             $port = 1337;
         }
 
-        echo $output->format('<c:yellow>Octopy development server started : <c:white>http://localhost:' . $port, true);
+        $info = $output->format(
+            '<c:green>Octopy CLI Tool <c:white>- Version ' . $this->app->version() . ' - Server Time : ' . date('Y-m-d H:i:s')
+        );
+        $info .= "\n";
+        $info .= $output->format('<c:yellow>Octopy development server started : <c:white>http://localhost:' . $port, true);
+        $info .= $output->format('<c:white>Press Control-C to stop development server.');
+
+        echo $info;
 
         foreach (['system', 'shell', 'shell_exec', 'exec'] as $shell) {
             if (function_exists($shell)) {

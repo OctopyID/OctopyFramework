@@ -104,6 +104,14 @@ class Application extends Container
      * @param  string $subpath
      * @return string
      */
+    public function system(string $subpath = null) : string
+    {
+        return $this->basepath('system/' . $subpath);
+    }
+    /**
+     * @param  string $subpath
+     * @return string
+     */
     public function vendor(string $subpath = null) : string
     {
         return $this->basepath('vendor/' . $subpath);

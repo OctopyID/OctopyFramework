@@ -44,7 +44,7 @@ class DotEnv
         }
 
         if (! is_readable($this->path)) {
-            throw new DotEnvException("The .env file is not readable: $this->path");
+            throw new DotEnvException('The .env file is not readable :' . $this->path);
         }
 
         $lines = file($this->path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -138,13 +138,11 @@ class DotEnv
         $key = trim($key);
         $value = trim($value);
 
-        // Sanitize the key
+        // sanitize the key
         $key = str_replace(['export', '\'', '"'], '', $key);
 
-        // Sanitize the value
-        $value = $this->nested(
-            $this->sanitize($value)
-        );
+        // sanitize the value
+        $value = $this->nested($this->sanitize($value));
 
         return compact('key', 'value');
     }

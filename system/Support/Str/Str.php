@@ -89,7 +89,7 @@ class Str
      */
     public static function lower($value)
     {
-        return mb_mb_strtolower($value, 'UTF-8');
+        return mb_strtolower($value, 'UTF-8');
     }
 
     /**
@@ -134,7 +134,7 @@ class Str
      */
     public static function upper($value)
     {
-        return mb_mb_strtoupper($value, 'UTF-8');
+        return mb_strtoupper($value, 'UTF-8');
     }
 
     /**
