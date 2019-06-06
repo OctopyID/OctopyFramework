@@ -153,6 +153,7 @@ return [
         'Route'     => Octopy\Support\Facade\Route::class,
         'Schema'    => Octopy\Support\Facade\Schema::class,
         'Console'   => Octopy\Support\Facade\Console::class,
+        'Session'   => Octopy\Support\Facade\Session::class,
         'Validator' => Octopy\Support\Facade\Validator::class,
     ],
 ];

@@ -70,7 +70,7 @@ class DatabaseSeedingCommand extends Command
      */
     private function seed(Output $output, string $seed)
     {
-        echo $output->success('Seeding : {white}' . $seed);
+        echo $output->success('Seeding : <c:white>' . $seed);
 
         call_user_func([$seeder = $this->app->make('App\\DB\\Seeder\\' . $seed), 'seed']);
 

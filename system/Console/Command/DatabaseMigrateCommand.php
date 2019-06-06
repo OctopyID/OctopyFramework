@@ -124,9 +124,9 @@ class DatabaseMigrateCommand extends Command
      */
     protected function create(Output $output, array $data)
     {
-        echo $output->warning('Migrating : {white}' . $data['name']);
+        echo $output->warning('Migrating : <c:white>' . $data['name']);
         $this->app->make($data['class'])->create();
-        echo $output->success('Migrated  : {white}' . $data['name']);
+        echo $output->success('Migrated  : <c:white>' . $data['name']);
     }
 
     /**
@@ -135,8 +135,8 @@ class DatabaseMigrateCommand extends Command
      */
     protected function drop(Output $output, array $data)
     {
-        echo $output->warning('Dropping Table : {white}' . $data['name']);
+        echo $output->warning('Dropping Table : <c:white>' . $data['name']);
         $this->app->make($data['class'])->drop();
-        echo $output->success('Table Dropped  : {white}' . $data['name']);
+        echo $output->success('Table Dropped  : <c:white>' . $data['name']);
     }
 }
