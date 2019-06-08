@@ -7,7 +7,7 @@
 		<meta name="keywords" content="octopy, framework, laravel, lighweight framework">
 		<title>Octopy Framework</title>
 		<link rel="icon" type="image/x-icon" href="favicon.ico">
-		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Nunito">
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Miriam+Libre">
 		<link rel="stylesheet" type="text/css" href="{{ url('css/style.css') }}">
 	</head>
 	<body>
