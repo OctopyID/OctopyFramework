@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="http://www.octopy.xyz/wp-content/uploads/2019/01/logo.png">
+	<img src="https://cdn.octopy.id/img/octopy-logo.png">
 </p>
 
 <p align="center">
