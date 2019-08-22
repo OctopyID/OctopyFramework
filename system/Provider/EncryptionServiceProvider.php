@@ -8,7 +8,7 @@
  *  \___/ \___|\__\___/| .__/ \__, |
  *                     |_|    |___/.
  * @author  : Supian M <supianidz@gmail.com>
- * @link    : www.octopy.xyz
+ * @link    : framework.octopy.id
  * @license : MIT
  */
 
@@ -43,6 +43,8 @@ class EncryptionServiceProvider extends ServiceProvider
      */
     protected function key(array $config) : string
     {
+        print_r($config);
+        exit;
         if (empty($key = $config['key'])) {
             throw new RuntimeException(
                 'No application encryption key has been specified.'

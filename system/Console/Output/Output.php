@@ -8,7 +8,7 @@
  *  \___/ \___|\__\___/| .__/ \__, |
  *                     |_|    |___/
  * @author  : Supian M <supianidz@gmail.com>
- * @link    : www.octopy.xyz
+ * @link    : framework.octopy.id
  * @license : MIT
  */
 
@@ -324,7 +324,7 @@ class Output extends Color
         $octopy[] = " | | | |/ __| __/ _ \| '_ \| | | | ";
         $octopy[] = " | |_| | (__| || (_) | |_) | |_| | ";
         $octopy[] = "  \___/ \___|\__\___/| .__/ \__, | ";
-        $octopy[] = "   www.octopy.xyz    |_|    |___/  ";
+        $octopy[] = "   framework.octopy.id    |_|    |___/  ";
         $octopy[] = "";
 
 

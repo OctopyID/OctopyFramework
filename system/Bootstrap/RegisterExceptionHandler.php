@@ -7,7 +7,7 @@
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
  *                     |_|    |___/.
- * @link    : www.octopy.xyz
+ * @link    : framework.octopy.id
  * @author  : Supian M <supianidz@gmail.com>
  * @license : MIT
  */

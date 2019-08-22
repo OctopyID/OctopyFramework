@@ -8,7 +8,7 @@
  *  \___/ \___|\__\___/| .__/ \__, |
  *                     |_|    |___/.
  * @author :Supian M <supianidz@gmail.com>
- * @link   :www.octopy.xyz
+ * @link   :framework.octopy.id
  * @license:MIT
  */
 
