@@ -43,8 +43,6 @@ class EncryptionServiceProvider extends ServiceProvider
      */
     protected function key(array $config) : string
     {
-        print_r($config);
-        exit;
         if (empty($key = $config['key'])) {
             throw new RuntimeException(
                 'No application encryption key has been specified.'
