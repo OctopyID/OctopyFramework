@@ -282,7 +282,7 @@ class Request
     public function ip(bool $server = false) : string
     {
         if ($server) {
-            return $this->server('SERVER_ADDR');
+            return $this->server('SERVER_ADDR') ?? '127.0.0.1' . $this->server('SERVER_PORT');
         }
 
         return $this->server('HTTP_CLIENT_IP') ?? $this->server('HTTP_X_FORWARDED_FOR') ?? $this->server('REMOTE_ADDR');

@@ -32,7 +32,7 @@ class Syntax
      */
     public function __construct(Application $app)
     {
-        switch (mb_substr(PHP_SAPI, 0, 3)) {
+        switch (PHP_SAPI) {
             case 'cli':
                 $this->parser = $app->make(CLIParser::class);
                 break;
