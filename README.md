@@ -10,12 +10,6 @@
 		<img src="https://github.styleci.io/repos/179120121/shield?branch=master&style=flat" alt="StyleCI">
 	</a>
 	<a href="https://packagist.org/packages/supianidz/octopyframework">
-		<img src="https://poser.pugx.org/supianidz/octopyframework/d/total.svg" alt="Total Downloads">
-	</a>
-	<a href="https://packagist.org/packages/supianidz/octopyframework">
-		<img src="https://poser.pugx.org/supianidz/octopyframework/v/stable.svg" alt="Latest Stable Version">
-	</a>
-	<a href="https://packagist.org/packages/supianidz/octopyframework">
 		<img src="https://poser.pugx.org/supianidz/octopyframework/license.svg" alt="License">
 	</a>
 </p>
