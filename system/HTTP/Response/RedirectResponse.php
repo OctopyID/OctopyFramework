@@ -14,6 +14,8 @@
 
 namespace Octopy\HTTP\Response;
 
+use Octopy\HTTP\Response;
+
 class RedirectResponse extends Response
 {
     /**
