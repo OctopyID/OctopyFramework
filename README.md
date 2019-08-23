@@ -9,9 +9,6 @@
 	<a href="https://github.styleci.io/repos/179120121">
 		<img src="https://github.styleci.io/repos/179120121/shield?branch=master&style=flat" alt="StyleCI">
 	</a>
-	<a href="https://packagist.org/packages/supianidz/octopyframework">
-		<img src="https://poser.pugx.org/supianidz/octopyframework/license.svg" alt="License">
-	</a>
 </p>
 
 ## What is Octopy Framework?
