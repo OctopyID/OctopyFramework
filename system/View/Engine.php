@@ -16,7 +16,6 @@ namespace Octopy\View;
 
 use Closure;
 use Exception;
-use RuntimeException;
 
 final class Engine
 {
@@ -107,7 +106,7 @@ final class Engine
         try {
             $content = $this->evaluate($storage);
         } catch (Exception $exception) {
-            throw new RuntimeException($exception->getMessage());
+            throw $exception;
         }
 
         return ltrim($content, "\n");
