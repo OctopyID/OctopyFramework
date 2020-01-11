@@ -48,6 +48,11 @@ class Database implements IteratorAggregate, JsonSerializable
     protected $data = [];
 
     /**
+     * @var array
+     */
+    protected $except = [];
+
+    /**
      * @var PDO
      */
     protected $driver;
@@ -300,17 +305,41 @@ class Database implements IteratorAggregate, JsonSerializable
     }
 
     /**
+     * @param  array $except
+     * @return $this
+     */
+    public function except(array $except)
+    {
+        $this->except = $except;
+
+        return $this;
+    }
+
+    /**
      * @param  mixed $data
      * @return $this
      */
     protected function data($data)
     {
+        $except = array_flip($this->except);
         if (! empty($model = $this->model)) {
             if (is_array($data)) {
                 foreach ($data as $key => $value) {
+                    if (isset($except[$key])) {
+                        continue;
+                    }
+
                     $data[$key] = new $model($value);
                 }
             } else {
+                if (is_object($data)) {
+                    foreach ($data as $key => $value) {
+                        if (isset($except[$key])) {
+                            unset($data->$key);
+                        }
+                    }
+                }
+
                 $data = new $model($data);
             }
         }
