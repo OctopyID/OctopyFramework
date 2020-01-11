@@ -25,6 +25,7 @@ return [
     'env'        => Octopy\Config\DotEnv::class,
     'filesystem' => Octopy\FileSystem::class,
     'hash'       => Octopy\Hashing\HashManager::class,
+    'lang'       => Octopy\Language::class,
     'logger'     => Octopy\Logger::class,
     'middleware' => Octopy\HTTP\Middleware::class,
     'path'       => Octopy\FileSystem\PathLocator::class,
@@ -37,6 +38,6 @@ return [
     'syntax'     => Octopy\Support\Syntax::class,
     'url'        => Octopy\HTTP\Routing\URLGenerator::class,
     'validator'  => Octopy\Validation\Validator::class,
-    'vardumper'  => Octopy\Debug\VarDumper::class,
+    'vardump'    => Octopy\Support\VarDump::class,
     'view'       => Octopy\View\Engine::class,
 ];

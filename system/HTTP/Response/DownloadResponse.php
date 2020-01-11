@@ -30,7 +30,7 @@ class DownloadResponse extends Response
         $content = $this->readfile($filepath);
 
         if (! $filename) {
-            $filename = last(explode(DS, $filepath));
+            $filename = last(explode('/', $filepath));
         }
 
         parent::__construct($content, 200, [

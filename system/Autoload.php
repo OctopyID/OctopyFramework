@@ -119,17 +119,17 @@ final class Autoload
             }
         }
 
-        $class = trim(str_replace(BS, DS, $class), DS);
+        $class = trim(str_replace('\\', '/', $class), '/');
         foreach ($this->namespace as $namespace => $directory) {
-            if (preg_match($pattern = '/^' . $namespace . '/', $class)) {
-                $classpath = str_replace(BS, DS, preg_replace($pattern, $directory, $class));
+            if (preg_match($pattern = "/^$namespace/", $class)) {
+                $classpath = str_replace('\\', '/', preg_replace($pattern, $directory, $class));
                 if ($fullpath = $this->require($classpath)) {
                     return $fullpath;
                 }
 
-                $pieces[] = array_slice($pieces = explode(DS, $classpath), -1)[0];
+                $pieces[] = array_slice($pieces = explode('/', $classpath), -1)[0];
 
-                if ($fullpath = $this->require(implode(DS, $pieces))) {
+                if ($fullpath = $this->require(implode('/', $pieces))) {
                     return $fullpath;
                 }
             }
@@ -144,7 +144,7 @@ final class Autoload
      */
     public function require(string $filepath)
     {
-        if (is_file($filepath = $this->basepath . $filepath . '.php')) {
+        if (is_file($filepath = $this->basepath . "$filepath.php")) {
             if (require_once $filepath) {
                 return $filepath;
             }

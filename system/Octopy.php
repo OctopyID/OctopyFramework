@@ -13,28 +13,11 @@
  */
 
 /*
-|---------------------------------------------------------------
-| SETUP OUR IMPORTANT CONSTANTS
-|---------------------------------------------------------------
-|
-| We always using DS constant instead DIRECTORY_SEPARATOR
-| for avoid problem in Windows System
-*/
-
-if (! defined('DS')) {
-    define('DS', '/');
-}
-
-if (! defined('BS')) {
-    define('BS', '\\');
-}
-
-/*
 |--------------------------------------------------------------------------
 | JUST ROOT PATH DIRECTORY PROJECT
 |--------------------------------------------------------------------------
 */
-$basepath = dirname(__DIR__) . DS;
+$basepath = dirname(__DIR__) . '/';
 
 /*
 |--------------------------------------------------------------------------

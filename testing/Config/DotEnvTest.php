@@ -33,9 +33,7 @@ class DotEnvTest extends TestCase
     {
         parent::setUp();
 
-        if (! $this->env) {
-            ($this->env = new DotEnv(__DIR__))->load();
-        }
+        $this->fixture = __DIR__ . '/env/';
     }
 
     /**
@@ -43,7 +41,8 @@ class DotEnvTest extends TestCase
      */
     public function testReturnFalseIfCannotFindFile() : void
     {
-        $this->assertFalse((new DotEnv(__DIR__, 'notfound'))->load());
+        $env = new DotEnv($this->fixture, 'notfound');
+        $this->assertFalse($env->load());
     }
 
     /**
@@ -54,7 +53,8 @@ class DotEnvTest extends TestCase
         $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('.env values containing spaces must be surrounded by quotes.');
 
-        (new DotEnv(__DIR__, '.env_error'))->load();
+        $env = new DotEnv($this->fixture, '.env.error');
+        $env->load();
     }
 
     /**
@@ -62,10 +62,13 @@ class DotEnvTest extends TestCase
      */
     public function testLoadVar() : void
     {
+        $env = new DotEnv($this->fixture);
+        $env->load();
+
         $this->assertEquals('', getenv('NULL'));
         $this->assertEquals('bar', getenv('FOO'));
         $this->assertEquals('baz', getenv('BAR'));
-        $this->assertEquals('with space', getenv('SPACED'));
+        $this->assertEquals('with spaces', getenv('SPACED'));
     }
 
     /**
@@ -80,7 +83,7 @@ class DotEnvTest extends TestCase
         $this->assertEquals('bar', getenv('CFOO'));
         $this->assertEquals('with spaces', getenv('CSPACED'));
         $this->assertEquals('a value with a # character', getenv('CQUOTES'));
-        $this->assertEquals('a value with a # character & a quote " character inside quotes', getenv('CQUOTESWITHQUOTE'));
+        $this->assertEquals('a value with a # character & a quote " character inside quotes', getenv('DOUBLEQUOTE'));
     }
 
     /**
@@ -91,7 +94,7 @@ class DotEnvTest extends TestCase
         $this->assertEquals('', $_SERVER['NULL']);
         $this->assertEquals('bar', $_SERVER['FOO']);
         $this->assertEquals('baz', $_SERVER['BAR']);
-        $this->assertEquals('with space', $_SERVER['SPACED']);
+        $this->assertEquals('with spaces', $_SERVER['SPACED']);
     }
 
     /**
@@ -112,7 +115,7 @@ class DotEnvTest extends TestCase
         $this->assertEquals('22222:22#2^{', getenv('SPVAR4'));
         $this->assertEquals('$a6^C7k%zs+e^.jvjXk', getenv('SPVAR1'));
         $this->assertEquals('?BUty3koaV3%GA*hMAwH}B', getenv('SPVAR2'));
-        $this->assertEquals('jdgEB4{QgEC]HL))&GcXxokB+wqoN+j>xkV7K?m$r', getenv('SPVAR3'));
+        $this->assertEquals('46ae3e009a9883e4f2c38542e300a16d', getenv('SPVAR3'));
         $this->assertEquals('test some escaped characters like a quote " or maybe a backslash \\', getenv('SPVAR5'));
     }
 }

@@ -78,6 +78,8 @@ class Collection implements Countable, IteratorAggregate
                     $middleware = $route->middleware;
                     $middleware[$offset] = $this->middleware->route($layer);
                 }
+
+                $route->middleware = $middleware;
             }
         }
     }
@@ -103,13 +105,13 @@ class Collection implements Countable, IteratorAggregate
 
         if ($match instanceof Route) {
             if (! in_array($request->method(), $match->method())) {
-                throw new MethodNotAllowedException();
+                throw new MethodNotAllowedException;
             }
 
             return $match;
         }
 
-        throw new RouteNotFoundException();
+        throw new RouteNotFoundException;
     }
 
     /**

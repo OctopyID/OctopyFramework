@@ -58,6 +58,10 @@ trait Resource
 
         $name = $option['name'] ?? strtolower($uri);
 
+        if ($name === '/') {
+            $name = strtolower(implode('.', $this->group['prefix']));
+        }
+
         if (in_array('index', $method)) {
             $this->get($uri, $controller . '@index')->name($name . '.index');
         }

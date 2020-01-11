@@ -47,7 +47,7 @@ class DatabaseRefreshCommand extends Command
      */
     public function handle(Argv $argv, Output $output)
     {
-        echo $this->call('db:migrate', [
+        echo $this->call('database:migrate', [
             '--seed'    => true,
             '--refresh' => true,
         ]);

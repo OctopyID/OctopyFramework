@@ -47,7 +47,7 @@ class MaintenanceUpCommand extends Command
      */
     public function handle(Argv $argv, Output $output)
     {
-        $down = $this->app['path']->writeable('maintenance.json');
+        $down = $this->app['path']->storage('maintenance.json');
 
         if (file_exists($down)) {
             unlink($down);

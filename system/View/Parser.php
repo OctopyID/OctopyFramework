@@ -127,7 +127,7 @@ final class Parser
      * @param  string $parameter
      * @return string
      */
-    protected function stream(string $type, string $parameter) : string
+    protected function stream(string $type, string $parameter)
     {
         $stream = new Stream(token_get_all('<?php ' . $type), $parameter);
 

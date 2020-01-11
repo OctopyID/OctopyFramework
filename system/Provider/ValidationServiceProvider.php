@@ -22,7 +22,7 @@ class ValidationServiceProvider extends ServiceProvider
     public function register()
     {
         $app = $this->app;
-        $app->request->macro('validate', static function (array $rules) use ($app) {
+        $app->request->macro('validate', function (array $rules) use ($app) {
             if (! $app->validator->validate($this, $rules)) {
                 $message = array_reverse($app->validator->message());
 
@@ -30,7 +30,12 @@ class ValidationServiceProvider extends ServiceProvider
                     return $app->response->json($message, 422)->send();
                 }
 
-                return $app->response->flash('error', $message)->redirect()->back(422)->send();
+                echo $app->response
+                            ->flash('error', $message)
+                                ->redirect()
+                                    ->back()
+                                        ->send();
+                exit;
             }
         });
     }

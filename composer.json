@@ -1,9 +1,9 @@
 {
     "name": "supianidz/octopyframework",
     "type": "project",
-    "description": "Lightweight PHP framework with Laravel look like.",
+    "description": "A lightweight PHP framework with Laravel look like.",
     "license": "MIT",
-    "keywords": ["framework", "octopy", "laravel"],
+    "keywords": ["php", "framework", "octopy", "laravel"],
     "support": {
         "issues": "https://github.com/SupianIDz/OctopyFramework/issues",
         "source": "https://github.com/SupianIDz/OctopyFramework"
@@ -15,7 +15,7 @@
         }
     ],
     "require": {
-        "php": ">=7.1",
+        "php": ">=7.3",
         "ext-curl": "*",
         "ext-json": "*",
         "ext-mbstring": "*"

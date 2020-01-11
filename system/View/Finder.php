@@ -73,12 +73,12 @@ final class Finder
             return $this->template[$name];
         }
 
-        $compiled = $this->compiled ? $this->compiled . mb_strtoupper(md5($name)) . '.php' : null;
+        $compiled = $this->compiled ? $this->compiled . md5($name) . '.php' : null;
 
         $template = str_replace('.', '/', $name);
         foreach ($this->resource as $resource) {
             $resource = array_map(static function ($extension) use ($resource, $template) {
-                return $resource . $template . $extension;
+                return "$resource$template$extension";
             }, ['.octopy.php', '.octopy', '.php']);
 
             foreach ($resource as $pathname) {

@@ -36,7 +36,7 @@ if (! function_exists('bcrypt')) {
      * @param  array  $option
      * @return string
      */
-    function bcrypt($value, $option = null)
+    function bcrypt($value, $option = [])
     {
         return App::make('hash')->driver('bcrypt')->make($value, $option);
     }
@@ -79,7 +79,7 @@ if (! function_exists('dd')) {
      */
     function dd(...$dump)
     {
-        App::make('vardumper')->dd(...$dump);
+        App::make('vardump')->dd(...$dump);
     }
 }
 
@@ -101,7 +101,7 @@ if (! function_exists('dump')) {
      */
     function dump(...$dump)
     {
-        App::make('vardumper')->dump(...$dump);
+        App::make('vardump')->dump(...$dump);
     }
 }
 
@@ -214,5 +214,17 @@ if (! function_exists('view')) {
     function view(string $name, array $parameter = []) : string
     {
         return App::make('view')->render($name, $parameter);
+    }
+}
+
+if (! function_exists('__')) {
+    /**
+     * @param  string $key
+     * @param  string $default
+     * @return string
+     */
+    function __(string $key = null, $default = null)
+    {
+        return App::make('lang')->get($key, $default);
     }
 }

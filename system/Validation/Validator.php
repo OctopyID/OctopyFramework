@@ -60,7 +60,9 @@ class Validator
                     throw new ValidationRuleException("Call to undefined rule [$method].");
                 }
 
-                $this->$method($attribute, ...$parameter);
+                if ($this->$method($attribute, ...$parameter)) {
+                    break;
+                }
             }
         }
 
@@ -95,11 +97,11 @@ class Validator
     /**
      * @param  string $format
      * @param  array  $replace
-     * @return void
+     * @return string
      */
-    protected function format(string $format, array $replace = []) : void
+    protected function format(string $format, array $replace = []) : string
     {
-        $this->message[$replace[':attribute']] = str_replace(array_keys($replace), $replace, $format);
+        return $this->message[$replace[':attribute']] = str_replace(array_keys($replace), $replace, $format);
     }
 
     /**

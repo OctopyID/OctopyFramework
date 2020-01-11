@@ -47,7 +47,7 @@ class AutoloadClearCommand extends Command
      */
     public function handle(Argv $argv, Output $output)
     {
-        if (file_exists($autoload = $this->app['path']->writeable('autoload.php'))) {
+        if (file_exists($autoload = $this->app['path']->storage('autoload.php'))) {
             unlink($autoload);
         }
 

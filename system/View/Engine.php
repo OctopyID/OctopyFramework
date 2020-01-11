@@ -99,7 +99,7 @@ final class Engine
 
         $this->parameter($parameter);
 
-        if ($storage->octopy() && $storage->expired()) {
+        if ($storage->default() && $storage->expired()) {
             $this->parser->compile($storage);
         }
 
@@ -181,7 +181,7 @@ final class Engine
         extract($this->parameter);
 
         try {
-            if ($octopy[0]->octopy() && $octopy[0]->compiled()) {
+            if ($octopy[0]->default() && $octopy[0]->compiled()) {
                 ob_start();
                 require $octopy[0];
 

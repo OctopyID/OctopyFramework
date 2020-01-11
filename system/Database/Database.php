@@ -267,6 +267,18 @@ class Database implements IteratorAggregate, JsonSerializable
     }
 
     /**
+     * @return int
+     */
+    public function count() : int
+    {
+        if ($this->get()) {
+            return count($this->data);
+        }
+
+        return 0;
+    }
+
+    /**
      * @param  array $data
      * @return bool
      */
@@ -313,10 +325,11 @@ class Database implements IteratorAggregate, JsonSerializable
      */
     protected function execute()
     {
+        $query = $this->reset();
         try {
-            return $this->driver->query($this->query);
+            return $this->driver->query($query);
         } catch (DBException $exception) {
-            throw new DBException($this->query);
+            throw new DBException($query);
         }
     }
 
@@ -337,6 +350,8 @@ class Database implements IteratorAggregate, JsonSerializable
     {
         if (is_string($value)) {
             return $this->driver->quote($value);
+        } elseif (is_null($value)) {
+            return "''";
         }
 
         return $value;

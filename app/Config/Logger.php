@@ -70,7 +70,7 @@ return [
     'configuration' => [
 
         'file' => [
-            'filepath'   => $this->path->writeable('octopy.log'),
+            'filepath'   => $this->path->storage('octopy.log'),
             'permission' => 0644,
         ],
     ],

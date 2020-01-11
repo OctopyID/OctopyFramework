@@ -78,6 +78,12 @@ class Middleware
         return $this->global ?? [];
     }
 
+    /**
+     * @param  array   $middleware
+     * @param  Request $object
+     * @param  Closure $next
+     * @return Closure
+     */
     public function dispatch(array $middleware, Request $object, Closure $next)
     {
         return (new Dispatcher($middleware))->dispatch($object, $next);

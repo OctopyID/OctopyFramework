@@ -63,7 +63,7 @@ class Model implements IteratorAggregate, JsonSerializable
         if (property_exists($this, 'table')) {
             $db->table($this->table);
         } else {
-            $model = explode(BS, static::class);
+            $model = explode('\\', static::class);
             $db->table(mb_strtolower(end($model)));
         }
 
@@ -94,7 +94,7 @@ class Model implements IteratorAggregate, JsonSerializable
         if (property_exists($instance = Container::make($model), 'table')) {
             $db->table($instance->table);
         } else {
-            $model = explode(BS, $model);
+            $model = explode('\\', $model);
             $db->table(mb_strtolower(end($model)));
         }
 

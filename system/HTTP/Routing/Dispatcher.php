@@ -48,9 +48,9 @@ class Dispatcher
     public function run()
     {
         // parameter
-        $parameter = array_reverse(Arr::where($this->route->parameter, static function ($array) {
+        $parameter = Arr::where($this->route->parameter, static function ($array) {
             return ! is_null($array);
-        }));
+        });
 
         // middleware
         $middleware = $this->route->middleware;

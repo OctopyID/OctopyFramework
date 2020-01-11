@@ -26,7 +26,7 @@ trait ValidationRule
     {
         $value = $this->value($attribute);
         if ($value !== true && $value !== 'true' && $value !== 1 && $value !== 'on') {
-            return $this->format('The `:attribute` must be accepted.', [
+            return $this->format($this->app->lang['validation.accepted'], [
                 ':attribute' => $attribute,
             ]);
         }
@@ -45,7 +45,7 @@ trait ValidationRule
         if ($value instanceof FileHandler) {
             $length = $value->size() / 1024;
             if (($length >= $min && $length <= $max) === false) {
-                return $this->format('The `:attribute` must be between :min and :max kilobytes.', [
+                return $this->format($this->app->lang['validation.between.bytes'], [
                     ':min'       => $min,
                     ':max'       => $max,
                     ':attribute' => $attribute,
@@ -54,7 +54,7 @@ trait ValidationRule
         } elseif (ctype_digit($value) || is_int($value) || is_int($value) || is_float($value) || is_double($value)) {
             $length = $value;
             if (($length >= $min && $length <= $max) === false) {
-                return $this->format('The `:attribute` must be between :min and :max.', [
+                return $this->format($this->app->lang['validation.between.numeric'], [
                     ':min'       => $min,
                     ':max'       => $max,
                     ':attribute' => $attribute,
@@ -63,7 +63,7 @@ trait ValidationRule
         } elseif (is_array($value)) {
             $length = count($value);
             if (($length >= $min && $length <= $max) === false) {
-                return $this->format('The `:attribute` must be between :min and :max items.', [
+                return $this->format($this->app->lang['validation.between.array'], [
                     ':min'       => $min,
                     ':max'       => $max,
                     ':attribute' => $attribute,
@@ -72,7 +72,7 @@ trait ValidationRule
         } elseif (is_string($value) || is_null($value)) {
             $length = mb_strlen($value);
             if (($length >= $min && $length <= $max) === false) {
-                return $this->format('The `:attribute` must be between :min and :max characters.', [
+                return $this->format($this->app->lang['validation.between.string'], [
                     ':min'       => $min,
                     ':max'       => $max,
                     ':attribute' => $attribute,
@@ -88,7 +88,7 @@ trait ValidationRule
     public function boolean(string $attribute)
     {
         if (! is_bool($this->value($attribute))) {
-            return $this->format('The `:attribute` field must be true or false.', [
+            return $this->format($this->app->lang['validation.boolean'], [
                 ':attribute' => $attribute,
             ]);
         }
@@ -102,7 +102,7 @@ trait ValidationRule
     public function confirmed(string $attribute, string $attribute2nd)
     {
         if ($this->value($attribute) !== $this->value($attribute2nd)) {
-            return $this->format('The `:attribute` confirmation does not match.', [
+            return $this->format($this->app->lang['validation.confirmed'], [
                 ':attribute' => $attribute,
             ]);
         }
@@ -115,7 +115,7 @@ trait ValidationRule
     public function email(string $attribute)
     {
         if (! filter_var($this->value($attribute), FILTER_VALIDATE_EMAIL)) {
-            return $this->format('The `:attribute` must be a valid email address.', [
+            return $this->format($this->app->lang['validation.email'], [
                 ':attribute' => $attribute,
             ]);
         }
@@ -131,8 +131,9 @@ trait ValidationRule
     {
         $database = $this->app['database']->table($table);
         $database->where($column, $this->value($attribute));
+
         if ($database->count() === 0) {
-            return $this->format('The selected `:attribute` is not exists.', [
+            return $this->format($this->app->lang['validation.exists'], [
                 ':attribute' => $attribute,
             ]);
         }
@@ -146,7 +147,7 @@ trait ValidationRule
     {
         $value = $this->value($attribute);
         if (! $value instanceof FileHandler) {
-            return $this->format('The `:attribute` must be a file.', [
+            return $this->format($this->app->lang['validation.file'], [
                 ':attribute' => $attribute,
             ]);
         }
@@ -160,7 +161,7 @@ trait ValidationRule
     {
         $value = $this->value($attribute);
         if (! is_int($value)) {
-            return $this->format('The `:attribute` must be an int.', [
+            return $this->format($this->app->lang['validation.integer'], [
                 ':attribute' => $attribute,
             ]);
         }
@@ -170,10 +171,19 @@ trait ValidationRule
      * @param  string $attribute
      * @return string
      */
+    public function integer(string $attribute)
+    {
+        return $this->int($attribute);
+    }
+
+    /**
+     * @param  string $attribute
+     * @return string
+     */
     public function ip(string $attribute)
     {
         if (! filter_var($this->value($attribute), FILTER_VALIDATE_IP)) {
-            return $this->format('The `:attribute` must be a valid IP address.', [
+            return $this->format($this->app->lang['validation.ip'], [
                 ':attribute' => $attribute,
             ]);
         }
@@ -190,28 +200,28 @@ trait ValidationRule
         if ($value instanceof FileHandler) {
             $size = $value->size() / 1024;
             if (($size < $max) === false) {
-                return $this->format('The `:attribute` may not be greater than :max kilobytes.', [
+                return $this->format($this->app->lang['validation.max.bytes'], [
                     ':max'       => $max,
                     ':attribute' => $attribute,
                 ]);
             }
         } elseif (ctype_digit($value) || is_int($value) || is_float($value) || is_double($value)) {
             if (($value < $max) === false) {
-                return $this->format('The `:attribute` may not be greater than :max.', [
+                return $this->format($this->app->lang['validation.max.numeric'], [
                     ':max'       => $max,
                     ':attribute' => $attribute,
                 ]);
             }
         } elseif (is_array($value)) {
             if ((count($value) < $max) === false) {
-                return $this->format('The `:attribute` may not be greater than :max items', [
+                return $this->format($this->app->lang['validation.max.array'], [
                     ':max'       => $max,
                     ':attribute' => $attribute,
                 ]);
             }
         } elseif (is_string($value) || is_null($value)) {
             if ((mb_strlen($value) < $max) === false) {
-                return $this->format('The `:attribute` may not be greater than :max characters.', [
+                return $this->format($this->app->lang['validation.max.string'], [
                     ':max'       => $max,
                     ':attribute' => $attribute,
                 ]);
@@ -230,28 +240,28 @@ trait ValidationRule
         if ($value instanceof FileHandler) {
             $size = $value->size() / 1024;
             if (($size > $min) === false) {
-                return $this->format('The `:attribute` must be at least :min kilobytes.', [
+                return $this->format($this->app->lang['validation.min.bytes'], [
                     ':min'       => $min,
                     ':attribute' => $attribute,
                 ]);
             }
         } elseif (ctype_digit($value) || is_int($value) || is_float($value) || is_double($value)) {
             if (($value > $min) === false) {
-                return $this->format('The `:attribute` must be at least :min.', [
+                return $this->format($this->app->lang['validation.min.numeric'], [
                     ':min'       => $min,
                     ':attribute' => $attribute,
                 ]);
             }
         } elseif (is_array($value)) {
             if ((count($value) > $min) === false) {
-                return $this->format('The `:attribute` must be at least :min items', [
+                return $this->format($this->app->lang['validation.min.array'], [
                     ':min'       => $min,
                     ':attribute' => $attribute,
                 ]);
             }
         } elseif (is_string($value) || is_null($value)) {
             if ((mb_strlen($value) > $min) === false) {
-                return $this->format('The `:attribute` must be at least :min characters.', [
+                return $this->format($this->app->lang['validation.min.string'], [
                     ':min'       => $min,
                     ':attribute' => $attribute,
                 ]);
@@ -276,7 +286,7 @@ trait ValidationRule
         }
 
         if ($mime !== $type) {
-            return $this->format('The `:attribute` must be a file of type: :type.', [
+            return $this->format($this->app->lang['validation.mime'], [
                 ':type'      => $type,
                 ':attribute' => $attribute,
             ]);
@@ -291,7 +301,7 @@ trait ValidationRule
     {
         $value = $this->value($attribute);
         if ($value === null || $value === '') {
-            return $this->format('The `:attribute` field is required.', [
+            return $this->format($this->app->lang['validation.required'], [
                 ':attribute' => $attribute,
             ]);
         }
@@ -304,7 +314,7 @@ trait ValidationRule
     public function string(string $attribute)
     {
         if (! is_string($this->value($attribute))) {
-            return $this->format('The `:attribute` must be a string.', [
+            return $this->format($this->app->lang['validation.string'], [
                 ':attribute' => $attribute,
             ]);
         }
@@ -321,7 +331,7 @@ trait ValidationRule
         $database = $this->app['database']->table($table);
         $database->where($column, $this->value($attribute));
         if ($database->count() > 0) {
-            return $this->format('The selected `:attribute` has already been taken.', [
+            return $this->format($this->app->lang['validation.unique'], [
                 ':attribute' => $attribute,
             ]);
         }
@@ -335,7 +345,7 @@ trait ValidationRule
     {
         $value = $this->value($attribute);
         if ($value instanceof FileHandler && $value->uploaded() === false) {
-            return $this->format('The `:attribute` failed to upload.', [
+            return $this->format($this->app->lang['validation.uploaded'], [
                 ':attribute' => $attribute,
             ]);
         }
@@ -348,7 +358,7 @@ trait ValidationRule
     public function url(string $attribute)
     {
         if (! filter_var($this->value($attribute), FILTER_VALIDATE_URL)) {
-            return $this->format('The `:attribute` is not valid URL.', [
+            return $this->format($this->app->lang['validation.url'], [
                 ':attribute' => $attribute,
             ]);
         }

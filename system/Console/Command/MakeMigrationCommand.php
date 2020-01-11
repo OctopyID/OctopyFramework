@@ -61,7 +61,7 @@ class MakeMigrationCommand extends Command
         }
 
         if (($table = $argv->get('-t')) === false && ($table = $argv->get('--table')) === false) {
-            $table = mb_strtolower($parsed['classname']);
+            $table = str_ireplace('Migration', '', mb_strtolower($parsed['classname']));
         }
 
         $data = [

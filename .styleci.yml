@@ -6,10 +6,10 @@ disabled:
   - concat_without_spaces
   - no_empty_phpdoc
   - no_blank_lines_after_phpdoc
+  - ordered_imports
+  - function_typehint_space
 
 enabled:
-  - array_indentation
-  - compact_nullable_typehint
   - concat_with_spaces
   - phpdoc_annotation_without_dot
   - multiline_comment_opening_closing
@@ -18,10 +18,8 @@ finder:
   exclude:
     - modules
     - node_modules
-    - writeable
+    - storage
     - vendor
-  exclude:
-    - "tests"
   name:
     - "*.php"
   not-name:

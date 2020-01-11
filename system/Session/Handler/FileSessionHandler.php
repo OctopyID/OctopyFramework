@@ -85,7 +85,7 @@ class FileSessionHandler implements SessionHandlerInterface
      */
     public function read($id)
     {
-        $filename = $this->storage . mb_strtoupper(md5($id));
+        $filename = $this->storage . md5($id);
 
         if (file_exists($filename)) {
             $this->data = $this->app['filesystem']->get($filename);
@@ -105,7 +105,7 @@ class FileSessionHandler implements SessionHandlerInterface
      */
     public function write($id, $data)
     {
-        $filename = $this->storage . mb_strtoupper(md5($id));
+        $filename = $this->storage . md5($id);
 
         if ($this->encrypt) {
             $data = chunk_split($this->app['encrypter']->encrypt($data));
@@ -120,7 +120,7 @@ class FileSessionHandler implements SessionHandlerInterface
      */
     public function destroy($id)
     {
-        $filename = $this->storage . mb_strtoupper(md5($id));
+        $filename = $this->storage . md5($id);
         if (file_exists($filename)) {
             unlink($filename);
         }

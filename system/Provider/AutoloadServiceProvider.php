@@ -23,13 +23,13 @@ class AutoloadServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $autoload = $this->app['path']->writeable('autoload.php');
+        $autoload = $this->app['path']->storage('autoload.php');
 
         if (file_exists($autoload)) {
             try {
                 $this->app['autoload']->classmap(
                     $this->app['encrypter']->decrypt(require $autoload)
-               );
+                );
             } catch (DecryptException $exception) {
                 if (! $this->app->console()) {
                     throw new DecryptException('The MAC is invalid, please re-run autoload cache command.');

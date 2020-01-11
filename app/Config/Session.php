@@ -50,7 +50,7 @@ return [
     | automatically by Octopy and you can use the Session like normal.
     |
     */
-    'encrypt' => true,
+    'encrypt' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -62,7 +62,7 @@ return [
     | location may be specified. This is only needed for file sessions.
     |
     */
-    'storage' => $this->path->writeable('session'),
+    'storage' => $this->path->storage('session'),
 
     /*
     |--------------------------------------------------------------------------

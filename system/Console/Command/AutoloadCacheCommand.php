@@ -51,7 +51,7 @@ class AutoloadCacheCommand extends Command
         $classmap = $this->classmap();
 
         try {
-            $cache = $this->app['path']->writeable('autoload.php');
+            $cache = $this->app['path']->storage('autoload.php');
 
             // we encrypting the content to confused attacker,
             // because sometimes there's contains a sensitive contents

@@ -16,24 +16,27 @@ html {
 
 body {
     font-family: "Miriam Libre";
-    background-color: #0c1021
+    background-color: #0C1021;
+    background-image: url("../img/wave.svg");
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-attachment: fixed;
 }
 
 .container > .content {
     text-align: center;
-    color: #fff;
+    color: #F2F2F1;
     font-size: 2rem
 }
 
 .container > .content > .logo {
-    padding-top: 100px;
+    padding-top: 90px;
     font-size: 60px
 }
 
 .links > a {
-    color: #F2F2F1;
     padding: 0 25px;
-    font-size: 15px;
+    font-size: 17px;
     font-weight: 600;
     letter-spacing: .1rem;
     text-decoration: none;
@@ -45,69 +48,19 @@ img {
     max-width: 15%
 }
 
-h2 {
+h1 {
     padding: 0;
     margin: 0
 }
 
 a {
     text-decoration: none;
-    color: #fff;
-    border: 0;
-    outline: 0;
+    color: #F2F2F1;
 }
 
-.container > .head {
-    position: relative;
-    border-bottom: 0;
-    height: 28px
-}
-
-.container > .head > .buttons {
-    float: left;
-    padding: 6px;
-    position: relative;
-    z-index: 1
-}
-
-.container > .head > .buttons a {
-    cursor: pointer;
-    display: inline-block;
-    text-align: center;
-    text-decoration: none;
-    margin: 0 2px;
-    -moz-border-radius: 50%;
-    -webkit-border-radius: 50%;
-    border-radius: 50%;
-    width: 15px;
-    height: 15px;
-    font-size: 1.5em;
-    line-height: .83333em
-}
-
-.container > .head > .buttons a.close {
-    background: #f25056;
-    color: #f25056
-}
-
-.container > .head > .buttons a.close:hover {
-    color: #a21f2c
-}
-
-.container > .head > .buttons a.minimize {
-    background: #fac536;
-    color: #fac536
-}
-
-.container > .head > .buttons a.minimize:hover {
-    color: #c28723
-}
-
-.container > .head > .buttons a.enlarge {
-    background: #39ea49;
-    color: #39ea49
-}
-
-.container > .head > .buttons a.enlarge:hover {
-    color: #0b7407
+p {
+    margin: 0;
+    font-size: 75%;
+    border-buttom: 1px solid #F2F2F1;
+    font-style: oblique;
 }

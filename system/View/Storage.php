@@ -57,11 +57,11 @@ final class Storage extends FileSystem
      */
     public function __toString()
     {
-        if ($this->octopy() && $this->compiled) {
+        if ($this->default() && $this->compiled) {
             return $this->compiled;
         }
 
-        if ($this->octopy() && ! $this->compiled) {
+        if ($this->default() && ! $this->compiled) {
             return $this->content;
         }
 
@@ -87,7 +87,7 @@ final class Storage extends FileSystem
     /**
      * @return bool
      */
-    public function octopy() : bool
+    public function default() : bool
     {
         return mb_substr($this->template, -11) === '.octopy.php' || mb_substr($this->template, -7) === '.octopy';
     }

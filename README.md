@@ -1,13 +1,10 @@
 <p align="center">
-	<img src="https://cdn.octopy.id/img/octopy-logo.png">
+	<img src="https://i.ibb.co/gWgwg2m/230.png">
 </p>
 
 <p align="center">
 	<a href="https://travis-ci.org/SupianIDz/OctopyFramework">
 		<img src="https://travis-ci.org/SupianIDz/OctopyFramework.svg?branch=master" alt="Build Status">
-	</a>
-	<a href="https://github.styleci.io/repos/179120121">
-		<img src="https://github.styleci.io/repos/179120121/shield?branch=master&style=flat" alt="StyleCI">
 	</a>
 </p>
 
@@ -15,7 +12,7 @@
 
 Octopy is a lightweight PHP web framework inspired by [Laravel](https://laravel.com/) framework and its use is almost like [Laravel](https://laravel.com/). For people who build web sites using PHP. Its goal is to enable you to develop projects much faster than you could if you were writing code from scratch, by providing a rich set of libraries for commonly needed tasks, as well as a simple interface and logical structure to access these libraries. Octopy lets you creatively focus on your project by minimizing the amount of code needed for a given task.
 
-In addition to the features above this framework is very lightweight, only measuring less than 1.5 megabytes because there is no dependency on other packages, but you are free to use packages from outside using composer.
+In addition to the features above this framework is very lightweight, only measuring less than 1 megabytes because there is no dependency on other packages, but you are free to use packages from outside using composer.
 
 Octopy is right for you if:
 

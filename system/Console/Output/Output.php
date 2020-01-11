@@ -324,7 +324,7 @@ class Output extends Color
         $octopy[] = " | | | |/ __| __/ _ \| '_ \| | | | ";
         $octopy[] = " | |_| | (__| || (_) | |_) | |_| | ";
         $octopy[] = "  \___/ \___|\__\___/| .__/ \__, | ";
-        $octopy[] = "   framework.octopy.id    |_|    |___/  ";
+        $octopy[] = "    www.octopy.id    |_|    |___/  ";
         $octopy[] = "";
 
 

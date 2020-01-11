@@ -29,7 +29,7 @@ class DotEnv
      */
     public function __construct(string $path, string $file = '.env')
     {
-        $this->path = preg_replace('/\/+/', '/', $path . DS . $file);
+        $this->path = preg_replace('/\/+/', '/', "$path/$file");
     }
 
     /**

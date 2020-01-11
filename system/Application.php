@@ -18,6 +18,9 @@ use Octopy\Support\Macroable;
 
 class Application extends Container
 {
+    /**
+     *
+     */
     use Macroable;
 
     /**
@@ -75,7 +78,7 @@ class Application extends Container
      */
     public function version() : string
     {
-        return 'v0.2.3';
+        return 'v0.1.0';
     }
 
     /**
@@ -94,10 +97,19 @@ class Application extends Container
     {
         $fullpath = $this->basepath . $subpath;
         if (! preg_match('/\.(php)/', $subpath)) {
-            $fullpath .= DS;
+            $fullpath .= '/';
         }
 
         return preg_replace('/\/+/', '/', $fullpath);
+    }
+
+    /**
+     * @param  string $subpath
+     * @return string
+     */
+    public function translation(string $subpath = null) : string
+    {
+        return $this->basepath('app/Language/' . $subpath);
     }
 
     /**
@@ -122,9 +134,9 @@ class Application extends Container
      * @param  string $subpath
      * @return string
      */
-    public function writeable(string $subpath = null) : string
+    public function storage(string $subpath = null) : string
     {
-        return $this->basepath('writeable/' . $subpath);
+        return $this->basepath('storage/' . $subpath);
     }
 
     /**

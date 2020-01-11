@@ -141,7 +141,7 @@ abstract class ExceptionHandler
             'line'      => $exception->getLine(),
             'trace'     => $exception->getTrace(),
             'message'   => head(explode("\n", $exception->getMessage())),
-            'exception' => last(explode(BS, get_class($exception))),
+            'exception' => last(explode('\\', get_class($exception))),
         ];
     }
 

@@ -101,7 +101,7 @@ class DatabaseMigrateCommand extends Command
             }
 
             // Migrating
-            sort($migration);
+            // sort($migration);
 
             foreach ($migration as $data) {
                 $this->create($output, $data);
@@ -114,7 +114,7 @@ class DatabaseMigrateCommand extends Command
         if ($argv->get('-s') || $argv->get('--seed')) {
             $argv->remove('name');
             echo $output->white(str_repeat('-', 40));
-            echo $this->call('db:seed');
+            echo $this->call('database:seed');
         }
     }
 

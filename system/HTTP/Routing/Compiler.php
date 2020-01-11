@@ -19,25 +19,29 @@ class Compiler
     /**
      * @var int
      */
-    protected $count = 0;
+    protected static $close = 0;
 
     /**
-     * @param  string $uri
+     * @param  string $target
      * @return array
      */
-    public function parse(string $uri) : array
+    public static function parse(string $target) : array
     {
-        return [$this->regexp($uri), $this->option($uri)];
+        return [
+            static::regexp($target),
+            static::option($target),
+        ];
     }
 
     /**
-     * @param  string $uri
+     * @param  string $target
      * @return array
      */
-    protected function option(string $uri) : array
+    protected static function option(string $target) : array
     {
-        if (preg_match_all('/\:(\w+?)\?/', $uri, $matches)) {
-            return array_filter(array_fill_keys($matches[1], null), static function ($key) {
+        $target = str_replace('?', '', $target);
+        if (preg_match_all('/(?<=\/):([^\/]+)(?=\/|$)/', $target, $match)) {
+            return array_filter(array_fill_keys($match[1], null), static function ($key) {
                 return is_string($key);
             }, ARRAY_FILTER_USE_KEY);
         }
@@ -46,53 +50,63 @@ class Compiler
     }
 
     /**
-     * @param  string $uri
+     * @param  string $target
      * @return string
      */
-    protected function regexp(string $uri) : ?string
+    protected static function regexp(string $target) : string
     {
-        if (preg_match_all('/(?<=\/):([^\/]+)(?=\/|$)/', $uri, $matches)) {
-            $search = '';
-            $regexp = '/';
+        if (preg_match_all('/(?<=\/):([^\/]+)(?=\/|$)/', $target, $match)) {
+            $offsetx = 0;
+            $pattern = '/';
+            foreach (preg_split('/\//', $target, null, PREG_SPLIT_NO_EMPTY) as $value) {
+                if (substr($value, 0, 1) === ':') {
+                    $pattern .= sprintf(static::compute($match[1], $offsetx), trim($match[1][$offsetx], '?'));
+                    $offsetx++;
+                } else {
+                    $pattern .= '/' . $value;
 
-            foreach ($matches[1] as $key => $value) {
-                $search .= '\/' . preg_quote($matches[0][$key]);
-                $regexp .= sprintf($this->compute($matches[1], $key), trim($value, '?'));
+                    if (! isset($match[1][$offsetx]) || substr($match[1][$offsetx], -1) !== '?') {
+                        $pattern .= '/';
+                    }
+
+                    if ($offsetx > 1) {
+                        $offsetx--;
+                    }
+                }
             }
 
-            $regexp = preg_replace('/' . $search . '/', rtrim($regexp, '/'), $uri);
-            $regexp = preg_replace('/\/+/', '/', $regexp .= str_repeat(')?', $this->count));
+            $pattern = preg_replace('/\/+/', '/', rtrim($pattern .= str_repeat(')?', static::$close), '/'));
         }
 
-        $this->count = 0;
+        static::$close = 0;
 
-        return '#^' . ($regexp ?? str_replace('/', '\/', $uri)) . '$#sDu';
+        return '#^' . ($pattern ?? str_replace('/', '\/', $target)) . '$#sDu';
     }
 
     /**
      * @param  array $array
      * @param  int   $offset
-     * @return bool
+     * @return string
      */
-    protected function compute(array $array, int $offset = 0)
+    protected static function compute(array $array, int $offset = 0) : string
     {
-        $regexp = '(?P<%s>[^/]++)';
+        $pattern = '(?P<%s>[^/]++)';
 
-        if ($offset > 0 && mb_substr($array[$offset], -1) === '?') {
-            $regexp = '(?:/' . $regexp;
+        if ($offset > 0 && substr($array[$offset], -1) === '?') {
+            $pattern = '(?:/' . $pattern;
 
-            $this->count += 1;
+            ++static::$close;
         }
 
-        if ($offset === 0 && mb_substr($array[$offset], -1) === '?') {
-            $regexp .= '?';
+        if ($offset === 0 && substr($array[$offset], -1) === '?') {
+            $pattern .= '?';
         }
 
-        if ($this->next($array, $offset) && $this->next($array, $offset + 1)) {
-            $regexp .= '/';
+        if (static::next($array, $offset) && static::next($array, $offset + 1)) {
+            $pattern .= '/';
         }
 
-        return $regexp;
+        return $pattern;
     }
 
     /**
@@ -100,7 +114,7 @@ class Compiler
      * @param  int   $offset
      * @return bool
      */
-    protected function next(array $array, int $offset) : bool
+    protected static function next(array $array, int $offset) : bool
     {
         if (! isset($array[$offset])) {
             return true;

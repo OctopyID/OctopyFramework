@@ -176,27 +176,27 @@ class Router
     public function set(array $method, string $uri, $controller)
     {
         // Method
-        $method = array_map('mb_strtoupper', $method);
+        $method = array_map('strtoupper', $method);
 
         // URI
         if (isset($this->group['prefix'])) {
-            $uri = implode(DS, $this->group['prefix']) . DS . $uri;
+            $uri = implode('/', $this->group['prefix']) . "/$uri";
         }
 
         $uri = $this->normalize($uri);
 
-        if ($uri !== DS) {
-            $uri = rtrim($uri, DS);
+        if ($uri !== '/') {
+            $uri = rtrim($uri, '/');
         }
 
-        if (mb_substr($uri, 0, 1) !== DS) {
-            $uri = DS . $uri;
+        if (mb_substr($uri, 0, 1) !== '/') {
+            $uri = '/' . $uri;
         }
 
         // Controller
         if (is_string($controller)) {
             if (isset($this->group['namespace'])) {
-                $controller = BS . implode(BS, $this->group['namespace']) . BS . $controller;
+                $controller = '\\' . implode('\\', $this->group['namespace']) . "\\$controller";
             }
 
             $controller = explode('@', $controller);
@@ -255,6 +255,6 @@ class Router
             return $value;
         }
 
-        return preg_replace('/\/+/', DS, preg_replace('/\\\\+/', BS, $value));
+        return preg_replace('/\/+/', '/', preg_replace('/\\\\+/', '\\', $value));
     }
 }

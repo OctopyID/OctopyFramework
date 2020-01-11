@@ -47,7 +47,7 @@ class RouteClearCommand extends Command
      */
     public function handle(Argv $argv, Output $output)
     {
-        $cache  = $this->app->writeable();
+        $cache  = $this->app->storage();
         $cache .= '9C46408A3BC655C68505C57A11D6C4EE';
 
         if (file_exists($cache)) {

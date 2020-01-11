@@ -59,7 +59,7 @@ class PathLocator
     public function __get(string $path) : PathLocator
     {
         if (! empty($this->subpath)) {
-            if ($path !== 'app' && ! in_array($path, ['app', 'system', 'public', 'writeable'])) {
+            if ($path !== 'app' && ! in_array($path, ['app', 'system', 'public', 'storage'])) {
                 $path = ucfirst($path);
             }
         }
@@ -76,7 +76,7 @@ class PathLocator
      */
     public function __call(string $path, array $additional = [])
     {
-        if (! in_array($path, ['app', 'system', 'public', 'writeable'])) {
+        if (! in_array($path, ['app', 'system', 'public', 'storage'])) {
             $path = ucfirst($path);
         }
 
