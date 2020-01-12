@@ -141,6 +141,10 @@ class Database implements IteratorAggregate, JsonSerializable
             $column[] = '*';
         } else {
             foreach ($column as $key => $value) {
+                if (preg_match('/^COUNT/', $value)) {
+                    continue;
+                }
+
                 $column[$key] = $this->escape($value);
             }
         }
@@ -244,10 +248,13 @@ class Database implements IteratorAggregate, JsonSerializable
     }
 
     /**
+     * @param  array $except
      * @return $this
      */
-    public function first()
+    public function first(array $except = [])
     {
+        $this->except($except);
+
         if (! $this->match('SELECT')) {
             $this->select('*');
         }
@@ -260,10 +267,13 @@ class Database implements IteratorAggregate, JsonSerializable
     }
 
     /**
+     * @param  array $except
      * @return $this
      */
-    public function get()
+    public function get(array $except = [])
     {
+        $this->except($except);
+
         if (! $this->match('SELECT')) {
             $this->select('*');
         }
@@ -276,11 +286,11 @@ class Database implements IteratorAggregate, JsonSerializable
      */
     public function count() : int
     {
-        if ($this->get()) {
-            return count($this->data);
+        if (! $this->match('SELECT')) {
+            $this->select('COUNT(*)');
         }
 
-        return 0;
+        return $this->execute()->rowCount();
     }
 
     /**
@@ -310,7 +320,7 @@ class Database implements IteratorAggregate, JsonSerializable
      */
     public function except(array $except)
     {
-        $this->except = $except;
+        $this->except = array_merge($this->except, $except);
 
         return $this;
     }
@@ -321,7 +331,8 @@ class Database implements IteratorAggregate, JsonSerializable
      */
     protected function data($data)
     {
-        $except = array_flip($this->except);
+        $data = $this->remove($data);
+
         if (! empty($model = $this->model)) {
             if (is_array($data)) {
                 foreach ($data as $key => $value) {
@@ -332,14 +343,6 @@ class Database implements IteratorAggregate, JsonSerializable
                     $data[$key] = new $model($value);
                 }
             } else {
-                if (is_object($data)) {
-                    foreach ($data as $key => $value) {
-                        if (isset($except[$key])) {
-                            unset($data->$key);
-                        }
-                    }
-                }
-
                 $data = new $model($data);
             }
         }
@@ -347,6 +350,33 @@ class Database implements IteratorAggregate, JsonSerializable
         $this->data = $data;
 
         return $this;
+    }
+
+    /**
+     * @param  array $data
+     * @return array
+     */
+    protected function remove($data)
+    {
+        // remove some values who's excepting from results
+        $except = array_flip($this->except);
+        if (is_object($data)) {
+            foreach ($data as $key => $value) {
+                if (isset($except[$key])) {
+                    unset($data->$key);
+                }
+            }
+        } elseif (is_array($data)) {
+            foreach ($data as $int => $object) {
+                foreach ($object as $key => $value) {
+                    if (isset($except[$key])) {
+                        unset($data[$int]->$key);
+                    }
+                }
+            }
+        }
+
+        return $data;
     }
 
     /**

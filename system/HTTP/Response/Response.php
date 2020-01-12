@@ -166,8 +166,12 @@ class Response
      * @param  array $header
      * @return Response
      */
-    public function make($data, int $status = 200, array $header = [])
+    public function make($data, $status = 200, array $header = [])
     {
+        if (! is_int($status)) {
+            $status = 500;
+        }
+
         if ($data instanceof Response) {
             return $data;
         }

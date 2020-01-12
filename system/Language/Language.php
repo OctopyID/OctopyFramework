@@ -43,7 +43,7 @@ class Language implements ArrayAccess
      * @param  string $key
      * @return bool
      */
-    public function has($key)
+    public function has(string $key)
     {
         return Arr::has($this->translated, $key);
     }
@@ -71,7 +71,7 @@ class Language implements ArrayAccess
      * @param  array $keys
      * @return array
      */
-    public function many($keys)
+    public function many(array $keys)
     {
         $config = [];
 

@@ -68,6 +68,7 @@ class Collection implements Countable, IteratorAggregate
      */
     public function refresh()
     {
+        $middleware = [];
         foreach ($this->route as $array) {
             foreach ($array as $route) {
                 if ($route->name && ! isset($this->alias[$route->name])) {

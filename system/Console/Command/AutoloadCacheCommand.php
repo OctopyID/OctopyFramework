@@ -72,15 +72,15 @@ class AutoloadCacheCommand extends Command
     {
         $basepath = $this->app->basepath();
 
-        // pattern for skipping vendor files
-        $composer = '/' . str_replace('/', '\/', preg_quote($basepath) . 'vendor') . '/';
+        // pattern for skipping vendor & octopy template files
+        $skipped = '/' . str_replace('/', '\/', preg_quote($basepath) . 'vendor') . '|\.octopy/';
 
         $classmap = [];
         foreach ($this->app['filesystem']->iterator($basepath) as $splfile) {
 
             // we do not discover all files form "vendor"
             // cause it's already handled by Composer
-            if (! $splfile->isFile() || preg_match($composer, $splfile)) {
+            if (! $splfile->isFile() || preg_match($skipped, $splfile)) {
                 continue;
             }
 

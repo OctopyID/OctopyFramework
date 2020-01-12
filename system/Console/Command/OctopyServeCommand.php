@@ -28,7 +28,7 @@ class OctopyServeCommand extends Command
     /**
      * @var array
      */
-    protected $option = [
+    protected $options = [
         '--port[=PORT]' => 'The port to serve the application on [default: 1337]',
     ];
 
