@@ -5,10 +5,12 @@
  * | |_| | (__| || (_) | |_) | |_| |
  *  \___/ \___|\__\___/| .__/ \__, |
  *                     |_|    |___/.
- * @author  : Supian M <supianidz@gmail.com>
- * @link    : framework.octopy.id
- * @license : MIT
+ * @author :Supian M <supianidz@gmail.com>
+ * @link   :framework.octopy.id
+ * @license:MIT
  */
+
+@import url("https://fonts.googleapis.com/css?family=Miriam+Libre");
 
 html {
     overflow: hidden;
@@ -30,27 +32,16 @@ body {
 }
 
 .container > .content > .logo {
-    padding-top: 90px;
-    font-size: 60px
+    padding-top: 70px;
 }
 
 .links > a {
     padding: 0 25px;
-    font-size: 17px;
+    font-size: 15px;
     font-weight: 600;
     letter-spacing: .1rem;
     text-decoration: none;
     text-transform: uppercase;
-}
-
-img {
-    min-width: 10%;
-    max-width: 15%
-}
-
-h1 {
-    padding: 0;
-    margin: 0
 }
 
 a {
@@ -58,9 +49,74 @@ a {
     color: #F2F2F1;
 }
 
+a:hover {
+    color: #459CB8;
+}
+
+img {
+    min-width: 10%;
+    max-width: 15%
+}
+
+h2 {
+    padding: 0;
+    margin: 0
+}
+
 p {
-    margin: 0;
-    font-size: 75%;
-    border-buttom: 1px solid #F2F2F1;
-    font-style: oblique;
+    font-size:80%;
+    padding:0;
+    margin: 10px 0 0 0;
+}
+
+.container > .head{
+    position:relative;
+    border-bottom:0;
+    height:28px
+}
+
+.container > .head > .buttons{
+    float:left;
+    padding:6px;
+    position:relative;
+    z-index:1
+}
+
+.container > .head > .buttons a{
+    cursor:pointer;
+    display:inline-block;
+    text-align:center;
+    text-decoration:none;
+    margin:0 2px;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+    border-radius:50%;
+    width:15px;
+    height:15px;
+    font-size:1.5em;
+    line-height:.83333em
+}
+
+.container > .head > .buttons a i{
+    text-align:center;
+    width:100%;
+    height:15px;
+    display:block;
+    font-size:.55556em;
+    line-height:1.5em
+}
+
+.container > .head > .buttons a.close{
+    background:#f25056;
+    color:#f25056
+}
+
+.container > .head > .buttons a.minimize{
+    background:#fac536;
+    color:#fac536
+}
+
+.container > .head > .buttons a.enlarge{
+    background:#39ea49;
+    color:#39ea49
 }
