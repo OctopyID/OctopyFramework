@@ -203,7 +203,7 @@ class Logger
 
         // is the level a valid level?
         if (! array_key_exists($level, $this->level)) {
-            throw new InvalidLogLevelException();
+            throw new InvalidLogLevelException;
         }
 
         // Does the app want to log this right now?

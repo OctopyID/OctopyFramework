@@ -95,7 +95,7 @@ class Container implements ArrayAccess
             unset(static::$instances[$abstract]);
         }
 
-        return new Container();
+        return new Container;
     }
 
     /**

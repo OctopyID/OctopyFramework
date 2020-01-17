@@ -30,7 +30,7 @@ class ValidatePostSize
         $max = $this->size();
 
         if ($max > 0 && $request->server('CONTENT_LENGTH') > $max) {
-            throw new PostTooLargeException();
+            throw new PostTooLargeException;
         }
 
         return $next($request);

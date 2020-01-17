@@ -58,6 +58,6 @@ class DownloadResponse extends Response
             }
         }
 
-        throw new FileNotFoundException();
+        throw new FileNotFoundException;
     }
 }

@@ -29,9 +29,11 @@ class HelperDirective extends Directive
         } elseif ($stream->next('dd') || $stream->next('d') || $stream->next('dump')) {
             return $this->php('%s(%s)', $stream->code(), $stream->expression());
         } elseif ($stream->next('session')) {
-            return $this->php('if($app->session->has(%s)) : ', $stream->expression());
+            return $this->php('if ($app->session->has(%s)) : ', $stream->expression());
         } elseif ($stream->next('endsession')) {
             return $this->php('endif;');
+        } elseif ($stream->next('lang')) {
+            return $this->php('echo __(%s);', $stream->expression());
         }
     }
 }

@@ -59,7 +59,7 @@ class VarDumper
     protected $colors = [
         'boolean'    => ['#FFC447', 'purple'     ],
         'double'     => ['#abb2bf', 'cyan'       ],
-        'int'    => ['#FFC447', 'lightgreen'],
+        'int'        => ['#FFC447', 'lightgreen'],
         'null'       => ['#FFC447', 'white'      ],
         'recursion'  => ['#e06c75', 'red'        ],
         'size'       => ['#21B089', 'green'      ],
@@ -77,14 +77,14 @@ class VarDumper
      * @var array
      */
     protected $foreground = [
-        'none'          => null,
-        'black'         => 30,
-        'red'           => 31,
-        'green'         => 32,
-        'yellow'        => 33,
-        'blue'          => 34,
-        'purple'        => 35,
-        'cyan'          => 36,
+        'none'         => null,
+        'black'        => 30,
+        'red'          => 31,
+        'green'        => 32,
+        'yellow'       => 33,
+        'blue'         => 34,
+        'purple'       => 35,
+        'cyan'         => 36,
         'lightgray'    => 37,
         'darkgray'     => 90,
         'lightred'     => 91,
@@ -93,21 +93,21 @@ class VarDumper
         'lightblue'    => 94,
         'lightmagenta' => 95,
         'lightcyan'    => 96,
-        'white'         => 97,
+        'white'        => 97,
     ];
 
     /**
      * @var array
      */
     protected $background = [
-        'none'          => null,
-        'black'         => 40,
-        'red'           => 41,
-        'green'         => 42,
-        'yellow'        => 43,
-        'blue'          => 44,
-        'purple'        => 45,
-        'cyan'          => 46,
+        'none'         => null,
+        'black'        => 40,
+        'red'          => 41,
+        'green'        => 42,
+        'yellow'       => 43,
+        'blue'         => 44,
+        'purple'       => 45,
+        'cyan'         => 46,
         'lightgray'    => 47,
         'darkgray'     => 100,
         'lightred'     => 101,
@@ -116,7 +116,7 @@ class VarDumper
         'lightblue'    => 104,
         'lightmagenta' => 105,
         'lightcyan'    => 106,
-        'white'         => 107,
+        'white'        => 107,
     ];
 
     /**
