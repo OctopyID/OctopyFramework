@@ -23,7 +23,7 @@
 | the responses back to the browser and delight our users.
 |
 */
-$app = require '../system/Octopy.php';
+$app = require __DIR__ . '/../system/Octopy.php';
 
 /*
 |--------------------------------------------------------------------------
