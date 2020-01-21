@@ -18,15 +18,14 @@ Octopy is right for you if:
 
 * You are not interested in large framework like [Laravel](https://laravel.com/).
 * You eschew complexity, favoring simple solutions.
-* You need broad compatibility with standard hosting accounts that run a variety of PHP versions and configurations.
-* You need clear, thorough documentation.
-* You need exceptional performance.
-* You want a framework that requires nearly zero configuration.
 * You want a framework with a small footprint.
 * You want a framework with zero dependencies.
-* You want fast debugging.
-* You want to create a database structure quickly.
 * You want to make things that are often made quickly.
+
+Do not use this if:
+
+* You need a full production-ready solution.
+* You prefer not to work with potential breaking changes and/or features not yet working properly as we improve it during alpha period.
 
 
 ## Learning Octopy
@@ -51,4 +50,4 @@ Please pay for my cup of coffee by hitting the star button :smiley:
 
 Crafted with :heart: from Kandangan, Indonesia
 
-Copyright 2018 - 2019 by [Supian M](mailto:supianidz@gmail.com)
+Copyright 2018 - 2020 by [Supian M](mailto:supianidz@gmail.com)
