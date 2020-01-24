@@ -30,11 +30,11 @@ Do not use this if:
 
 ## Learning Octopy
 
-Octopy has the most extensive and thorough [documentation](https://framework.octopy.id/docs/welcome/), making it a breeze to get started with the framework.
+Octopy has the most extensive and thorough [documentation](https://framework.octopy.id/docs/introduction), making it a breeze to get started with the framework.
 
 ## Contributing
 
-Thank you for considering contributing to the Octopy framework! The contribution guide can be found in the [Octopy documentation](https://framework.octopy.id/docs/contribution/).
+Thank you for considering contributing to the Octopy framework! The contribution guide can be found in the [Octopy documentation](https://framework.octopy.id/docs/contributions).
 
 ## Security Vulnerabilities
 
