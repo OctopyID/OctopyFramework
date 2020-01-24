@@ -24,6 +24,14 @@ use Octopy\Session\Handler\NullSessionHandler;
 class Session implements ArrayAccess
 {
     /**
+     * @var array
+     */
+    protected $handler = [
+        'file'  => FileSessionHandler::class,
+        'array' => NullSessionHandler::class,
+    ];
+
+    /**
      * @param Application             $app
      * @param SessionHandlerInterface $handler
      */
@@ -170,12 +178,30 @@ class Session implements ArrayAccess
      */
     public static function handler(?string $name) : string
     {
-        $handler = [
-            'file'  => FileSessionHandler::class,
-            'array' => NullSessionHandler::class,
-        ];
+        $handler = $this->handler[$name] ?? $this->handler['array'];
 
-        return $handler[$name] ?? $handler['array'];
+        if ($handler instanceof Closure) {
+            $handler = $handler($this->app);
+        }
+
+        if (! $handler instanceof SessionHandlerInterface) {
+            throw new Exception("Session handler should implement the SessionHandlerInterface");
+        }
+
+        return $handler;
+    }
+
+    /**
+     * @param string $name
+     * @param mixed  $handler
+     */
+    public function extend(string $name, $handler)
+    {
+        if (array_key_exists($name, $this->handler)) {
+            throw new Exception("Session handler [$name] already exists.");
+        }
+
+        $this->handler[$name] = $handler;
     }
 
     /**
