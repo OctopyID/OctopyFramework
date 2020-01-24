@@ -26,7 +26,7 @@ class Session implements ArrayAccess
     /**
      * @var array
      */
-    protected $handler = [
+    protected static $handler = [
         'file'  => FileSessionHandler::class,
         'array' => NullSessionHandler::class,
     ];
@@ -178,14 +178,10 @@ class Session implements ArrayAccess
      */
     public static function handler(?string $name) : string
     {
-        $handler = $this->handler[$name] ?? $this->handler['array'];
+        $handler = self::$handler[$name] ?? self::$handler['array'];
 
         if ($handler instanceof Closure) {
             $handler = $handler($this->app);
-        }
-
-        if (! $handler instanceof SessionHandlerInterface) {
-            throw new Exception("Session handler should implement the SessionHandlerInterface");
         }
 
         return $handler;
@@ -197,11 +193,11 @@ class Session implements ArrayAccess
      */
     public function extend(string $name, $handler)
     {
-        if (array_key_exists($name, $this->handler)) {
+        if (array_key_exists($name, self::$handler)) {
             throw new Exception("Session handler [$name] already exists.");
         }
 
-        $this->handler[$name] = $handler;
+        self::$handler[$name] = $handler;
     }
 
     /**
