@@ -14,6 +14,7 @@
 
 namespace Octopy;
 
+use Closure;
 use Exception;
 use ArrayAccess;
 use SessionHandlerInterface;
@@ -93,6 +94,10 @@ class Session implements ArrayAccess
     {
         if ($this->has($name)) {
             return $_SESSION[$name];
+        }
+
+        if ($default instanceof Closure) {
+            $default = $default();
         }
 
         return $default;
