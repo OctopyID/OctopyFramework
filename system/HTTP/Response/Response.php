@@ -193,6 +193,39 @@ class Response
      */
     public function body($body)
     {
+        $this->body = $this->check($body);
+
+        return $this;
+    }
+
+    /**
+     * @param  string $body
+     * @return $this
+     */
+    public function prepend($body)
+    {
+        $this->body = $this->check($body) . $this->body;
+
+        return $this;
+    }
+
+    /**
+     * @param  string $body
+     * @return $this
+     */
+    public function append($body)
+    {
+        $this->body .= $this->check($body);
+
+        return $this;
+    }
+
+    /**
+     * @param  string $body
+     * @return string
+     */
+    private function check($body)
+    {
         if (! is_null($body) && ! is_string($body) && ! is_numeric($body) && ! is_callable([$body, '__toString'])) {
             throw new UnexpectedValueException(
                 'The response body must be a string or object implementing __toString() given ' . gettype($body)
@@ -203,9 +236,7 @@ class Response
             $body = call_user_func($body);
         }
 
-        $this->body = $body;
-
-        return $this;
+        return $body;
     }
 
     /**
