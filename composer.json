@@ -1,12 +1,12 @@
 {
-    "name": "supianidz/octopyframework",
+    "name": "octopyid/octopyframework",
     "type": "project",
     "description": "A lightweight PHP framework with Laravel look like.",
     "license": "MIT",
     "keywords": ["php", "framework", "octopy", "laravel"],
     "support": {
-        "issues": "https://github.com/SupianIDz/OctopyFramework/issues",
-        "source": "https://github.com/SupianIDz/OctopyFramework"
+        "issues": "https://github.com/OctopyID/OctopyFramework/issues",
+        "source": "https://github.com/OctopyID/OctopyFramework"
     },
     "authors": [
         {
