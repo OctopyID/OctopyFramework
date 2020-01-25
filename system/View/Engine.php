@@ -17,7 +17,7 @@ namespace Octopy\View;
 use Closure;
 use Exception;
 
-final class Engine
+final class Engine extends Finder
 {
     /**
      * @var Octopy\View\Finder
@@ -61,7 +61,7 @@ final class Engine
     public function __construct(string $resource, ?string $compiled = null)
     {
         $this->parser = new Parser($this);
-        $this->finder = new Finder($resource, $compiled);
+        parent::__construct($resource, $compiled);
     }
 
     /**
@@ -95,7 +95,7 @@ final class Engine
      */
     public function render(string $name, array $parameter = [])
     {
-        $storage = $this->finder->find($name = $this->trim($name));
+        $storage = $this->find($name = $this->trim($name));
 
         $this->parameter($parameter);
 

@@ -16,7 +16,7 @@ namespace Octopy\View;
 
 use Octopy\View\Exception\ViewException;
 
-final class Finder
+class Finder
 {
     /**
      * @var array
@@ -50,7 +50,7 @@ final class Finder
     /**
      * @param mixed $resource
      */
-    public function set($resource)
+    public function resource($resource)
     {
         $this->resource = array_merge($this->resource, (array) $resource);
     }
@@ -67,7 +67,7 @@ final class Finder
      * @param  string $name
      * @return Storage
      */
-    public function find(string $name) : Storage
+    protected function find(string $name) : Storage
     {
         if (array_key_exists($name, $this->template)) {
             return $this->template[$name];
