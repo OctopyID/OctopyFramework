@@ -249,7 +249,7 @@ class Request
      * @param  string $name
      * @return mixed
      */
-    public function header(string $name = null)
+    public function header(string $keyname = null)
     {
         $header = [];
         foreach ($_SERVER as $key => $val) {
@@ -268,8 +268,8 @@ class Request
             }
         }
 
-        if (! is_null($name)) {
-            return $header[$name] ?? null;
+        if (! is_null($keyname)) {
+            return $header[$keyname] ?? null;
         }
 
         return $header;
