@@ -158,12 +158,12 @@ if (! function_exists('byteformatter')) {
     function byteformatter($byte) : string
     {
         if ($byte < 1024) {
-            return ' ' . $byte . 'B';
+            return ' ' . $byte . ' B';
         } elseif ($byte < 1048576) {
-            return ' ' . round($byte / 1024, 2) . 'KB';
+            return ' ' . round($byte / 1024, 2) . ' KB';
         }
 
-        return ' ' . round($byte / 1048576, 2) . 'MB';
+        return ' ' . round($byte / 1048576, 2) . ' MB';
     }
 }
 
