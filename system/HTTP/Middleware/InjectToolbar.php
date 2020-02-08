@@ -18,30 +18,28 @@ use Closure;
 use Throwable;
 use Octopy\Application;
 use Octopy\HTTP\Request;
-use Octopy\Debug\DebugBar;
+use Octopy\Debug\Toolbar;
 
-class InjectDebugBar
+class InjectToolbar
 {
     /**
      * @var array
      */
-    protected $except = [
-        '__debugbar',
-    ];
+    protected $except = [];
 
     /**
-     * @var Octopy\Debug\DebugBar
+     * @var Octopy\Debug\Toolbar
      */
-    protected $debugbar;
+    protected $toolbar;
 
     /**
      * @param Application $app
-     * @param DebugBar    $debugbar
+     * @param Toolbar    $toolbar
      */
-    public function __construct(Application $app, DebugBar $debugbar)
+    public function __construct(Application $app, Toolbar $toolbar)
     {
-        $this->debugbar = $debugbar;
-        $this->except = array_merge($this->except, $app['config']['debugbar.except']);
+        $this->app      = $app;
+        $this->toolbar = $toolbar;
     }
 
     /**
@@ -51,7 +49,10 @@ class InjectDebugBar
      */
     public function handle(Request $request, Closure $next)
     {
-        if (! $this->debugbar->enabled() || $request->is($this->except)) {
+        // excepting
+        $except = array_merge($this->app['config']['toolbar.except'], (array) ('/'. $this->app['config']['toolbar.prefix'] . '*'));
+
+        if (! $this->toolbar->enabled() || $request->is($except)) {
             return $next($request);
         }
 
@@ -61,6 +62,13 @@ class InjectDebugBar
             throw $exception;
         }
 
-        return $this->debugbar->modify($response);
+        $this->toolbar->boot($this->app)
+                       ->write($this->app);
+
+        if ($this->app->config['toolbar.inject']) {
+            $response = $this->toolbar->modify($response);
+        }
+
+        return $response;
     }
 }

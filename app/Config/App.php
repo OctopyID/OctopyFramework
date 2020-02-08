@@ -129,6 +129,7 @@ return [
          * System Service Providers...
          */
         Octopy\Provider\SessionServiceProvider::class,
+        Octopy\Provider\ToolbarServiceProvider::class,
         Octopy\Provider\ConsoleServiceProvider::class,
         Octopy\Provider\ResponseServiceProvider::class,
         Octopy\Provider\AutoloadServiceProvider::class,

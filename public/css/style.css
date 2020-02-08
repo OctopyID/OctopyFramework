@@ -44,26 +44,26 @@ body {
     text-transform: uppercase;
 }
 
-a {
+.links > a {
     text-decoration: none;
     color: #F2F2F1;
 }
 
-a:hover {
+.links > a:hover {
     color: #459CB8;
 }
 
-img {
+.logo > img {
     min-width: 10%;
     max-width: 15%
 }
 
-h2 {
+.content > h2 {
     padding: 0;
     margin: 0
 }
 
-p {
+.content > p {
     font-size:80%;
     padding:0;
     margin: 10px 0 0 0;
