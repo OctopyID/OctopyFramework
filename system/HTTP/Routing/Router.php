@@ -44,6 +44,11 @@ class Router
     protected $middleware;
 
     /**
+     * @var Octopy\HTTP\Routing\Route
+     */
+    protected $current;
+
+    /**
      * @param Application $app
      * @param Collection  $collection
      * @param Compiler    $compiler
@@ -232,7 +237,7 @@ class Router
      */
     public function dispatch(Request $request)
     {
-        $route = $this->collection->match($request);
+        $this->current = $route = $this->collection->match($request);
 
         try {
             $response = $this->app->make(Dispatcher::class, [
@@ -243,6 +248,14 @@ class Router
         }
 
         return $this->app['response']->make($response);
+    }
+
+    /**
+     * @return Route
+     */
+    public function current() : Route
+    {
+        return $this->current;
     }
 
     /**
