@@ -17,6 +17,7 @@ namespace Octopy;
 use ArrayIterator;
 use JsonSerializable;
 use IteratorAggregate;
+use Octopy\Database\Queries;
 use Octopy\Database\Connection;
 use Octopy\Database\Exception\DBException;
 
@@ -51,6 +52,11 @@ class Database implements IteratorAggregate, JsonSerializable
      * @var array
      */
     protected $except = [];
+
+    /**
+     * @var array
+     */
+    protected $queries = [];
 
     /**
      * @var PDO
@@ -326,6 +332,14 @@ class Database implements IteratorAggregate, JsonSerializable
     }
 
     /**
+     * @return array
+     */
+    public function queries() : array
+    {
+        return Queries::all();
+    }
+
+    /**
      * @param  mixed $data
      * @return $this
      */
@@ -384,7 +398,8 @@ class Database implements IteratorAggregate, JsonSerializable
      */
     protected function execute()
     {
-        $query = $this->reset();
+        Queries::collect($query = $this->reset());
+
         try {
             return $this->driver->query($query);
         } catch (DBException $exception) {

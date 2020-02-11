@@ -1,5 +1,5 @@
 <div id="octopy-history" class="tab">
-	<h2>History <span></span></h2>
+	<h2>History</h2>
 	<table>
     	<thead>
        		<tr>

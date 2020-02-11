@@ -42,6 +42,7 @@ return [
      */
     'collectors' => [
         Octopy\Debug\Toolbar\DataCollector\RouteCollector::class,
+        Octopy\Debug\Toolbar\DataCollector\QueryCollector::class,
         Octopy\Debug\Toolbar\DataCollector\ViewCollector::class,
         Octopy\Debug\Toolbar\DataCollector\VarsCollector::class,
         Octopy\Debug\Toolbar\DataCollector\FileCollector::class,
