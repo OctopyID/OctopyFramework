@@ -160,9 +160,39 @@ class Router
      * @param  callable $controller
      * @return Route
      */
+    public function put(string $uri, $controller)
+    {
+        return $this->set(['PUT'], $uri, $controller);
+    }
+    
+    /**
+     * @param  string   $uri
+     * @param  callable $controller
+     * @return Route
+     */
+    public function patch(string $uri, $controller)
+    {
+        return $this->set(['PATCH'], $uri, $controller);
+    }
+
+    /**
+     * @param  string   $uri
+     * @param  callable $controller
+     * @return Route
+     */
+    public function delete(string $uri, $controller)
+    {
+        return $this->set(['DELETE'], $uri, $controller);
+    }
+
+    /**
+     * @param  string   $uri
+     * @param  callable $controller
+     * @return Route
+     */
     public function any(string $uri, $controller)
     {
-        return $this->set(['GET', 'POST'], $uri, $controller);
+        return $this->set(['GET', 'POST', 'PUT', 'PATCH', 'DELETE'], $uri, $controller);
     }
 
     /**
