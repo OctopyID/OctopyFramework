@@ -162,9 +162,9 @@ class Request
      */
     public function method() : string
     {
-        return $this->input('__method', $this->server(
+        return strtoupper($this->input('__method', $this->server(
             'REQUEST_METHOD'
-        ));
+        )));
     }
 
     /**
