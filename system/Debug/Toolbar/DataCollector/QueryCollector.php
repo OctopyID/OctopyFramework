@@ -14,6 +14,8 @@
 
 namespace Octopy\Debug\Toolbar\DataCollector;
 
+use Exception;
+
 class QueryCollector extends Collector
 {
     /**
@@ -31,7 +33,11 @@ class QueryCollector extends Collector
      */
     public function collect()
     {
-        return $this->app->database->queries();
+        try {
+            return $this->app->database->queries();
+        } catch (Exception $exception) {
+            return [];
+        }
     }
 
     /**
