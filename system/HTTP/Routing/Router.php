@@ -164,7 +164,7 @@ class Router
     {
         return $this->set(['PUT'], $uri, $controller);
     }
-    
+
     /**
      * @param  string   $uri
      * @param  callable $controller

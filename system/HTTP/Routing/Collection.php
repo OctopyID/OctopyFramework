@@ -96,7 +96,7 @@ class Collection implements Countable, IteratorAggregate
         );
 
         if (($match = $this->search($route, $path = $request->path())) === false) {
-            foreach (array_diff(['POST', 'GET'], [$method]) as $method) {
+            foreach (array_diff(['GET', 'POST', 'PUT', 'PATCH', 'DELETE'], [$method]) as $method) {
                 $route = $this->get($method);
                 if (($match = $this->search($route, $path)) !== false) {
                     break;
