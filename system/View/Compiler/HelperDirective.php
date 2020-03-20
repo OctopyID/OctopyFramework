@@ -26,6 +26,8 @@ class HelperDirective extends Directive
     {
         if ($stream->next('csrf')) {
             return '<input type="hidden" name="__TOKEN__" value="<?php echo csrf(); ?>">';
+        } elseif ($stream->next('method')) {
+            return '<input type="hidden" name="__method" value=' . mb_strtoupper($stream->expression()) . '>';
         } elseif ($stream->next('dd') || $stream->next('d') || $stream->next('dump')) {
             return $this->php('%s(%s)', $stream->code(), $stream->expression());
         } elseif ($stream->next('session')) {
