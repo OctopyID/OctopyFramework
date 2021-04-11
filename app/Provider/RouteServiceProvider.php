@@ -32,7 +32,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::group(['namespace' => $this->namespace], static function ($route) {
             $route->load('Web.php');
 
-            $route->group(['prefix' =>'api'], static function ($route) {
+            $route->group(['prefix' => 'api'], static function ($route) {
                 $route->load('Api.php');
             });
         });

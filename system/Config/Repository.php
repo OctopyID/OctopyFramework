@@ -75,8 +75,8 @@ class Repository implements ArrayAccess
     }
 
     /**
-     * @param mixed $key
-     * @param mixed $value
+     * @param  mixed $key
+     * @param  mixed $value
      */
     public function set($key, $value = null)
     {
@@ -88,8 +88,8 @@ class Repository implements ArrayAccess
     }
 
     /**
-     * @param string $key
-     * @param mixed  $value
+     * @param  string $key
+     * @param  mixed  $value
      */
     public function prepend($key, $value)
     {
@@ -101,8 +101,8 @@ class Repository implements ArrayAccess
     }
 
     /**
-     * @param string $key
-     * @param mixed  $value
+     * @param  string $key
+     * @param  mixed  $value
      */
     public function push(string $key, $value)
     {
@@ -136,8 +136,8 @@ class Repository implements ArrayAccess
     }
 
     /**
-     * @param string $key
-     * @param mixed  $value
+     * @param  string $key
+     * @param  mixed  $value
      */
     public function offsetSet($key, $value)
     {
@@ -145,7 +145,7 @@ class Repository implements ArrayAccess
     }
 
     /**
-     * @param string $key
+     * @param  string $key
      */
     public function offsetUnset($key)
     {

@@ -27,7 +27,7 @@ abstract class BaseHandler
     protected $datetime;
 
     /**
-     * @param array $config
+     * @param  array $config
      */
     public function __construct(array $config)
     {

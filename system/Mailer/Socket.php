@@ -32,9 +32,9 @@ class Socket
     protected $auth;
 
     /**
-     * @param string $host
-     * @param int    $port
-     * @param array  $auth
+     * @param  string $host
+     * @param  int    $port
+     * @param  array  $auth
      */
     public function __construct(string $host, int $port, array $auth)
     {

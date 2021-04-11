@@ -27,7 +27,7 @@ abstract class ExceptionHandler
     protected $app;
 
     /**
-     * @param Application $app
+     * @param  Application $app
      */
     public function __construct(Application $app)
     {
@@ -35,7 +35,7 @@ abstract class ExceptionHandler
     }
 
     /**
-     * @param Exception $exception
+     * @param  Exception $exception
      */
     public function report(Exception $exception)
     {
@@ -51,7 +51,7 @@ abstract class ExceptionHandler
     }
 
     /**
-     * @param Exception $exception
+     * @param  Exception $exception
      */
     public function console(Exception $exception)
     {
@@ -87,7 +87,7 @@ abstract class ExceptionHandler
                     $output .= $color->apply('c:green', $trace['file']);
                     $output .= $color->apply('c:lightgray', ' ');
                     $output .= $color->apply('c:lightgray', $trace['line']);
-                } elseif (isset($trace['class'])) {
+                } else if (isset($trace['class'])) {
                     $output .= $color->apply('c:green', $trace['class']);
                     $output .= $color->apply('c:lightgray', '::');
                     $output .= $color->apply('c:lightgray', $trace['function']);

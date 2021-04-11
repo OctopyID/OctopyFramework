@@ -46,7 +46,7 @@ class Str
             // pattern such as "library/*", making any string check convenient.
             $pattern = str_replace('\*', '.*', $pattern);
 
-            if (preg_match('#^'.$pattern.'\z#u', $value) === 1) {
+            if (preg_match('#^' . $pattern . '\z#u', $value) === 1) {
                 return true;
             }
         }
@@ -80,11 +80,11 @@ class Str
             return $value;
         }
 
-        return rtrim(mb_strimwidth($value, 0, $limit, '', 'UTF-8')).$end;
+        return rtrim(mb_strimwidth($value, 0, $limit, '', 'UTF-8')) . $end;
     }
 
     /**
-     * @param  string  $value
+     * @param  string $value
      * @return string
      */
     public static function lower($value)
@@ -100,13 +100,13 @@ class Str
      */
     public static function words($value, $words = 100, $end = '...')
     {
-        preg_match('/^\s*+(?:\S++\s*+){1,'.$words.'}/u', $value, $matches);
+        preg_match('/^\s*+(?:\S++\s*+){1,' . $words . '}/u', $value, $matches);
 
         if (! isset($matches[0]) || static::length($value) === static::length($matches[0])) {
             return $value;
         }
 
-        return rtrim($matches[0]).$end;
+        return rtrim($matches[0]) . $end;
     }
 
     /**
@@ -129,7 +129,7 @@ class Str
     }
 
     /**
-     * @param  string  $value
+     * @param  string $value
      * @return string
      */
     public static function upper($value)

@@ -33,8 +33,8 @@ class Dispatcher
     protected $route;
 
     /**
-     * @param Application $app
-     * @param Route       $route
+     * @param  Application $app
+     * @param  Route       $route
      */
     public function __construct(Application $app, Route $route)
     {
@@ -79,9 +79,34 @@ class Dispatcher
     }
 
     /**
+     * @param  array   $parameter
+     * @param  unknown $reflector
+     * @return array
+     */
+    public function method(array $parameter, $reflector) : array
+    {
+        $count = 0;
+
+        $array = array_values($parameter);
+
+        foreach ($reflector->getParameters() as $key => $dependency) {
+            $instance = $this->transform($dependency, $parameter);
+
+            if (! is_null($instance)) {
+                $count++;
+                $this->splice($parameter, $key, $instance);
+            } else if (! isset($array[$key - $count]) && $dependency->isDefaultValueAvailable()) {
+                $this->splice($parameter, $key, $dependency->getDefaultValue());
+            }
+        }
+
+        return $parameter;
+    }
+
+    /**
      * @param  array  &$middleware
-     * @param  object $controller
-     * @param  string $method
+     * @param  object  $controller
+     * @param  string  $method
      * @return void
      */
     protected function middleware(array &$middleware, $controller, string $method)
@@ -116,31 +141,6 @@ class Dispatcher
         }
 
         return $this->method($parameter, new ReflectionMethod($instance, $method));
-    }
-
-    /**
-     * @param  array   $parameter
-     * @param  unknown $reflector
-     * @return array
-     */
-    public function method(array $parameter, $reflector) : array
-    {
-        $count = 0;
-
-        $array = array_values($parameter);
-
-        foreach ($reflector->getParameters() as $key => $dependency) {
-            $instance = $this->transform($dependency, $parameter);
-
-            if (! is_null($instance)) {
-                $count++;
-                $this->splice($parameter, $key, $instance);
-            } elseif (! isset($array[$key - $count]) && $dependency->isDefaultValueAvailable()) {
-                $this->splice($parameter, $key, $dependency->getDefaultValue());
-            }
-        }
-
-        return $parameter;
     }
 
     /**

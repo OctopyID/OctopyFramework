@@ -19,8 +19,8 @@ use Exception;
 class TableFormatter
 {
     /**
-    * @var array
-    */
+     * @var array
+     */
     private $data = [];
 
     /**
@@ -49,7 +49,7 @@ class TableFormatter
     private $table;
 
     /**
-     * @param array $data
+     * @param  array $data
      */
     public function __construct(array $data)
     {
@@ -137,7 +137,7 @@ class TableFormatter
             }
 
             $this->data = $temp;
-        } elseif (is_array($this->data[0])) {
+        } else if (is_array($this->data[0])) {
             $this->header();
         } else {
             throw new Exception('Passed data must be array of objects or arrays');

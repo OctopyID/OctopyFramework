@@ -21,7 +21,7 @@ use Octopy\Config\DotEnv;
 class RegisterEnvironmentVariable
 {
     /**
-     * @param Application $app
+     * @param  Application $app
      */
     public function bootstrap(Application $app)
     {

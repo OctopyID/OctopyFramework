@@ -19,9 +19,9 @@ use Octopy\HTTP\Response;
 class RedirectResponse extends Response
 {
     /**
-     * @param string $location
-     * @param int    $status
-     * @param array  $header
+     * @param  string $location
+     * @param  int    $status
+     * @param  array  $header
      */
     public function __construct(string $location = '/', int $status = 302, array $header = [])
     {

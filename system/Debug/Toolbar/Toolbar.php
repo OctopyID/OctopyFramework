@@ -49,12 +49,12 @@ class Toolbar
     }
 
     /**
-     * @param Application $app
+     * @param  Application $app
      */
     public function write($app)
     {
         $app->make(FileStorage::class)
-                    ->write();
+            ->write();
     }
 
     /**
@@ -87,9 +87,9 @@ class Toolbar
      */
     public function modify($response)
     {
-        $content  = (string) $response->body;
+        $content = (string) $response->body;
 
-        $rendered  = '<script id="toolbar_loader" data-time="' . $this->time .'" src="' . route("assets.javascript", "octopy.js")  . '"></script>';
+        $rendered = '<script id="toolbar_loader" data-time="' . $this->time . '" src="' . route("assets.javascript", "octopy.js") . '"></script>';
         $rendered .= '<style type="text/css" id="toolbar_dynamic_style"></style>';
         $rendered .= '<script type="text/javascript" id="toolbar_dynamic_script"></script>';
 

@@ -37,8 +37,8 @@ final class Autoload
     private $namespace = [];
 
     /**
-     * @param string $basepath
-     * @param array  $namespace
+     * @param  string $basepath
+     * @param  array  $namespace
      */
     public function __construct(string $basepath, array $namespace = [])
     {

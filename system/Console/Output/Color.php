@@ -19,11 +19,11 @@ use Exception as InvalidStyleException;
 
 class Color
 {
-    public const RESET_STYLE     = 0;
+    public const RESET_STYLE = 0;
 
-    public const FOREGROUND      = 38;
+    public const FOREGROUND = 38;
 
-    public const BACKGROUND      = 48;
+    public const BACKGROUND = 48;
 
     public const COLOR256_REGEXP = '~^(b:)?color_([0-9]{1,3})$~';
 
@@ -41,24 +41,24 @@ class Color
      * @var array
      */
     protected $style = [
-        's:none'          => null,
-        's:bold'          => 1,
-        's:dark'          => 2,
-        's:italic'        => 3,
-        's:underline'     => 4,
-        's:blink'         => 5,
-        's:reverse'       => 7,
-        's:concealed'     => 8,
+        's:none'      => null,
+        's:bold'      => 1,
+        's:dark'      => 2,
+        's:italic'    => 3,
+        's:underline' => 4,
+        's:blink'     => 5,
+        's:reverse'   => 7,
+        's:concealed' => 8,
 
-        'c:default'       => 39,
-        'c:black'         => 30,
-        'c:red'           => 31,
-        'c:green'         => 32,
-        'c:yellow'        => 33,
-        'c:blue'          => 34,
-        'c:magenta'       => 35,
-        'c:cyan'          => 36,
-        'c:lightgray'    => 37,
+        'c:default'   => 39,
+        'c:black'     => 30,
+        'c:red'       => 31,
+        'c:green'     => 32,
+        'c:yellow'    => 33,
+        'c:blue'      => 34,
+        'c:magenta'   => 35,
+        'c:cyan'      => 36,
+        'c:lightgray' => 37,
 
         'c:darkgray'     => 90,
         'c:lightred'     => 91,
@@ -67,17 +67,17 @@ class Color
         'c:lightblue'    => 94,
         'c:lightmagenta' => 95,
         'c:lightcyan'    => 96,
-        'c:white'         => 97,
+        'c:white'        => 97,
 
-        'b:default'       => 49,
-        'b:black'         => 40,
-        'b:red'           => 41,
-        'b:green'         => 42,
-        'b:yellow'        => 43,
-        'b:blue'          => 44,
-        'b:magenta'       => 45,
-        'b:cyan'          => 46,
-        'b:lightgray'    => 47,
+        'b:default'   => 49,
+        'b:black'     => 40,
+        'b:red'       => 41,
+        'b:green'     => 42,
+        'b:yellow'    => 43,
+        'b:blue'      => 44,
+        'b:magenta'   => 45,
+        'b:cyan'      => 46,
+        'b:lightgray' => 47,
 
         'b:darkgray'     => 100,
         'b:lightred'     => 101,
@@ -86,7 +86,7 @@ class Color
         'b:lightblue'    => 104,
         'b:lightmagenta' => 105,
         'b:lightcyan'    => 106,
-        'b:white'         => 107,
+        'b:white'        => 107,
     ];
 
     /**
@@ -115,7 +115,7 @@ class Color
     {
         preg_match_all('^\<' . implode('|', array_keys($this->style)) . '\>^', $text, $match);
         $match[1] = [];
-        foreach ($match[0] as $i  => $key) {
+        foreach ($match[0] as $i => $key) {
             $match[0][$i] = '<' . $key . '>';
             $match[1][$i] = sprintf("\033[%um", $this->style[$key]);
         }
@@ -147,7 +147,7 @@ class Color
         foreach ($style as $key) {
             if (isset($this->theme[$key])) {
                 $sequence = array_merge($sequence, $this->sequence($key));
-            } elseif ($this->validate($key)) {
+            } else if ($this->validate($key)) {
                 $sequence[] = $this->style($key);
             } else {
                 throw new InvalidStyleException($key);
@@ -166,7 +166,7 @@ class Color
     }
 
     /**
-     * @param bool $force
+     * @param  bool $force
      */
     public function force($force)
     {
@@ -182,8 +182,8 @@ class Color
     }
 
     /**
-    * @param array $theme
-    */
+     * @param  array $theme
+     */
     public function set(array $theme)
     {
         $this->theme = [];
@@ -193,8 +193,8 @@ class Color
     }
 
     /**
-     * @param string $name
-     * @param mixed  $styles
+     * @param  string $name
+     * @param  mixed  $styles
      */
     public function theme($name, $styles)
     {
@@ -224,7 +224,7 @@ class Color
     }
 
     /**
-     * @param string $name
+     * @param  string $name
      */
     public function remove($name)
     {
@@ -239,9 +239,10 @@ class Color
         if (DIRECTORY_SEPARATOR === '\\') {
             if (function_exists('sapi_windows_vt100_support') && @sapi_windows_vt100_support(STDOUT)) {
                 return true;
-            } elseif (getenv('ANSICON') !== false || getenv('ConEmuANSI') === 'ON') {
+            } else if (getenv('ANSICON') !== false || getenv('ConEmuANSI') === 'ON') {
                 return true;
             }
+
             return false;
         } else {
             return function_exists('posix_isatty') && @posix_isatty(STDOUT);
@@ -290,7 +291,7 @@ class Color
 
         preg_match(Color::COLOR256_REGEXP, $style, $matches);
 
-        $type  = $matches[1] === 'b:' ? Color::BACKGROUND : Color::FOREGROUND;
+        $type = $matches[1] === 'b:' ? Color::BACKGROUND : Color::FOREGROUND;
         $value = $matches[2];
 
         return "$type;5;$value";

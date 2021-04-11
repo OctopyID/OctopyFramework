@@ -127,9 +127,9 @@ class Response
     ];
 
     /**
-     * @param mixed $data
-     * @param int   $status
-     * @param array $header
+     * @param  mixed $data
+     * @param  int   $status
+     * @param  array $header
      */
     public function __construct($data = '', $status = 200, $header = [])
     {
@@ -218,25 +218,6 @@ class Response
         $this->body .= $this->check($body);
 
         return $this;
-    }
-
-    /**
-     * @param  string $body
-     * @return string
-     */
-    private function check($body)
-    {
-        if (! is_null($body) && ! is_string($body) && ! is_numeric($body) && ! is_callable([$body, '__toString'])) {
-            throw new UnexpectedValueException(
-                'The response body must be a string or object implementing __toString() given ' . gettype($body)
-            );
-        }
-
-        if (is_callable([$body, '__toString'])) {
-            $body = call_user_func($body);
-        }
-
-        return $body;
     }
 
     /**
@@ -345,5 +326,24 @@ class Response
         }
 
         echo $this->body;
+    }
+
+    /**
+     * @param  string $body
+     * @return string
+     */
+    private function check($body)
+    {
+        if (! is_null($body) && ! is_string($body) && ! is_numeric($body) && ! is_callable([$body, '__toString'])) {
+            throw new UnexpectedValueException(
+                'The response body must be a string or object implementing __toString() given ' . gettype($body)
+            );
+        }
+
+        if (is_callable([$body, '__toString'])) {
+            $body = call_user_func($body);
+        }
+
+        return $body;
     }
 }

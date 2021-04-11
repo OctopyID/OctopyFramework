@@ -1,6 +1,5 @@
 <?php
 
-
 /*
  *   ___       _
  *  / _ \  ___| |_ ___  _ __  _   _
@@ -32,7 +31,7 @@ class Language implements ArrayAccess
     protected $translated = [];
 
     /**
-     * @param Application $app
+     * @param  Application $app
      */
     public function __construct(Application $app)
     {
@@ -87,8 +86,8 @@ class Language implements ArrayAccess
     }
 
     /**
-     * @param mixed $key
-     * @param mixed $value
+     * @param  mixed $key
+     * @param  mixed $value
      */
     public function set($key, $value = null)
     {
@@ -100,8 +99,8 @@ class Language implements ArrayAccess
     }
 
     /**
-     * @param string $key
-     * @param mixed  $value
+     * @param  string $key
+     * @param  mixed  $value
      */
     public function prepend($key, $value)
     {
@@ -113,8 +112,8 @@ class Language implements ArrayAccess
     }
 
     /**
-     * @param string $key
-     * @param mixed  $value
+     * @param  string $key
+     * @param  mixed  $value
      */
     public function push(string $key, $value)
     {
@@ -127,24 +126,6 @@ class Language implements ArrayAccess
     public function all() : array
     {
         return $this->translated;
-    }
-
-    /**
-     * @param string $key
-     */
-    protected function load(string $key)
-    {
-        $arr = explode('.', $key);
-
-        $translation = $this->app->translation(
-            $this->app->config['app.locale'] . '/' . ucfirst($arr[0]) . '.php'
-        );
-
-        if (! file_exists($translation)) {
-            throw new TranslationNotDefinedException("Could not find translation for `$key`");
-        }
-
-        $this->translated[$arr[0]] = require $translation;
     }
 
     /**
@@ -166,8 +147,8 @@ class Language implements ArrayAccess
     }
 
     /**
-     * @param string $key
-     * @param mixed  $value
+     * @param  string $key
+     * @param  mixed  $value
      */
     public function offsetSet($key, $value)
     {
@@ -175,10 +156,28 @@ class Language implements ArrayAccess
     }
 
     /**
-     * @param string $key
+     * @param  string $key
      */
     public function offsetUnset($key)
     {
         $this->set($key, null);
+    }
+
+    /**
+     * @param  string $key
+     */
+    protected function load(string $key)
+    {
+        $arr = explode('.', $key);
+
+        $translation = $this->app->translation(
+            $this->app->config['app.locale'] . '/' . ucfirst($arr[0]) . '.php'
+        );
+
+        if (! file_exists($translation)) {
+            throw new TranslationNotDefinedException("Could not find translation for `$key`");
+        }
+
+        $this->translated[$arr[0]] = require $translation;
     }
 }

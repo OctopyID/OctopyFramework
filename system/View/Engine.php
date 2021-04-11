@@ -55,8 +55,8 @@ final class Engine extends Finder
     protected $directive = [];
 
     /**
-     * @param string $resource
-     * @param string $compiled
+     * @param  string $resource
+     * @param  string $compiled
      */
     public function __construct(string $resource, ?string $compiled = null)
     {
@@ -65,8 +65,8 @@ final class Engine extends Finder
     }
 
     /**
-     * @param string $varname
-     * @param mixed  $value
+     * @param  string $varname
+     * @param  mixed  $value
      */
     public function share(string $varname, $value = null)
     {
@@ -74,8 +74,8 @@ final class Engine extends Finder
     }
 
     /**
-     * @param string  $name
-     * @param Closure $handler
+     * @param  string  $name
+     * @param  Closure $handler
      */
     public function directive(string $name, Closure $handler = null)
     {

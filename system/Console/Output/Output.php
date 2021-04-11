@@ -31,7 +31,7 @@ class Output extends Color
     protected $app;
 
     /**
-     * @param Application $app
+     * @param  Application $app
      */
     public function __construct(Application $app)
     {
@@ -99,7 +99,7 @@ class Output extends Color
      */
     public function help(Route $route) : string
     {
-        $output  = $this->banner();
+        $output = $this->banner();
 
         // description
         $this->table->add(['header'], [
@@ -189,7 +189,7 @@ class Output extends Color
      */
     public function list() : string
     {
-        $output  = $this->banner();
+        $output = $this->banner();
         $output .= $this->white(' USAGE : command [options] [args]') . "\n";
 
         // Header
@@ -326,7 +326,6 @@ class Output extends Color
         $octopy[] = "  \___/ \___|\__\___/| .__/ \__, | ";
         $octopy[] = "    www.octopy.id    |_|    |___/  ";
         $octopy[] = "";
-
 
         return $this->yellow(implode("\n", $octopy));
     }

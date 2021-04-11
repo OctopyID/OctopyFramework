@@ -20,7 +20,7 @@ use InvalidArgumentException;
 class Arr
 {
     /**
-     * @param  mixed  $value
+     * @param  mixed $value
      * @return bool
      */
     public static function accessible($value)
@@ -29,9 +29,9 @@ class Arr
     }
 
     /**
-     * @param  array   $array
-     * @param  string  $key
-     * @param  mixed   $value
+     * @param  array  $array
+     * @param  string $key
+     * @param  mixed  $value
      * @return array
      */
     public static function add(array $array, $key, $value)
@@ -44,9 +44,9 @@ class Arr
     }
 
     /**
-    * @param  array  $array
-    * @return array
-    */
+     * @param  array $array
+     * @return array
+     */
     public static function divide(array $array) : array
     {
         return [array_keys($array), array_values($array)];
@@ -125,9 +125,9 @@ class Arr
     }
 
     /**
-     * @param  array     $array
-     * @param  callable  $callback
-     * @param  mixed     $default
+     * @param  array    $array
+     * @param  callable $callback
+     * @param  mixed    $default
      * @return mixed
      */
     public static function last(array $array, callable $callback = null, $default = null)
@@ -140,8 +140,8 @@ class Arr
     }
 
     /**
-     * @param  array  $array
-     * @param  array  $keys
+     * @param  array $array
+     * @param  array $keys
      * @return void
      */
     public static function forget(&$array, $keys)
@@ -177,9 +177,9 @@ class Arr
     }
 
     /**
-     * @param  array   $array
-     * @param  string  $key
-     * @param  mixed   $default
+     * @param  array  $array
+     * @param  string $key
+     * @param  mixed  $default
      * @return mixed
      */
     public static function get($array, $key, $default = null)
@@ -212,8 +212,8 @@ class Arr
     }
 
     /**
-     * @param  array   $array
-     * @param  string  $keys
+     * @param  array  $array
+     * @param  string $keys
      * @return bool
      */
     public static function has(array $array, $keys)
@@ -252,7 +252,7 @@ class Arr
     }
 
     /**
-     * @param  array  $array
+     * @param  array $array
      * @return bool
      */
     public static function assoc(array $array)
@@ -263,8 +263,8 @@ class Arr
     }
 
     /**
-     * @param  array  $array
-     * @param  mixed  $keys
+     * @param  array $array
+     * @param  mixed $keys
      * @return array
      */
     public static function only(array $array, $keys)
@@ -273,9 +273,9 @@ class Arr
     }
 
     /**
-     * @param  array  $array
-     * @param  mixed  $value
-     * @param  mixed  $key
+     * @param  array $array
+     * @param  mixed $value
+     * @param  mixed $key
      * @return array
      */
     public static function prepend(array $array, $value, $key = null)
@@ -290,9 +290,9 @@ class Arr
     }
 
     /**
-     * @param  array   $array
-     * @param  string  $key
-     * @param  mixed   $default
+     * @param  array  $array
+     * @param  string $key
+     * @param  mixed  $default
      * @return mixed
      */
     public static function pull(&$array, string $key, $default = null)
@@ -305,8 +305,8 @@ class Arr
     }
 
     /**
-     * @param  array  $array
-     * @param  int    $number
+     * @param  array $array
+     * @param  int   $number
      * @return mixed
      */
     public static function random(array $array, int $number = null)
@@ -341,9 +341,9 @@ class Arr
     }
 
     /**
-     * @param  array   $array
-     * @param  string  $key
-     * @param  mixed   $value
+     * @param  array  $array
+     * @param  string $key
+     * @param  mixed  $value
      * @return array
      */
     public static function set(&$array, $key, $value)
@@ -369,8 +369,8 @@ class Arr
     }
 
     /**
-     * @param  array  $array
-     * @param  int    $seed
+     * @param  array $array
+     * @param  int   $seed
      * @return array
      */
     public static function shuffle(array $array, int $seed = null)
@@ -388,7 +388,7 @@ class Arr
     }
 
     /**
-     * @param  array  $array
+     * @param  array $array
      * @return array
      */
     public static function sortr(array $array)
@@ -409,7 +409,7 @@ class Arr
     }
 
     /**
-     * @param  array  $array
+     * @param  array $array
      * @return string
      */
     public static function query(array $array) : string
@@ -418,8 +418,8 @@ class Arr
     }
 
     /**
-     * @param  array     $array
-     * @param  callable  $callback
+     * @param  array    $array
+     * @param  callable $callback
      * @return array
      */
     public static function where(array $array, callable $callback) : array
@@ -428,7 +428,7 @@ class Arr
     }
 
     /**
-     * @param  mixed  $value
+     * @param  mixed $value
      * @return array
      */
     public static function wrap($value)

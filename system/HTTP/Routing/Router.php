@@ -49,9 +49,9 @@ class Router
     protected $current;
 
     /**
-     * @param Application $app
-     * @param Collection  $collection
-     * @param Compiler    $compiler
+     * @param  Application $app
+     * @param  Collection  $collection
+     * @param  Compiler    $compiler
      */
     public function __construct(Application $app, Collection $collection, Middleware $middleware, Compiler $compiler)
     {
@@ -84,8 +84,8 @@ class Router
     }
 
     /**
-     * @param array   $attribute
-     * @param Closure $callback
+     * @param  array   $attribute
+     * @param  Closure $callback
      */
     public function group(array $attribute, Closure $callback)
     {
@@ -109,8 +109,8 @@ class Router
     }
 
     /**
-     * @param string  $namespace
-     * @param Closure $callback
+     * @param  string  $namespace
+     * @param  Closure $callback
      */
     public function namespace(string $namespace, Closure $callback)
     {
@@ -118,8 +118,8 @@ class Router
     }
 
     /**
-     * @param string  $prefix
-     * @param Closure $callback
+     * @param  string  $prefix
+     * @param  Closure $callback
      */
     public function prefix(string $prefix, Closure $callback)
     {
@@ -127,8 +127,8 @@ class Router
     }
 
     /**
-     * @param string  $middleware
-     * @param Closure $callback
+     * @param  string  $middleware
+     * @param  Closure $callback
      */
     public function middleware(string $middleware, Closure $callback)
     {
@@ -204,9 +204,9 @@ class Router
     }
 
     /**
-     * @param array    $method
-     * @param string   $uri
-     * @param callable $controller
+     * @param  array    $method
+     * @param  string   $uri
+     * @param  callable $controller
      */
     public function set(array $method, string $uri, $controller)
     {

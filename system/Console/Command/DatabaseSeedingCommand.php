@@ -65,8 +65,8 @@ class DatabaseSeedingCommand extends Command
     }
 
     /**
-     * @param Output $output
-     * @param string $seed
+     * @param  Output $output
+     * @param  string $seed
      */
     private function seed(Output $output, string $seed)
     {

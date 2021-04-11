@@ -24,8 +24,8 @@ class DotEnv
     protected $path;
 
     /**
-     * @param string $path
-     * @param string $file
+     * @param  string $path
+     * @param  string $file
      */
     public function __construct(string $path, string $file = '.env')
     {
@@ -65,27 +65,6 @@ class DotEnv
     }
 
     /**
-     * @param string $key
-     * @param string $value
-     */
-    protected function set(string $key, string $value = '')
-    {
-        extract($this->normalize($key, $value));
-
-        if (! getenv($key, true)) {
-            putenv("$key=$value");
-        }
-
-        if (empty($_ENV[$key])) {
-            $_ENV[$key] = $value;
-        }
-
-        if (empty($_SERVER[$key])) {
-            $_SERVER[$key] = $value;
-        }
-    }
-
-    /**
      * @param  string $key
      * @param  mixed  $default
      * @return mixed
@@ -122,6 +101,27 @@ class DotEnv
     public function all() : array
     {
         return $_ENV;
+    }
+
+    /**
+     * @param  string $key
+     * @param  string $value
+     */
+    protected function set(string $key, string $value = '')
+    {
+        extract($this->normalize($key, $value));
+
+        if (! getenv($key, true)) {
+            putenv("$key=$value");
+        }
+
+        if (empty($_ENV[$key])) {
+            $_ENV[$key] = $value;
+        }
+
+        if (empty($_SERVER[$key])) {
+            $_SERVER[$key] = $value;
+        }
     }
 
     /**

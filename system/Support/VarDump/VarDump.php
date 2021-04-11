@@ -57,34 +57,34 @@ class VarDump
      * @var array
      */
     protected $colors = [
-        'boolean'    => ['#FFC447', 'purple'     ],
-        'double'     => ['#abb2bf', 'cyan'       ],
-        'int'    => ['#FFC447', 'lightgreen'],
-        'null'       => ['#FFC447', 'white'      ],
-        'recursion'  => ['#e06c75', 'red'        ],
-        'size'       => ['#21B089', 'green'      ],
-        'string'     => ['#589DF6', 'blue'       ],
-        'type'       => ['#BBBBBB', 'lightgray' ],
+        'boolean'   => ['#FFC447', 'purple'],
+        'double'    => ['#abb2bf', 'cyan'],
+        'int'       => ['#FFC447', 'lightgreen'],
+        'null'      => ['#FFC447', 'white'],
+        'recursion' => ['#e06c75', 'red'],
+        'size'      => ['#21B089', 'green'],
+        'string'    => ['#589DF6', 'blue'],
+        'type'      => ['#BBBBBB', 'lightgray'],
 
-        'array'      => ['#abb2bf', 'white'      ],
-        'arrow'      => ['#e06c75', 'red'        ],
-        'name'       => ['#e6c07b', 'yellow'     ],
-        'object'     => ['#abb2bf', 'white'      ],
-        'visibility' => ['#FA8C8F', 'lightred'  ],
+        'array'      => ['#abb2bf', 'white'],
+        'arrow'      => ['#e06c75', 'red'],
+        'name'       => ['#e6c07b', 'yellow'],
+        'object'     => ['#abb2bf', 'white'],
+        'visibility' => ['#FA8C8F', 'lightred'],
     ];
 
     /**
      * @var array
      */
     protected $foreground = [
-        'none'          => null,
-        'black'         => 30,
-        'red'           => 31,
-        'green'         => 32,
-        'yellow'        => 33,
-        'blue'          => 34,
-        'purple'        => 35,
-        'cyan'          => 36,
+        'none'         => null,
+        'black'        => 30,
+        'red'          => 31,
+        'green'        => 32,
+        'yellow'       => 33,
+        'blue'         => 34,
+        'purple'       => 35,
+        'cyan'         => 36,
         'lightgray'    => 37,
         'darkgray'     => 90,
         'lightred'     => 91,
@@ -93,21 +93,21 @@ class VarDump
         'lightblue'    => 94,
         'lightmagenta' => 95,
         'lightcyan'    => 96,
-        'white'         => 97,
+        'white'        => 97,
     ];
 
     /**
      * @var array
      */
     protected $background = [
-        'none'          => null,
-        'black'         => 40,
-        'red'           => 41,
-        'green'         => 42,
-        'yellow'        => 43,
-        'blue'          => 44,
-        'purple'        => 45,
-        'cyan'          => 46,
+        'none'         => null,
+        'black'        => 40,
+        'red'          => 41,
+        'green'        => 42,
+        'yellow'       => 43,
+        'blue'         => 44,
+        'purple'       => 45,
+        'cyan'         => 46,
         'lightgray'    => 47,
         'darkgray'     => 100,
         'lightred'     => 101,
@@ -116,7 +116,7 @@ class VarDump
         'lightblue'    => 104,
         'lightmagenta' => 105,
         'lightcyan'    => 106,
-        'white'         => 107,
+        'white'        => 107,
     ];
 
     /**
@@ -205,8 +205,8 @@ class VarDump
     }
 
     /**
-     * @param  string  $string
-     * @param  string  $format
+     * @param  string $string
+     * @param  string $format
      * @return string
      */
     protected function console(string $string, string $format = null) : string
@@ -221,7 +221,7 @@ class VarDump
     }
 
     /**
-     * @param string  $data
+     * @param  string $data
      */
     protected function output(string $data) : void
     {
@@ -239,8 +239,8 @@ class VarDump
     }
 
     /**
-     * @param  string  $value
-     * @param  string  $name
+     * @param  string $value
+     * @param  string $name
      * @return string
      */
     protected function color($value, string $name) : ?string
@@ -257,22 +257,22 @@ class VarDump
     }
 
     /**
-     * @param  int  $size
-     * @param  int  $type
+     * @param  int $size
+     * @param  int $type
      * @return string
      */
     protected function counter(int $size, int $type = 0) : string
     {
         if (! $this->console) {
-            return $this->color('<small>(' . ($type ? 'length' : 'size')  . ":{$size})</small>", 'size');
+            return $this->color('<small>(' . ($type ? 'length' : 'size') . ":{$size})</small>", 'size');
         }
 
-        return $this->color('(' . ($type ? 'length' : 'size')  . ":{$size})", 'size');
+        return $this->color('(' . ($type ? 'length' : 'size') . ":{$size})", 'size');
     }
 
     /**
-     * @param  string  $type
-     * @param  string  $before
+     * @param  string $type
+     * @param  string $before
      * @return string
      */
     protected function type(string $type, string $before = ' ') : string
@@ -289,7 +289,7 @@ class VarDump
     }
 
     /**
-     * @param  iteger  $size
+     * @param  iteger $size
      * @return string
      */
     protected function indent(int $size) : string
@@ -298,7 +298,7 @@ class VarDump
     }
 
     /**
-     * @param  int  $size
+     * @param  int $size
      * @return string
      */
     protected function pad(int $size) : string
@@ -316,8 +316,8 @@ class VarDump
     }
 
     /**
-     * @param  array  $array
-     * @param  bool   $object
+     * @param  array $array
+     * @param  bool  $object
      * @return string
      */
     protected function array(array $array, bool $object) : string
@@ -326,7 +326,7 @@ class VarDump
         $this->indent += $this->padding;
         foreach ($array as $key => $arr) {
             if (is_array($arr)) {
-                $temporary .= $this->break() . $this->indent($this->indent) . $this->parent((string) $key)  . 'Array ' . $this->counter(count($arr));
+                $temporary .= $this->break() . $this->indent($this->indent) . $this->parent((string) $key) . 'Array ' . $this->counter(count($arr));
 
                 $result = $this->array($arr, $object);
 
@@ -337,7 +337,7 @@ class VarDump
                 if (! $this->console) {
                     $id = time() . rand(0, 9999);
 
-                    $temporary .= " [<span onclick=\"__vardump('debug_" . $id . "', this)\"> ▼ </span><span id=\"debug_" . $id ."\">{$result}</span>]";
+                    $temporary .= " [<span onclick=\"__vardump('debug_" . $id . "', this)\"> ▼ </span><span id=\"debug_" . $id . "\">{$result}</span>]";
                 } else {
                     $temporary .= " [{$result}]";
                 }
@@ -360,7 +360,7 @@ class VarDump
     }
 
     /**
-     * @param  object  $object
+     * @param  object $object
      * @return string
      */
     protected function refcount($object) : string
@@ -373,7 +373,7 @@ class VarDump
     }
 
     /**
-     * @param  object  $object
+     * @param  object $object
      * @return mixed
      */
     protected function object($object)
@@ -389,9 +389,9 @@ class VarDump
         foreach ($reflection->getProperties() as $size => $prop) {
             if ($prop->isPrivate()) {
                 $temporary .= "{$this->break()}{$this->indent($this->indent)}{$this->color('protected', 'visibility')}{$this->pad(2)} {$this->color(':', 'arrow')} ";
-            } elseif ($prop->isProtected()) {
+            } else if ($prop->isProtected()) {
                 $temporary .= "{$this->break()}{$this->indent($this->indent)}{$this->color('protected', 'visibility')} {$this->color(':', 'arrow')} ";
-            } elseif ($prop->isPublic()) {
+            } else if ($prop->isPublic()) {
                 $temporary .= "{$this->break()}{$this->indent($this->indent)}{$this->color('public', 'visibility')}{$this->pad(3)} {$this->color(':', 'arrow')} ";
             }
 
@@ -409,7 +409,7 @@ class VarDump
 
         if (! $this->console) {
             $id = time() . rand(0, 9999);
-            $format = $this->color('Object (:name) [:id] {<span onclick="__vardump(\'debug_' . $id . '\', this)"> ▼ </span><span id="debug_' . $id .'">:content</span>}', 'object');
+            $format = $this->color('Object (:name) [:id] {<span onclick="__vardump(\'debug_' . $id . '\', this)"> ▼ </span><span id="debug_' . $id . '">:content</span>}', 'object');
         } else {
             $format = $this->color('Object (:name) [:id] {:content}', 'object');
         }
@@ -424,9 +424,9 @@ class VarDump
     }
 
     /**
-     * @param  array  $args
-     * @param  bool   $called
-     * @param  bool   $object
+     * @param  array $args
+     * @param  bool  $called
+     * @param  bool  $object
      * @return string
      */
     protected function evaluate(array $args, bool $called = false, bool $object = false) : ?string
@@ -440,10 +440,10 @@ class VarDump
                         $each = nl2br(str_replace(['<', ' '], ['&lt;', '&nbsp;'], $each));
                     }
 
-                    $temporary .=  $this->color("'{$each}'", $type) . " {$this->counter(mb_strlen($each), 1)}{$this->type($type)}";
+                    $temporary .= $this->color("'{$each}'", $type) . " {$this->counter(mb_strlen($each), 1)}{$this->type($type)}";
                     break;
                 case 'int':
-                    $temporary .=  "{$this->color((string) $each, $type)}{$this->type($type)}";
+                    $temporary .= "{$this->color((string) $each, $type)}{$this->type($type)}";
                     break;
                 case 'double':
                     $temporary .= "{$this->color((string) $each, $type)}{$this->type($type)}";
@@ -457,7 +457,7 @@ class VarDump
                 case 'array':
                     if (! $this->console) {
                         $id = time() . rand(0, 9999);
-                        $format = $this->color('Array :size [<span onclick="__vardump(\'debug_' . $id . '\', this)"> ▼ </span><span id="debug_' . $id .'">:content</span>]', 'array');
+                        $format = $this->color('Array :size [<span onclick="__vardump(\'debug_' . $id . '\', this)"> ▼ </span><span id="debug_' . $id . '">:content</span>]', 'array');
                     } else {
                         $format = $this->color('Array :size [:content]', 'array');
                     }

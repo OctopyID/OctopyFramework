@@ -25,7 +25,7 @@ class RegisterMiddlewareProvider
     protected $middleware;
 
     /**
-     * @param Middleware $middleware
+     * @param  Middleware $middleware
      */
     public function __construct(Middleware $middleware)
     {
@@ -33,7 +33,7 @@ class RegisterMiddlewareProvider
     }
 
     /**
-     * @param Application $app
+     * @param  Application $app
      */
     public function bootstrap(Application $app)
     {

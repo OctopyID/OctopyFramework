@@ -35,7 +35,7 @@ class Kernel
     ];
 
     /**
-     * @param Application $app
+     * @param  Application $app
      */
     public function __construct(Application $app)
     {
@@ -67,7 +67,7 @@ class Kernel
     }
 
     /**
-     * @param Argv $argv
+     * @param  Argv $argv
      */
     public function terminate(Argv $argv)
     {

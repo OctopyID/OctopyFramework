@@ -45,7 +45,6 @@ class NullSessionHandler implements SessionHandlerInterface
         return true;
     }
 
-
     /**
      * @param  string $id
      * @param  mixed  $data

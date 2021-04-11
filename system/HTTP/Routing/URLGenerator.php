@@ -26,7 +26,7 @@ class URLGenerator
     protected $app;
 
     /**
-     * @param Application $app
+     * @param  Application $app
      */
     public function __construct(Application $app)
     {
@@ -44,7 +44,7 @@ class URLGenerator
         if (array_key_exists($name, $collection)) {
             preg_match($collection[$name]->pattern, $collection[$name]->uri, $matches);
 
-            $passed  = [];
+            $passed = [];
             $default = array_merge($collection[$name]->parameter, $default);
 
             foreach ($required = array_slice($matches, 1) as $key => $value) {

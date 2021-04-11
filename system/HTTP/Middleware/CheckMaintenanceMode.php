@@ -32,7 +32,7 @@ class CheckMaintenanceMode
     protected $except = [];
 
     /**
-     * @param Application $app
+     * @param  Application $app
      */
     public function __construct(Application $app)
     {

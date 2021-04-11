@@ -24,7 +24,7 @@ class FileHandler
     protected $file;
 
     /**
-     * @param array $file
+     * @param  array $file
      */
     public function __construct(array $file)
     {
@@ -32,8 +32,8 @@ class FileHandler
     }
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function name() : string
     {
         return $this->file['name'];

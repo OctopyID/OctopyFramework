@@ -38,7 +38,7 @@ class HashManager
     protected $hasher;
 
     /**
-     * @param Application $app
+     * @param  Application $app
      */
     public function __construct(Application $app)
     {
@@ -77,7 +77,7 @@ class HashManager
     }
 
     /**
-     * @param  string  $hashed
+     * @param  string $hashed
      * @return array
      */
     public function info($hashed)

@@ -24,6 +24,7 @@ class ResponseServiceProvider extends ServiceProvider
         $app = $this->app;
         $app->response->macro('flash', function (string $name, array $flash) use ($app) {
             $app->session->set($name, $flash);
+
             return $app->response;
         });
 

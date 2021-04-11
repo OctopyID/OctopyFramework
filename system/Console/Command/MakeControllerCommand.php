@@ -88,7 +88,7 @@ class MakeControllerCommand extends Command
     {
         if ($argv->get('--api')) {
             return 'Controller.api';
-        } elseif ($argv->get('--resource')) {
+        } else if ($argv->get('--resource')) {
             return 'Controller.resource';
         }
 

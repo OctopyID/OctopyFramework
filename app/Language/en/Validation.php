@@ -1,6 +1,5 @@
 <?php
 
-
 /*
  *   ___       _
  *  / _ \  ___| |_ ___  _ __  _   _
@@ -27,10 +26,10 @@ return [
 
     'accepted'  => 'The `:attribute` must be accepted.',
     'between'   => [
-        'numeric'   => 'The `:attribute` must be between :min and :max.',
-        'array'     => 'The `:attribute` must be between :min and :max items.',
-        'bytes'     => 'The `:attribute` must be between :min and :max kilobytes.',
-        'string'    => 'The `:attribute` must be between :min and :max characters.',
+        'numeric' => 'The `:attribute` must be between :min and :max.',
+        'array'   => 'The `:attribute` must be between :min and :max items.',
+        'bytes'   => 'The `:attribute` must be between :min and :max kilobytes.',
+        'string'  => 'The `:attribute` must be between :min and :max characters.',
     ],
     'boolean'   => 'The `:attribute` field must be true or false.',
     'confirmed' => 'The `:attribute` confirmation does not match.',
@@ -40,16 +39,16 @@ return [
     'integer'   => 'The `:attribute` must be an integer.',
     'ip'        => 'The `:attribute` must be a valid IP address.',
     'max'       => [
-        'numeric'   => 'The `:attribute` may not be greater than :max.',
-        'array'     => 'The `:attribute` may not be greater than :max items',
-        'bytes'     => 'The `:attribute` may not be greater than :max kilobytes.',
-        'string'    => 'The `:attribute` may not be greater than :max characters.',
+        'numeric' => 'The `:attribute` may not be greater than :max.',
+        'array'   => 'The `:attribute` may not be greater than :max items',
+        'bytes'   => 'The `:attribute` may not be greater than :max kilobytes.',
+        'string'  => 'The `:attribute` may not be greater than :max characters.',
     ],
     'min'       => [
-        'numeric'   => 'The `:attribute` must be at least :min.',
-        'array'     => 'The `:attribute` must be at least :min items',
-        'bytes'     => 'The `:attribute` must be at least :min kilobytes.',
-        'string'    => 'The `:attribute` must be at least :min characters.',
+        'numeric' => 'The `:attribute` must be at least :min.',
+        'array'   => 'The `:attribute` must be at least :min items',
+        'bytes'   => 'The `:attribute` must be at least :min kilobytes.',
+        'string'  => 'The `:attribute` must be at least :min characters.',
     ],
     'mime'      => 'The `:attribute` must be a file of type: :type.',
     'required'  => 'The `:attribute` field is required.',

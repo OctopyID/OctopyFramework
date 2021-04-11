@@ -27,8 +27,8 @@ class Connection
     protected $config;
 
     /**
-     * @param string $driver
-     * @param array  $config
+     * @param  string $driver
+     * @param  array  $config
      */
     public function __construct(string $driver, array $config)
     {

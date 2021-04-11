@@ -21,7 +21,7 @@ return [
     'console'    => Octopy\Console::class,
     'database'   => Octopy\Database::class,
     'datetime'   => Octopy\Support\DateTime::class,
-    'toolbar'   => Octopy\Debug\Toolbar::class,
+    'toolbar'    => Octopy\Debug\Toolbar::class,
     'encrypter'  => Octopy\Encryption\Encrypter::class,
     'env'        => Octopy\Config\DotEnv::class,
     'filesystem' => Octopy\FileSystem::class,

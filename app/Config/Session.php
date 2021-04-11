@@ -26,7 +26,7 @@ return [
     | Supported : "file", "array"
     |
     */
-    'handler' => 'file',
+    'handler'  => 'file',
 
     /*
     |--------------------------------------------------------------------------
@@ -50,7 +50,7 @@ return [
     | automatically by Octopy and you can use the Session like normal.
     |
     */
-    'encrypt' => false,
+    'encrypt'  => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -62,7 +62,7 @@ return [
     | location may be specified. This is only needed for file sessions.
     |
     */
-    'storage' => $this->path->storage('session'),
+    'storage'  => $this->path->storage('session'),
 
     /*
     |--------------------------------------------------------------------------
@@ -74,7 +74,7 @@ return [
     | your application but you are free to change this when necessary.
     |
     */
-    'path' => '/',
+    'path'     => '/',
 
     /*
     |--------------------------------------------------------------------------
@@ -86,7 +86,7 @@ return [
     | available to in your application. A sensible default has been set.
     |
     */
-    'domain' => env('SESSION_DOMAIN', null),
+    'domain'   => env('SESSION_DOMAIN', null),
 
     /*
     |--------------------------------------------------------------------------
@@ -98,7 +98,7 @@ return [
     | the cookie from being sent to you if it can not be done securely.
     |
     */
-    'secure' => env('SESSION_SECURE_COOKIE', false),
+    'secure'   => env('SESSION_SECURE_COOKIE', false),
 
     /*
     |--------------------------------------------------------------------------

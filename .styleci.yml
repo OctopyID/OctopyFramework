@@ -13,7 +13,7 @@ enabled:
   - concat_with_spaces
   - phpdoc_annotation_without_dot
   - multiline_comment_opening_closing
-  
+
 finder:
   exclude:
     - modules
@@ -27,4 +27,4 @@ finder:
     - "*.octopy.php"
   depth:
     - "< 3"
-    
+

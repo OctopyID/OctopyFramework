@@ -62,13 +62,12 @@ class MakeConsoleCommand extends Command
             return $output->warning('Command already exists.');
         }
 
-
         if (! ($command = $argv->get('--command'))) {
             $command = 'command:name';
         }
 
         $data = [
-            'DummyClassName' => $parsed['classname'],
+            'DummyClassName'   => $parsed['classname'],
             'DummyCommandName' => $command,
         ];
 

@@ -57,4 +57,5 @@ $app->instance(Octopy\Autoload::class, $autoload);
  | up the engines and make this app do its thang.
  |
  */
+
 return $app;

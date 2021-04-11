@@ -35,7 +35,7 @@ class Collection implements Countable, IteratorAggregate
     protected $alias = [];
 
     /**
-     * @param Middleware $middleware
+     * @param  Middleware $middleware
      */
     public function __construct(Middleware $middleware)
     {
@@ -43,7 +43,7 @@ class Collection implements Countable, IteratorAggregate
     }
 
     /**
-     * @param Route $route
+     * @param  Route $route
      */
     public function set(Route $route)
     {
@@ -116,28 +116,6 @@ class Collection implements Countable, IteratorAggregate
     }
 
     /**
-     * @param  array  $route
-     * @param  string $path
-     * @return mixed
-     */
-    protected function search(array $route, string $request)
-    {
-        if (isset($route[$request])) {
-            return $route[$request];
-        }
-
-        foreach ($route as $route) {
-            if (preg_match($route->pattern, $request, $parameter)) {
-                return $route->parameter(array_filter($parameter, static function ($key) {
-                    return is_string($key);
-                }, ARRAY_FILTER_USE_KEY));
-            }
-        }
-
-        return false;
-    }
-
-    /**
      * @return array
      */
     public function all() : array
@@ -167,5 +145,27 @@ class Collection implements Countable, IteratorAggregate
     public function count()
     {
         return count($this->route);
+    }
+
+    /**
+     * @param  array  $route
+     * @param  string $path
+     * @return mixed
+     */
+    protected function search(array $route, string $request)
+    {
+        if (isset($route[$request])) {
+            return $route[$request];
+        }
+
+        foreach ($route as $route) {
+            if (preg_match($route->pattern, $request, $parameter)) {
+                return $route->parameter(array_filter($parameter, static function ($key) {
+                    return is_string($key);
+                }, ARRAY_FILTER_USE_KEY));
+            }
+        }
+
+        return false;
     }
 }

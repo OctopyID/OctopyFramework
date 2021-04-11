@@ -28,11 +28,11 @@ class LayoutDirective extends Directive
     {
         if ($stream->next('parent') || $stream->next('extend')) {
             return $parser->footer($this->php('echo $this->render(%s);', $stream->expression()));
-        } elseif ($stream->next('section') || $stream->next('block')) {
+        } else if ($stream->next('section') || $stream->next('block')) {
             return $this->php('$this->section(%s);', $stream->expression());
-        } elseif ($stream->next('endsection') || $stream->next('endblock')) {
+        } else if ($stream->next('endsection') || $stream->next('endblock')) {
             return $this->php('$this->endsection();');
-        } elseif ($stream->next('yield') || $stream->next('child')) {
+        } else if ($stream->next('yield') || $stream->next('child')) {
             return $this->php('echo $this->yield(%s);', $stream->expression());
         }
     }

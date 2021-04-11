@@ -70,7 +70,7 @@ class BcryptHasher extends Hasher
 
     /**
      * @param  string $hashed
-     * @param  array   $option
+     * @param  array  $option
      * @return bool
      */
     public function rehash($hashed, array $option = [])

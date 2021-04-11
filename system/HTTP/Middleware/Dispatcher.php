@@ -26,7 +26,7 @@ class Dispatcher
     protected $middleware;
 
     /**
-     * @param array $middleware
+     * @param  array $middleware
      */
     public function __construct(array $middleware = [])
     {

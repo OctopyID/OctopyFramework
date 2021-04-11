@@ -33,12 +33,12 @@ class InjectToolbar
     protected $toolbar;
 
     /**
-     * @param Application $app
-     * @param Toolbar    $toolbar
+     * @param  Application $app
+     * @param  Toolbar     $toolbar
      */
     public function __construct(Application $app, Toolbar $toolbar)
     {
-        $this->app      = $app;
+        $this->app = $app;
         $this->toolbar = $toolbar;
     }
 
@@ -50,7 +50,7 @@ class InjectToolbar
     public function handle(Request $request, Closure $next)
     {
         // excepting
-        $except = array_merge($this->app['config']['toolbar.except'], (array) ('/'. $this->app['config']['toolbar.prefix'] . '*'));
+        $except = array_merge($this->app['config']['toolbar.except'], (array) ('/' . $this->app['config']['toolbar.prefix'] . '*'));
 
         if (! $this->toolbar->enabled() || $request->is($except)) {
             return $next($request);
@@ -63,7 +63,7 @@ class InjectToolbar
         }
 
         $this->toolbar->boot($this->app)
-                       ->write($this->app);
+            ->write($this->app);
 
         if ($this->app->config['toolbar.inject']) {
             $response = $this->toolbar->modify($response);

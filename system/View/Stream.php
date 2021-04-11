@@ -32,7 +32,7 @@ final class Stream
     protected $expression;
 
     /**
-     * @param array $token
+     * @param  array $token
      */
     public function __construct(array $token, ?string $expression = null)
     {

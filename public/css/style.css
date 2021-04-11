@@ -10,113 +10,113 @@
  * @license:MIT
  */
 
-@import url("https://fonts.googleapis.com/css?family=Miriam+Libre");
+@import url('https://fonts.googleapis.com/css?family=Miriam+Libre');
 
 html {
-    overflow: hidden;
+    overflow : hidden;
 }
 
 body {
-    font-family: "Miriam Libre";
-    background-color: #0C1021;
-    background-image: url("../img/wave.svg");
-    background-repeat: no-repeat;
-    background-position: center bottom;
-    background-attachment: fixed;
+    font-family           : 'Miriam Libre';
+    background-color      : #0C1021;
+    background-image      : url('../img/wave.svg');
+    background-repeat     : no-repeat;
+    background-position   : center bottom;
+    background-attachment : fixed;
 }
 
 .container > .content {
-    text-align: center;
-    color: #F2F2F1;
-    font-size: 2rem
+    text-align : center;
+    color      : #F2F2F1;
+    font-size  : 2rem
 }
 
 .container > .content > .logo {
-    padding-top: 70px;
+    padding-top : 70px;
 }
 
 .links > a {
-    padding: 0 25px;
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: .1rem;
-    text-decoration: none;
-    text-transform: uppercase;
+    padding         : 0 25px;
+    font-size       : 15px;
+    font-weight     : 600;
+    letter-spacing  : .1rem;
+    text-decoration : none;
+    text-transform  : uppercase;
 }
 
 .links > a {
-    text-decoration: none;
-    color: #F2F2F1;
+    text-decoration : none;
+    color           : #F2F2F1;
 }
 
 .links > a:hover {
-    color: #459CB8;
+    color : #459CB8;
 }
 
 .logo > img {
-    min-width: 10%;
-    max-width: 15%
+    min-width : 10%;
+    max-width : 15%
 }
 
 .content > h2 {
-    padding: 0;
-    margin: 0
+    padding : 0;
+    margin  : 0
 }
 
 .content > p {
-    font-size:80%;
-    padding:0;
-    margin: 10px 0 0 0;
+    font-size : 80%;
+    padding   : 0;
+    margin    : 10px 0 0 0;
 }
 
-.container > .head{
-    position:relative;
-    border-bottom:0;
-    height:28px
+.container > .head {
+    position      : relative;
+    border-bottom : 0;
+    height        : 28px
 }
 
-.container > .head > .buttons{
-    float:left;
-    padding:6px;
-    position:relative;
-    z-index:1
+.container > .head > .buttons {
+    float    : left;
+    padding  : 6px;
+    position : relative;
+    z-index  : 1
 }
 
-.container > .head > .buttons a{
-    cursor:pointer;
-    display:inline-block;
-    text-align:center;
-    text-decoration:none;
-    margin:0 2px;
-    -moz-border-radius:50%;
-    -webkit-border-radius:50%;
-    border-radius:50%;
-    width:15px;
-    height:15px;
-    font-size:1.5em;
-    line-height:.83333em
+.container > .head > .buttons a {
+    cursor                : pointer;
+    display               : inline-block;
+    text-align            : center;
+    text-decoration       : none;
+    margin                : 0 2px;
+    -moz-border-radius    : 50%;
+    -webkit-border-radius : 50%;
+    border-radius         : 50%;
+    width                 : 15px;
+    height                : 15px;
+    font-size             : 1.5em;
+    line-height           : .83333em
 }
 
-.container > .head > .buttons a i{
-    text-align:center;
-    width:100%;
-    height:15px;
-    display:block;
-    font-size:.55556em;
-    line-height:1.5em
+.container > .head > .buttons a i {
+    text-align  : center;
+    width       : 100%;
+    height      : 15px;
+    display     : block;
+    font-size   : .55556em;
+    line-height : 1.5em
 }
 
-.container > .head > .buttons a.close{
-    background:#f25056;
-    color:#f25056
+.container > .head > .buttons a.close {
+    background : #F25056;
+    color      : #F25056
 }
 
-.container > .head > .buttons a.minimize{
-    background:#fac536;
-    color:#fac536
+.container > .head > .buttons a.minimize {
+    background : #FAC536;
+    color      : #FAC536
 }
 
-.container > .head > .buttons a.enlarge{
-    background:#39ea49;
-    color:#39ea49
+.container > .head > .buttons a.enlarge {
+    background : #39EA49;
+    color      : #39EA49
 }

@@ -34,7 +34,7 @@ class VerifyCSRFToken
     ];
 
     /**
-     * @param Application $app
+     * @param  Application $app
      */
     public function __construct(Application $app)
     {

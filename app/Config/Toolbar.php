@@ -28,7 +28,7 @@ return [
 
     'enabled' => env('DEBUGBAR_ENABLED', true),
 
-    'except' => [
+    'except'     => [
 
     ],
 
@@ -62,7 +62,7 @@ return [
     | -1 for unlimited history.
     |
     */
-    'history' => 20,
+    'history'    => 20,
 
     /*
      |--------------------------------------------------------------------------
@@ -72,7 +72,7 @@ return [
      | DebugBar stores data for session/ajax requests.
      |
      */
-    'storage' => $this->path->storage('debugbar'),
+    'storage'    => $this->path->storage('debugbar'),
 
     /*
      |--------------------------------------------------------------------------
@@ -84,7 +84,7 @@ return [
      | in your template yourself.
      |
      */
-    'inject' => true,
+    'inject'     => true,
 
     /*
      |--------------------------------------------------------------------------
@@ -96,5 +96,5 @@ return [
      | from trying to overcome bugs like this: http://trac.nginx.org/nginx/ticket/97
      |
      */
-    'prefix' => 'debugbar',
+    'prefix'     => 'debugbar',
 ];

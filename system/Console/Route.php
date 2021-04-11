@@ -22,11 +22,11 @@ class Route
     protected $data;
 
     /**
-     * @param string $command
-     * @param array  $option
-     * @param array  $argument
-     * @param string $handler
-     * @param string $describe
+     * @param  string $command
+     * @param  array  $option
+     * @param  array  $argument
+     * @param  string $handler
+     * @param  string $describe
      */
     public function __construct(string $command, array $option, array $argument, $handler, string $describe)
     {
@@ -69,7 +69,7 @@ class Route
     }
 
     /**
-     * @param  array  $argument
+     * @param  array $argument
      * @return Route
      */
     public function argument(array $argument) : Route

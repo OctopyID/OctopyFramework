@@ -24,7 +24,7 @@ class Collection
     protected $parameter;
 
     /**
-     * @param array $parameter
+     * @param  array $parameter
      */
     public function __construct(array $parameter = [])
     {

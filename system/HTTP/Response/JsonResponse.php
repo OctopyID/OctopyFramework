@@ -52,7 +52,7 @@ class JsonResponse extends Response
             }
         } catch (Exception $exception) {
             if (get_class($exception) === 'Exception' && mb_strpos($exception->getMessage(), 'Failed calling ') === 0) {
-                throw $exception->getPrevious() ? : $exception;
+                throw $exception->getPrevious() ?: $exception;
             }
 
             throw $exception;
@@ -77,9 +77,9 @@ class JsonResponse extends Response
         }
 
         return ($option & JSON_PARTIAL_OUTPUT_ON_ERROR) && in_array($error, [
-            JSON_ERROR_RECURSION,
-            JSON_ERROR_INF_OR_NAN,
-            JSON_ERROR_UNSUPPORTED_TYPE,
-        ]);
+                JSON_ERROR_RECURSION,
+                JSON_ERROR_INF_OR_NAN,
+                JSON_ERROR_UNSUPPORTED_TYPE,
+            ]);
     }
 }

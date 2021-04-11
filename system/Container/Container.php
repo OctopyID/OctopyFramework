@@ -45,24 +45,6 @@ class Container implements ArrayAccess
 
     /**
      * @param  string $abstract
-     * @return object
-     */
-    public function __get(string $abstract)
-    {
-        return static::make($abstract);
-    }
-
-    /**
-     * @param string   $abstract
-     * @param callable $instance
-     */
-    public function __set(string $abstract, $instance)
-    {
-        static::instance($abstract, $instance);
-    }
-
-    /**
-     * @param  string $abstract
      * @return bool
      */
     public static function has(string $abstract) : bool
@@ -86,7 +68,7 @@ class Container implements ArrayAccess
     }
 
     /**
-     * @param string $abstract
+     * @param  string $abstract
      */
     public static function unset(string $abstract)
     {
@@ -225,6 +207,24 @@ class Container implements ArrayAccess
     }
 
     /**
+     * @param  string $abstract
+     * @return object
+     */
+    public function __get(string $abstract)
+    {
+        return static::make($abstract);
+    }
+
+    /**
+     * @param  string   $abstract
+     * @param  callable $instance
+     */
+    public function __set(string $abstract, $instance)
+    {
+        static::instance($abstract, $instance);
+    }
+
+    /**
      * @param  string $key
      * @return bool
      */
@@ -253,7 +253,7 @@ class Container implements ArrayAccess
     }
 
     /**
-     * @param string $key
+     * @param  string $key
      */
     public function offsetUnset($key)
     {

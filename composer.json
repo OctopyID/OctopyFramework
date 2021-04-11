@@ -3,7 +3,12 @@
     "type": "project",
     "description": "A lightweight PHP framework with Laravel look like.",
     "license": "MIT",
-    "keywords": ["php", "framework", "octopy", "laravel"],
+    "keywords": [
+        "php",
+        "framework",
+        "octopy",
+        "laravel"
+    ],
     "support": {
         "issues": "https://github.com/OctopyID/OctopyFramework/issues",
         "source": "https://github.com/OctopyID/OctopyFramework"
@@ -15,7 +20,7 @@
         }
     ],
     "require": {
-        "php": ">=7.3",
+        "php": "^7.3",
         "ext-curl": "*",
         "ext-json": "*",
         "ext-mbstring": "*"
@@ -42,5 +47,5 @@
         "post-create-project-cmd": [
             "@php octopy key:generate"
         ]
-    }   
+    }
 }

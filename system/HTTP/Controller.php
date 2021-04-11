@@ -30,7 +30,7 @@ class Controller
     protected $middleware = [];
 
     /**
-     * @param Application $app
+     * @param  Application $app
      */
     public function __construct(Application $app)
     {

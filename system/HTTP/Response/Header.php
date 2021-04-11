@@ -24,7 +24,7 @@ class Header
     protected $header = [];
 
     /**
-     * @param array $header
+     * @param  array $header
      */
     public function __construct(array $header = [])
     {
@@ -68,9 +68,9 @@ class Header
     }
 
     /**
-     * @param mixed $key
-     * @param mixed $value
-     * @param bool  $replace
+     * @param  mixed $key
+     * @param  mixed $value
+     * @param  bool  $replace
      */
     public function set($key, $value = null, bool $replace = true)
     {

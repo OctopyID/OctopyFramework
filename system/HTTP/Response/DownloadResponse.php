@@ -21,9 +21,9 @@ use Octopy\FileSystem\Exception\FileNotFoundException;
 class DownloadResponse extends Response
 {
     /**
-     * @param string $filepath
-     * @param string $filename
-     * @param string $disposition
+     * @param  string $filepath
+     * @param  string $filename
+     * @param  string $disposition
      */
     public function __construct(string $filepath, string $filename = null, string $disposition = 'attachment')
     {

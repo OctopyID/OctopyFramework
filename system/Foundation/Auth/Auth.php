@@ -1,6 +1,5 @@
 <?php
 
-
 /*
  *   ___       _
  *  / _ \  ___| |_ ___  _ __  _   _
@@ -37,11 +36,11 @@ class Auth
     protected $config;
 
     /**
-     * @param Application $app
+     * @param  Application $app
      */
     public function __construct(Application $app)
     {
-        $this->app    = $app;
+        $this->app = $app;
         $this->config = $app->config['auth'];
 
         if (! $this->guard) {
@@ -88,10 +87,10 @@ class Auth
         switch ($this->provider['driver']) {
             case 'tentacle':
                 $query = $this->provider['model']::where($key[0], $val[0]);
-            break;
+                break;
             case 'database':
                 $query = DB::table($this->provider['table'])->where($key[0], $val[0]);
-            break;
+                break;
         }
 
         if ($query->count() > 0) {
@@ -114,9 +113,7 @@ class Auth
             throw new Exception("Auth guard [$guard] is not defined");
         }
 
-        $this->provider = $this->config['providers'][
-            $this->config['guards'][$guard]['provider']
-        ];
+        $this->provider = $this->config['providers'][$this->config['guards'][$guard]['provider']];
 
         return $this;
     }

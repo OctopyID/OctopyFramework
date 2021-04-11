@@ -20,8 +20,8 @@ use DateTime as PHPDateTime;
 class DateTime extends PHPDateTime
 {
     /**
-     * @param int    $time
-     * @param string $timezone
+     * @param  int    $time
+     * @param  string $timezone
      */
     public function __construct(?string $time = 'now', $timezone = null)
     {

@@ -37,7 +37,7 @@ class MenuFormatter
     protected $margin = [];
 
     /**
-     * @param int $margin
+     * @param  int $margin
      */
     public function margin(int $margin = 0)
     {
@@ -45,9 +45,9 @@ class MenuFormatter
     }
 
     /**
-     * @param array $keys
-     * @param array $data
-     * @param array $color
+     * @param  array $keys
+     * @param  array $data
+     * @param  array $color
      */
     public function add(array $keys, array $data, array $color = [])
     {
@@ -87,7 +87,7 @@ class MenuFormatter
             $table .= "\n";
         }
 
-        $this->data   = [];
+        $this->data = [];
         $this->margin = [];
         $this->margin(
             $this->state = 0

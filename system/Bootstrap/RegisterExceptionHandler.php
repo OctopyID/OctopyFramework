@@ -33,7 +33,7 @@ class RegisterExceptionHandler
     protected $handler;
 
     /**
-     * @param Handler $handler
+     * @param  Handler $handler
      */
     public function __construct(Handler $handler)
     {

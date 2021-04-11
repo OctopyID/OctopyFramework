@@ -22,7 +22,7 @@ class Queries
     protected static $queries = [];
 
     /**
-     * @param string $query
+     * @param  string $query
      */
     public static function collect(string $query)
     {

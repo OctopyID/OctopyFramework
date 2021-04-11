@@ -1,7 +1,7 @@
 <div id="octopy-{{ strtolower($collector->name) }}" class="tab active">
-	<h2>Route</h2>
+    <h2>Route</h2>
     <h3>Matched Route</h3>
-	<table>
+    <table>
         <tbody>
             <tr>
                 <td class="debug-bar-width30 debug-bar-txt-bold">Name</td>
@@ -22,17 +22,17 @@
             <tr>
                 <td class="debug-bar-width30 debug-bar-txt-bold">Middleware</td>
                 @if(! empty($data->route->middleware))
-                    @php($no = 1)
-                    <td>{{ $no }}. {{ $data->route->middleware[0] }}</td>
-                    @foreach(array_slice($data->route->middleware, 1) as $middleware)
-                        <tr>
-                            <td></td>
-                            <td>{{ ++$no }}. {{ $middleware }}</td>
-                        </tr>
-                    @endforeach
-                @else
-                    -
-                @endif
+                @php($no = 1)
+                <td>{{ $no }}. {{ $data->route->middleware[0] }}</td>
+                @foreach(array_slice($data->route->middleware, 1) as $middleware)
+            <tr>
+                <td></td>
+                <td>{{ ++$no }}. {{ $middleware }}</td>
+            </tr>
+            @endforeach
+            @else
+            -
+            @endif
             </tr>
         </tbody>
     </table>

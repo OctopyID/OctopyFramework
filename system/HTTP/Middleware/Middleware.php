@@ -39,8 +39,8 @@ class Middleware
     }
 
     /**
-     * @param string $layer
-     * @param mixed  $middleware
+     * @param  string $layer
+     * @param  mixed  $middleware
      */
     public function set(string $layer, $middleware = null)
     {
@@ -48,7 +48,7 @@ class Middleware
             if (! isset($this->global[$layer])) {
                 $this->global[] = $layer;
             }
-        } elseif (! isset($this->route[$layer])) {
+        } else if (! isset($this->route[$layer])) {
             $this->route[$layer] = $middleware;
         }
     }

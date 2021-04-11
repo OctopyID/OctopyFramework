@@ -49,7 +49,7 @@ class ConsoleServiceProvider extends ServiceProvider
     private function discover()
     {
         $discover = [
-            'App\\Console\\Command\\' => $this->app['path']->app->console->command(),
+            'App\\Console\\Command\\'    => $this->app['path']->app->console->command(),
             'Octopy\\Console\\Command\\' => $this->app['path']->system->console->command(),
         ];
 

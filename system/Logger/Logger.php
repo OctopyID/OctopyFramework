@@ -46,7 +46,7 @@ class Logger
     protected $loggable;
 
     /**
-     * @param Application $app
+     * @param  Application $app
      */
     public function __construct(Application $app)
     {
@@ -223,6 +223,30 @@ class Logger
     }
 
     /**
+     * @return array
+     */
+    public function determine() : array
+    {
+        // Determine the file and line by finding the first
+        // backtrace that is not part of our logging system.
+        $file = null;
+        $line = null;
+        $trace = debug_backtrace();
+
+        foreach ($trace as $row) {
+            if (in_array($row['function'], ['interpolate', 'determine', 'log'])) {
+                continue;
+            }
+
+            $file = $row['file'] ?? isset($row['object']) ? get_class($row['object']) : 'unknown';
+            $line = $row['line'] ?? $row['function'] ?? 'unknown';
+            break;
+        }
+
+        return compact('file', 'line');
+    }
+
+    /**
      * @param  mixed $message
      * @param  array $context
      * @return string
@@ -272,29 +296,5 @@ class Logger
         }
 
         return strtr($message, $replace);
-    }
-
-    /**
-     * @return array
-     */
-    public function determine() : array
-    {
-        // Determine the file and line by finding the first
-        // backtrace that is not part of our logging system.
-        $file = null;
-        $line = null;
-        $trace = debug_backtrace();
-
-        foreach ($trace as $row) {
-            if (in_array($row['function'], ['interpolate', 'determine', 'log'])) {
-                continue;
-            }
-
-            $file = $row['file'] ?? isset($row['object']) ? get_class($row['object']) : 'unknown';
-            $line = $row['line'] ?? $row['function'] ?? 'unknown';
-            break;
-        }
-
-        return compact('file', 'line');
     }
 }

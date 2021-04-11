@@ -72,12 +72,12 @@ class GenerateAppKeyCommand extends Command
     protected function key() : string
     {
         return 'base64:' . base64_encode(
-            Encrypter::generate($this->app['config']['app.cipher'])
-        );
+                Encrypter::generate($this->app['config']['app.cipher'])
+            );
     }
 
     /**
-     * @param  string  $key
+     * @param  string $key
      * @return void
      */
     protected function write($key)
@@ -85,9 +85,9 @@ class GenerateAppKeyCommand extends Command
         $lines = file($environment = $this->app->basepath() . '.env');
         foreach ($lines as $i => $line) {
             if (preg_match('/^APP_KEY/', $line = trim($line))) {
-                $array    = explode('=', $line, 2);
+                $array = explode('=', $line, 2);
                 $array[1] = $key;
-                $line     = implode('= ', $array);
+                $line = implode('= ', $array);
             }
 
             $lines[$i] = $line;

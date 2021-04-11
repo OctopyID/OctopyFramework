@@ -13,6 +13,7 @@
  */
 
 use Octopy\Stuff\Inspiring;
+use Octopy\Support\Facade\Console;
 
 Console::command('inspire', static function (Octopy\Console\Output $output) {
     return $output->comment(Inspiring::quote());

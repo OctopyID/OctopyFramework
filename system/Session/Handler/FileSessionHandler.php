@@ -41,7 +41,7 @@ class FileSessionHandler implements SessionHandlerInterface
     protected $storage;
 
     /**
-     * @@param Application $app
+     * @@param  Application $app
      */
     public function __construct(Application $app)
     {
@@ -64,7 +64,7 @@ class FileSessionHandler implements SessionHandlerInterface
             if (! mkdir($this->storage, 0755, true)) {
                 throw new SessionException("Configured save path [$this->storage] is not a directory, doesn't exist or cannot be created.");
             }
-        } elseif (! is_writable($this->storage)) {
+        } else if (! is_writable($this->storage)) {
             throw new SessionException("Configured save path [$this->storage] is not writable by the PHP process.");
         }
 

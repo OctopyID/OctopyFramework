@@ -22,7 +22,7 @@ class Route
     protected $data;
 
     /**
-     * @param array $data
+     * @param  array $data
      */
     public function __construct(array $data)
     {
@@ -41,8 +41,8 @@ class Route
     }
 
     /**
-     * @param string $key
-     * @param mixed  $value
+     * @param  string $key
+     * @param  mixed  $value
      */
     public function __set(string $key, $value)
     {
@@ -104,6 +104,7 @@ class Route
     protected function update(string $key, $value) : Route
     {
         $this->data[$key] = $value;
+
         return $this;
     }
 }

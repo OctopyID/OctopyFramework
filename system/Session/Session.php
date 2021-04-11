@@ -32,8 +32,8 @@ class Session implements ArrayAccess
     ];
 
     /**
-     * @param Application             $app
-     * @param SessionHandlerInterface $handler
+     * @param  Application             $app
+     * @param  SessionHandlerInterface $handler
      */
     public function __construct(Application $app, SessionHandlerInterface $handler)
     {
@@ -71,8 +71,23 @@ class Session implements ArrayAccess
     }
 
     /**
-     * @param string $name
-     * @param mixed  $value
+     * @param  string $name
+     * @return string
+     */
+    public static function handler(?string $name) : string
+    {
+        $handler = self::$handler[$name] ?? self::$handler['array'];
+
+        if ($handler instanceof Closure) {
+            $handler = $handler($this->app);
+        }
+
+        return $handler;
+    }
+
+    /**
+     * @param  string $name
+     * @param  mixed  $value
      */
     public function set($name, $value = null)
     {
@@ -174,22 +189,7 @@ class Session implements ArrayAccess
 
     /**
      * @param  string $name
-     * @return string
-     */
-    public static function handler(?string $name) : string
-    {
-        $handler = self::$handler[$name] ?? self::$handler['array'];
-
-        if ($handler instanceof Closure) {
-            $handler = $handler($this->app);
-        }
-
-        return $handler;
-    }
-
-    /**
-     * @param string $name
-     * @param mixed  $handler
+     * @param  mixed  $handler
      */
     public function extend(string $name, $handler)
     {
@@ -229,7 +229,7 @@ class Session implements ArrayAccess
     }
 
     /**
-     * @param string $key
+     * @param  string $key
      */
     public function offsetUnset($key)
     {

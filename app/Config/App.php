@@ -24,7 +24,7 @@ return [
     | any other location as required by the application or its packages.
     |
     */
-    'name' => env('APP_NAME', 'Octopy Framework'),
+    'name'     => env('APP_NAME', 'Octopy Framework'),
 
     /*
     |--------------------------------------------------------------------------
@@ -36,7 +36,7 @@ return [
     | services the application utilizes. Set this in your ".env" file.
     |
     */
-    'env' => env('APP_ENV', 'production'),
+    'env'      => env('APP_ENV', 'production'),
 
     /*
     |--------------------------------------------------------------------------
@@ -48,7 +48,7 @@ return [
     | application. If disabled, a simple generic error page is shown.
     |
     */
-    'debug' => env('APP_DEBUG', false),
+    'debug'    => env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -60,7 +60,7 @@ return [
     | your application so that it is used when running Artisan tasks.
     |
     */
-    'url' => env('APP_URL', 'http://localhost'),
+    'url'      => env('APP_URL', 'http://localhost'),
 
     /*
     |--------------------------------------------------------------------------
@@ -84,7 +84,7 @@ return [
     | to any of the locales which will be supported by the application.
     |
     */
-    'locale' => 'en',
+    'locale'   => 'en',
 
     /*
     |--------------------------------------------------------------------------
@@ -96,7 +96,7 @@ return [
     | will not be safe. Please do this before deploying an application!
     |
     */
-    'key' => env('APP_KEY'),
+    'key'      => env('APP_KEY'),
 
     /*
     |--------------------------------------------------------------------------
@@ -106,7 +106,7 @@ return [
     | This cipher used for openssl encryption method
     |
     */
-    'cipher' => 'AES-256-CBC',
+    'cipher'   => 'AES-256-CBC',
 
     /*
     |--------------------------------------------------------------------------
@@ -148,7 +148,7 @@ return [
     | the aliases are "lazy" loaded so they don't hinder performance.
     |
     */
-    'aliases' => [
+    'aliases'  => [
         'App'       => Octopy\Support\Facade\App::class,
         'View'      => Octopy\Support\Facade\View::class,
         'Route'     => Octopy\Support\Facade\Route::class,

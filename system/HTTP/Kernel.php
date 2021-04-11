@@ -31,8 +31,8 @@ class Kernel
     ];
 
     /**
-     * @param Application $app
-     * @param Middleware  $middleware
+     * @param  Application $app
+     * @param  Middleware  $middleware
      */
     public function __construct(Application $app, Middleware $middleware)
     {
@@ -76,8 +76,8 @@ class Kernel
     }
 
     /**
-     * @param Request  $request
-     * @param Response $response
+     * @param  Request  $request
+     * @param  Response $response
      */
     public function terminate(Request $request, Response $response)
     {

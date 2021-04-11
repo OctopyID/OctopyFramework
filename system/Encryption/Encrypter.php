@@ -31,8 +31,8 @@ class Encrypter
     protected $cipher;
 
     /**
-     * @param string $key
-     * @param string $cipher
+     * @param  string $key
+     * @param  string $cipher
      */
     public function __construct(string $key, string $cipher)
     {
@@ -42,6 +42,15 @@ class Encrypter
         } else {
             throw new CipherKeyException('The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths.');
         }
+    }
+
+    /**
+     * @param  string $cipher
+     * @return string
+     */
+    public static function generate($cipher)
+    {
+        return random_bytes($cipher === 'AES-128-CBC' ? 16 : 32);
     }
 
     /**
@@ -57,17 +66,8 @@ class Encrypter
     }
 
     /**
-     * @param  string $cipher
-     * @return string
-     */
-    public static function generate($cipher)
-    {
-        return random_bytes($cipher === 'AES-128-CBC' ? 16 : 32);
-    }
-
-    /**
      * @param  mixed $value
-     * @param  bool $serialize
+     * @param  bool  $serialize
      * @return string
      */
     public function encrypt($value, $serialize = true)
@@ -121,8 +121,16 @@ class Encrypter
     }
 
     /**
+     * @return string
+     */
+    public function key()
+    {
+        return $this->key;
+    }
+
+    /**
      * @param  string $iv
-     * @param  mixed $value
+     * @param  mixed  $value
      * @return string
      */
     protected function hash($iv, $value)
@@ -159,7 +167,7 @@ class Encrypter
     protected function jsonvalidate($payload)
     {
         return is_array($payload) && isset($payload['iv'], $payload['value'], $payload['mac']) &&
-               strlen(base64_decode($payload['iv'], true)) === openssl_cipher_iv_length($this->cipher);
+            strlen(base64_decode($payload['iv'], true)) === openssl_cipher_iv_length($this->cipher);
     }
 
     /**
@@ -181,13 +189,5 @@ class Encrypter
     protected function calculate($payload, $bytes)
     {
         return hash_hmac('sha256', $this->hash($payload['iv'], $payload['value']), $bytes, true);
-    }
-
-    /**
-     * @return string
-     */
-    public function key()
-    {
-        return $this->key;
     }
 }

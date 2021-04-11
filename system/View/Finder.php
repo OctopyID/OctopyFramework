@@ -34,8 +34,8 @@ class Finder
     protected $template = [];
 
     /**
-     * @param array  $resource
-     * @param string $compiled
+     * @param  array  $resource
+     * @param  string $compiled
      */
     public function __construct($resource = [], ?string $compiled = null)
     {
@@ -48,7 +48,7 @@ class Finder
     }
 
     /**
-     * @param mixed $resource
+     * @param  mixed $resource
      */
     public function resource($resource)
     {

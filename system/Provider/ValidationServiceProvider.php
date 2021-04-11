@@ -31,10 +31,10 @@ class ValidationServiceProvider extends ServiceProvider
                 }
 
                 echo $app->response
-                            ->flash('error', $message)
-                                ->redirect()
-                                    ->back()
-                                        ->send();
+                    ->flash('error', $message)
+                    ->redirect()
+                    ->back()
+                    ->send();
                 exit;
             }
         });

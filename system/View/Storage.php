@@ -34,8 +34,8 @@ final class Storage extends FileSystem
     protected $compiled;
 
     /**
-     * @param string $template
-     * @param string $compiled
+     * @param  string $template
+     * @param  string $compiled
      */
     public function __construct(string $template, ?string $compiled)
     {

@@ -37,8 +37,8 @@ class VarsCollector extends Collector
     public function collect()
     {
         return [
-            'session' => $this->app->session->all(),
-            'request' => [
+            'session'  => $this->app->session->all(),
+            'request'  => [
                 'input'  => $this->app->request->all(),
                 'header' => $this->app->request->header(),
                 'cookie' => $this->app->request->cookie(),

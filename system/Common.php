@@ -16,8 +16,8 @@ use Octopy\Support\Facade\App;
 
 if (! function_exists('app')) {
     /**
-     * @param  string  $abstract
-     * @param  array   $parameter
+     * @param  string $abstract
+     * @param  array  $parameter
      * @return mixed
      */
     function app(string $abstract = null, array $parameter = [])
@@ -118,8 +118,8 @@ if (! function_exists('encrypt')) {
 
 if (! function_exists('env')) {
     /**
-     * @param  string  $key
-     * @param  mixed   $default
+     * @param  string $key
+     * @param  mixed  $default
      * @return mixed
      */
     function env(string $key, $default = null)
@@ -159,7 +159,7 @@ if (! function_exists('byteformatter')) {
     {
         if ($byte < 1024) {
             return ' ' . $byte . ' B';
-        } elseif ($byte < 1048576) {
+        } else if ($byte < 1048576) {
             return ' ' . round($byte / 1024, 2) . ' KB';
         }
 

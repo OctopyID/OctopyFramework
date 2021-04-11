@@ -56,7 +56,7 @@ class SMTP
     protected $attachment = false;
 
     /**
-     * @param Application $app
+     * @param  Application $app
      */
     public function __construct(Application $app)
     {

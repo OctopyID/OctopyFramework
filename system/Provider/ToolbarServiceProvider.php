@@ -40,13 +40,13 @@ class ToolbarServiceProvider extends ServiceProvider
     {
         Route::group(['prefix' => $this->app['config']['toolbar.prefix'], 'namespace' => $this->namespace], static function ($route) {
             $route->get('assets/stylesheet', 'AssetController@stylesheet')
-                    ->name('assets.stylesheet');
+                ->name('assets.stylesheet');
 
             $route->get('assets/javascript/:filename', 'AssetController@javascript')
-                    ->name('assets.javascript');
+                ->name('assets.javascript');
 
             $route->get('detail/:time', 'DetailController@index')
-                    ->name('toolbar.detail');
+                ->name('toolbar.detail');
         });
     }
 }

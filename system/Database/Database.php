@@ -64,7 +64,7 @@ class Database implements IteratorAggregate, JsonSerializable
     protected $driver;
 
     /**
-     * @param Application $app
+     * @param  Application $app
      */
     public function __construct(Application $app)
     {
@@ -340,6 +340,22 @@ class Database implements IteratorAggregate, JsonSerializable
     }
 
     /**
+     * @return ArrayIterator
+     */
+    public function getIterator()
+    {
+        return new ArrayIterator($this->data);
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        return $this->data;
+    }
+
+    /**
      * @param  mixed $data
      * @return $this
      */
@@ -380,7 +396,7 @@ class Database implements IteratorAggregate, JsonSerializable
                     unset($data->$key);
                 }
             }
-        } elseif (is_array($data)) {
+        } else if (is_array($data)) {
             foreach ($data as $int => $object) {
                 foreach ($object as $key => $value) {
                     if (isset($except[$key])) {
@@ -424,7 +440,7 @@ class Database implements IteratorAggregate, JsonSerializable
     {
         if (is_string($value)) {
             return $this->driver->quote($value);
-        } elseif (is_null($value)) {
+        } else if (is_null($value)) {
             return "''";
         }
 
@@ -441,8 +457,8 @@ class Database implements IteratorAggregate, JsonSerializable
     }
 
     /**
-     * @param string $format
-     * @param array  $value
+     * @param  string $format
+     * @param  array  $value
      */
     protected function set(string $format, ...$value)
     {
@@ -461,21 +477,5 @@ class Database implements IteratorAggregate, JsonSerializable
         $this->query = null;
 
         return trim($query);
-    }
-
-    /**
-     * @return ArrayIterator
-     */
-    public function getIterator()
-    {
-        return new ArrayIterator($this->data);
-    }
-
-    /**
-     * @return array
-     */
-    public function jsonSerialize()
-    {
-        return $this->data;
     }
 }

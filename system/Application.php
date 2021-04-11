@@ -49,14 +49,13 @@ class Application extends Container
     protected $terminating = [];
 
     /**
-     * @param string $basepath
+     * @param  string $basepath
      */
     public function __construct(string $basepath)
     {
         $this->basepath = $basepath;
 
         if ($this->instance(static::class, $this)) {
-
             // set instance aliases
             $aliases = include 'Config/Container.php';
             foreach ($aliases as $abstract => $concrete) {
@@ -172,8 +171,8 @@ class Application extends Container
     }
 
     /**
-     * @param mixed $provider
-     * @param bool  $force
+     * @param  mixed $provider
+     * @param  bool  $force
      */
     public function register($provider, bool $force = false)
     {
@@ -199,7 +198,7 @@ class Application extends Container
     }
 
     /**
-     * @param callable $boot
+     * @param  callable $boot
      */
     public function boot(callable $boot)
     {

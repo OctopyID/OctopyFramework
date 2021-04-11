@@ -39,11 +39,11 @@ $app = require 'system/Octopy.php';
 $kernel = $app->make(App\Console\Kernel::class);
 
 $status = $kernel->handle(
-	$input = $app->make(Octopy\Console\Argv::class, [
-		'argv' => $argv
-	]),
+    $input = $app->make(Octopy\Console\Argv::class, [
+        'argv' => $argv,
+    ]),
 
-	$app->make(Octopy\Console\Output::class)
+    $app->make(Octopy\Console\Output::class)
 );
 
 $kernel->terminate($input);

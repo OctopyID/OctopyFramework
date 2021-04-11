@@ -29,7 +29,7 @@ final class Parser
     protected $footer = [];
 
     /**
-     * @param Engine $engine
+     * @param  Engine $engine
      */
     public function __construct(Engine $engine)
     {

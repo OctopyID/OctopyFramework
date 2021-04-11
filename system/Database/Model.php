@@ -28,11 +28,21 @@ class Model implements IteratorAggregate, JsonSerializable
     protected $data;
 
     /**
-     * @param mixed $data
+     * @param  mixed $data
      */
     public function __construct($data = null)
     {
         $this->data = $data;
+    }
+
+    /**
+     * @param  string $method
+     * @param  array  $args
+     * @return mixed
+     */
+    public static function __callStatic(string $method, array $args = [])
+    {
+        return (new static())->$method(...$args);
     }
 
     /**
@@ -68,16 +78,6 @@ class Model implements IteratorAggregate, JsonSerializable
         }
 
         return $db->$method(...$args);
-    }
-
-    /**
-     * @param  string $method
-     * @param  array  $args
-     * @return mixed
-     */
-    public static function __callStatic(string $method, array $args = [])
-    {
-        return (new static())->$method(...$args);
     }
 
     /**

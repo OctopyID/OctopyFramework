@@ -21,7 +21,7 @@ use Octopy\HTTP\Controller;
 class DetailController extends Controller
 {
     /**
-     * @param Application $app
+     * @param  Application $app
      */
     public function __construct(Application $app)
     {

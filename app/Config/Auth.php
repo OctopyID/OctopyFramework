@@ -1,6 +1,5 @@
 <?php
 
-
 /*
  *   ___       _
  *  / _ \  ___| |_ ___  _ __  _   _
@@ -25,7 +24,7 @@ return [
     | as required, but they're a perfect start for most applications.
     |
     */
-    'default' => 'web',
+    'default'   => 'web',
 
     /*
     |--------------------------------------------------------------------------
@@ -43,7 +42,7 @@ return [
     | Supported: "session"
     |
     */
-    'guards' => [
+    'guards'    => [
         'web' => [
             'provider' => 'users',
         ],

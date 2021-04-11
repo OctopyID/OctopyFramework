@@ -28,7 +28,7 @@ class Console
     protected $app;
 
     /**
-     * @param Application $app
+     * @param  Application $app
      */
     public function __construct(Application $app, Collection $collection)
     {
@@ -105,7 +105,7 @@ class Console
     }
 
     /**
-     * @param string $route
+     * @param  string $route
      */
     public function load(string $route)
     {

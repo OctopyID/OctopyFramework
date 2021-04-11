@@ -27,7 +27,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate
     protected $command = [];
 
     /**
-     * @param Route $command
+     * @param  Route $command
      */
     public function set(Route $command)
     {
@@ -92,7 +92,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
-     * @param string $key
+     * @param  string $key
      */
     public function offsetUnset($key)
     {

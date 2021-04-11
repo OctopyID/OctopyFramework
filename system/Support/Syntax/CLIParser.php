@@ -51,7 +51,7 @@ class CLIParser
     ];
 
     /**
-     * @param Color $color
+     * @param  Color $color
      */
     public function __construct(Color $color)
     {
@@ -86,7 +86,7 @@ class CLIParser
     }
 
     /**
-     * @param string $source
+     * @param  string $source
      * @return array
      */
     protected function parse($source)
@@ -106,8 +106,8 @@ class CLIParser
     {
         $tokens = token_get_all($source);
 
-        $buffer  = '';
-        $output  = [];
+        $buffer = '';
+        $output = [];
         $current = null;
 
         foreach ($tokens as $token) {
@@ -121,7 +121,7 @@ class CLIParser
                     case T_CLOSE_TAG:
                     case T_VARIABLE:
 
-                    // Constants
+                        // Constants
                     case T_DIR:
                     case T_FILE:
                     case T_METHOD_C:
@@ -155,7 +155,7 @@ class CLIParser
                         $newtype = CLIParser::TOKEN_KEYWORD;
                 }
             } else {
-                $newtype = $token === '"' ? CLIParser::TOKEN_STRING  : CLIParser::TOKEN_KEYWORD;
+                $newtype = $token === '"' ? CLIParser::TOKEN_STRING : CLIParser::TOKEN_KEYWORD;
             }
 
             if ($current === null) {
@@ -164,11 +164,11 @@ class CLIParser
 
             if ($current !== $newtype) {
                 $output[] = [$current, $buffer];
-                $buffer   = '';
-                $current  = $newtype;
+                $buffer = '';
+                $current = $newtype;
             }
 
-            $buffer .= is_array($token) ? $token[1]  : $token;
+            $buffer .= is_array($token) ? $token[1] : $token;
         }
 
         if (isset($newtype)) {
@@ -245,7 +245,7 @@ class CLIParser
         $snippet = '';
         foreach ($lines as $i => $line) {
             if ($marker !== null) {
-                $snippet .= ($marker === $i + 1 ? $this->color->apply(CLIParser::ACTUAL_LINE_MARK, '  > ')  : '    ');
+                $snippet .= ($marker === $i + 1 ? $this->color->apply(CLIParser::ACTUAL_LINE_MARK, '  > ') : '    ');
             }
 
             $snippet .= $this->color->apply(CLIParser::LINE_NUMBER, str_pad($i + 1, $length, ' ', STR_PAD_LEFT) . '| ');

@@ -20,7 +20,7 @@ use Octopy\Application;
 class BootUpServiceProvider
 {
     /**
-     * @param Application $app
+     * @param  Application $app
      */
     public function bootstrap(Application $app)
     {

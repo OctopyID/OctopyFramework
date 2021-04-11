@@ -24,7 +24,7 @@ return [
     | one of the handlers defined in the "handlers" configuration array.
     |
     */
-    'handler' => 'file',
+    'handler'       => 'file',
 
     /*
     |--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return [
     | your log files will fill up very fast.
     |
     */
-    'threshold' => 3,
+    'threshold'     => 3,
 
     /*
     |--------------------------------------------------------------------------
@@ -84,5 +84,5 @@ return [
     | codes to set your own date formatting
     |
     */
-    'dateformat' => 'Y-m-d H:i:s',
+    'dateformat'    => 'Y-m-d H:i:s',
 ];

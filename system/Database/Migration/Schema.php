@@ -26,7 +26,7 @@ class Schema
     protected $blueprint;
 
     /**
-     * @param Application $app
+     * @param  Application $app
      */
     public function __construct(Application $app)
     {
@@ -54,7 +54,7 @@ class Schema
     }
 
     /**
-     * @param string $table
+     * @param  string $table
      */
     public function drop(string $table)
     {

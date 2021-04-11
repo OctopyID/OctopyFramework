@@ -33,8 +33,8 @@ class Dispatcher
     protected $command;
 
     /**
-     * @param Application $app
-     * @param Route     $command
+     * @param  Application $app
+     * @param  Route       $command
      */
     public function __construct(Application $app, Route $command)
     {
@@ -60,21 +60,6 @@ class Dispatcher
     }
 
     /**
-     * @param  array  $parameter
-     * @param  object $instance
-     * @param  string $method
-     * @return array
-     */
-    protected function class(array $parameter, $instance, string $method)
-    {
-        if (! method_exists($instance, $method)) {
-            return $parameter;
-        }
-
-        return $this->method($parameter, new ReflectionMethod($instance, $method));
-    }
-
-    /**
      * @param  array   $parameter
      * @param  unknown $reflector
      * @return array
@@ -91,12 +76,27 @@ class Dispatcher
             if (! is_null($instance)) {
                 $count++;
                 $this->splice($parameter, $key, $instance);
-            } elseif (! isset($array[$key - $count]) && $dependency->isDefaultValueAvailable()) {
+            } else if (! isset($array[$key - $count]) && $dependency->isDefaultValueAvailable()) {
                 $this->splice($parameter, $key, $dependency->getDefaultValue());
             }
         }
 
         return $parameter;
+    }
+
+    /**
+     * @param  array  $parameter
+     * @param  object $instance
+     * @param  string $method
+     * @return array
+     */
+    protected function class(array $parameter, $instance, string $method)
+    {
+        if (! method_exists($instance, $method)) {
+            return $parameter;
+        }
+
+        return $this->method($parameter, new ReflectionMethod($instance, $method));
     }
 
     /**

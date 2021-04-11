@@ -21,7 +21,7 @@ use Octopy\Exception\ExceptionHandler;
 class Handler extends ExceptionHandler
 {
     /**
-     * @param Exception $exception
+     * @param  Exception $exception
      */
     public function report(Exception $exception)
     {

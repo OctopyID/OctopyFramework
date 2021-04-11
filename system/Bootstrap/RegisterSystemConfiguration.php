@@ -31,7 +31,7 @@ class RegisterSystemConfiguration
     protected $filesystem;
 
     /**
-     * @param FileSystem $filesystem
+     * @param  FileSystem $filesystem
      */
     public function __construct(FileSystem $filesystem)
     {
@@ -39,7 +39,7 @@ class RegisterSystemConfiguration
     }
 
     /**
-     * @param Application $app
+     * @param  Application $app
      */
     public function bootstrap(Application $app)
     {

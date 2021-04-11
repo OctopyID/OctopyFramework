@@ -34,7 +34,7 @@ class Collector
     protected $app;
 
     /**
-     * @param Application $app
+     * @param  Application $app
      */
     public function __construct(Application $app)
     {

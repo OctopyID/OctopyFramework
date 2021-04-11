@@ -39,7 +39,7 @@ class ArgonHasher extends Hasher
     protected $verify = false;
 
     /**
-     * @param array $option
+     * @param  array $option
      */
     public function __construct(array $option = [])
     {
@@ -50,7 +50,7 @@ class ArgonHasher extends Hasher
     }
 
     /**
-     * @param  string  $value
+     * @param  string $value
      * @param  array  $option
      * @return string
      */
@@ -67,14 +67,6 @@ class ArgonHasher extends Hasher
         }
 
         return $hash;
-    }
-
-    /**
-     * @return int
-     */
-    protected function algorithm()
-    {
-        return PASSWORD_ARGON2I;
     }
 
     /**
@@ -104,6 +96,14 @@ class ArgonHasher extends Hasher
             'time_cost'   => $this->time($option),
             'memory_cost' => $this->memory($option),
         ]);
+    }
+
+    /**
+     * @return int
+     */
+    protected function algorithm()
+    {
+        return PASSWORD_ARGON2I;
     }
 
     /**

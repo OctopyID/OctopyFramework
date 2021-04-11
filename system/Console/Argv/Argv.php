@@ -27,7 +27,7 @@ class Argv
     protected $option = [];
 
     /**
-     * @param array $argv
+     * @param  array $argv
      */
     public function __construct(array $argv = [])
     {
@@ -42,9 +42,9 @@ class Argv
                 } else {
                     $this->option[$array[0]] = true;
                 }
-            } elseif (preg_match('/^-(.*?)/', $value) && mb_strlen($value) === 2) {
+            } else if (preg_match('/^-(.*?)/', $value) && mb_strlen($value) === 2) {
                 $this->option[$value] = $argv[$i + 1] ?? true;
-            } elseif (! array_key_exists('value', $this->option)) {
+            } else if (! array_key_exists('value', $this->option)) {
                 $this->option['value'] = $value;
             }
         }
@@ -92,7 +92,7 @@ class Argv
     }
 
     /**
-     * @param string $key
+     * @param  string $key
      */
     public function remove(string $key)
     {

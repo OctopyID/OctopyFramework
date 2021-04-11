@@ -77,8 +77,8 @@ class FileSystem
     }
 
     /**
-     * @param string $path
-     * @param string $content
+     * @param  string $path
+     * @param  string $content
      */
     public function replace(string $path, $content)
     {
@@ -142,13 +142,13 @@ class FileSystem
     {
         if (is_file($path)) {
             return unlink($path);
-        } elseif (is_dir($path)) {
+        } else if (is_dir($path)) {
             $items = new FilesystemIterator($path);
 
             foreach ($items as $item) {
                 if ($item->isFile()) {
                     $status = $this->delete($item);
-                } elseif ($item->isDir() && ! $item->isLink()) {
+                } else if ($item->isDir() && ! $item->isLink()) {
                     if ($this->delete($item)) {
                         $status = rmdir($item);
                     }

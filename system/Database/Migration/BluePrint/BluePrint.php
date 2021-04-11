@@ -44,7 +44,7 @@ abstract class BluePrint
     protected $unique = [];
 
     /**
-     * @param Application $app
+     * @param  Application $app
      */
     public function __construct(Application $app)
     {

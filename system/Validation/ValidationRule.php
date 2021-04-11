@@ -33,9 +33,9 @@ trait ValidationRule
     }
 
     /**
-     * @param  string  $attribute
-     * @param  int     $min
-     * @param  int     $max
+     * @param  string $attribute
+     * @param  int    $min
+     * @param  int    $max
      * @return string
      */
     public function between(string $attribute, int $min, int $max)
@@ -51,7 +51,7 @@ trait ValidationRule
                     ':attribute' => $attribute,
                 ]);
             }
-        } elseif (ctype_digit($value) || is_int($value) || is_int($value) || is_float($value) || is_double($value)) {
+        } else if (ctype_digit($value) || is_int($value) || is_int($value) || is_float($value) || is_double($value)) {
             $length = $value;
             if (($length >= $min && $length <= $max) === false) {
                 return $this->format($this->app->lang['validation.between.numeric'], [
@@ -60,7 +60,7 @@ trait ValidationRule
                     ':attribute' => $attribute,
                 ]);
             }
-        } elseif (is_array($value)) {
+        } else if (is_array($value)) {
             $length = count($value);
             if (($length >= $min && $length <= $max) === false) {
                 return $this->format($this->app->lang['validation.between.array'], [
@@ -69,7 +69,7 @@ trait ValidationRule
                     ':attribute' => $attribute,
                 ]);
             }
-        } elseif (is_string($value) || is_null($value)) {
+        } else if (is_string($value) || is_null($value)) {
             $length = mb_strlen($value);
             if (($length >= $min && $length <= $max) === false) {
                 return $this->format($this->app->lang['validation.between.string'], [
@@ -205,21 +205,21 @@ trait ValidationRule
                     ':attribute' => $attribute,
                 ]);
             }
-        } elseif (ctype_digit($value) || is_int($value) || is_float($value) || is_double($value)) {
+        } else if (ctype_digit($value) || is_int($value) || is_float($value) || is_double($value)) {
             if (($value < $max) === false) {
                 return $this->format($this->app->lang['validation.max.numeric'], [
                     ':max'       => $max,
                     ':attribute' => $attribute,
                 ]);
             }
-        } elseif (is_array($value)) {
+        } else if (is_array($value)) {
             if ((count($value) < $max) === false) {
                 return $this->format($this->app->lang['validation.max.array'], [
                     ':max'       => $max,
                     ':attribute' => $attribute,
                 ]);
             }
-        } elseif (is_string($value) || is_null($value)) {
+        } else if (is_string($value) || is_null($value)) {
             if ((mb_strlen($value) < $max) === false) {
                 return $this->format($this->app->lang['validation.max.string'], [
                     ':max'       => $max,
@@ -245,21 +245,21 @@ trait ValidationRule
                     ':attribute' => $attribute,
                 ]);
             }
-        } elseif (ctype_digit($value) || is_int($value) || is_float($value) || is_double($value)) {
+        } else if (ctype_digit($value) || is_int($value) || is_float($value) || is_double($value)) {
             if (($value > $min) === false) {
                 return $this->format($this->app->lang['validation.min.numeric'], [
                     ':min'       => $min,
                     ':attribute' => $attribute,
                 ]);
             }
-        } elseif (is_array($value)) {
+        } else if (is_array($value)) {
             if ((count($value) > $min) === false) {
                 return $this->format($this->app->lang['validation.min.array'], [
                     ':min'       => $min,
                     ':attribute' => $attribute,
                 ]);
             }
-        } elseif (is_string($value) || is_null($value)) {
+        } else if (is_string($value) || is_null($value)) {
             if ((mb_strlen($value) > $min) === false) {
                 return $this->format($this->app->lang['validation.min.string'], [
                     ':min'       => $min,
@@ -281,7 +281,7 @@ trait ValidationRule
         $mime = '';
         if ($value instanceof FileHandler) {
             $mime = $value->mime();
-        } elseif (is_string($value) && file_exists($value)) {
+        } else if (is_string($value) && file_exists($value)) {
             $mime = mime_content_type($value);
         }
 

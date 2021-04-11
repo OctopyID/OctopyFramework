@@ -12,7 +12,7 @@
  * @license : MIT
  */
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Octopy\Testing\Autoload;
 
@@ -24,16 +24,6 @@ class AutoloaderTest extends TestCase
      * @var Octopy\Autoload
      */
     protected $loader;
-
-    /**
-     * @return void
-     */
-    protected function setUp() : void
-    {
-        parent::setUp();
-
-        $this->loader = $this->app->make('autoload');
-    }
 
     /**
      * @return void
@@ -88,5 +78,15 @@ class AutoloaderTest extends TestCase
         $this->assertFalse(
             $this->loader->load('\App\Missing\Classname')
         );
+    }
+
+    /**
+     * @return void
+     */
+    protected function setUp() : void
+    {
+        parent::setUp();
+
+        $this->loader = $this->app->make('autoload');
     }
 }

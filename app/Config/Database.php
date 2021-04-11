@@ -24,7 +24,7 @@ return [
     | you may use many connections at once using the Database library.
     |
     */
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default'    => env('DB_CONNECTION', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -72,7 +72,7 @@ return [
     | the migrations on disk haven't actually been run in the database.
     |
     */
-    'migration' => $this->path->app->migration('/'),
+    'migration'  => $this->path->app->migration('/'),
 
     /*
     |--------------------------------------------------------------------------
@@ -84,5 +84,5 @@ return [
     | the migrations on disk haven't actually been run in the database.
     |
     */
-    'seeder' => $this->path->app->seeder('/'),
+    'seeder'     => $this->path->app->seeder('/'),
 ];

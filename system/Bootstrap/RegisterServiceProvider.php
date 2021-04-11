@@ -19,7 +19,7 @@ use Octopy\Application;
 class RegisterServiceProvider
 {
     /**
-     * @param Application $app
+     * @param  Application $app
      */
     public function bootstrap(Application $app)
     {

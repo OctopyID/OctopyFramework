@@ -81,7 +81,7 @@ class DatabaseMigrateCommand extends Command
                 }
 
                 $class = '\\App\\DB\\Migration\\' . ($file = mb_substr($row->getFilename(), 0, -4));
-                $migration[ $class::$timestamp ] = [
+                $migration[$class::$timestamp] = [
                     'name'  => $file,
                     'class' => $class,
                 ];
@@ -119,8 +119,8 @@ class DatabaseMigrateCommand extends Command
     }
 
     /**
-     * @param Output $output
-     * @param array  $data
+     * @param  Output $output
+     * @param  array  $data
      */
     protected function create(Output $output, array $data)
     {
@@ -130,8 +130,8 @@ class DatabaseMigrateCommand extends Command
     }
 
     /**
-     * @param Output $output
-     * @param array  $data
+     * @param  Output $output
+     * @param  array  $data
      */
     protected function drop(Output $output, array $data)
     {

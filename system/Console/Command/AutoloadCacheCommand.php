@@ -77,7 +77,6 @@ class AutoloadCacheCommand extends Command
 
         $classmap = [];
         foreach ($this->app['filesystem']->iterator($basepath) as $splfile) {
-
             // we do not discover all files form "vendor"
             // cause it's already handled by Composer
             if (! $splfile->isFile() || preg_match($skipped, $splfile)) {

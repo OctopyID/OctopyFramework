@@ -20,10 +20,10 @@ use PDOException;
 class MySQL extends PDO
 {
     /**
-     * @param string $hostname
-     * @param string $database
-     * @param string $username
-     * @param string $password
+     * @param  string $hostname
+     * @param  string $database
+     * @param  string $username
+     * @param  string $password
      */
     public function __construct(string $hostname, string $database, string $username, string $password)
     {

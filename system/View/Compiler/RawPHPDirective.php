@@ -26,13 +26,13 @@ class RawPHPDirective extends Directive
     {
         if ($stream->next('php') && $stream->expression() !== '') {
             return $this->php('%s;', $stream->expression());
-        } elseif ($stream->next('php') && $stream->expression() === '') {
+        } else if ($stream->next('php') && $stream->expression() === '') {
             return '<?php ';
-        } elseif ($stream->next('endphp')) {
+        } else if ($stream->next('endphp')) {
             return ' ?>';
-        } elseif ($stream->next(T_UNSET)) {
+        } else if ($stream->next(T_UNSET)) {
             return $this->php('%s(%s);', $stream->code(), $stream->expression());
-        } elseif ($stream->next(T_EXIT)) {
+        } else if ($stream->next(T_EXIT)) {
             if ($stream->expression() === '') {
                 return $this->php('%s;', $stream->code());
             }

@@ -52,7 +52,7 @@ return [
     | to control the amount of time it takes to hash the given password.
     |
     */
-    'argon' => [
+    'argon'  => [
         'time'   => 2,
         'thread' => 2,
         'memory' => 1024,

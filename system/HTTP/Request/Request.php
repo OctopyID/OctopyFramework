@@ -192,7 +192,7 @@ class Request
         array_pop($root);
         $root = implode('/', $root);
 
-        return rtrim(preg_replace('/\?.*/', '', preg_replace('/\/+/', '/', str_replace($root, '', $this->server('REQUEST_URI')))), '/') ? : '/';
+        return rtrim(preg_replace('/\?.*/', '', preg_replace('/\/+/', '/', str_replace($root, '', $this->server('REQUEST_URI')))), '/') ?: '/';
     }
 
     /**
@@ -256,7 +256,7 @@ class Request
         $header = [];
         foreach ($_SERVER as $key => $val) {
             if (preg_match('/\AHTTP_/', $key)) {
-                $name  = preg_replace('/\AHTTP_/', '', $key);
+                $name = preg_replace('/\AHTTP_/', '', $key);
                 $match = explode('_', $name);
                 if (count($match) > 0 and mb_strlen($name) > 2) {
                     foreach ($match as $subkey => $subvalue) {

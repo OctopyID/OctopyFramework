@@ -12,7 +12,7 @@
  * @license : MIT
  */
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Octopy\Testing\Config;
 
@@ -25,16 +25,6 @@ class DotEnvTest extends TestCase
      * @var Octopy\Config\DotEnv
      */
     protected $env;
-
-    /**
-     * @return void
-     */
-    protected function setUp() : void
-    {
-        parent::setUp();
-
-        $this->fixture = __DIR__ . '/env/';
-    }
 
     /**
      * @return void
@@ -117,5 +107,15 @@ class DotEnvTest extends TestCase
         $this->assertEquals('?BUty3koaV3%GA*hMAwH}B', getenv('SPVAR2'));
         $this->assertEquals('46ae3e009a9883e4f2c38542e300a16d', getenv('SPVAR3'));
         $this->assertEquals('test some escaped characters like a quote " or maybe a backslash \\', getenv('SPVAR5'));
+    }
+
+    /**
+     * @return void
+     */
+    protected function setUp() : void
+    {
+        parent::setUp();
+
+        $this->fixture = __DIR__ . '/env/';
     }
 }

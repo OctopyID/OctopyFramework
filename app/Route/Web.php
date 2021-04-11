@@ -13,6 +13,7 @@
  */
 
 use Octopy\HTTP\Response;
+use Octopy\Support\Facade\Route;
 
 Route::get('/', static function (Response $response) {
     return $response->view('welcome', [], 200);

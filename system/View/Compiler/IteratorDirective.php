@@ -26,15 +26,15 @@ class IteratorDirective extends Directive
     {
         if (in_array($stream->token(), [T_FOR, T_FOREACH, T_WHILE])) {
             return $this->php('%s(%s) :', $stream->code(), $stream->expression());
-        } elseif (in_array($stream->token(), [T_ENDFOR, T_ENDFOREACH, T_ENDWHILE])) {
+        } else if (in_array($stream->token(), [T_ENDFOR, T_ENDFOREACH, T_ENDWHILE])) {
             return $this->php('%s;', $stream->code());
-        } elseif ($stream->next(T_CONTINUE)) {
+        } else if ($stream->next(T_CONTINUE)) {
             if ($stream->expression() === '') {
                 return $this->php('%s;', $stream->code());
             }
 
             return $this->php('if(%s) : continue; endif;', $stream->expression());
-        } elseif ($stream->next(T_BREAK)) {
+        } else if ($stream->next(T_BREAK)) {
             if ($stream->expression() === '') {
                 return $this->php('%s;', $stream->code());
             }
