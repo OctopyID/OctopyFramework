@@ -8,6 +8,11 @@
 	</a>
 </p>
 
+> Octopy framework is built on a small footprint, speed reason but still feel the beauty of Laravel's. 
+> Over time Laravel has outpaced Octopy in terms of speed and is more mature and much better hardware than a few years ago at a price so low that the reason for the small footprint is not an issue anymore. 
+> Then for security reasons and developer activity, the Octopy framework will be left without any updates.
+
+
 ## What is Octopy Framework?
 
 Octopy is a lightweight PHP web framework inspired by [Laravel](https://laravel.com/) framework and its use is almost like [Laravel](https://laravel.com/). For people who build web
